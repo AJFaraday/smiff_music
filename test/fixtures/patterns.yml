@@ -12,6 +12,6 @@ two:
   name: snare
   step_size: 16
   step_count: 32
-  instrument_name: MyString
+  instrument_name: snare
   bits: 2058
   active: true

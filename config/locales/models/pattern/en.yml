@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      pattern:
+        one: Pattern
+        other: Pattern
+    attributes:
+      pattern:
+        id: ID
+        name: Name
+        instrument_name: Instrument
+        step_size: Note Value
+        step_count: Size
+        bits: Bits (internal)
+        active: Active
+        pattern_indexes: Note Positions
+    errors:
+      pattern:
+        not_found: "This pattern (id: %{id}) was not found."

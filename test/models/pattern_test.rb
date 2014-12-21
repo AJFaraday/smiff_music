@@ -32,6 +32,14 @@ class PatternTest < ActiveSupport::TestCase
     )
   end
 
-  
+  def test_to_hash
+    pattern_hash = Pattern.first.to_hash
+    [:instrument_name, :bits, :step_size, :step_count].each do |key|
+      assert pattern_hash.keys.include? key
+    end
+    full_hash = Pattern.to_hash
+    assert_includes full_hash.keys, Pattern.first.instrument_name
+    assert_equal pattern_hash, full_hash[Pattern.first.name]
+  end  
 
 end

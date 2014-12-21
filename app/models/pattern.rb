@@ -1,5 +1,24 @@
 class Pattern < ActiveRecord::Base
 
+
+  def Pattern.to_hash
+    result = {}
+    all.each do |pattern|
+      result[pattern.instrument_name] = pattern.to_hash
+    end
+    result
+  end
+
+  def to_hash
+    {
+      instrument_name: instrument_name,
+      bits: pattern_bits,
+      step_size: step_size,
+      step_count: step_count
+    }
+  end
+
+
   # returns array of indexes (e.g. [0,4,8,10,12])
   def pattern_indexes
     array = bits.to_s(2).chars.each_with_index.map do |value, index|
