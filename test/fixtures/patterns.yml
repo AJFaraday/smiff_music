@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Kick
+  step_size: 16
+  step_count: 16
+  instrument_name: kick
+  bits: 32928
+  active: true
+
+two:
+  name: snare
+  step_size: 16
+  step_count: 32
+  instrument_name: MyString
+  bits: 2058
+  active: true
