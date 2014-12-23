@@ -3,6 +3,8 @@ var Sound = {
   context:null,
   samples:{},
   patterns:{},
+  sixteenth_time: 150,
+  step: 0,
 
   init:function (attributes) {
     // set up context and gain chain
@@ -58,6 +60,16 @@ var Sound = {
     $.each(this.patterns, function (name, pattern) {
       pattern.play_step(step)
     });
+    this.step += 1
+  },
+
+  play: function() {
+    setInterval(
+      function() {Sound.play_step(Sound.step) },
+      this.sixteenth_time
+    )
   }
+
+
 
 }
