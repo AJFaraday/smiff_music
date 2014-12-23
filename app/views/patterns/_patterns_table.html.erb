@@ -1,0 +1,25 @@
+<table class="patterns">
+  <thead>
+  <tr>
+    <th><%= t('.sample') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @patterns.each do |pattern| %>
+
+    <tr id="<%= pattern.instrument_name %>">
+      <td>
+        <div class='indicator pre' id="<%= pattern.instrument_name %>"></div>
+        <%= pattern.name %>
+      </td>
+      <% pattern.step_count.times do |index| %>
+        <% kls = pattern.pattern_indexes.include?(index) ? 'active' : 'inactive' %>
+        <td class="step <%= kls %>"
+            id="<%= pattern.instrument_name %>_step_<%= index %>">
+          <div></div>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,29 +1,10 @@
 <%= render partial: 'shared/js_audio' %>
 
-<h1>TESTING STUFF</h1>
+<%= render partial: 'shared/play_controls' %>
+<div class=left_half>
+  <%= render partial: 'patterns_table' %>
+</div>
 
-<table class="patterns">
-  <thead>
-  <tr>
-    <th><%= t('.indicator') %></th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @patterns.each do |pattern| %>
+<div class=right_half>
 
-    <tr id="<%= pattern.instrument_name %>">
-      <td>
-        <div class='indicator pre' id="<%= pattern.instrument_name %>"></div>
-        <%= pattern.name %>
-      </td>
-      <% pattern.step_count.times do |index| %>
-        <% kls = pattern.pattern_indexes.include?(index) ? 'active' : 'inactive' %>
-        <td class="step <%= kls %>"
-            id="<%= pattern.instrument_name %>_step_<%= index %>">
-          <div></div>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+</div>

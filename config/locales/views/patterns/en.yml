@@ -1,4 +1,4 @@
 en:
   patterns:
-    index:
-      indicator: Indicator
+    pattern_table:
+      sample: Sampley

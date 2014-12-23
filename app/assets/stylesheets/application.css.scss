@@ -1,0 +1,31 @@
+//= require_tree
+
+.play_controls {
+  height:35px;
+  background-color: #cccccc;
+  padding: 10px;
+  border-radius:10px;
+  width: 70px;
+}
+
+.button {
+  margin: 2px;
+}
+
+#play_button {
+  float:left;
+  height: 0px;
+  width: 0px;
+  border-left: 30px #777777 solid;
+  border-top: 15px solid transparent ;
+  border-bottom: 15px solid transparent;
+  border-radius: 5px;
+}
+
+#stop_button {
+  height: 30px;
+  width: 30px;
+  background-color: #777777;
+  border-radius: 4px;
+  float:left;
+}
