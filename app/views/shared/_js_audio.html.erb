@@ -1,5 +1,8 @@
 <script type="text/javascript">
   window.onload = function () {
-    Sound.init();
+    Sound.init(
+      <%# attributes from rails app %>
+      <%= raw Sample.sound_init_params.to_json %>
+    );
   }
 </script>

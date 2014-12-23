@@ -3,7 +3,7 @@ class PatternsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        #todo 
+        @patterns = Pattern.all
       end
       format.json do 
         render json: Pattern.to_hash.to_json

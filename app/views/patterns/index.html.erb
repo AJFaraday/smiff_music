@@ -2,4 +2,21 @@
 
 <h1>TESTING STUFF</h1>
 
+<table>
+  <thead>
+  <tr>
+    <th><%= t('.indicator') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @patterns.each do |pattern| %>
 
+    <tr>
+      <td>
+        <div class='indicator' id="<%= pattern.name %>"></div>
+        <%= pattern.name %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

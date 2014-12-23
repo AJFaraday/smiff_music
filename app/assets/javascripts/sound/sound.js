@@ -3,7 +3,7 @@ var Sound = {
   context:null,
   samples:{},
 
-  init:function () {
+  init:function (attributes) {
     // set up context and gain chain
     this.get_context();
     this.master_gain = this.context.createGainNode();
@@ -11,8 +11,8 @@ var Sound = {
     this.master_gain.connect(this.context.destination);
 
     // load samples
-    sample_names = ['kick', 'snare'];
-    sample_names.forEach(function (sample_name) {
+
+    attributes['sample_names'].forEach(function (sample_name) {
       Sound.samples[sample_name] = new Sample(sample_name);
       Sound.samples[sample_name].load_sample();
     });
