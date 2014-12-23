@@ -119,11 +119,9 @@ This works in exactly the same way as play, except that the sequence will be cha
 There are a number of messages to modify the speed of the player.
 
 * show speed
+* set speed to 120 bpm
 * speed up
 * speed down
-* speed to 120 bpm
-
-### show speed
 
 This will tell you what speed, in beats per minute (BPM), the sequence is being played at.
 
@@ -132,12 +130,12 @@ This will tell you what speed, in beats per minute (BPM), the sequence is being 
 Sequence is being played at 180 bpm
 ```
 
-### speed to X
+### set speed to X
 
 Example:
 
 ```
-> speed to 140 bpm
+> set speed to 140 bpm
 ```
 
 This will set playback to a specific speed in beats per minutes (BPM).
@@ -163,3 +161,9 @@ Example:
 ```
 
 This will decrease the speed of playback by 5bpm
+
+This can also be written as:
+
+```
+> slow down
+```
