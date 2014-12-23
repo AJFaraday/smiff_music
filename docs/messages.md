@@ -58,14 +58,12 @@ This will clear a drum pattern. Leaving it empty.
 Examples:
 
 ```
-> play kick on 1
-> play snare on step 4
-> play hihat 1
+> play kick on step 1
+> play snare on step 5
 > play hihat on steps 1 to 4
 > play hihat on steps 1 to 16 skipping 1
 ```
 
-(it is not yet decided how these should be structured, it could be any of the above)
 
 Play can do one of 2 basic things:
 
@@ -103,6 +101,18 @@ Example:
 ------1---5---9---13--
 hihat-#-#-#-#---------
 ```
+
+### do not play
+
+Examples:
+
+```
+> do not play kick on beat 5
+> do not play snare on beats 1 to 8
+> do not play hihat on beats 1 to 16 skipping 1
+```
+
+This works in exactly the same way as play, except that the sequence will be changed so that the notes specified will not be played on the steps identified.
 
 ## Player
 
