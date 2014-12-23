@@ -146,8 +146,20 @@ This will set playback to a specific speed in beats per minutes (BPM).
 
 ### speed up
 
+Example:
+
+```
+> speed up
+```
+
 This will increase the speed of playback by 5bpm
 
 ### speed down 
+
+Example:
+
+```
+> speed down
+```
 
 This will decrease the speed of playback by 5bpm
