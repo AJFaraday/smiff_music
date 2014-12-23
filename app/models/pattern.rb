@@ -24,7 +24,7 @@ class Pattern < ActiveRecord::Base
   def to_hash
     {
       instrument_name: instrument_name,
-      bits: pattern_bits,
+      steps: pattern_bits,
       step_size: step_size,
       step_count: step_count
     }

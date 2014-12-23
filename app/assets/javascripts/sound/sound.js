@@ -2,7 +2,7 @@ var Sound = {
 
   context:null,
   samples:{},
-  patterns: {},
+  patterns:{},
 
   init:function (attributes) {
     // set up context and gain chain
@@ -19,10 +19,25 @@ var Sound = {
     this.set_patterns(attributes['patterns']);
   },
 
-  set_patterns: function(patts) {
+  set_patterns:function (patts) {
     $.each(patts, function (key, attrs) {
       Sound.patterns[key] = new Pattern(attrs)
     });
+  },
+
+  reset_patterns:function () {
+    $.get(
+      '/patterns',
+      {},
+      function (response) {
+        $.each(response, function (key, attrs) {
+          pattern = Sound.patterns[key];
+          pattern.steps = attrs['steps'];
+          pattern.display();
+        });
+      },
+      'json'
+    )
   },
 
   get_context:function () {
@@ -39,8 +54,8 @@ var Sound = {
     return this.context != null
   },
 
-  play_step: function(step) {
-    $.each(this.patterns, function(name,pattern) {
+  play_step:function (step) {
+    $.each(this.patterns, function (name, pattern) {
       pattern.play_step(step)
     });
   }
