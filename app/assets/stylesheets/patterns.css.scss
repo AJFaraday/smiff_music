@@ -1,3 +1,48 @@
-// Place all the styles related to the Patterns controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$step_size: 15px ;
+
+.indicator {
+  width: $step_size;
+  height: $step_size;
+  border-radius:$step_size / 2;
+  float: left;
+}
+
+// indicators, red, yellow, green
+.pre{
+  background-color:#FF0000;
+}
+.loading{
+  background-color: #ffff00;
+}
+.done{
+  background-color: #00FF00;
+}
+
+table.patterns{
+  border: none;
+  border-collapse: collapse;
+  padding: 0;
+  margin: 0;
+}
+
+
+td.step {
+  padding: 0px;
+  margin: 0px;
+}
+
+td.step div {
+  width: $step_size ;
+  height: $step_size ;
+  padding: 0px;
+  margin: 0px;
+  border: 1px black solid;
+}
+
+td.step.inactive div {
+  background-color: #ffffff ;
+}
+
+td.step.active div {
+  background-color: #666666 ;
+}

@@ -1,8 +1,13 @@
+<%
+   init_params = Sample.sound_init_params
+   init_params.merge!(Pattern.sound_init_params)
+%>
+
 <script type="text/javascript">
   window.onload = function () {
     Sound.init(
       <%# attributes from rails app %>
-      <%= raw Sample.sound_init_params.to_json %>
+      <%= raw init_params.to_json %>
     );
   }
 </script>
