@@ -18,7 +18,7 @@ clear:
   name: 'clear_pattern'
   regex: 'clear ([a-z]+)'
   variables:
-    - 'pattern_name'
+    - 'pattern_names'
   action: 'clear_patterns'
   weight: 0
 

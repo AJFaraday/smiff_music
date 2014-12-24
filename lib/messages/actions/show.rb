@@ -28,7 +28,7 @@ module Messages::Actions::Show
         response: 'error',
         display: I18n.t(
             'actions.show_patterns.errors.unknown_error',
-            names: pattern_names.join(','),
+            names: self.pattern_names.join(','),
             message: er.message
         )
       }
