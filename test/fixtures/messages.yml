@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source_text: MyString
+  source_type: MyString
+  source: MyString
+  action: MyString
+  status: 1
+  message_format_id: 1
+
+two:
+  source_text: MyString
+  source_type: MyString
+  source: MyString
+  action: MyString
+  status: 1
+  message_format_id: 1
