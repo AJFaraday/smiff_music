@@ -2,7 +2,7 @@ show:
   name: 'show'
   regex: 'show ([a-z]+)'
   variables:
-    - 'pattern_name'
+    - 'pattern_names'
   action: 'show_patterns'
   weight: 0
 
@@ -12,7 +12,7 @@ show_multiple:
   variables:
     - 'pattern_names'
   action: 'show_patterns'
-  weight: 2
+  weight: 1
 
 clear:
   name: 'clear_pattern'
@@ -28,7 +28,7 @@ clear_multiple:
   variables:
     - 'pattern_names'
   action: 'clear_patterns'
-  weight: 2
+  weight: 1
 
 play_one:
   name: 'play_one'
@@ -92,7 +92,7 @@ clear_range_skipping:
 
 show_speed:
   name: 'show_speed'
-  regex: 'show speed'
+  regex: 'show (?:speed|bpm)'
   action: 'show_speed'
   weight: 0
 

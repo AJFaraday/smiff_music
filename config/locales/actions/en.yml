@@ -1,0 +1,11 @@
+en:
+  messages:
+    errors:
+      message_unfound: "Sorry, I can't understand this message: '%{message}'"
+      not_implemented: "Sorry, it looks like this action '%{action}' is not yet implemented."
+  actions: 
+    show_patterns: 
+      errors: 
+        no_patterns: "Sorry, I can't find any patterns named '%{names}'"
+        unknown_error: "Sorry, an error occurred while trying to show %{names}: %{message}"
+

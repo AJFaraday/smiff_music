@@ -1,5 +1,11 @@
 class Pattern < ActiveRecord::Base
 
+  after_initialize :set_default_bits
+
+  def set_default_bits
+    self.bits ||= 0
+  end 
+
   def Pattern.sound_init_params
     patterns = {}
     all.each do |pattern|
