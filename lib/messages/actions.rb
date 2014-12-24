@@ -4,7 +4,7 @@ class Messages::Actions
 
   extend Messages::Actions::Show
 
-  def run(action, arguments)
+  def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)
       self.send(action,arguments)
     else
