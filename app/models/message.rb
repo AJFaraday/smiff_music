@@ -1,6 +1,7 @@
 class Message < ActiveRecord::Base
 
   belongs_to :message_format
+  serialize :parameters
 
   def Message.parse(text)
     message = Message.new(
@@ -10,7 +11,8 @@ class Message < ActiveRecord::Base
     parser.parse(text)
     if parser.parsed
       message.message_format = parser.message_format
-      message.action = "#{parser.message_format.action}(#{parser.parameters})"
+      message.action = parser.message_format.action
+      message.parameters = parser.parameters
       message.status = 1
     else
       message.status = 0

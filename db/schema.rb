@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224161622) do
+ActiveRecord::Schema.define(version: 20141224195343) do
 
   create_table "message_formats", force: true do |t|
     t.string   "name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20141224161622) do
     t.integer  "message_format_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "parameters"
   end
 
   create_table "patterns", force: true do |t|
