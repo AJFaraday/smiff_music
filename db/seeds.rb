@@ -1,23 +1,18 @@
 
-Pattern.create(
-  name: 'kick',
-  step_size: 16,
-  step_count: 16,
-  instrument_name: 'kick',
-  active: true
-)
-
-Pattern.create(
-  name: 'snare',
-  step_size: 16,
-  step_count: 16,
-  instrument_name: 'snare',
-  active: true
-)
-
-
+# generate drum patterns (simple 16-step form)
+%w(kick snare hihat crash tom1 tom2 tom3).each do |drum|
+  Pattern.create(
+    name: drum,
+    step_size: 16,
+    step_count: 16,
+    instrument_name: drum,
+    active: true
+  )
+end
 
 sample_names = Pattern.all.collect{|x|x.instrument_name}
 sample_names.each do |sample|
   Sample.create(name: sample)
 end
+
+Messages::FormatBuilder.new.build_messages

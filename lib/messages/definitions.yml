@@ -1,0 +1,104 @@
+show:
+  name: 'show'
+  regex: '/show ([a-z]+)/'
+  variables:
+    'pattern_name'
+  action: 'show_patterns'
+
+show_multiple:
+  name: 'show_multiple'
+  regex: '/show ([a-z]+)([, ([a-z]+)]+) and ([a-z]+)/'
+  variables:
+    'pattern_names'
+  action: 'show_patterns'
+
+clear:
+  name: 'clear_pattern'
+  regex: '/clear ([a-z]+)/'
+  variables:
+    'pattern_name'
+  action: 'clear_patterns'
+
+clear_multiple:
+  name: 'clear_multiple'
+  regex: '/clear ([a-z]+)([, ([a-z]+)]+) and ([a-z]+)/'
+  variables:
+    'pattern_names'
+  action: 'clear_patterns'
+
+play_one:
+  name: 'play_one'
+  regex: '/play ([a-z]+) on step ([0-9]+)/'
+  variables:
+    - 'pattern_name'
+    - 'step'
+  action: 'add_steps'
+
+play_range:
+  name: 'play_range'
+  regex: '/play ([a-z]+) on steps ([0-9]+) to ([0-9]+)/'
+  variables:
+    - 'pattern_name'
+    - 'start_step'
+    - 'end_step'
+  action: 'add_steps'
+
+play_range_skipping:
+  name: 'play_range_skipping'
+  regex: '/play ([a-z]+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)/'
+  variables: 
+    - 'pattern_name'
+    - 'start_step'
+    - 'end_step'
+    - 'block_size'
+  action: 'add_steps'
+
+clear_one:
+  name: 'clear_one'
+  regex: '/do not play ([a-z]+) on step ([0-9]+)/'
+  variables:
+    - 'pattern_name'
+    - 'step'
+  action: 'clear_steps'
+
+play_range:
+  name: 'clear_range'
+  regex: '/do not play ([a-z]+) on steps ([0-9]+) to ([0-9]+)/'
+  variables:
+    - 'pattern_name'
+    - 'start_step'
+    - 'end_step'
+  action: 'clear_steps'
+
+play_range_skipping:
+  name: 'clear_range_skipping'
+  regex: '/do not play ([a-z]+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)/'
+  variables:
+    - 'pattern_name'
+    - 'start_step'
+    - 'end_step'
+    - 'block_size'
+  action: 'clear_steps'
+  
+show_speed:
+  name: 'show_speed'
+  regex: '/show speed/'
+  action: 'show_speed'
+
+speed_up:
+  name: 'speed_up'
+  regex: '/speed up/'
+  action: 'speed_up'
+
+speed_down:
+  name: 'speed_down'
+  regex: '/(?:slow|speed) down/'
+  action: 'speed_down'
+
+set_speed:
+  name: 'set_speed'
+  regex: '/set speed to ([0-9]+)(?: bpm)?/'
+  variables: 
+    - 'bpm'
+  action: 'set_speed'
+

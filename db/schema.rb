@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223134951) do
+ActiveRecord::Schema.define(version: 20141224122334) do
+
+  create_table "message_formats", force: true do |t|
+    t.string   "name"
+    t.string   "regex"
+    t.string   "action"
+    t.string   "variables"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "patterns", force: true do |t|
     t.string   "name"
