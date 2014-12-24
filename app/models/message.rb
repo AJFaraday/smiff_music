@@ -25,7 +25,6 @@ class Message < ActiveRecord::Base
       message.status = 0
     end
     message.save!
-    message.run
     message
   end
 
@@ -39,7 +38,15 @@ class Message < ActiveRecord::Base
           self.status = -1
       end
       save!
-      return result[:display]
+      return result
+    elsif self.invalid?
+      return {
+           display: I18n.t(
+            'messages.error.message_unfound',
+            :message => self.source_text
+          ),
+          response: 'error'
+      }
     end 
   end 
 

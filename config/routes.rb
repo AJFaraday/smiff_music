@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
-  resources :patterns
+  resources :patterns, :only => [:index, :show]
+
+  resources :messages, :only => [:create]
 
   root 'patterns#index'
 

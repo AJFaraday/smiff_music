@@ -1,3 +1,38 @@
-// Place all the styles related to the Message controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// console section
+
+#console {
+  min-height: 350px; 
+}
+
+#console #readout {
+  float:left;
+  width: 100%;
+  height: 300px;  
+  border-radius: 5px; 
+  font: "Courier New", Courier, monospace;
+  background-color: black ;
+  color: green ;
+}
+
+
+#console #input {
+  float:left; 
+  width: 89%;
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 5px ;
+  color: green;
+  background-color: #333333 ; 
+}
+
+#console #submit {
+  float: right;
+  width: 10%; 
+  height: 36px;
+  margin-top: 10px;
+  background-color: #777777;
+  border-radius: 5px ;
+  text-align: center;
+  font-size: 30px;
+  padding:2px;
+}

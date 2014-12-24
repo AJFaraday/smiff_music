@@ -1,5 +1,7 @@
 //= require_tree
 
+$section_background: #aaaaaa ;
+
 .play_controls {
   height:35px;
   background-color: #cccccc;
@@ -28,4 +30,14 @@
   background-color: #777777;
   border-radius: 4px;
   float:left;
+}
+
+.section {
+  width: 95%;
+  min-height: 50px;
+  padding: 20px;
+  margin-bottom: 10px ;
+  border-radius: 20px;
+  background-color: $section_background ;
+  color: white;
 }
