@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224122334) do
+ActiveRecord::Schema.define(version: 20141224155731) do
 
   create_table "message_formats", force: true do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20141224122334) do
     t.string   "variables"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "weight",     default: 0
   end
 
   create_table "patterns", force: true do |t|
