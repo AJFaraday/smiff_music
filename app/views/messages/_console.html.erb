@@ -1,5 +1,7 @@
 <div id=readout></div>
 <div id=input>
-  <%= text_field_tag :message, nil, class: 'form-control' %>
+  <%= text_field_tag :message, nil,
+                     class: 'form-control',
+                     autocomplete: 'off' %>
 </div>
 <div id=submit><%= t('.submit') %></div>
