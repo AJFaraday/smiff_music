@@ -5,6 +5,13 @@ module Messages::Actions::Show
 
   def show_patterns(args)
     self.pattern_names = args['pattern_names']
+    pattern_names.compact!
+    pattern_names.reject!{|x|x.blank?}
+    self.pattern_names = self.pattern_names.collect do |x|
+      x.split(',').reject{|x|x.blank?}[0].strip
+    end
+    self.pattern_names.uniq
+    puts pattern_names.inspect
     begin
       self.patterns = Pattern.where(:name => self.pattern_names)
       if self.patterns.any? 

@@ -16,15 +16,20 @@
   font-family: monaco, Consolas, 'Lucida Console', monospace;
 }
 
-#console #readout #div {
-  padding: 0px;
-  margin: 0px;
-  width:100%;
+#console #readout .input {
+  color: #00ff00;
 }
 
-#console #readout #div.input {
+#console #readout .success {
   color: #00ff00;
-  font-family: monaco, Consolas, 'Lucida Console', monospace;
+}
+
+#console #readout .error {
+  color: #ff0000;
+}
+
+#console #readout .failure {
+  color: #ffff00;
 }
 
 #console #input {

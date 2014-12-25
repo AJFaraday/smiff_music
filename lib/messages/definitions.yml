@@ -8,7 +8,7 @@ show:
 
 show_multiple:
   name: 'show_multiple'
-  regex: 'show ([a-z]+)([, ([a-z]+)]+) and ([a-z]+)'
+  regex: 'show (\w+)((, \w+)*)(?: and (\w+))'
   variables:
     - 'pattern_names'
   action: 'show_patterns'
