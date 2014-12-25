@@ -47,7 +47,7 @@ class Messages::Parser
       if self.message_format.variables.count == 1
         self.parameters[self.message_format.variables.first] = matches
       else
-        self.message_format.parameters.each_with_index do |param, index|
+        self.message_format.variables.each_with_index do |param, index|
           self.parameters[param] = matches[index]
         end
       end

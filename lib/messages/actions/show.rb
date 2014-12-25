@@ -8,9 +8,9 @@ module Messages::Actions::Show
     pattern_names.compact!
     pattern_names.reject!{|x|x.blank?}
     self.pattern_names = self.pattern_names.collect do |x|
-      x.split(',').reject{|x|x.blank?}[0].strip
+      x.split(',').collect{|x|x.strip}.reject{|x|x.blank?}
     end
-    self.pattern_names.uniq
+    self.pattern_names.flatten.uniq
     puts pattern_names.inspect
     begin
       self.patterns = Pattern.where(:name => self.pattern_names)
