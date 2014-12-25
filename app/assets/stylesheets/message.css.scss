@@ -1,38 +1,65 @@
 // console section
 
 #console {
-  min-height: 350px; 
+  min-height: 390px;
 }
 
 #console #readout {
   float:left;
   width: 100%;
   height: 300px;  
-  border-radius: 5px; 
-  font: "Courier New", Courier, monospace;
+  border-radius: 5px;
   background-color: black ;
-  color: green ;
+  color: #00ff00 ;
+  padding: 10px;
+  overflow-y: auto;
+  font-family: monaco, Consolas, 'Lucida Console', monospace;
 }
 
+#console #readout #div {
+  padding: 0px;
+  margin: 0px;
+  width:100%;
+}
+
+#console #readout #div.input {
+  color: #00ff00;
+  font-family: monaco, Consolas, 'Lucida Console', monospace;
+}
 
 #console #input {
-  float:left; 
+  float: left;
   width: 89%;
-  height: 40px;
-  margin-top: 10px;
-  border-radius: 5px ;
-  color: green;
-  background-color: #333333 ; 
+  height: 45px;
+  border-radius: 5px;
+  background-color: #333333;
+  padding: 5px;
+  margin-top:10px;
 }
 
 #console #submit {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;
+
   float: right;
   width: 10%; 
-  height: 36px;
+  height: 45px;
   margin-top: 10px;
   background-color: #777777;
   border-radius: 5px ;
   text-align: center;
   font-size: 30px;
   padding:2px;
+  border-top: solid white 2px;
+  border-left: solid white 2px;
+  border-bottom: solid #555555 2px;
+  border-right: solid #555555 2px;
+}
+
+#console #submit:active {
+  border-top: solid #555555 2px;
+  border-left: solid #555555 2px;
+  border-bottom: solid white 2px;
+  border-right: solid white 2px;
 }

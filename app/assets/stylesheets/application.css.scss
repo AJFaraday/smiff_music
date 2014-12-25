@@ -2,12 +2,18 @@
 
 $section_background: #aaaaaa ;
 
+.holder {
+  margin-left: auto;
+  margin-right: auto;
+  width:95%;
+}
+
 .play_controls {
-  height:35px;
+  height:55px;
   background-color: #cccccc;
   padding: 10px;
   border-radius:10px;
-  width: 70px;
+  width: 90px;
 }
 
 .button {
@@ -33,7 +39,7 @@ $section_background: #aaaaaa ;
 }
 
 .section {
-  width: 95%;
+  width: 100%;
   min-height: 50px;
   padding: 20px;
   margin-bottom: 10px ;

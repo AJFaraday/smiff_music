@@ -2,14 +2,16 @@
 <html>
 <head>
   <title>SmiffMusic</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'message', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'bootstrap.min' 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'console', 'bootstrap.min', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'sound/sound', 'sound/sample', 'sound/pattern', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class=holder>
+  <%= yield %>
+</div>
 
 </body>
 </html>
