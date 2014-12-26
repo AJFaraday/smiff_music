@@ -73,6 +73,13 @@ Example:
 
 This will clear a drum pattern. Leaving it empty.
 
+You can also clear more than one pattern:
+
+```
+clear kick and snare
+clear kick, snare and hihat
+```
+
 ### play
 
 Examples:
