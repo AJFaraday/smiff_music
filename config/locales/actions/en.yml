@@ -20,3 +20,5 @@ en:
         other: "I've cleared the %{names} patterns"
     set_speed:
       success: "The speed is now %{bpm} beats per minute"
+    show_speed:
+      info: "The speed is %{bpm} beats per minute"

@@ -112,7 +112,7 @@ show_speed:
   name: 'show_speed'
   regex: 'show (?:speed|bpm)'
   action: 'show_speed'
-  weight: 0
+  weight: 4
 
 speed_up:
   name: 'speed_up'

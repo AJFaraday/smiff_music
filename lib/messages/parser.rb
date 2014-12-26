@@ -41,7 +41,7 @@ class Messages::Parser
 
   def build_parameters
     self.parameters = {}
-    if self.match_data and self.message_format
+    if self.match_data and self.message_format and self.message_format.variables
       matches = self.match_data.to_a 
       matches.shift # remove source text
       self.message_format.variables.each do |param|
