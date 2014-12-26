@@ -88,7 +88,7 @@ clear_range_skipping:
     - 'end_step'
     - 'block_size'
   action: 'clear_steps'
-  weight: 3
+  weight: 4
 
 show_speed:
   name: 'show_speed'

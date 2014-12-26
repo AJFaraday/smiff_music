@@ -12,6 +12,8 @@ en:
         unknown_error: "Sorry, an error occurred while trying to show %{names}: %{message}"
     add_steps:
        success: "Now playing %{name} on steps %{steps}"
+    clear_steps:
+       success: "Now no longer playing %{name} on steps %{steps}"
     clear:
        success:
          one: "I've cleared the '%{name}' pattern."
