@@ -46,7 +46,7 @@ class Messages::Parser
       matches.shift # remove source text
       self.message_format.variables.each do |param|
         if self.message_format.variables.count == 1
-          self.parameters[self.message_format.variables.first] = matches
+          self.parameters[self.message_format.variables.first] = matches[0]
         else
           if matches.count > 1 and param == self.message_format.variables[-1]
             puts 'got here'
