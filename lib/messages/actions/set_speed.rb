@@ -1,7 +1,6 @@
 module Messages::Actions::SetSpeed
 
   def set_speed(args)
-    puts args.inspect
     SystemSetting['bpm'] = args['bpm']
     return {
       response: 'success',

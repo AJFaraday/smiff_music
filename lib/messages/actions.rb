@@ -4,7 +4,7 @@ class Messages::Actions
 
   AVAILABLE_ACTIONS = %w{
     show_patterns add_steps clear_patterns clear_steps
-    set_speed show_speed
+    set_speed show_speed speed_up speed_down
   }
 
   extend Messages::Actions::Show
@@ -13,7 +13,8 @@ class Messages::Actions
   extend Messages::Actions::ClearSteps
   extend Messages::Actions::SetSpeed
   extend Messages::Actions::ShowSpeed
-
+  extend Messages::Actions::SpeedUp
+  extend Messages::Actions::SpeedDown
 
   def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)
