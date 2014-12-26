@@ -58,7 +58,7 @@ play_range_skipping:
     - 'end_step'
     - 'block_size'
   action: 'add_steps'
-  weight: 1
+  weight: 2
 
 clear_one:
   name: 'clear_one'
@@ -67,7 +67,7 @@ clear_one:
     - 'pattern_name'
     - 'step'
   action: 'clear_steps'
-  weight: 2
+  weight: 3
 
 clear_range:
   name: 'clear_range'
@@ -77,7 +77,7 @@ clear_range:
     - 'start_step'
     - 'end_step'
   action: 'clear_steps'
-  weight: 2
+  weight: 3
 
 clear_range_skipping:
   name: 'clear_range_skipping'
@@ -88,7 +88,7 @@ clear_range_skipping:
     - 'end_step'
     - 'block_size'
   action: 'clear_steps'
-  weight: 2
+  weight: 3
 
 show_speed:
   name: 'show_speed'

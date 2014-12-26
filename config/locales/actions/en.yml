@@ -3,9 +3,11 @@ en:
     errors:
       message_unfound: "Sorry, I can't understand this message: '%{message}'"
       not_implemented: "Sorry, it looks like this action '%{action}' is not yet implemented."
+      pattern_not_found: "Sorry, I couldn't find a pattern named '%{action}'"
   actions: 
     show_patterns: 
       errors: 
-        no_patterns: "Sorry, I can't find any patterns named '%{names}'"
+        no_pattern: "Sorry, I can't find any patterns named '%{names}'"
         unknown_error: "Sorry, an error occurred while trying to show %{names}: %{message}"
-
+    add_steps:
+       success: "Now playing %{name} on steps %{steps}"
