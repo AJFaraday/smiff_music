@@ -3,7 +3,7 @@ var Sound = {
   context:null,
   samples:{},
   patterns:{},
-  sixteenth_time:150,
+  sixteenth_time:100,
   step:0,
   lowest_common_multiple:0,
   player_active:false,
@@ -23,6 +23,19 @@ var Sound = {
     });
     this.set_patterns(attributes['patterns']);
     this.init_player_controls();
+
+    this.set_bpm(attributes['bpm']);
+  },
+
+  set_bpm:function (bpm) {
+    var step_time = (60000 / bpm) / 4;
+    Sound.sixteenth_time = step_time;
+
+    if (Sound.player_active) {
+      clearInterval(Sound.player);
+      Sound.player_active = false;
+      Sound.play()
+    }
   },
 
   init_player_controls:function () {
@@ -32,6 +45,7 @@ var Sound = {
     $('#stop_button').on('click', function () {
       Sound.stop()
     });
+    $('#stop_button').hide();
   },
 
   set_patterns:function (patts) {
@@ -53,9 +67,14 @@ var Sound = {
       {},
       function (response) {
         $.each(response, function (key, attrs) {
-          pattern = Sound.patterns[key];
-          pattern.steps = attrs['steps'];
-          pattern.display();
+          if (key == 'bpm') {
+
+            Sound.set_bpm(attrs);
+          } else {
+            pattern = Sound.patterns[key];
+            pattern.steps = attrs['steps'];
+            pattern.display();
+          }
         });
       },
       'json'
@@ -101,6 +120,8 @@ var Sound = {
         this.sixteenth_time
       )
       Sound.player_active = true;
+      $('#stop_button').show();
+      $('#play_button').hide();
     }
   },
 
@@ -109,6 +130,8 @@ var Sound = {
       clearInterval(Sound.player);
       Sound.player_active = false;
     }
+    $('#stop_button').hide();
+    $('#play_button').show();
   },
 
 

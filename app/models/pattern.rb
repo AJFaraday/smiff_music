@@ -24,6 +24,7 @@ class Pattern < ActiveRecord::Base
     all.each do |pattern|
       result[pattern.instrument_name] = pattern.to_hash
     end
+    result['bpm'] = SystemSetting['bpm']
     result
   end
 

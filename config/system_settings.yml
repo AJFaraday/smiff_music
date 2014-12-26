@@ -1,3 +1,9 @@
 bpm: 
   default: 120
-  tip: Beats per Minute
+  tip: Beats per minute
+max_bpm:
+  default: 200
+  tip: Maximum beats per minute
+min_bpm:
+  default: 60
+  tip: Minimum beats per minute
