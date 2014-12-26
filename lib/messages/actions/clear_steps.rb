@@ -9,6 +9,8 @@ module Messages::Actions::ClearSteps
 
     if args.keys.include?('step')
       remove_steps([args['step']])
+    elsif args.keys.include?('steps')
+      remove_steps(munge_list(args['steps']))
     elsif args.keys.include?('start_step') and args.keys.include?('end_step')
       if args.keys.include?('block_size')
         puts 'skipping'

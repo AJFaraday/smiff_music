@@ -44,11 +44,16 @@ class Messages::Parser
     if self.match_data and self.message_format
       matches = self.match_data.to_a 
       matches.shift # remove source text
-      if self.message_format.variables.count == 1
-        self.parameters[self.message_format.variables.first] = matches
-      else
-        self.message_format.variables.each_with_index do |param, index|
-          self.parameters[param] = matches[index]
+      self.message_format.variables.each do |param|
+        if self.message_format.variables.count == 1
+          self.parameters[self.message_format.variables.first] = matches
+        else
+          if matches.count > 1 and param == self.message_format.variables[-1]
+            puts 'got here'
+            self.parameters[param] = matches
+          else 
+            self.parameters[param] = matches.shift
+          end
         end
       end
     end

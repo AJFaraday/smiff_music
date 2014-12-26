@@ -34,16 +34,16 @@ var Sound = {
     if (Sound.player_active) {
       clearInterval(Sound.player);
       Sound.player_active = false;
-      Sound.play()
+      Sound.play(false);
     }
   },
 
   init_player_controls:function () {
     $('#play_button').on('click', function () {
-      Sound.play()
+      Sound.play(true);
     });
     $('#stop_button').on('click', function () {
-      Sound.stop()
+      Sound.stop();
     });
     $('#stop_button').hide();
   },
@@ -110,15 +110,17 @@ var Sound = {
     }
   },
 
-  play:function () {
+  play:function (set_to_start) {
     if (!Sound.player_active) {
-      Sound.step = 0;
+      if (set_to_start) {
+        Sound.step = 0;
+      };
       Sound.player = setInterval(
         function () {
           Sound.play_step(Sound.step)
         },
         this.sixteenth_time
-      )
+      );
       Sound.player_active = true;
       $('#stop_button').show();
       $('#play_button').hide();

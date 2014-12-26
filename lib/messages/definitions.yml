@@ -22,9 +22,9 @@ clear:
   action: 'clear_patterns'
   weight: 0
 
-clear_multiple:
-  name: 'clear_multiple'
-  regex: 'clear (\w+)([, ([a-z]+)]+) and ([a-z]+)'
+clear_multiple_patterns:
+  name: 'clear_multiple_patterns'
+  regex: 'clear (\w+)([, (\w+)]+) and (\w+)'
   variables:
     - 'pattern_names'
   action: 'clear_patterns'
@@ -49,6 +49,15 @@ play_range:
   action: 'add_steps'
   weight: 1
 
+play_multiple:
+  name: 'play_multiple'
+  regex: 'play (\w+) on steps ([0-9]+)([, ([0-9]+)]+) and ([0-9]+)'
+  variables:
+    - 'pattern_name'
+    - 'steps'
+  action: 'add_steps'
+  weight: 2
+
 play_range_skipping:
   name: 'play_range_skipping'
   regex: 'play (\w+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)'
@@ -68,6 +77,15 @@ clear_one:
     - 'step'
   action: 'clear_steps'
   weight: 3
+
+clear_multiple:
+  name: 'clear_multiple'
+  regex: 'do not play (\w+) on steps ([0-9]+)([, ([0-9]+)]+) and ([0-9]+)'
+  variables:
+    - 'pattern_name'
+    - 'steps'
+  action: 'clear_steps'
+  weight: 4
 
 clear_range:
   name: 'clear_range'
