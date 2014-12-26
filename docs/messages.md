@@ -89,13 +89,15 @@ Examples:
 > play snare on step 5
 > play hihat on steps 1 to 4
 > play hihat on steps 1 to 16 skipping 1
+> play snare on steps 5, 9 and 13
 ```
 
 
-Play can do one of 2 basic things:
+Play can do one of 3 basic things:
 
 * Add a drum hit to a certain step
 * Add a drum to a range of steps
+* Add a drum to specific steps
 
 To add to a certain step:
 
@@ -123,10 +125,19 @@ Example:
 
 ```
 > clear hihat
-> play hat on steps 1 to 8 skipping 1
+> play hihat on steps 1 to 8 skipping 1
 > show hihat
 ------1---5---9---13--
 hihat-#-#-#-#---------
+```
+
+You can also pick out a list of numbered steps:
+
+```
+> play snare on steps 5, 8 and 13
+> show hihat
+------1---5---9---13--
+hihat-----#--#----#---
 ```
 
 ### do not play
@@ -137,6 +148,7 @@ Examples:
 > do not play kick on beat 5
 > do not play snare on beats 1 to 8
 > do not play hihat on beats 1 to 16 skipping 1
+> do not play hihat on steps 1, 3 and 5
 ```
 
 This works in exactly the same way as play, except that the sequence will be changed so that the notes specified will not be played on the steps identified.
