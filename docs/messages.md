@@ -14,6 +14,21 @@ There are a number of drum patterns available:
 * tom3
 * crash
 
+You can find the names of these drums with this command:
+
+```
+list drums
+```
+
+The result is a lot like the list above: 
+
+```
+kick
+snare
+hihat
+...
+```
+
 For each of these you can perform one of a number of actions:
 
 * show
