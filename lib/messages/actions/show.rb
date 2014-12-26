@@ -18,7 +18,9 @@ module Messages::Actions::Show
           response: 'failure',
           display: I18n.t(
             'actions.show_patterns.errors.no_patterns',
-            names: pattern_names.join(',')
+            names: pattern_names.to_sentence(
+              last_word_connector: ' and '
+            )
           )
         }
       end

@@ -2,10 +2,11 @@ class Messages::Actions
 
   require 'active_support'
 
-  AVAILABLE_ACTIONS = %w{ show_patterns add_steps}
+  AVAILABLE_ACTIONS = %w{ show_patterns add_steps clear_patterns}
 
   extend Messages::Actions::Show
   extend Messages::Actions::AddSteps
+  extend Messages::Actions::ClearPatterns
 
   def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)

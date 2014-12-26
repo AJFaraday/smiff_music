@@ -8,6 +8,11 @@ en:
     show_patterns: 
       errors: 
         no_pattern: "Sorry, I can't find any patterns named '%{names}'"
+        no_patterns: "Sorry, I can't find patterns named %{names}"
         unknown_error: "Sorry, an error occurred while trying to show %{names}: %{message}"
     add_steps:
        success: "Now playing %{name} on steps %{steps}"
+    clear:
+       success:
+         one: "I've cleared the '%{name}' pattern."
+         other: "I've cleared the %{names} patterns"

@@ -1,6 +1,6 @@
 show:
   name: 'show'
-  regex: 'show ([a-z]+)'
+  regex: 'show (\w+)'
   variables:
     - 'pattern_names'
   action: 'show_patterns'
@@ -16,7 +16,7 @@ show_multiple:
 
 clear:
   name: 'clear_pattern'
-  regex: 'clear ([a-z]+)'
+  regex: 'clear (\w+)'
   variables:
     - 'pattern_names'
   action: 'clear_patterns'
@@ -24,7 +24,7 @@ clear:
 
 clear_multiple:
   name: 'clear_multiple'
-  regex: 'clear ([a-z]+)([, ([a-z]+)]+) and ([a-z]+)'
+  regex: 'clear (\w+)([, ([a-z]+)]+) and ([a-z]+)'
   variables:
     - 'pattern_names'
   action: 'clear_patterns'
@@ -32,7 +32,7 @@ clear_multiple:
 
 play_one:
   name: 'play_one'
-  regex: 'play ([a-z]+) on step ([0-9]+)'
+  regex: 'play (\w+) on step ([0-9]+)'
   variables:
     - 'pattern_name'
     - 'step'
@@ -41,7 +41,7 @@ play_one:
 
 play_range:
   name: 'play_range'
-  regex: 'play ([a-z]+) on steps ([0-9]+) to ([0-9]+)'
+  regex: 'play (\w+) on steps ([0-9]+) to ([0-9]+)'
   variables:
     - 'pattern_name'
     - 'start_step'
@@ -51,7 +51,7 @@ play_range:
 
 play_range_skipping:
   name: 'play_range_skipping'
-  regex: 'play ([a-z]+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)'
+  regex: 'play (\w+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)'
   variables: 
     - 'pattern_name'
     - 'start_step'
@@ -62,7 +62,7 @@ play_range_skipping:
 
 clear_one:
   name: 'clear_one'
-  regex: 'do not play ([a-z]+) on step ([0-9]+)'
+  regex: 'do not play (\w+) on step ([0-9]+)'
   variables:
     - 'pattern_name'
     - 'step'
@@ -71,7 +71,7 @@ clear_one:
 
 clear_range:
   name: 'clear_range'
-  regex: 'do not play ([a-z]+) on steps ([0-9]+) to ([0-9]+)'
+  regex: 'do not play (\w+) on steps ([0-9]+) to ([0-9]+)'
   variables:
     - 'pattern_name'
     - 'start_step'
@@ -81,7 +81,7 @@ clear_range:
 
 clear_range_skipping:
   name: 'clear_range_skipping'
-  regex: 'do not play ([a-z]+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)'
+  regex: 'do not play (\w+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)'
   variables:
     - 'pattern_name'
     - 'start_step'
