@@ -4,14 +4,8 @@ module Messages::Actions::Show
   attr_accessor :patterns
 
   def show_patterns(args)
-    self.pattern_names = args['pattern_names']
-    pattern_names.compact!
-    pattern_names.reject!{|x|x.blank?}
-    self.pattern_names = self.pattern_names.collect do |x|
-      x.split(',').collect{|x|x.strip}.reject{|x|x.blank?}
-    end
-    self.pattern_names.flatten.uniq
-    puts pattern_names.inspect
+    self.pattern_names = munge_list(args['pattern_names'])
+
     begin
       self.patterns = Pattern.where(:name => self.pattern_names)
       if self.patterns.any? 
