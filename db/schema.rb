@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224195343) do
+ActiveRecord::Schema.define(version: 20141226140407) do
 
   create_table "message_formats", force: true do |t|
     t.string   "name"
@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(version: 20141224195343) do
 
   create_table "samples", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "system_settings", force: true do |t|
+    t.string   "name"
+    t.string   "tip"
+    t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
