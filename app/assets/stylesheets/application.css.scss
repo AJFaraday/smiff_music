@@ -13,7 +13,7 @@ $section_background: #aaaaaa ;
   background-color: #cccccc;
   padding: 10px;
   border-radius:10px;
-  width: 55px;
+  width: 160px;
 }
 
 .button {
@@ -36,6 +36,17 @@ $section_background: #aaaaaa ;
   background-color: #777777;
   border-radius: 4px;
   float:left;
+}
+
+.user_vol_holder {
+  float: left;
+  width: 100px;
+  height: 30px ;
+  padding-top:7px;
+}
+
+#user_vol {
+  width: 100px;
 }
 
 .section {

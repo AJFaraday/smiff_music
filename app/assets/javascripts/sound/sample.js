@@ -34,7 +34,7 @@ function Sample(name) {
     if (this.audio != null) {
       var source = Sound.context.createBufferSource();
       source.buffer = this.audio;
-      source.connect(Sound.master_gain);
+      source.connect(Sound.user_gain);
       source.start(0);
     } else {
       throw new Error('Sound is not loaded')

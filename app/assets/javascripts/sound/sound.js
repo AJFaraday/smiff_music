@@ -12,9 +12,15 @@ var Sound = {
   init:function (attributes) {
     // set up context and gain chain
     this.get_context();
+
+    this.user_gain = this.context.createGainNode();
+    this.user_gain.gain.value = 0.7;
+    this.user_gain.connect(this.context.destination);
+
     this.master_gain = this.context.createGainNode();
-    this.master_gain.value = 0.2;
-    this.master_gain.connect(this.context.destination);
+    this.master_gain.gain.value = 0.4;
+    this.master_gain.connect(this.user_gain);
+
 
     // load samples
     attributes['sample_names'].forEach(function (sample_name) {
@@ -47,6 +53,10 @@ var Sound = {
       Sound.stop();
     });
     $('#stop_button').hide();
+
+    $('#user_vol').on('change', function() {
+      Sound.user_gain.gain.value = $('#user_vol').val();
+    });
   },
 
   set_patterns:function (patts) {
