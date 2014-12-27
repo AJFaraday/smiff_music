@@ -4,7 +4,7 @@ class Messages::Actions
 
   AVAILABLE_ACTIONS = %w{
     show_patterns add_steps clear_patterns clear_steps
-    set_speed show_speed speed_up speed_down
+    set_speed show_speed speed_up speed_down list_drums
   }
 
   extend Messages::Actions::Show
@@ -15,6 +15,7 @@ class Messages::Actions
   extend Messages::Actions::ShowSpeed
   extend Messages::Actions::SpeedUp
   extend Messages::Actions::SpeedDown
+  extend Messages::Actions::ListDrums
 
   def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)
@@ -23,7 +24,7 @@ class Messages::Actions
       return {
         response: 'failure',
         display: I18n.t(
-          'messages.errors.not_implemented',
+        'messages.errors.not_implemented',
           action: action
         )
       }
@@ -43,14 +44,19 @@ class Messages::Actions
   end
 
   def self.munge_list(list)
-    list.compact!
-    list.reject! { |x| x.blank? }
-    list = list.collect do |x|
-      x.split(',').collect { |x| x.strip }.reject { |x| x.blank? }
+    puts "munging #{list.inspect}"
+    if list.is_a?(Array)
+      list.compact!
+      list.reject! { |x| x.blank? }
+      list = list.collect do |x|
+        x.split(',').collect { |x| x.strip }.reject { |x| x.blank? }
+      end
+      list = list.flatten.uniq
+      puts list.inspect
+      list
+    else
+      [list ]
     end
-    list = list.flatten.uniq
-    puts list.inspect
-    list
   end
 
 end

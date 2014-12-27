@@ -29,7 +29,7 @@ class Messages::Parser
           if self.match_data.nil?
             self.match_data = message_format.regex.match(text)
             if self.match_data
-              self.message_format = message_format 
+              self.message_format = message_format
               build_parameters
             end
           end
@@ -42,16 +42,18 @@ class Messages::Parser
   def build_parameters
     self.parameters = {}
     if self.match_data and self.message_format and self.message_format.variables
-      matches = self.match_data.to_a 
+      matches = self.match_data.to_a
       matches.shift # remove source text
       self.message_format.variables.each do |param|
         if self.message_format.variables.count == 1
-          self.parameters[self.message_format.variables.first] = matches[0]
+          puts 'one'
+          self.parameters[self.message_format.variables.first] = matches
         else
           if matches.count > 1 and param == self.message_format.variables[-1]
-            puts 'got here'
+            puts 'two'
             self.parameters[param] = matches
-          else 
+          else
+            puts 'three'
             self.parameters[param] = matches.shift
           end
         end

@@ -24,7 +24,7 @@ clear:
 
 clear_multiple_patterns:
   name: 'clear_multiple_patterns'
-  regex: 'clear (\w+)([, (\w+)]+) and (\w+)'
+  regex: 'clear (\w+)((, \w+)*)(?: and (\w+))'
   variables:
     - 'pattern_names'
   action: 'clear_patterns'
@@ -51,7 +51,7 @@ play_range:
 
 play_multiple:
   name: 'play_multiple'
-  regex: 'play (\w+) on steps ([0-9]+)([, ([0-9]+)]+) and ([0-9]+)'
+  regex: 'play (\w+) on steps ([0-9]+)((, [0-9]+)*)(?: and ([0-9]+))'
   variables:
     - 'pattern_name'
     - 'steps'
@@ -80,7 +80,7 @@ clear_one:
 
 clear_multiple:
   name: 'clear_multiple'
-  regex: 'do not play (\w+) on steps ([0-9]+)([, ([0-9]+)]+) and ([0-9]+)'
+  regex: 'do not play (\w+) on steps ([0-9]+)(, [0-9]+)*(?: and ([0-9]+))'
   variables:
     - 'pattern_name'
     - 'steps'
@@ -133,4 +133,10 @@ set_speed:
     - 'bpm'
   action: 'set_speed'
   weight: 0
+
+list_drums:
+  name: 'list_drums'
+  regex: '(?:list|show) drums'
+  action: 'list_drums'
+  weight: 4
 

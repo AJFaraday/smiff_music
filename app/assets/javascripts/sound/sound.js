@@ -29,12 +29,13 @@ var Sound = {
 
   set_bpm:function (bpm) {
     var step_time = (60000 / bpm) / 4;
-    Sound.sixteenth_time = step_time;
-
-    if (Sound.player_active) {
-      clearInterval(Sound.player);
-      Sound.player_active = false;
-      Sound.play(false);
+    if (step_time != Sound.sixteenth_time) {
+      Sound.sixteenth_time = step_time;
+      if (Sound.player_active) {
+        clearInterval(Sound.player);
+        Sound.player_active = false;
+        Sound.play(false)
+      }
     }
   },
 
@@ -63,12 +64,10 @@ var Sound = {
 
   reset_patterns:function () {
     $.get(
-      '/patterns',
-      {},
+      '/patterns.json',
       function (response) {
         $.each(response, function (key, attrs) {
           if (key == 'bpm') {
-
             Sound.set_bpm(attrs);
           } else {
             pattern = Sound.patterns[key];
@@ -78,7 +77,8 @@ var Sound = {
         });
       },
       'json'
-    )
+    );
+    return false;
   },
 
   get_context:function () {
@@ -114,7 +114,8 @@ var Sound = {
     if (!Sound.player_active) {
       if (set_to_start) {
         Sound.step = 0;
-      };
+      }
+      ;
       Sound.player = setInterval(
         function () {
           Sound.play_step(Sound.step)

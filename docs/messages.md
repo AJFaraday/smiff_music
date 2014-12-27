@@ -20,12 +20,18 @@ You can find the names of these drums with this command:
 list drums
 ```
 
+or 
+
+```
+show drums
+```
+
 The result is a lot like the list above: 
 
 ```
-kick
-snare
-hihat
+* kick
+* snare
+* hihat
 ...
 ```
 

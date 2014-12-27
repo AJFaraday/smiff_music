@@ -1,7 +1,8 @@
 module Messages::Actions::SetSpeed
 
   def set_speed(args)
-    SystemSetting['bpm'] = args['bpm']
+    bpm = args['bpm'][0].to_i
+    SystemSetting['bpm'] = bpm
     return {
       response: 'success',
       display: I18n.t(
