@@ -2,6 +2,12 @@
   <thead>
   <tr>
     <th><%= t('.sample') %></th>
+    <% steps = @patterns.collect{|x|x.step_count}.reduce(:lcm) %>
+    <% steps.times do |step| %>
+      <th class='step_header'>
+        <%= step + 1 %>
+      </th>
+    <% end %>
   </tr>
   </thead>
   <tbody>
