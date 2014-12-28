@@ -4,7 +4,7 @@
   Pattern.create(
     name: drum,
     step_size: 16,
-    step_count: 16,
+    step_count: 32,
     instrument_name: drum,
     active: true
   )
