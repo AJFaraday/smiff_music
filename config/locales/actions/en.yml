@@ -20,5 +20,7 @@ en:
         other: "I've cleared the %{names} patterns"
     set_speed:
       success: "The speed is now %{bpm} beats per minute"
+      too_fast: "Sorry, the speed you asked for (%{bpm} bpm) is more than the maximum: %{max} bpm"
+      too_slow: "Sorry, the speed you asked for (%{bpm} bpm) is less than the minimum: %{min} bpm"
     show_speed:
       info: "The speed is %{bpm} beats per minute"

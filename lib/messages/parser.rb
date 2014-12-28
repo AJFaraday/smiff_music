@@ -46,14 +46,11 @@ class Messages::Parser
       matches.shift # remove source text
       self.message_format.variables.each do |param|
         if self.message_format.variables.count == 1
-          puts 'one'
           self.parameters[self.message_format.variables.first] = matches
         else
           if matches.count > 1 and param == self.message_format.variables[-1]
-            puts 'two'
             self.parameters[param] = matches
           else
-            puts 'three'
             self.parameters[param] = matches.shift
           end
         end
