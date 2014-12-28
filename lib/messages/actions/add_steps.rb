@@ -1,7 +1,5 @@
 module Messages::Actions::AddSteps
 
-
-
   attr_accessor :pattern
   attr_accessor :steps
 
@@ -27,18 +25,29 @@ module Messages::Actions::AddSteps
   # this sets the array, steps, indexes to true
   def set_steps(steps)
     modified_steps = steps.collect{|x| x.to_i - 1}
-    self.pattern.pattern_indexes += modified_steps
-    self.pattern.save!
-    {
-      response: 'success',
-      display: I18n.t(
-        'actions.add_steps.success',
-        name: self.pattern.name,
-        steps: steps.to_sentence(
-          last_word_connector: ' and '
+    out_of_range_steps = steps.select {|x|x.to_i < 1 or x.to_i > self.pattern.step_count}
+    if out_of_range_steps.any?
+      {
+        response: 'failure',
+        display: I18n.t(
+          'actions.add_steps.out_of_range',
+          max: pattern.step_count
         )
-      )
-    }
+      }
+    else
+      self.pattern.pattern_indexes += modified_steps
+      self.pattern.save!
+      {
+        response: 'success',
+        display: I18n.t(
+          'actions.add_steps.success',
+          name: self.pattern.name,
+          steps: steps.to_sentence(
+            last_word_connector: ' and '
+          )
+        )
+      }
+    end
   end
 
   def set_block(args)

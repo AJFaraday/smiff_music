@@ -12,6 +12,7 @@ en:
         unknown_error: "Sorry, an error occurred while trying to show %{names}: %{message}"
     add_steps:
       success: "Now playing %{name} on steps %{steps}"
+      out_of_range: "Sorry, I can't add these steps because some are out of range (1 to %{max})"
     clear_steps:
       success: "Now no longer playing %{name} on steps %{steps}"
     clear:
