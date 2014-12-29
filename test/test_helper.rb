@@ -13,8 +13,14 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
   Capybara.default_driver = :selenium
+
+
 end
