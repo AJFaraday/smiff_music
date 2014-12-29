@@ -7,3 +7,6 @@ max_bpm:
 min_bpm:
   default: 60
   tip: Minimum beats per minute
+pattern_version:
+  default: 0
+  tip: Version of the overall pattern, used to avoid unnecessary data load.

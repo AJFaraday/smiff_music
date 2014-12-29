@@ -6,8 +6,13 @@ class PatternStore
   cattr_accessor :hash
 
   def PatternStore.version
-    @@version ||= 0
+    @@version ||= SystemSetting['pattern_version'].to_i
   end
+
+  def PatternStore.version=(value)
+    @@version = SystemSetting['pattern_version'] = PatternStore.hash['version'] = value
+  end
+
 
   def PatternStore.hash
     @@hash ||= PatternStore.build_hash
@@ -35,8 +40,7 @@ class PatternStore
     else
       raise "Changed entity is unknown to PatternStore #{changed_entity.inspect}"
     end
-    @@version += 1
-    PatternStore.hash['version'] = @@version
+    PatternStore.version += 1
     PatternStore.hash
   end
 

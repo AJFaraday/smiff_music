@@ -6,14 +6,13 @@ class PatternsController < ApplicationController
         @patterns = Pattern.all
       end
       format.json do
-        puts "PatternStore at ver: #{PatternStore.version}"
         if params[:version] and params[:version].to_i < PatternStore.version
           render json: PatternStore.hash.to_json
         else
           # in this case the client already has the most recent version of the patterns
           # this avoids unnecessary data being passed down the line and
           # unnecessary modifications being made client-side
-          render json: {}.to_json
+          render nothing: true
         end
       end
     end
