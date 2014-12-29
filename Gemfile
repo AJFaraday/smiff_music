@@ -13,3 +13,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
 
+
+group :testing do
+  gem 'capybara'
+  gem 'rspec'
+  gem 'selenium-webdriver'
+end
