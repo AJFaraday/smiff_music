@@ -11,10 +11,14 @@ en:
         no_patterns: "Sorry, I can't find patterns named %{names}"
         unknown_error: "Sorry, an error occurred while trying to show %{names}: %{message}"
     add_steps:
-      success: "Now playing %{name} on steps %{steps}"
+      success:
+        other: "Now playing %{name} on steps %{steps}"
+        one: "Now playing %{name} on step %{steps}"
       out_of_range: "Sorry, I can't add these steps because some are out of range (1 to %{max})"
     clear_steps:
-      success: "Now no longer playing %{name} on steps %{steps}"
+      success:
+        one: "Now no longer playing %{name} on step %{steps}"
+        other: "Now no longer playing %{name} on steps %{steps}"
     clear:
       success:
         one: "I've cleared the %{name} pattern"

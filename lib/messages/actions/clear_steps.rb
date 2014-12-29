@@ -7,9 +7,7 @@ module Messages::Actions::ClearSteps
     self.pattern = Pattern.find_by_name(args['pattern_name'])
     return pattern_not_found([args['pattern_name']]) unless self.pattern
 
-    if args.keys.include?('step')
-      remove_steps([args['step']])
-    elsif args.keys.include?('steps')
+    if args.keys.include?('steps')
       remove_steps(munge_list(args['steps']))
     elsif args.keys.include?('start_step') and args.keys.include?('end_step')
       if args.keys.include?('block_size')
@@ -27,16 +25,27 @@ module Messages::Actions::ClearSteps
     modified_steps = steps.collect{|x| x.to_i - 1}
     self.pattern.pattern_indexes -= modified_steps
     self.pattern.save!
-    {
-      response: 'success',
-      display: I18n.t(
-        'actions.clear_steps.success',
-        name: self.pattern.name,
-        steps: steps.to_sentence(
-          last_word_connector: ' and '
+    if steps.count > 1
+      {
+        response: 'success',
+        display: I18n.t(
+          'actions.clear_steps.success.other',
+          name: self.pattern.name,
+          steps: steps.to_sentence(
+            last_word_connector: ' and '
+          )
         )
-      )
-    }
+      }
+    else
+      {
+        response: 'success',
+        display: I18n.t(
+          'actions.clear_steps.success.one',
+          name: self.pattern.name,
+          steps: steps[0]
+        )
+      }
+    end
   end
 
   def clear_block(args)

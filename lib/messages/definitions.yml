@@ -1,49 +1,33 @@
-show:
-  name: 'show'
-  regex: 'show (\w+)'
-  variables:
-    - 'pattern_names'
-  action: 'show_patterns'
-  weight: 0
-
 show_multiple:
   name: 'show_multiple'
-  regex: 'show (\w+)((, \w+)*)(?: and (\w+))'
+  regex: 'show (\w+)((, \w+)*)((?: and (\w+))*)'
   variables:
     - 'pattern_names'
   action: 'show_patterns'
-  weight: 1
-
-clear:
-  name: 'clear_pattern'
-  regex: 'clear (\w+)'
-  variables:
-    - 'pattern_names'
-  action: 'clear_patterns'
   weight: 0
 
 clear_all_drums:
   name: 'clear_all_drums'
   regex: 'clear all drums'
   action: 'clear_all_drums'
-  weight: 4
+  weight: 2
 
 clear_multiple_patterns:
   name: 'clear_multiple_patterns'
-  regex: 'clear (\w+)((, \w+)*)(?: and (\w+))'
+  regex: 'clear (\w+)((, \w+)*)((?: and (\w+))*)'
   variables:
     - 'pattern_names'
   action: 'clear_patterns'
-  weight: 1
+  weight: 0
 
-play_one:
-  name: 'play_one'
-  regex: 'play (\w+) on step ([0-9]+)'
+play_multiple:
+  name: 'play_multiple'
+  regex: 'play (\w+) on (?:steps|step) ([0-9]+)((, [0-9]+)*)((?: and ([0-9]+))*)'
   variables:
     - 'pattern_name'
-    - 'step'
+    - 'steps'
   action: 'add_steps'
-  weight: 1
+  weight: 0
 
 play_range:
   name: 'play_range'
@@ -54,15 +38,6 @@ play_range:
     - 'end_step'
   action: 'add_steps'
   weight: 1
-
-play_multiple:
-  name: 'play_multiple'
-  regex: 'play (\w+) on steps ([0-9]+)((, [0-9]+)*)(?: and ([0-9]+))'
-  variables:
-    - 'pattern_name'
-    - 'steps'
-  action: 'add_steps'
-  weight: 2
 
 play_range_skipping:
   name: 'play_range_skipping'
@@ -75,23 +50,14 @@ play_range_skipping:
   action: 'add_steps'
   weight: 2
 
-clear_one:
-  name: 'clear_one'
-  regex: 'do not play (\w+) on step ([0-9]+)'
-  variables:
-    - 'pattern_name'
-    - 'step'
-  action: 'clear_steps'
-  weight: 3
-
 clear_multiple:
   name: 'clear_multiple'
-  regex: 'do not play (\w+) on steps ([0-9]+)(, [0-9]+)*(?: and ([0-9]+))'
+  regex: 'do not play (\w+) on (?:steps|step) ([0-9]+)((, [0-9]+)*)((?: and ([0-9]+))*)'
   variables:
     - 'pattern_name'
     - 'steps'
   action: 'clear_steps'
-  weight: 4
+  weight: 1
 
 clear_range:
   name: 'clear_range'
@@ -101,7 +67,7 @@ clear_range:
     - 'start_step'
     - 'end_step'
   action: 'clear_steps'
-  weight: 3
+  weight: 2
 
 clear_range_skipping:
   name: 'clear_range_skipping'
@@ -112,13 +78,13 @@ clear_range_skipping:
     - 'end_step'
     - 'block_size'
   action: 'clear_steps'
-  weight: 4
+  weight: 3
 
 show_speed:
   name: 'show_speed'
   regex: 'show (?:speed|bpm)'
   action: 'show_speed'
-  weight: 4
+  weight: 2
 
 speed_up:
   name: 'speed_up'
@@ -144,7 +110,7 @@ list_drums:
   name: 'list_drums'
   regex: '(?:list|show) drums'
   action: 'list_drums'
-  weight: 4
+  weight: 2
 
 mute_unmute:
   name: 'mute or unmute drums'
@@ -152,5 +118,5 @@ mute_unmute:
   variables:
     - 'mode'
     - 'pattern_names'
-  action: 'mute_unmute'x
+  action: 'mute_unmute'
   weight: 0

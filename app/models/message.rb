@@ -42,11 +42,11 @@ class Message < ActiveRecord::Base
       return result
     elsif self.invalid?
       return {
-           display: I18n.t(
+        display: I18n.t(
             'messages.errors.message_unfound',
             :message => self.source_text
           ),
-          response: 'error'
+        response: 'error'
       }
     end 
   end 
