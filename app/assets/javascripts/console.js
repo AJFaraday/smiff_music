@@ -11,10 +11,17 @@ var Console = {
       Console.send_message();
     });
 
+    Console.field.on('keydown', function(event) {
+      if (event.keyCode == 13) {
+        Console.button.addClass('active');
+      }
+    });
+
     Console.field.on('keyup', function (event) {
       switch (event.keyCode) {
         case 13: //enter - submit message
           Console.send_message();
+          Console.button.removeClass('active');
           break;
         case 38: // up - previous message
           Console.prev_message();

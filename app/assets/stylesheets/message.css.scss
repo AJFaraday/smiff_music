@@ -62,7 +62,7 @@
   border-right: solid #555555 2px;
 }
 
-#console #submit:active {
+#console #submit:active, #console #submit.active {
   border-top: solid #555555 2px;
   border-left: solid #555555 2px;
   border-bottom: solid white 2px;
