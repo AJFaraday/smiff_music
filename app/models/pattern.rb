@@ -16,7 +16,6 @@ class Pattern < ActiveRecord::Base
     patterns = {}
     all.each do |pattern|
       patterns[pattern.name] = pattern.to_hash
-      patterns[pattern.name][:sample] = pattern.instrument_name
     end
     {
       patterns: patterns
@@ -26,15 +25,15 @@ class Pattern < ActiveRecord::Base
   def Pattern.to_hash
     result = {}
     all.each do |pattern|
-      result[pattern.instrument_name] = pattern.to_hash
+      result[pattern.name] = pattern.to_hash
     end
     result
   end
 
   def to_hash
     {
-      instrument_name: instrument_name,
       steps: bits,
+      sample: instrument_name,
       step_count: step_count,
       muted: muted
     }
