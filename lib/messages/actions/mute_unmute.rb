@@ -14,27 +14,16 @@ module Messages::Actions::MuteUnmute
       )
     end
 
-    if patterns.length == 1
-      return {
-        response: 'success',
-        display: I18n.t(
-          'actions.mute_unmute.success.one',
-          name: self.pattern_names[0],
-          action: I18n.t("actions.mute_unmute.#{args['mode']}")
-        )
-      }
-    else
-      return {
-        response: 'success',
-        display: I18n.t(
-          'actions.mute_unmute.success.other',
-          names: self.pattern_names.to_sentence(
-            last_word_connector: ' and '
-          ),
-          action: I18n.t("actions.mute_unmute.#{args['mode']}")
-        )
-      }
-    end
+    return {
+      response: 'success',
+      display: I18n.t(
+        "actions.mute_unmute.success.#{steps.count > 1 ? 'other' : 'one'}",
+        names: self.pattern_names.to_sentence(
+          last_word_connector: ' and '
+        ),
+        action: I18n.t("actions.mute_unmute.#{args['mode']}")
+      )
+    }
   end
 
 end

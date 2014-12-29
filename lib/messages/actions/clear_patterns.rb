@@ -9,25 +9,15 @@ module Messages::Actions::ClearPatterns
     return pattern_not_found([self.pattern_names]) unless self.patterns.any?
     puts patterns.inspect
     self.patterns.each{|x| x.update_attribute(:pattern_indexes, [])}
-    if patterns.length == 1
-      return {
-        response: 'success',
-        display: I18n.t(
-          'actions.clear.success.one',
-          name: self.pattern_names[0]
+    return {
+      response: 'success',
+      display: I18n.t(
+        "actions.clear.success.#{self.patterns.count > 1 ? 'other' : 'one'}",
+        names: self.pattern_names.to_sentence(
+          last_word_connector: ' and '
         )
-      }
-    else
-      return {
-        response: 'success',
-        display: I18n.t(
-          'actions.clear.success.other',
-          names: self.pattern_names.to_sentence(
-            last_word_connector: ' and '
-          )
-        )
-      }
-    end
+      )
+    }
   end
 
 end

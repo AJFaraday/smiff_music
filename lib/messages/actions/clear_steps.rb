@@ -25,27 +25,16 @@ module Messages::Actions::ClearSteps
     modified_steps = steps.collect{|x| x.to_i - 1}
     self.pattern.pattern_indexes -= modified_steps
     self.pattern.save!
-    if steps.count > 1
-      {
-        response: 'success',
-        display: I18n.t(
-          'actions.clear_steps.success.other',
-          name: self.pattern.name,
-          steps: steps.to_sentence(
-            last_word_connector: ' and '
-          )
+    return {
+      response: 'success',
+      display: I18n.t(
+        "actions.clear_steps.success.#{steps.count > 1 ? 'other' : 'one'}",
+        name: self.pattern.name,
+        steps: steps.to_sentence(
+          last_word_connector: ' and '
         )
-      }
-    else
-      {
-        response: 'success',
-        display: I18n.t(
-          'actions.clear_steps.success.one',
-          name: self.pattern.name,
-          steps: steps[0]
-        )
-      }
-    end
+      )
+    }
   end
 
   def clear_block(args)

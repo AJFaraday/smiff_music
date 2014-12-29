@@ -21,7 +21,7 @@ en:
         other: "Now no longer playing %{name} on steps %{steps}"
     clear:
       success:
-        one: "I've cleared the %{name} pattern"
+        one: "I've cleared the %{names} pattern"
         other: "I've cleared the %{names} patterns"
     set_speed:
       success: "The speed is now %{bpm} beats per minute"
@@ -35,5 +35,5 @@ en:
       mute: muted
       unmute: unmuted
       success:
-        one: "I've %{action} the %{name} pattern"
+        one: "I've %{action} the %{names} pattern"
         other: "I've %{action} the %{names} patterns"
