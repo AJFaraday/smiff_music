@@ -37,6 +37,7 @@ class Message < ActiveRecord::Base
         else # failure, error
           self.status = -1
       end
+      result[:version] = PatternStore.version
       save!
       return result
     elsif self.invalid?

@@ -77,6 +77,7 @@ var Sound = {
   reset_patterns:function () {
     $.get(
       '/patterns.json',
+      {version: Sound.version},
       function (response) {
         $.each(response, function (key, attrs) {
           if (key == 'bpm') {
