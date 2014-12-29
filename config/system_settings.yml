@@ -10,3 +10,7 @@ min_bpm:
 pattern_version:
   default: 0
   tip: Version of the overall pattern, used to avoid unnecessary data load.
+group_marker_space:
+  default: 4
+  tip: The space between marked steps on the pattern diagram
+

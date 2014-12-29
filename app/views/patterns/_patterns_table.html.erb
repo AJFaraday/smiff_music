@@ -20,7 +20,7 @@
       </td>
       <% pattern.step_count.times do |index| %>
         <% kls = pattern.pattern_indexes.include?(index) ? 'active' : 'inactive' %>
-        <% kls += ' marker' if index % 4 == 0 %>
+        <% kls += ' marker' if index % SystemSetting['group_marker_space'].to_i == 0 %>
         <td class="step <%= kls %>"
             id="<%= pattern.instrument_name %>_step_<%= index %>">
           <div></div>
