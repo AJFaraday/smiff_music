@@ -52,11 +52,15 @@ td.step.inactive div {
   background-color: #ffffff ;
 }
 
+td.step.inactive.marker div {
+  background-color: #dddddd;
+}
+
 td.step.active div {
   background-color: #666666 ;
 }
 
 
 tr.muted td.step.active div {
-  background-color: #cccccc;
+  background-color: #bbbbbb;
 }
