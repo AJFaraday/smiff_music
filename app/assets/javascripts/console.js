@@ -50,6 +50,7 @@ var Console = {
           feedback = feedback.concat(response['display'].replace(/\n/g, "<br/>"));
           feedback = feedback.concat('</div>');
           Console.display(feedback);
+          Sound.reset_patterns();
         },
         'json'
       );
