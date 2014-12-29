@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20141226140407) do
     t.integer  "step_size"
     t.integer  "step_count"
     t.string   "instrument_name"
-    t.integer  "bits"
+    t.binary   "bits",            limit: 16777215
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"

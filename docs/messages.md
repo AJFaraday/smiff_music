@@ -86,6 +86,12 @@ clear kick and snare
 clear kick, snare and hihat
 ```
 
+You can also clear all drums with this message:
+
+```
+clear all drums
+```
+
 ### play
 
 Examples:

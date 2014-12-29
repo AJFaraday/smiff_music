@@ -22,6 +22,13 @@ clear:
   action: 'clear_patterns'
   weight: 0
 
+clear:
+  name: 'clear_pattern'
+  regex: 'clear all drums'
+  action: 'clear_all_drums'
+  weight: 4
+
+
 clear_multiple_patterns:
   name: 'clear_multiple_patterns'
   regex: 'clear (\w+)((, \w+)*)(?: and (\w+))'

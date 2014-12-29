@@ -25,3 +25,5 @@ en:
       too_slow: "Sorry, the speed you asked for (%{bpm} bpm) is less than the minimum: %{min} bpm"
     show_speed:
       info: "The speed is %{bpm} beats per minute"
+    clear_all_drums:
+      success: "I've cleared all of the drum patterns."
