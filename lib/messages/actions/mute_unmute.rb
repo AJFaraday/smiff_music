@@ -17,7 +17,7 @@ module Messages::Actions::MuteUnmute
     return {
       response: 'success',
       display: I18n.t(
-        "actions.mute_unmute.success.#{steps.count > 1 ? 'other' : 'one'}",
+        "actions.mute_unmute.success.#{self.patterns.count > 1 ? 'other' : 'one'}",
         names: self.pattern_names.to_sentence(
           last_word_connector: ' and '
         ),
