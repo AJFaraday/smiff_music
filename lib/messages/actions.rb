@@ -47,7 +47,7 @@ class Messages::Actions
   end
 
   def self.munge_list(list)
-    puts "munging #{list.inspect}"
+    Rails.logger.info "munging #{list.inspect}"
     if list.is_a?(Array)
       list.compact!
       list.reject! { |x| x.blank? }
@@ -62,7 +62,7 @@ class Messages::Actions
       list.uniq!
       list
     else
-      [list ]
+      [list]
     end
   end
 

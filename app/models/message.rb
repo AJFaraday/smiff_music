@@ -20,9 +20,9 @@ class Message < ActiveRecord::Base
       message.message_format = parser.message_format
       message.action = parser.message_format.action
       message.parameters = parser.parameters
-      message.status = 1
+      message.status = Message::PENDING_STATE
     else
-      message.status = 0
+      message.status = Message::INVALID_STATE
     end
     message.save!
     message
@@ -33,14 +33,16 @@ class Message < ActiveRecord::Base
       result = Messages::Actions.run(action,parameters)
       case result[:response]
         when 'success'
-          self.status = 2
+          self.status = Message::RUN_STATE
         else # failure, error
-          self.status = -1
+          self.status = Message::FAILED_STATE
       end
       result[:version] = PatternStore.version
       save!
       return result
     elsif self.invalid?
+      self.status = Message::FAILED_STATE
+      save!
       return {
         display: I18n.t(
             'messages.errors.message_unfound',
