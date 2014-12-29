@@ -146,3 +146,11 @@ list_drums:
   action: 'list_drums'
   weight: 4
 
+mute_unmute:
+  name: 'mute or unmute drums'
+  regex: '(unmute|mute) (\w+)((, \w+)*)((?: and (\w+))*)'
+  variables:
+    - 'mode'
+    - 'pattern_names'
+  action: 'mute_unmute'x
+  weight: 0

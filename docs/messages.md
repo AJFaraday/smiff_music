@@ -41,6 +41,7 @@ For each of these you can perform one of a number of actions:
 * clear
 * play
 * do not play
+* mute and unmute
 
 ### show
 
@@ -164,6 +165,28 @@ Examples:
 ```
 
 This works in exactly the same way as play, except that the sequence will be changed so that the notes specified will not be played on the steps identified.
+
+### mute
+
+```
+mute kick
+mute kick and snare
+mute tom1, tom2 and tom3
+```
+
+This will mute a pattern, keeping it from sounding in playback. 
+
+You can still modify patterns while they are muted.
+
+### unmute
+
+```
+unmute kick
+unmute kick and snare
+unmute tom1, tom2 and tom3
+```
+
+This will unmute any muted patterns, meaning they are now heard.
 
 ## Player
 

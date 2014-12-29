@@ -5,7 +5,7 @@ class Messages::Actions
   AVAILABLE_ACTIONS = %w{
     show_patterns add_steps clear_patterns clear_steps
     set_speed show_speed speed_up speed_down list_drums
-    clear_all_drums
+    clear_all_drums mute_unmute
   }
 
   extend Messages::Actions::Show
@@ -18,6 +18,7 @@ class Messages::Actions
   extend Messages::Actions::SpeedDown
   extend Messages::Actions::ListDrums
   extend Messages::Actions::ClearAllDrums
+  extend Messages::Actions::MuteUnmute
 
   def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)
@@ -52,6 +53,10 @@ class Messages::Actions
       list.reject! { |x| x.blank? }
       list = list.collect do |x|
         x.split(',').collect { |x| x.strip }.reject { |x| x.blank? }
+      end
+      list = list.flatten
+      list = list.collect do |x|
+        x.split('and').collect { |x| x.strip }.reject { |x| x.blank? }
       end
       list = list.flatten.uniq
       puts list.inspect

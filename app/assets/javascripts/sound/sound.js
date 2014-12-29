@@ -87,6 +87,7 @@ var Sound = {
           } else {
             pattern = Sound.patterns[key];
             pattern.step_source = attrs['steps'];
+            pattern.muted = attrs['muted'];
             pattern.set_step_info();
             pattern.display();
           }
