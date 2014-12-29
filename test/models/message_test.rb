@@ -44,7 +44,7 @@ class MessageTest < ActiveSupport::TestCase
     result = message.run
     assert_instance_of Hash, result
     assert_equal %i{response display version}, result.keys
-    assert_equal SystemSetting['pattern_version'], result[:version]
+    assert result[:version]
     assert_equal 'success', result[:response]
     assert_equal(
       "------1---5---9---13--17--21--25--29--
