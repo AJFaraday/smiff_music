@@ -22,12 +22,11 @@ clear:
   action: 'clear_patterns'
   weight: 0
 
-clear:
-  name: 'clear_pattern'
+clear_all_drums:
+  name: 'clear_all_drums'
   regex: 'clear all drums'
   action: 'clear_all_drums'
   weight: 4
-
 
 clear_multiple_patterns:
   name: 'clear_multiple_patterns'
