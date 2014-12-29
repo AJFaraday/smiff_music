@@ -6,7 +6,7 @@ class PatternsController < ApplicationController
         @patterns = Pattern.all
       end
       format.json do 
-        render json: Pattern.to_hash.to_json
+        render json: PatternStore.hash.to_json
       end
     end
   end

@@ -5,7 +5,7 @@ class CreatePatterns < ActiveRecord::Migration
       t.integer :step_size
       t.integer :step_count
       t.string :instrument_name
-      t.integer :bits
+      t.column :bits, :binary, :limit => 10.megabyte
       t.boolean :active
 
       t.timestamps

@@ -2,6 +2,12 @@ class Pattern < ActiveRecord::Base
 
   after_initialize :set_default_bits
 
+  after_save :modify_pattern_store
+
+  def modify_pattern_store
+    PatternStore.modify_hash(self)
+  end
+
   def set_default_bits
     self.bits ||= 0
   end 
@@ -10,8 +16,9 @@ class Pattern < ActiveRecord::Base
     patterns = {}
     all.each do |pattern|
       patterns[pattern.name] = {
-        steps: pattern.pattern_bits,
-        sample: pattern.instrument_name
+        steps: pattern.bits,
+        sample: pattern.instrument_name,
+        step_count: pattern.step_count
       }
     end
     {
@@ -24,19 +31,17 @@ class Pattern < ActiveRecord::Base
     all.each do |pattern|
       result[pattern.instrument_name] = pattern.to_hash
     end
-    result['bpm'] = SystemSetting['bpm']
     result
   end
 
   def to_hash
     {
       instrument_name: instrument_name,
-      steps: pattern_bits,
+      steps: bits,
       step_size: step_size,
       step_count: step_count
     }
   end
-
 
   # returns array of indexes (e.g. [0,4,8,10,12])
   def pattern_indexes
@@ -62,5 +67,11 @@ class Pattern < ActiveRecord::Base
     str = str.rjust(self.step_count, '0')
     str.chars.collect{|x|x=='1'}
   end 
+
+  # bits is stored as a blob. and retrieved as a a string
+  # I want it to be an integer (so I can treat it as a bit mask)
+  def bits
+    super.to_i
+  end
 
 end

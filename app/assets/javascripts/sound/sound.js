@@ -7,11 +7,13 @@ var Sound = {
   step:0,
   lowest_common_multiple:0,
   player_active:false,
-
+  version: 0,
 
   init:function (attributes) {
     // set up context and gain chain
     this.get_context();
+
+    this.version = (attributes['version']);
 
     this.user_gain = this.context.createGainNode();
     this.user_gain.gain.value = 0.7;
@@ -66,7 +68,7 @@ var Sound = {
 
     var step_counts = []
     for (key in Sound.patterns) {
-      step_counts = step_counts.concat(Sound.patterns[key].steps.length);
+      step_counts = step_counts.concat(Sound.patterns[key].step_string.length);
     }
     ;
     Sound.lowest_common_multiple = Sound.LCM(step_counts);
@@ -79,9 +81,12 @@ var Sound = {
         $.each(response, function (key, attrs) {
           if (key == 'bpm') {
             Sound.set_bpm(attrs);
+          } else if (key == 'version') {
+            Sound.version = attrs;
           } else {
             pattern = Sound.patterns[key];
-            pattern.steps = attrs['steps'];
+            pattern.step_source = attrs['steps'];
+            pattern.set_step_info();
             pattern.display();
           }
         });
