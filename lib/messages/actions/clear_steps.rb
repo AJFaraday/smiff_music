@@ -11,10 +11,8 @@ module Messages::Actions::ClearSteps
       remove_steps(munge_list(args['steps']))
     elsif args.keys.include?('start_step') and args.keys.include?('end_step')
       if args.keys.include?('block_size')
-        puts 'skipping'
         clear_block_skipping(args)
       else
-        puts "not skipping #{args.inspect}"
         clear_block(args)
       end
     end
@@ -23,18 +21,29 @@ module Messages::Actions::ClearSteps
   # this sets the array, steps, indexes to true
   def remove_steps(steps)
     modified_steps = steps.collect{|x| x.to_i - 1}
-    self.pattern.pattern_indexes -= modified_steps
-    self.pattern.save!
-    return {
-      response: 'success',
-      display: I18n.t(
-        "actions.clear_steps.success.#{steps.count > 1 ? 'other' : 'one'}",
-        name: self.pattern.name,
-        steps: steps.to_sentence(
-          last_word_connector: ' and '
+    out_of_range_steps = steps.select {|x|x.to_i < 1 or x.to_i > self.pattern.step_count}
+    if out_of_range_steps.any?
+      {
+        response: 'failure',
+        display: I18n.t(
+          'actions.clear_steps.out_of_range',
+          max: pattern.step_count
         )
-      )
-    }
+      }
+    else
+      self.pattern.pattern_indexes -= modified_steps
+      self.pattern.save!
+      return {
+        response: 'success',
+        display: I18n.t(
+          "actions.clear_steps.success.#{steps.count > 1 ? 'other' : 'one'}",
+          name: self.pattern.name,
+          steps: steps.to_sentence(
+            last_word_connector: ' and '
+          )
+        )
+      }
+    end
   end
 
   def clear_block(args)

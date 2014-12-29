@@ -3,7 +3,7 @@ en:
     errors:
       message_unfound: "Sorry, I can't understand this message: '%{message}'"
       not_implemented: "Sorry, it looks like this action '%{action}' is not yet implemented."
-      pattern_not_found: "Sorry, I couldn't find a pattern named '%{action}'"
+      pattern_not_found: "Sorry, I can't find any patterns named %{names}"
   actions: 
     show_patterns: 
       errors: 
@@ -19,6 +19,7 @@ en:
       success:
         one: "Now no longer playing %{name} on step %{steps}"
         other: "Now no longer playing %{name} on steps %{steps}"
+      out_of_range: "Sorry, I can't clear these steps because some are out of range (1 to %{max})"
     clear:
       success:
         one: "I've cleared the %{names} pattern"

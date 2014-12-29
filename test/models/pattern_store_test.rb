@@ -35,5 +35,4 @@ class PatternStoreTest < ActiveSupport::TestCase
     assert_not_equal(hash['bpm'], PatternStore.hash['bpm'])
   end
 
-
 end

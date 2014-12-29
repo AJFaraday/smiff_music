@@ -11,10 +11,8 @@ module Messages::Actions::AddSteps
       set_steps(munge_list(args['steps']))
     elsif args.keys.include?('start_step') and args.keys.include?('end_step')
       if args.keys.include?('block_size')
-        puts 'skipping'
         set_block_skipping(args)
       else
-        puts "not skipping #{args.inspect}"
         set_block(args)
       end
     end

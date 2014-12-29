@@ -1,6 +1,5 @@
 module Messages::Actions::ListDrums
 
-
   def list_drums(args)
     return {
       response: 'success',

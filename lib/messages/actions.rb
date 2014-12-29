@@ -38,7 +38,7 @@ class Messages::Actions
     {
       response: 'failure',
       display: I18n.t(
-        'actions.show_patterns.errors.no_pattern',
+        'messages.errors.pattern_not_found',
         names: pattern_names.to_sentence(
           last_word_connector: ' and '
         )
