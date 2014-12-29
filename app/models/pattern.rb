@@ -15,11 +15,8 @@ class Pattern < ActiveRecord::Base
   def Pattern.sound_init_params
     patterns = {}
     all.each do |pattern|
-      patterns[pattern.name] = {
-        steps: pattern.bits,
-        sample: pattern.instrument_name,
-        step_count: pattern.step_count
-      }
+      patterns[pattern.name] = pattern.to_hash
+      patterns[pattern.name][:sample] = pattern.instrument_name
     end
     {
       patterns: patterns
@@ -38,8 +35,8 @@ class Pattern < ActiveRecord::Base
     {
       instrument_name: instrument_name,
       steps: bits,
-      step_size: step_size,
-      step_count: step_count
+      step_count: step_count,
+      muted: muted
     }
   end
 

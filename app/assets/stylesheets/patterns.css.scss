@@ -47,10 +47,16 @@ td.step div {
   border: 1px black solid;
 }
 
+
 td.step.inactive div {
   background-color: #ffffff ;
 }
 
 td.step.active div {
   background-color: #666666 ;
+}
+
+
+tr.muted td.step.active div {
+  background-color: #cccccc;
 }

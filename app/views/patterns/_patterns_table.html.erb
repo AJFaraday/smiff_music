@@ -13,7 +13,7 @@
   <tbody>
   <% @patterns.each do |pattern| %>
 
-    <tr id="<%= pattern.instrument_name %>">
+    <tr id="<%= pattern.instrument_name %>" <%= 'class=muted' if pattern.muted %>>
       <td>
         <div class='indicator pre' id="<%= pattern.instrument_name %>"></div>
         <%= pattern.name %>
