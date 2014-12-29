@@ -34,7 +34,7 @@ class PatternTest < ActiveSupport::TestCase
 
   def test_to_hash
     pattern_hash = Pattern.first.to_hash
-    [:instrument_name, :bits, :step_size, :step_count].each do |key|
+    [:instrument_name, :steps, :step_count, :muted].each do |key|
       assert pattern_hash.keys.include? key
     end
     full_hash = Pattern.to_hash

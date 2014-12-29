@@ -1,13 +1,130 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: MyString
-  regex: MyString
-  action: MyString
-  variables: MyString
-
-two:
-  name: MyString
-  regex: MyString
-  action: MyString
-  variables: MyString
+# version 0 database as created by /db/seeds.rb
+---
+show_multiple:
+  id: 1
+  name: show_multiple
+  regex: 'show (\w+)((, \w+)*)((?: and (\w+))*)'
+  action: show_patterns
+  variables:
+  - pattern_names
+  weight: 0
+clear_all_drums:
+  id: 2
+  name: clear_all_drums
+  regex: clear all drums
+  action: clear_all_drums
+  variables: 
+  weight: 2
+clear_multiple_patterns:
+  id: 3
+  name: clear_multiple_patterns
+  regex: 'clear (\w+)((, \w+)*)((?: and (\w+))*)'
+  action: clear_patterns
+  variables:
+  - pattern_names
+  weight: 0
+play_multiple:
+  id: 4
+  name: play_multiple
+  regex: 'play (\w+) on (?:steps|step) ([0-9]+)((, [0-9]+)*)((?: and ([0-9]+))*)'
+  action: add_steps
+  variables:
+  - pattern_name
+  - steps
+  weight: 0
+play_range:
+  id: 5
+  name: play_range
+  regex: play (\w+) on steps ([0-9]+) to ([0-9]+)
+  action: add_steps
+  variables:
+  - pattern_name
+  - start_step
+  - end_step
+  weight: 1
+play_range_skipping:
+  id: 6
+  name: play_range_skipping
+  regex: play (\w+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)
+  action: add_steps
+  variables:
+  - pattern_name
+  - start_step
+  - end_step
+  - block_size
+  weight: 2
+clear_multiple:
+  id: 7
+  name: clear_multiple
+  regex: 'do not play (\w+) on (?:steps|step) ([0-9]+)((, [0-9]+)*)((?: and ([0-9]+))*)'
+  action: clear_steps
+  variables:
+  - pattern_name
+  - steps
+  weight: 1
+clear_range:
+  id: 8
+  name: clear_range
+  regex: do not play (\w+) on steps ([0-9]+) to ([0-9]+)
+  action: clear_steps
+  variables:
+  - pattern_name
+  - start_step
+  - end_step
+  weight: 2
+clear_range_skipping:
+  id: 9
+  name: clear_range_skipping
+  regex: do not play (\w+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)
+  action: clear_steps
+  variables:
+  - pattern_name
+  - start_step
+  - end_step
+  - block_size
+  weight: 3
+show_speed:
+  id: 10
+  name: show_speed
+  regex: show (?:speed|bpm)
+  action: show_speed
+  variables: 
+  weight: 2
+speed_up:
+  id: 11
+  name: speed_up
+  regex: speed up
+  action: speed_up
+  variables: 
+  weight: 0
+speed_down:
+  id: 12
+  name: speed_down
+  regex: "(?:slow|speed) down"
+  action: speed_down
+  variables: 
+  weight: 0
+set_speed:
+  id: 13
+  name: set_speed
+  regex: 'set speed to ([0-9]+)(?: bpm)?'
+  action: set_speed
+  variables:
+  - bpm
+  weight: 0
+list_drums:
+  id: 14
+  name: list_drums
+  regex: "(?:list|show) drums"
+  action: list_drums
+  variables: 
+  weight: 2
+mute_or_unmute_drums:
+  id: 15
+  name: mute or unmute drums
+  regex: "(unmute|mute) (\\w+)((, \\w+)*)((?: and (\\w+))*)"
+  action: mute_unmute
+  variables:
+  - mode
+  - pattern_names
+  weight: 0

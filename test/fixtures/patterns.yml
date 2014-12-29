@@ -1,17 +1,64 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: Kick
+# version 0 database as created by /db/seeds.rb
+p1:
+  id: 1
+  name: kick
   step_size: 16
-  step_count: 16
+  step_count: 32
   instrument_name: kick
-  bits: 32928
+  bits:
   active: true
-
-two:
+  muted: false
+p2:
+  id: 2
   name: snare
   step_size: 16
   step_count: 32
   instrument_name: snare
-  bits: 2058
+  bits:
   active: true
+  muted: false
+p3:
+  id: 3
+  name: hihat
+  step_size: 16
+  step_count: 32
+  instrument_name: hihat
+  bits:
+  active: true
+  muted: false
+p4:
+  id: 4
+  name: crash
+  step_size: 16
+  step_count: 32
+  instrument_name: crash
+  bits:
+  active: true
+  muted: false
+p5:
+  id: 5
+  name: tom1
+  step_size: 16
+  step_count: 32
+  instrument_name: tom1
+  bits:
+  active: true
+  muted: false
+p6:
+  id: 6
+  name: tom2
+  step_size: 16
+  step_count: 32
+  instrument_name: tom2
+  bits:
+  active: true
+  muted: false
+p7:
+  id: 7
+  name: tom3
+  step_size: 16
+  step_count: 32
+  instrument_name: tom3
+  bits:
+  active: true
+  muted: false
