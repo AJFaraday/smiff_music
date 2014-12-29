@@ -54,12 +54,12 @@ class Messages::Actions
       list = list.collect do |x|
         x.split(',').collect { |x| x.strip }.reject { |x| x.blank? }
       end
-      list = list.flatten
+      list.flatten!
       list = list.collect do |x|
         x.split('and').collect { |x| x.strip }.reject { |x| x.blank? }
       end
-      list = list.flatten.uniq
-      puts list.inspect
+      list.flatten!
+      list.uniq!
       list
     else
       [list ]
