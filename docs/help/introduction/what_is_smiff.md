@@ -2,7 +2,7 @@
 
 SMIFF Music is a web application by Andrew Faraday (@MarmiteJunction), exploring the use of the internet as a tool for creating music collaboratively.
 
-SMIFF Music stands for Social Media Interface for Music.
+SMIFF Music stands for Social Media InterFace For Music.
 
 In the current version (version zero), SMIFF is just a drum machine, and does not have a Social Media Interface. Version zero is a proof of concept, demonstrating that music can be made within a web browser and modifed via a collection of text messages. It also demonstrates that more than one person can modify the same pattern, and everyone listening will hear the resultant changes.
 
