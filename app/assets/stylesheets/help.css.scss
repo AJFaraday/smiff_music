@@ -24,6 +24,7 @@
 
 .help_list ul{
   padding-left:10px;
+  list-style-type: disc;
 }
 
 .help_list ul a, .help_list ul a:hover {
@@ -32,6 +33,12 @@
 
 .help_list ul ul{
   padding-left:10px;
+  list-style-type: disc;
+}
+
+.help_list ul ul ul{
+  padding-left:10px;
+  list-style-type: disc;
 }
 
 .help_list ul ul a, .help_list ul ul a:hover {
