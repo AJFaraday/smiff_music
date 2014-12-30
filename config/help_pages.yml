@@ -9,9 +9,44 @@
   anchor: messages
   file: '/docs/help/messages.md'
   children:
-    - title: Drums
-      anchor: messages_drums
-      file: '/docs/help/messages/drums.md'
     - title: Player
       anchor: messages_player
       file: '/docs/help/messages/player.md'
+      children:
+        - title: show speed
+          anchor: set_speed
+          file: '/docs/help/messages/player/set_speed_to_x.md'
+        - title: show speed
+          anchor: show_speed
+          file: '/docs/help/messages/player/show_speed.md'
+        - title: speed up
+          anchor: speed_up
+          file: '/docs/help/messages/player/speed_up.md'
+        - title: speed down
+          anchor: speed_down
+          file: '/docs/help/messages/player/speed_down.md'
+    - title: Drums
+      anchor: messages_drums
+      file: '/docs/help/messages/drums.md'
+      children:
+        - title: list
+          anchor: list
+          file: '/docs/help/messages/drums/list.md'
+        - title: show
+          anchor: show
+          file: '/docs/help/messages/drums/show.md'
+        - title: play
+          anchor: play
+          file: '/docs/help/messages/drums/play.md'
+        - title: do not play
+          anchor: do_not_play
+          file: '/docs/help/messages/drums/do_not_play.md'
+        - title: mute
+          anchor: mute
+          file: '/docs/help/messages/drums/mute.md'
+        - title: unmute
+          anchor: unmute
+          file: '/docs/help/messages/drums/unmute.md'
+        - title: clear
+          anchor: clear
+          file: '/docs/help/messages/drums/clear.md'

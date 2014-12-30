@@ -15,6 +15,7 @@
 
 .help_list{
   padding-left:20px;
+  overflow-y: auto;
 }
 
 .help_list a, .help_list a:hover {
@@ -29,11 +30,13 @@
   color:white;
 }
 
-
 .help_list ul ul{
   padding-left:20px;
 }
 
 .help_list ul ul a, .help_list ul ul a:hover {
   color:white;
+}
+
+.help_section{
 }

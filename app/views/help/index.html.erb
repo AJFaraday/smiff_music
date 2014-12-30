@@ -7,17 +7,22 @@
 </div>
 
 <script type='text/javascript'>
-  function set_main_height() {
+  function set_help_height() {
     $('#main_section').css(
       'height',
       window.innerHeight - 180
     );
+    $('.help_list').css(
+      'height',
+      window.innerHeight - 180 - 30
+    );
+
   }
 
   $(window).resize(function() {
-    set_main_height();
+    set_help_height();
   });
   $(document).ready(function() {
-    set_main_height();
+    set_help_height();
   });
 </script>

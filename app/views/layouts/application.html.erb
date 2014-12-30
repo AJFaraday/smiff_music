@@ -13,9 +13,14 @@
 
 <div class=holder>
   <div class=header>
-    <h1>Smiff Music</h1>
+    <%= render partial: 'shared/play_controls' %>
+    <div class='title'><h1>Smiff Music</h1></div>
+
   </div>
   <%= yield %>
+
+  <%= render partial: 'shared/js_init' %>
+
 </div>
 
 </body>
