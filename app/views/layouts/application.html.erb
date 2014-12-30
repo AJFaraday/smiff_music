@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>SmiffMusic</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'bootstrap.min' 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'help', 'application', 'bootstrap.min', media: 'all',
+                          'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'console', 'bootstrap.min',
                              'monkey_patch_string', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'sound/sound', 'sound/sample', 'sound/pattern', 'data-turbolinks-track' => true %>
@@ -11,6 +12,9 @@
 <body>
 
 <div class=holder>
+  <div class=header>
+    <h1>Smiff Music</h1>
+  </div>
   <%= yield %>
 </div>
 

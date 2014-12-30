@@ -1,0 +1,23 @@
+<div class='section' id='main_section'>
+  <%= render partial: 'help_display' %>
+</div>
+
+<div class='section' id='nav_section' role='complimentary'>
+  <%= render partial: 'help_nav' %>
+</div>
+
+<script type='text/javascript'>
+  function set_main_height() {
+    $('#main_section').css(
+      'height',
+      window.innerHeight - 180
+    );
+  }
+
+  $(window).resize(function() {
+    set_main_height();
+  });
+  $(document).ready(function() {
+    set_main_height();
+  });
+</script>

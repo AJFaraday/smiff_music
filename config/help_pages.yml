@@ -1,0 +1,17 @@
+---
+- title: Introduction
+  anchor: intro
+  file: '/docs/help/introduction.md'
+- title: Using the Terminal
+  anchor: terminal
+  file: '/docs/help/terminal.md'
+- title: Available Messages
+  anchor: messages
+  file: '/docs/help/messages.md'
+  children:
+    - title: Drums
+      anchor: messages_drums
+      file: '/docs/help/messages/drums.md'
+    - title: Player
+      anchor: messages_player
+      file: '/docs/help/messages/player.md'

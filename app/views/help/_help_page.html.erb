@@ -1,0 +1,8 @@
+<div class=help-section id="<%= page['anchor'] %>">
+  <%= raw page['content'] %>
+</div>
+<% if page['children'] %>
+  <% page['children'].each do |child| %>
+    <%= render partial: 'help_page', locals: {page: child} %>
+  <% end %>
+<% end %>

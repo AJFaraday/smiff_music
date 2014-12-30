@@ -1,0 +1,39 @@
+#main_section {
+  width:79%;
+  padding: 20px;
+  float: left;
+  //position:fixed !important;
+  //position:absolute;
+  overflow-y:auto;
+}
+
+#nav_section {
+  width:20%;
+  float: right;
+  padding:10px;
+}
+
+.help_list{
+  padding-left:20px;
+}
+
+.help_list a, .help_list a:hover {
+  color:white;
+}
+
+.help_list ul{
+  padding-left:10px;
+}
+
+.help_list ul a, .help_list ul a:hover {
+  color:white;
+}
+
+
+.help_list ul ul{
+  padding-left:20px;
+}
+
+.help_list ul ul a, .help_list ul ul a:hover {
+  color:white;
+}

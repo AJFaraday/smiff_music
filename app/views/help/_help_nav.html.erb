@@ -1,0 +1,5 @@
+<ul class='help_list'>
+  <% @pages.each do |page| %>
+    <%= render partial: 'help_nav_menu_item', locals: {page: page} %>
+  <% end %>
+</ul>

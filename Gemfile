@@ -14,6 +14,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 
+gem 'github-markup'
+gem 'redcarpet'
+
 group :testing do
   gem 'capybara'
   gem 'rspec'
