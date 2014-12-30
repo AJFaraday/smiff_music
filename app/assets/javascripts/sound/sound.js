@@ -7,29 +7,31 @@ var Sound = {
   step:0,
   lowest_common_multiple:0,
   player_active:false,
-  version: 0,
+  version:0,
 
   init:function (attributes) {
     // set up context and gain chain
-    this.get_context();
 
     this.version = (attributes['version']);
 
-    this.user_gain = this.context.createGain();
-    this.user_gain.gain.value = 0.7;
-    this.user_gain.connect(this.context.destination);
+    if (this.get_context()) {
 
-    this.master_gain = this.context.createGain();
-    this.master_gain.gain.value = 0.4;
-    this.master_gain.connect(this.user_gain);
+      this.user_gain = this.context.createGain();
+      this.user_gain.gain.value = 0.7;
+      this.user_gain.connect(this.context.destination);
 
+      this.master_gain = this.context.createGain();
+      this.master_gain.gain.value = 0.4;
+      this.master_gain.connect(this.user_gain);
 
+    }
     // load samples
     attributes['sample_names'].forEach(function (sample_name) {
       Sound.samples[sample_name] = new Sample(sample_name);
       Sound.samples[sample_name].load_sample();
     });
     this.set_patterns(attributes['patterns']);
+
     this.init_player_controls();
 
     this.set_bpm(attributes['bpm']);
@@ -56,7 +58,7 @@ var Sound = {
     });
     $('#stop_button').hide();
 
-    $('#user_vol').on('change', function() {
+    $('#user_vol').on('change', function () {
       Sound.user_gain.gain.value = $('#user_vol').val();
     });
   },
@@ -77,7 +79,7 @@ var Sound = {
   reset_patterns:function () {
     $.get(
       '/patterns.json',
-      {version: Sound.version},
+      {version:Sound.version},
       function (response) {
         $.each(response, function (key, attrs) {
           if (key == 'bpm') {
@@ -99,12 +101,17 @@ var Sound = {
   },
 
   get_context:function () {
-    if (typeof AudioContext !== "undefined") {
+    if (this.context) {
+      console.log('using existing context');
+      return false;
+    } else if (typeof AudioContext !== "undefined") {
       console.log('using AudioContext')
       this.context = new AudioContext();
+      return true
     } else if (typeof webkitAudioContext !== "undefined") {
       console.log('using webkitAudioContext')
       this.context = new webkitAudioContext();
+      return true
     } else {
       throw new Error('AudioContext not supported. :(');
     }

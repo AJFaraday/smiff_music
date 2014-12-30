@@ -6,11 +6,15 @@
 %>
 
 <script type="text/javascript">
-  window.onload = function () {
+  var ready_action = function () {
+    console.log('initialising')
     Sound.init(
       <%# attributes from rails app %>
       <%= raw init_params.to_json %>
     );
     Console.init();
   }
+
+  $(document).ready(ready_action);
+  //$(document).on('page:load', ready_action);
 </script>

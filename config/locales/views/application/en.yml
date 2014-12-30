@@ -1,0 +1,5 @@
+en:
+  layouts:
+    application:
+      home: Home
+      help: Help

@@ -3,7 +3,7 @@
 <head>
   <title>SmiffMusic</title>
   <%= stylesheet_link_tag 'help', 'application', 'bootstrap.min', media: 'all',
-                          'data-turbolinks-track' => true %>
+      'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'console', 'bootstrap.min',
                              'monkey_patch_string', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'sound/sound', 'sound/sample', 'sound/pattern', 'data-turbolinks-track' => true %>
@@ -15,7 +15,16 @@
   <div class=header>
     <%= render partial: 'shared/play_controls' %>
     <div class='title'><h1>Smiff Music</h1></div>
-
+    <div class='header_menu'>
+      <ul class="nav nav-pills">
+        <li class="<%= 'active' if params[:controller] == 'patterns' %>">
+          <a href="/"><%= t('.home') %></a>
+        </li>
+        <li class="<%= 'active' if params[:controller] == 'help' %>">
+          <a href='/help'><%= t('.help') %></a>
+        </li>
+      </ul>
+    </div>
   </div>
   <%= yield %>
 

@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
 
+gem 'jquery-turbolinks'
 
 gem 'github-markup'
 gem 'redcarpet'

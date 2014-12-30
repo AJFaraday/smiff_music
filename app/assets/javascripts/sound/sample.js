@@ -23,7 +23,6 @@ function Sample(name) {
         sample.indicator.addClass('done');
         Sound.context.decodeAudioData(this.response, function(buffer) {
           sample.audio = buffer;
-          console.log(sample);
         }, function(error) {
           console.error("decodeAudioData error", error);
         });

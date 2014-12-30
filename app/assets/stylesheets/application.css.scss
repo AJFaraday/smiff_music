@@ -10,13 +10,39 @@ $section_background: #aaaaaa ;
 
 .header {
   width:100%;
-  height: 150px;
+  height: 130px;
   background-color:#999999;
   color: white;
   border-radius: 30px;
   padding: 20px;
   margin-top:0px;
   margin-bottom:10px;
+}
+
+.header .header_menu {
+  float: left;
+  width:100%;
+  margin-top:10px;
+}
+
+.header .header_menu ul.nav li:hover a {
+  background-color: #444444;
+}
+
+.header .header_menu ul.nav li a {
+  background-color: #666666;
+}
+
+.header .header_menu ul.nav li.active a {
+  background-color: #aaaaaa;
+}
+
+.header .header_menu ul.nav li a {
+  color: white;
+}
+
+.header .header_menu ul.nav li a:visited {
+  color: white;
 }
 
 .header .title{
