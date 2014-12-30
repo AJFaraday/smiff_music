@@ -1,4 +1,7 @@
 en:
   patterns:
+    index:
+      terminal: Terminal
+      overview: Overview
     patterns_table:
       sample: Sample

@@ -3,6 +3,7 @@ require './test/test_helper'
 class ConsoleTest < ActionDispatch::IntegrationTest
 
   def send_message(text)
+    page.find('#terminal_tab').click
     fill_in('message', :with => text)
     find('div#submit').click
     wait_for_ajax
@@ -28,17 +29,20 @@ class ConsoleTest < ActionDispatch::IntegrationTest
     readout = find('div#readout')
     assert_includes(readout.text, "> play kick on step 1")
     assert_includes(readout.text, "Now playing kick on step 1")
+    page.find('#overview_tab').click
     assert page.has_css?('td#kick_step_0.active')
   end
 
   def test_send_message_with_enter_key
     visit '/'
+    page.find('#terminal_tab').click
     fill_in('message', :with => 'play kick on step 1')
     press_key('enter')
     wait_for_ajax
     readout = find('div#readout')
     assert_includes(readout.text, "> play kick on step 1")
     assert_includes(readout.text, "Now playing kick on step 1")
+    page.find('#overview_tab').click
     assert page.has_css?('td#kick_step_0.active')
   end
 
@@ -71,6 +75,7 @@ class ConsoleTest < ActionDispatch::IntegrationTest
   end
 
   def test_sent_button_effect
+    page.find('#terminal_tab').click
     refute page.has_css?('div#submit.active')
     page.evaluate_script("$('input#message').trigger($.Event('keydown', { keyCode: 13 }))")
     assert page.has_css?('div#submit.active')
