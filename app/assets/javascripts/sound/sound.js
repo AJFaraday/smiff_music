@@ -17,6 +17,8 @@ var Sound = {
     if (this.context) {
       this.init_player_controls();
       this.display_already_loaded_samples();
+      $.each(this.samples, function(key,sample){sample.setup_row()});
+      $.each(this.patterns, function(key, pattern){pattern.setup_row()});
     } else {
       this.get_context();
       this.user_gain = this.context.createGain();

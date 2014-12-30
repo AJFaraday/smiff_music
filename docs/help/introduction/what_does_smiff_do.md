@@ -5,7 +5,9 @@ SMIFF Music consists of two main components:
 * the player
 * the terminal
 
-The player holds patterns and sounds for each instrument, and when you click play (situated in the header) it plays through the sequence, looping back to the begining when it reaches the end. 
+The player holds patterns and sounds for each instrument, and when you click play (situated in the header) it plays through the sequence, looping back to the begining when it reaches the end.
+
+Next to the play or stop button you will see a slider which acts as a volume control. 
 
 At the end of each pattern, it checks with the database to see if someone else has changed the pattern. If it has then it will modify the pattern in the player. 
 

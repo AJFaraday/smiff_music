@@ -18,12 +18,13 @@ module Messages::Actions::SetSpeed
         display: I18n.t(
         "actions.set_speed.too_slow",
         bpm: bpm,
-        min: SystemSetting['min_bpm']
-      )
+          min: SystemSetting['min_bpm']
+        )
       }
     end
 
     SystemSetting['bpm'] = bpm
+    PatternStore.modify_hash('bpm',bpm)
     return {
       response: 'success',
       display: I18n.t(

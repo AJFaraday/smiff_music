@@ -2,8 +2,8 @@ function Sample(name) {
   this.name = name;
   this.url = '/audio/' + name + '.wav';
   this.audio = null;
-  this.indicator = $('.indicator#'+this.name);
-  this.row = $('tr#'+this.name);
+  this.indicator = $('.indicator#' + this.name);
+  this.row = $('tr#' + this.name);
 
   // run on initialise, gets audio from server
   this.load_sample = function () {
@@ -21,9 +21,9 @@ function Sample(name) {
         var sample = Sound.samples[this.sample_name];
         console.log('loaded: ' + sample.name);
         sample.indicator.addClass('done');
-        Sound.context.decodeAudioData(this.response, function(buffer) {
+        Sound.context.decodeAudioData(this.response, function (buffer) {
           sample.audio = buffer;
-        }, function(error) {
+        }, function (error) {
           console.error("decodeAudioData error", error);
         });
       };
@@ -31,7 +31,7 @@ function Sample(name) {
     } else {
       throw new Error('Sound is not yet initialised on this page');
     }
-  }
+  };
 
   this.play = function () {
     if (this.audio != null) {
@@ -42,12 +42,18 @@ function Sample(name) {
     } else {
       throw new Error('Sound is not loaded')
     }
-  }
+  };
 
-  // set up interactions
-  this.row.on(
-    'click',
-    function(){Sound.samples[$(this)[0]['id']].play()}
-  );
+  this.setup_row = function () {
+    this.row = $('tr#' + this.name);
+    // set up interactions
+    this.row.on(
+      'click',
+      function () {
+        Sound.samples[$(this)[0]['id']].play()
+      }
+    );
+  };
+  this.setup_row();
 
 }

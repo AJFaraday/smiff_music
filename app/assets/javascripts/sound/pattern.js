@@ -6,6 +6,11 @@ function Pattern(attrs) {
   this.step_count = attrs['step_count'];
   this.muted = attrs['muted'];
 
+  // used on re-loading page
+  this.setup_row = function() {
+    this.row = this.sample.row;
+  }
+
   this.set_step_info = function () {
     this.step_string = this.step_source.toString(2).leftJustify(this.step_count, '0');
     this.length = this.step_string.length
