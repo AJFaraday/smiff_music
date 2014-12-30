@@ -2,6 +2,13 @@
 - title: Introduction
   anchor: intro
   file: '/docs/help/introduction.md'
+  children:
+    - title: "What is SMIFF?"
+      anchor: what_is
+      file: '/docs/help/introduction/what_is_smiff.md'
+    - title: 'What does SMIFF do?'
+      anchor: does_what
+      file: '/docs/help/introduction/what_does_smiff_do.md'
 - title: Using the Terminal
   anchor: terminal
   file: '/docs/help/terminal.md'

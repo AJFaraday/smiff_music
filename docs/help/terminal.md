@@ -4,7 +4,9 @@ _Note: if you use a unix or linux terminal, stop reading now. You know this alre
 
 The main way to interact with SMIFF is via the terminal. This is the black area with a text field beneath it. 
 
-Click on the text field to focus on the terminal, then you can type messages (as described on the 'messages' page), and either press enter or click 'Send' to send the message.
+Click on the text field to focus on the terminal, then you can type messages (as described under 'messages'), and either press enter or click 'Send' to send the message.
+
+Having sent the message you can see the result of this message on the terminal.
 
 Once you have sent one message you can press up and down to scroll through your previous messages which you can run again.
 
