@@ -108,3 +108,25 @@ $section_background: #aaaaaa ;
   background-color: $section_background ;
   color: white;
 }
+
+.nav-tabs li a {
+  color: white;
+  background-color:#888888 ;
+}
+
+.nav-tabs li.active a {
+  color: white;
+  background-color:#555555 ;
+  border-color:black;
+}
+
+.nav-tabs li:hover a {
+  color: white;
+  background-color:#222222 ;
+  border-color:black;
+}
+.nav-tabs li.active:hover a {
+  color: white;
+  background-color:#222222 ;
+  border-color:black;
+}
