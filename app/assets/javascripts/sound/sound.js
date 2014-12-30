@@ -15,11 +15,11 @@ var Sound = {
 
     this.version = (attributes['version']);
 
-    this.user_gain = this.context.createGainNode();
+    this.user_gain = this.context.createGain();
     this.user_gain.gain.value = 0.7;
     this.user_gain.connect(this.context.destination);
 
-    this.master_gain = this.context.createGainNode();
+    this.master_gain = this.context.createGain();
     this.master_gain.gain.value = 0.4;
     this.master_gain.connect(this.user_gain);
 
@@ -100,8 +100,10 @@ var Sound = {
 
   get_context:function () {
     if (typeof AudioContext !== "undefined") {
+      console.log('using AudioContext')
       this.context = new AudioContext();
     } else if (typeof webkitAudioContext !== "undefined") {
+      console.log('using webkitAudioContext')
       this.context = new webkitAudioContext();
     } else {
       throw new Error('AudioContext not supported. :(');

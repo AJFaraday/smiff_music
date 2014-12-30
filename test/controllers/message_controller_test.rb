@@ -1,7 +1,7 @@
-require 'test_helper'
+require './test/test_helper'
 
-class MessageControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class MessagesControllerTest < ActionController::TestCase
+
+
+
 end

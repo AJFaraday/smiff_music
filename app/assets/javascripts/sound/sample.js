@@ -18,11 +18,15 @@ function Sample(name) {
 
       // Our asynchronous callback
       request.onload = function () {
-        sample = Sound.samples[this.sample_name];
+        var sample = Sound.samples[this.sample_name];
         console.log('loaded: ' + sample.name);
         sample.indicator.addClass('done');
-        var audio_data = this.response;
-        sample.audio = Sound.context.createBuffer(audio_data, true);
+        Sound.context.decodeAudioData(this.response, function(buffer) {
+          sample.audio = buffer;
+          console.log(sample);
+        }, function(error) {
+          console.error("decodeAudioData error", error);
+        });
       };
       request.send();
     } else {
