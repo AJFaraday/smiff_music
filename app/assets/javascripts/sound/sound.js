@@ -14,8 +14,11 @@ var Sound = {
 
     this.version = (attributes['version']);
 
-    if (this.get_context()) {
-
+    if (this.context) {
+      this.init_player_controls();
+      this.display_already_loaded_samples();
+    } else {
+      this.get_context();
       this.user_gain = this.context.createGain();
       this.user_gain.gain.value = 0.7;
       this.user_gain.connect(this.context.destination);
@@ -24,17 +27,27 @@ var Sound = {
       this.master_gain.gain.value = 0.4;
       this.master_gain.connect(this.user_gain);
 
+      // load samples
+      attributes['sample_names'].forEach(function (sample_name) {
+        Sound.samples[sample_name] = new Sample(sample_name);
+        Sound.samples[sample_name].load_sample();
+      });
+      this.set_patterns(attributes['patterns']);
+
+      this.init_player_controls();
+
+      this.set_bpm(attributes['bpm']);
+
+
     }
-    // load samples
-    attributes['sample_names'].forEach(function (sample_name) {
-      Sound.samples[sample_name] = new Sample(sample_name);
-      Sound.samples[sample_name].load_sample();
-    });
-    this.set_patterns(attributes['patterns']);
+  },
 
-    this.init_player_controls();
-
-    this.set_bpm(attributes['bpm']);
+  display_already_loaded_samples:function () {
+    $('.indicator').each(function(i,indicator) {
+      if (Sound.samples[indicator.id].audio) {
+        $(indicator).addClass('done')
+      }
+    })
   },
 
   set_bpm:function (bpm) {
@@ -56,7 +69,11 @@ var Sound = {
     $('#stop_button').on('click', function () {
       Sound.stop();
     });
-    $('#stop_button').hide();
+    if (this.player_active) {
+      $('#play_button').hide();
+    } else {
+      $('#stop_button').hide();
+    }
 
     $('#user_vol').on('change', function () {
       Sound.user_gain.gain.value = $('#user_vol').val();
@@ -101,10 +118,7 @@ var Sound = {
   },
 
   get_context:function () {
-    if (this.context) {
-      console.log('using existing context');
-      return false;
-    } else if (typeof AudioContext !== "undefined") {
+    if (typeof AudioContext !== "undefined") {
       console.log('using AudioContext')
       this.context = new AudioContext();
       return true
@@ -164,8 +178,8 @@ var Sound = {
   },
 
 
-  // lowest common multiple, pinched from
-  // http://rosettacode.org/wiki/Least_common_multiple#JavaScript
+// lowest common multiple, pinched from
+// http://rosettacode.org/wiki/Least_common_multiple#JavaScript
   LCM:function (A) {
     var n = A.length, a = Math.abs(A[0]);
     for (var i = 1; i < n; i++) {

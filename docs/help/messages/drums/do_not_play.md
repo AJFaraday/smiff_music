@@ -9,4 +9,4 @@ Examples:
 > do not play hihat on steps 1, 3 and 5
 </pre>
 
-This works in exactly the same way as play, except that the sequence will be changed so that the notes specified will not be played on the steps identified.
+This works in exactly the same way as play, except that the result is the exact opposite. The sequence will be changed so that the sound will not be played on the steps identified.
