@@ -15,7 +15,7 @@ class Message < ActiveRecord::Base
       source_text: text
     )
     parser = Messages::Parser.new
-    parser.parse(text)
+    parser.parse(text.downcase)
     if parser.parsed
       message.message_format = parser.message_format
       message.action = parser.message_format.action
