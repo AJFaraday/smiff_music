@@ -52,13 +52,13 @@
           file: '/docs/help/messages/drums/mute.md'
         - title: mute all drums
           anchor: mute_all_drums
-          file: '/docs/help/drums/mute_all.md'
+          file: '/docs/help/messages/drums/mute_all.md'
         - title: unmute
           anchor: unmute
           file: '/docs/help/messages/drums/unmute.md'
         - title: unmute all drums
           anchor: unmute_all_drums
-          file: '/docs/help/drums/unmute_all.md'
+          file: '/docs/help/messages/drums/unmute_all.md'
         - title: clear
           anchor: clear
           file: '/docs/help/messages/drums/clear.md'

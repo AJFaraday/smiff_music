@@ -1,0 +1,300 @@
+
+
+<h1>SMIFF Music</h1>
+<h2>What is SMIFF?</h2>
+
+<p>SMIFF Music is a web application by Andrew Faraday (@MarmiteJunction), exploring the use of the internet as a tool for creating music collaboratively.</p>
+
+<p>SMIFF Music stands for Social Media InterFace For Music.</p>
+
+<p>In the current version (version zero), SMIFF is just a drum machine, and does not have a Social Media Interface. Version zero is a proof of concept, demonstrating that music can be made within a web browser and modifed via a collection of text messages. It also demonstrates that more than one person can modify the same pattern, and everyone listening will hear the resultant changes.</p>
+
+<p>This means that SMIFF is a tool for making electronic music as a social activity, but anonymously. So the resulting sound is created by and, in part, owned by everyone who uses the application.</p>
+<h2>What does SMIFF do?</h2>
+
+<p>SMIFF Music consists of two main components:</p>
+
+<ul>
+<li>the player</li>
+<li>the terminal</li>
+</ul>
+
+<p>The player holds patterns and sounds for each instrument, and when you click play (situated in the header) it plays through the sequence, looping back to the begining when it reaches the end.</p>
+
+<p>Next to the play or stop button you will see a slider which acts as a volume control. </p>
+
+<p>At the end of each pattern, it checks with the database to see if someone else has changed the pattern. If it has then it will modify the pattern in the player. </p>
+
+<p>You can see the patterns currently being played in the Overview tab on SMIFFs home page.</p>
+
+<p>The terminal can be found in the Terminal tab on SMIFFs home page.</p>
+
+<p>You can use the terminal to change the pattern simply by typing in messages (in the white text field, below the large black area) and pressing enter. </p>
+<h1>Using The Terminal</h1>
+
+<p><em>Note: if you use a unix or linux terminal, stop reading now. You know this already.</em></p>
+
+<p>The main way to interact with SMIFF is via the terminal. This is the black area with a text field beneath it. </p>
+
+<p>Click on the text field to focus on the terminal, then you can type messages (as described under &#39;messages&#39;), and either press enter or click &#39;Send&#39; to send the message.</p>
+
+<p>Having sent the message you can see the result of this message on the terminal.</p>
+
+<p>Once you have sent one message you can press up and down to scroll through your previous messages which you can run again.</p>
+
+<p>Once you have scrolled back to a previous message you can modify it before re-running it.</p>
+
+<p>This behaviour is useful for building patterns, you can re-use the format of a message, but change the details.</p>
+<h1>Available Messages</h1>
+
+<p>The next section contains messages you can send to SMIFF which will affect the music you hear:</p>
+<h2>Player</h2>
+
+<p>There are a number of messages to modify the speed of the player.</p>
+
+<ul>
+<li>show speed</li>
+<li>set speed to 120 bpm</li>
+<li>speed up</li>
+<li>speed down</li>
+</ul>
+<h3>set speed to X</h3>
+
+<p>Example:</p>
+
+<pre>
+> set speed to 140 bpm
+</pre>
+
+<p>This will set playback to a specific speed in beats per minutes (BPM).</p>
+
+<p><em>Note:</em> The outer limits of speeds available will be set by SMIFF, but there will be a lot of freedom within this range.</p>
+<h3>show speed</h3>
+
+<p>This will tell you what speed, in beats per minute (BPM), the sequence is being played at.</p>
+
+<pre>
+> show speed
+Sequence is being played at 180 bpm
+</pre>
+<h3>speed up</h3>
+
+<p>Example:</p>
+
+<pre>
+> speed up
+</pre>
+
+<p>This will increase the speed of playback by 5bpm</p>
+<h3>speed down</h3>
+
+<p>Example:</p>
+
+<pre>
+> speed down
+</pre>
+
+<p>This will decrease the speed of playback by 5bpm</p>
+
+<p>This can also be written as:</p>
+
+<pre>
+> slow down
+</pre>
+<h2>Drums</h2>
+
+<p>There are a number of drum patterns available:</p>
+
+<ul>
+<li>kick</li>
+<li>snare</li>
+<li>hihat</li>
+<li>tom1</li>
+<li>tom2</li>
+<li>tom3</li>
+<li>crash</li>
+</ul>
+
+<p>For each of these you can perform one of a number of actions:</p>
+
+<ul>
+<li>show</li>
+<li>play</li>
+<li>do not play</li>
+<li>mute</li>
+<li>unmute</li>
+<li>clear</li>
+</ul>
+<h3>list</h3>
+
+<p>You can find the names of all drums with this command:</p>
+
+<pre>
+list drums
+</pre>
+
+<p>The result is a lot like the list above:</p>
+
+<pre>
+* kick
+* snare
+* hihat
+...
+</pre>
+<h3>show</h3>
+
+<p>Example:</p>
+
+<pre>
+> show kick
+</pre>
+
+<p>This will display a text representation of the contents of the kick pattern</p>
+
+<pre>
+-----1---5---9---13--
+kick-#-----#-#-----#-
+</pre>
+
+<p>You can also show a list of patterns:</p>
+
+<pre>
+> show hihat, snare and kick
+</pre>
+
+<p>This will display all of the patterns specified</p>
+
+<pre>
+------1---5---9---13--
+hihat-#-#-#-#-#-#-#-##
+snare-----#-------#---
+kick--#-----#-#-----#-
+</pre>
+<h3>play</h3>
+
+<p>Examples:</p>
+
+<pre>
+> play kick on step 1
+> play snare on step 5
+> play hihat on steps 1 to 4
+> play hihat on steps 1 to 16 skipping 1
+> play snare on steps 5, 9 and 13
+</pre>
+
+<p>Play can do one of 3 basic things:</p>
+
+<ul>
+<li>Add a drum hit to a certain step</li>
+<li>Add a drum to a range of steps</li>
+<li>Add a drum to specific steps</li>
+</ul>
+
+<p>To add to a certain step:</p>
+
+<pre>
+> play kick on step 1
+</pre>
+
+<p>This will change the pattern so the kick is played on step 1</p>
+
+<p>To add to a range of steps:</p>
+
+<pre>
+> play hihat on steps 1 to 8
+</pre>
+
+<p>This will change the pattern so the hihat is played on steps 1 to 8, including steps 1 and 8.</p>
+
+<pre>
+> play hat on steps 1 to 8 skipping 1
+</pre>
+
+<p>This will change the pattern so the hihat is played on steps 1 to 8, but after each hit there is a gap of one. So it will play the hihat on steps 1, 3 5 and 7</p>
+
+<p>Example:</p>
+
+<pre>
+> clear hihat
+> play hihat on steps 1 to 8 skipping 1
+> show hihat
+------1---5---9---13--
+hihat-#-#-#-#---------
+</pre>
+
+<p>You can also pick out a list of numbered steps:</p>
+
+<pre>
+> play snare on steps 5, 8 and 13
+> show hihat
+------1---5---9---13--
+hihat-----#--#----#---
+</pre>
+<h3>do not play</h3>
+
+<p>Examples:</p>
+
+<pre>
+> do not play kick on beat 5
+> do not play snare on beats 1 to 8
+> do not play hihat on beats 1 to 16 skipping 1
+> do not play hihat on steps 1, 3 and 5
+</pre>
+
+<p>This works in exactly the same way as play, except that the result is the exact opposite. The sequence will be changed so that the sound will not be played on the steps identified.</p>
+<h3>mute</h3>
+
+<pre>
+mute kick
+mute kick and snare
+mute tom1, tom2 and tom3
+</pre>
+
+<p>This will mute a pattern, keeping it from sounding in playback.</p>
+
+<p>You can still modify patterns while they are muted.</p>
+<h3>mute all drums</h3>
+
+<pre>
+mute all drums
+</pre>
+
+<p>This will mute all drum patterns, maintaining the pattern but preventing them from making a sound.</p>
+<h3>unmute</h3>
+
+<pre>
+unmute kick
+unmute kick and snare
+unmute tom1, tom2 and tom3
+</pre>
+
+<p>This will unmute any muted patterns, meaning they are now heard.</p>
+<h3>unmute all drums</h3>
+
+<pre>
+unmute all drums
+</pre>
+
+<p>This will unmute all muted drum patterns, all patterns will now sound.</p>
+<h3>clear</h3>
+
+<p>Example:</p>
+
+<pre>
+> clear kick
+</pre>
+
+<p>This will clear a drum pattern. Leaving it empty.</p>
+
+<p>You can also clear more than one pattern:</p>
+
+<pre>
+clear kick and snare
+clear kick, snare and hihat
+</pre>
+
+<p>You can also clear all drums with this message:</p>
+
+<pre>
+clear all drums
+</pre>
