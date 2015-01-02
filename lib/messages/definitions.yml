@@ -120,3 +120,11 @@ mute_unmute:
     - 'pattern_names'
   action: 'mute_unmute'
   weight: 0
+
+mute_unmute_all:
+  name: 'mute_or_unmute_all_drums'
+  regex: '(unmute|mute) all drums'
+  variables:
+    - 'mode'
+  action: 'mute_unmute_all'
+  weight: 1

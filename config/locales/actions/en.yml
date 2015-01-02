@@ -38,3 +38,7 @@ en:
       success:
         one: "I've %{action} the %{names} pattern"
         other: "I've %{action} the %{names} patterns"
+    mute_unmute_all:
+      mute: muted
+      unmute: unmuted
+      success: "I've %{action} all of the drum patterns."

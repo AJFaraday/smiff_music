@@ -5,7 +5,7 @@ class Messages::Actions
   AVAILABLE_ACTIONS = %w{
     show_patterns add_steps clear_patterns clear_steps
     set_speed show_speed speed_up speed_down list_drums
-    clear_all_drums mute_unmute
+    clear_all_drums mute_unmute mute_unmute_all
   }
 
   extend Messages::Actions::Show
@@ -19,6 +19,7 @@ class Messages::Actions
   extend Messages::Actions::ListDrums
   extend Messages::Actions::ClearAllDrums
   extend Messages::Actions::MuteUnmute
+  extend Messages::Actions::MuteUnmuteAll
 
   def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)
