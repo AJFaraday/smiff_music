@@ -65,7 +65,6 @@ class Message < ActiveRecord::Base
   end
 
   def log_failure(result=nil)
-    puts 'logging failure'
     if result
       Message.failure_log.info("[#{result[:response]}] #{self.source_text}")
     else

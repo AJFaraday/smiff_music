@@ -34,6 +34,13 @@ class Messages::Actions
         )
       }
     end
+  rescue => er
+    Rails.logger.info er.message
+    Rails.logger.info er.backtrace.join("\n")
+    return {
+      response: 'error',
+      display: I18n.t('messages.errors.could_not_run')
+    }
   end
 
   def self.pattern_not_found(pattern_names)
