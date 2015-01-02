@@ -25,6 +25,7 @@ This is the installation process for a local instance.
 
 * `git clone git@github.com:AJFaraday/smiff_music.git`
 * `cd smiff_music`
+* `bundle install`
 * modify /config/database.yml if necessary (the repo version is for mysql with an unprotected root user, it is not secure)
 * `rake db:setup`
 * `rails s`
