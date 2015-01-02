@@ -6,12 +6,6 @@ You can find the names of all drums with this command:
 list drums
 </pre>
 
-or
-
-<pre>
-show drums
-</pre>
-
 The result is a lot like the list above:
 
 <pre>

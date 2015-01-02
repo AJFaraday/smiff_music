@@ -55,7 +55,8 @@ module Messages::Actions::Show
         pattern_diagram << pattern.pattern_bits.collect{|x|x ? '#' : '-'}.join()
       end 
       pattern_diagram = pattern_diagram[0..length]
-      result << "#{pattern.name.ljust(label_length, '-')}#{pattern_diagram}\n"
+      mute_state = pattern.muted ? ' (muted)' : ''
+      result << "#{pattern.name.ljust(label_length, '-')}#{pattern_diagram} #{mute_state}\n"
     end 
     result
   end

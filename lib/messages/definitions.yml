@@ -108,7 +108,7 @@ set_speed:
 
 list_drums:
   name: 'list_drums'
-  regex: '(?:list|show) drums'
+  regex: 'list drums'
   action: 'list_drums'
   weight: 2
 
@@ -127,4 +127,10 @@ mute_unmute_all:
   variables:
     - 'mode'
   action: 'mute_unmute_all'
+  weight: 1
+
+show_all_drums:
+  name: 'show all drums'
+  regex: 'show all(?: drums)'
+  action: 'show_all_drums'
   weight: 1

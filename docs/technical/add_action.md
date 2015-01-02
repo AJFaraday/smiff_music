@@ -79,6 +79,8 @@ module Messages::Actions::AddSteps
 end
 ```
 
+args will always be a hash, containing variables named as per the variables attribute in the message definition with values taken from the input regex mask.
+
 This should return a hash which defines how it interacts with the terminal. It should have these attriutes
 
 | attribute | value | meaning |
