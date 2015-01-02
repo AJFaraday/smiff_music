@@ -3,7 +3,9 @@ class Messages::FormatBuilder
   def build_messages
     definitions = YAML.load_file(File.join(Rails.root,'lib','messages','definitions.yml'))
     definitions.each do |name, params|
-      unless already_created?(params['name'])
+      if already_created?(params['name'])
+        update_format(params)
+      else
         create_format(params)
       end
     end 
@@ -11,6 +13,11 @@ class Messages::FormatBuilder
  
   def already_created?(name)
     MessageFormat.where(:name => name).any?
+  end
+
+  def update_format(params)
+    message_format = MessageFormat.where(:name => params['name']).first
+    message_format.update_attributes!(params)
   end
 
   def create_format(params)
