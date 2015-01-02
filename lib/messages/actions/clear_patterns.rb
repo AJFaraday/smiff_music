@@ -7,7 +7,7 @@ module Messages::Actions::ClearPatterns
     self.pattern_names = munge_list(args['pattern_names'])
     self.patterns = Pattern.where(name: self.pattern_names)
     return pattern_not_found(self.pattern_names) unless self.patterns.any?
-    self.patterns.each{|x| x.update_attribute(:pattern_indexes, [])}
+    self.patterns.each{|x| x.update_attribute(:bits, 0)}
     return {
       response: 'success',
       display: I18n.t(
