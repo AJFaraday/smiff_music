@@ -1,12 +1,12 @@
 # SMIFF Music - Social Media Interface For Music
 
-The idea is simple, people send a tweet then SMIFF app makes music. Only the music is written, modified and interacted with by many people over the web. Hopefully producing an unending and infinitely modifiable, constantly developing and organic piece of music where all are involved.
+The idea is simple, people send a tweet then the SMIFF Music app makes music. Only the music is written, modified and interacted with by many people over the web. Hopefully producing an unending and infinitely modifiable, constantly developing and organic piece of music where all are involved.
 
 Version Zero is just a drum machine, but future plans include melodic patterns, tonal control, modifying effects.
 
 Components:
 
-* Ruby on Rails app - serves data on the current content of the music, and the JS player. 
+* Ruby on Rails app - serves data on the current content of the music, and the web audio player. 
 * Web-audio player - using the web audio api, this will produce the sound spontaneously on the client computer.
 * Twitter search - This will look for tweets addressed to the account and makes the recommended changes to the sound. (future plan)
 * Twitter account - This will be the mark of tweets being sent to SMIFF, and may return some patterns on request. (future plan)
