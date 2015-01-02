@@ -14,21 +14,3 @@ Once you have scrolled back to a previous message you can modify it before re-ru
 
 This behaviour is useful for building patterns, you can re-use the format of a message, but change the details.
 
-For example:
-
-<pre>
-> play kick on steps 1, 5, 9 and 13
-(press enter)
-(press up)
-(change the message to:)
-> play snare on steps 5 and 13
-(press enter)
-(press up)
-(change message to)
-> play tom1 on step 3
-(enter, up, change)
-> play tom2 on step 6
-(enter, up, change)
-> play tom3 on step 8
-</pre>
-
