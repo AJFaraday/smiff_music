@@ -453,9 +453,9 @@ kick---------------------------------
         {'pattern_names' => ['kick','snare','hihat']}
       )
       display = "------1---5---9---13--17--21--25--29--
-kick----------------------------------
-snare---------------------------------
-hihat---------------------------------
+kick---------------------------------- 
+snare--------------------------------- 
+hihat--------------------------------- 
 "
       assert_equal(
         display,
@@ -465,6 +465,51 @@ hihat---------------------------------
 
   end
 
+  def test_show_all
+    result = Messages::Actions.show_all_drums({})
+    assert_equal('success', result[:response])
+    display = "------1---5---9---13--17--21--25--29--
+kick---------------------------------- 
+snare--------------------------------- 
+hihat--------------------------------- 
+crash--------------------------------- 
+tom1---------------------------------- 
+tom2---------------------------------- 
+tom3---------------------------------- 
+"
+    assert_equal(
+      display,
+      result[:display]
+    )    
+  end
 
+  def test_mute_all
+    result = Messages::Actions.mute_unmute_all({'mode' => ['mute']})
+    assert_equal('success', result[:response])
+    assert_equal(
+      I18n.t('actions.mute_unmute_all.success', action: 'muted'),
+      result[:display]
+    )
+    Pattern.all.each{|p| assert p.muted}
+  end
+
+  def test_unmute_all
+    result = Messages::Actions.mute_unmute_all({'mode' => ['unmute']})
+    assert_equal('success', result[:response])
+    assert_equal(
+      I18n.t('actions.mute_unmute_all.success', action: 'unmuted'),
+      result[:display]
+    )
+    Pattern.all.each{|p| refute p.muted}
+  end
+
+  def test_show_includes_mute_info
+    Pattern.update_all(:muted => false)
+    result = Messages::Actions.show_all_drums({})
+    refute result[:display].include?('(muted)')
+    Pattern.update_all(:muted => true)
+    result = Messages::Actions.show_all_drums({})
+    assert result[:display].include?('(muted)')
+  end 
 
 end

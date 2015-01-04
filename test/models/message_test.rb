@@ -48,9 +48,9 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal 'success', result[:response]
     assert_equal(
       "------1---5---9---13--17--21--25--29--
-kick----------------------------------
-snare---------------------------------
-hihat---------------------------------
+kick---------------------------------- 
+snare--------------------------------- 
+hihat--------------------------------- 
 ",
       result[:display]
     )
