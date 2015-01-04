@@ -19,7 +19,7 @@ class PatternStore
   end
 
   def PatternStore.build_hash
-    @@hash ||= Pattern.to_hash
+    @@hash = Pattern.to_hash
     @@hash['bpm'] = SystemSetting['bpm']
     @@hash['version'] = PatternStore.version
     @@hash
