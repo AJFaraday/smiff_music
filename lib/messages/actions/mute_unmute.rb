@@ -6,6 +6,7 @@ module Messages::Actions::MuteUnmute
   def mute_unmute(args)
     self.pattern_names = munge_list(args['pattern_names'])
     self.patterns = Pattern.where(:name => self.pattern_names)
+    return pattern_not_found(self.pattern_names) unless self.patterns.any?
 
     self.patterns.each do |pattern|
       pattern.update_attribute(
