@@ -4,6 +4,8 @@ module Messages::Actions::ClearAllDrums
   def clear_all_drums(args)
     # todo when there are non-drum patterns, distinguish between drums and melodic.
     Pattern.update_all(bits: 0)
+    PatternStore.hash.each{|k,value| value[:steps] = 0 if value.is_a?(Hash)}
+    PatternStore.version += 1
 
     return {
       response: 'success',
