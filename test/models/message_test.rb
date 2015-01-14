@@ -95,6 +95,42 @@ hihat---------------------------------
     assert_equal Hash.new, message.parameters
   end
 
+  def test_set_speed_with_bpm
+    message = Message.parse('set speed to 140 bpm')
+    assert_equal 'set_speed', message.action
+    assert_equal ({'bpm' => ['140']}), message.parameters
+  end
+
+  def test_set_speed_without_bpm
+    message = Message.parse('set speed to 140')
+    assert_equal 'set_speed', message.action
+    assert_equal ({'bpm' => ['140']}), message.parameters
+  end
+
+  def test_speed_up
+    message = Message.parse('speed up')
+    assert_equal 'speed_up', message.action
+    assert_equal Hash.new, message.parameters
+  end
+
+  def test_speed_down
+    message = Message.parse('speed down')
+    assert_equal 'speed_down', message.action
+    assert_equal Hash.new, message.parameters
+  end
+
+  def test_slow_down
+    message = Message.parse('slow down')
+    assert_equal 'speed_down', message.action
+    assert_equal Hash.new, message.parameters
+  end
+
+  def test_list_drums
+    message = Message.parse('list drums')
+    assert_equal 'list_drums', message.action
+    assert_equal Hash.new, message.parameters
+  end
+
 
 
 end
