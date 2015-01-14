@@ -21,11 +21,11 @@
       file: '/docs/help/messages/player.md'
       children:
         - title: show speed
-          anchor: set_speed
-          file: '/docs/help/messages/player/set_speed_to_x.md'
-        - title: show speed
           anchor: show_speed
           file: '/docs/help/messages/player/show_speed.md'
+        - title: set speed
+          anchor: set_speed
+          file: '/docs/help/messages/player/set_speed_to_x.md'
         - title: speed up
           anchor: speed_up
           file: '/docs/help/messages/player/speed_up.md'
