@@ -3,6 +3,10 @@ require './test/test_helper'
 # testing Messages::Actions
 class MessagesActionsTest < ActiveSupport::TestCase
 
+  def setup
+    PatternStore.hash = nil
+  end
+
   # this method is used to fix the rubbish input from list regexes
   def test_munge_list
     # single string is converted to one-member array
@@ -140,10 +144,9 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_clear_all_drums
-    kick_bits = PatternStore.hash['kick'][:steps]
-
     Pattern.first.update_attribute :pattern_indexes, [0,1,2]
     Pattern.last.update_attribute :pattern_indexes, [0,1,2]
+    kick_bits = PatternStore.hash['kick'][:steps]
 
     result = Messages::Actions.clear_all_drums({})
     assert_equal 'success', result[:response]

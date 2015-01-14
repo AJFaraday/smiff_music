@@ -18,12 +18,12 @@ class PatternsControllerTest < ActionController::TestCase
   end
 
   def test_index_json_old_version
-    get :index, version: SystemSetting['pattern_version'] - 1, format: 'json'
+    get :index, version: SystemSetting['pattern_version'].to_i - 1, format: 'json'
     assert_equal PatternStore.hash.to_json, response.body
   end
 
   def test_index_json_current_version
-    get :index, version: SystemSetting['pattern_version'], format: 'json'
+    get :index, version: PatternStore.hash['version'], format: 'json'
     assert_equal ' ', response.body
   end
 
