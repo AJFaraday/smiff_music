@@ -131,6 +131,6 @@ mute_unmute_all:
 
 show_all_drums:
   name: 'show all drums'
-  regex: 'show all(?: drums)'
+  regex: 'show all(?: drums)?'
   action: 'show_all_drums'
-  weight: 1
+  weight: 2

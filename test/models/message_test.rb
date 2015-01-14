@@ -131,6 +131,17 @@ hihat---------------------------------
     assert_equal Hash.new, message.parameters
   end
 
+  def test_show_all
+    message = Message.parse('show all')
+    assert_equal 'show_all_drums', message.action
+    assert_equal Hash.new, message.parameters
+  end
+
+  def test_show_all_drums
+    message = Message.parse('show all drums')
+    assert_equal 'show_all_drums', message.action
+    assert_equal Hash.new, message.parameters
+  end
 
 
 end
