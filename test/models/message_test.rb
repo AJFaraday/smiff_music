@@ -194,6 +194,94 @@ hihat---------------------------------
     )
   end
 
+  def test_play_range
+    message = Message.parse('play kick on steps 1 to 5')
+    assert_equal 'add_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'start_step' => '1',
+        'end_step' => '5'
+      }),
+      message.parameters
+    )
+  end
 
+  def test_play_range_skipping
+    message = Message.parse('play kick on steps 1 to 5 skipping 2')
+    assert_equal 'add_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'start_step' => '1',
+        'end_step' => '5',
+        'block_size' => '2'
+      }),
+      message.parameters
+    )
+  end
+
+  def test_do_not_play_multiple_one
+    message = Message.parse('do not play kick on step 1')
+    assert_equal 'clear_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'steps' => ["1", "", nil, "", nil]
+      }),
+      message.parameters
+    )
+  end
+
+  def test_do_not_play_multiple_comma_list
+    message = Message.parse('do not play kick on steps 1, 2, 3')
+    assert_equal 'clear_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'steps' => ["1", ", 2, 3", ", 3", "", nil]
+      }),
+      message.parameters
+    )
+  end
+
+  def test_do_not_play_multiple_english_list
+    message = Message.parse('do not play kick on steps 1, 2 and 3')
+    assert_equal 'clear_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'steps' => ["1", ", 2", ", 2", " and 3", "3"]
+      }),
+      message.parameters
+    )
+  end
+
+  def test_do_not_play_range
+    message = Message.parse('do not play kick on steps 1 to 5')
+    assert_equal 'clear_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'start_step' => '1',
+        'end_step' => '5'
+      }),
+      message.parameters
+    )
+  end
+
+  def test_do_not_play_range_skipping
+    message = Message.parse('do not play kick on steps 1 to 5 skipping 2')
+    assert_equal 'clear_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'start_step' => '1',
+        'end_step' => '5',
+        'block_size' => '2'
+      }),
+      message.parameters
+    )
+  end
 
 end
