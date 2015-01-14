@@ -19,6 +19,8 @@ This should be reflected in the branch name, e.g.:
 
 etc.
 
+The 'master' branch should match the latest completed version.
+
 This file contains versions of SMIFF both built and planned, and their intended contents. 
 
 Version 0
