@@ -284,4 +284,100 @@ hihat---------------------------------
     )
   end
 
+
+
+  def test_mute_one_pattern
+    message = Message.parse('mute kick')
+    assert_equal 'mute_unmute', message.action
+    assert_equal(
+      ({
+        "pattern_names"=>["kick", "", nil, "", nil],
+        'mode' => 'mute'
+      }),
+      message.parameters
+    )
+  end
+
+  def test_mute_list
+    message = Message.parse('mute kick, snare and hihat')
+    assert_equal 'mute_unmute', message.action
+    assert_equal(
+      ({
+        "pattern_names"=>["kick", ", snare", ", snare", " and hihat", "hihat"],
+        'mode' => 'mute'
+      }),
+      message.parameters
+    )
+  end
+
+  def test_unmute_one_pattern
+    message = Message.parse('unmute kick')
+    assert_equal 'mute_unmute', message.action
+    assert_equal(
+      ({
+        "pattern_names"=>["kick", "", nil, "", nil],
+        'mode' => 'unmute'
+      }),
+      message.parameters
+    )
+  end
+
+  def test_unmute_list
+    message = Message.parse('unmute kick, snare and hihat')
+    assert_equal 'mute_unmute', message.action
+    assert_equal(
+      ({
+        "pattern_names"=>["kick", ", snare", ", snare", " and hihat", "hihat"],
+        'mode' => 'unmute'
+      }),
+      message.parameters
+    )
+  end
+
+  def test_mute_all
+    message = Message.parse('mute all drums')
+    assert_equal 'mute_unmute_all', message.action
+    assert_equal(
+      ({'mode' => ['mute']}),
+      message.parameters
+    )
+  end
+
+  def test_unmute_all
+    message = Message.parse('unmute all drums')
+    assert_equal 'mute_unmute_all', message.action
+    assert_equal(
+      ({'mode' => ['unmute']}),
+      message.parameters
+    )
+  end
+
+  def test_clear_one
+    message = Message.parse('clear kick')
+    assert_equal 'clear_patterns', message.action
+    assert_equal(
+      ({
+        "pattern_names"=>["kick", "", nil, "", nil]
+      }),
+      message.parameters
+    )
+  end
+
+  def test_clear_list
+    message = Message.parse('clear kick, snare and hihat')
+    assert_equal 'clear_patterns', message.action
+    assert_equal(
+      ({
+        "pattern_names"=>["kick", ", snare", ", snare", " and hihat", "hihat"]
+      }),
+      message.parameters
+    )
+  end
+
+  def test_clear_all
+    message = Message.parse('clear all drums')
+    assert_equal 'clear_all_drums', message.action
+    assert_equal(Hash.new,message.parameters)
+  end
+
 end
