@@ -11,6 +11,8 @@ This file documents how to add new actions to smiff music.
 * extend /lib/messages/actions.rb with your named module
 * document your new message under /docs/help/messages/ (under the relevant category)
 * add your new help section in /config/help_pages.yml
+* add a test for parsing your action to /test/models/message_test.rb
+* add a test for running your action to /test/models/messages_actions_test.rb
 * rake db:seed
 * restart server
 
