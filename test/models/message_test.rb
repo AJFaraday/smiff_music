@@ -143,5 +143,57 @@ hihat---------------------------------
     assert_equal Hash.new, message.parameters
   end
 
+  def test_show_one_drum
+    message = Message.parse('show kick')
+    assert_equal 'show_patterns', message.action
+    assert_equal ({'pattern_names' => ["kick", "", nil, "", nil]}), message.parameters
+  end
+
+  def test_show_one_drum
+    message = Message.parse('show kick, snare and hihat')
+    assert_equal 'show_patterns', message.action
+    assert_equal(
+      ({'pattern_names' => ["kick", ", snare", ", snare", " and hihat", "hihat"]}),
+      message.parameters
+    )
+  end
+
+  def test_play_multiple_one
+    message = Message.parse('play kick on step 1')
+    assert_equal 'add_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'steps' => ["1", "", nil, "", nil]
+      }),
+      message.parameters
+    )
+  end
+
+  def test_play_multiple_comma_list
+    message = Message.parse('play kick on steps 1, 2, 3')
+    assert_equal 'add_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'steps' => ["1", ", 2, 3", ", 3", "", nil]
+      }),
+      message.parameters
+    )
+  end
+
+  def test_play_multiple_english_list
+    message = Message.parse('play kick on steps 1, 2 and 3')
+    assert_equal 'add_steps', message.action
+    assert_equal(
+      ({
+        'pattern_name' => "kick",
+        'steps' => ["1", ", 2", ", 2", " and 3", "3"]
+      }),
+      message.parameters
+    )
+  end
+
+
 
 end
