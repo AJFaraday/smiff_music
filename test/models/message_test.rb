@@ -83,4 +83,18 @@ hihat---------------------------------
     assert message.run?
   end
 
+  def test_parse_show_speed
+    message = Message.parse('show speed')
+    assert_equal 'show_speed', message.action
+    assert_equal Hash.new, message.parameters
+  end
+
+  def test_parse_show_bpm
+    message = Message.parse('show bpm')
+    assert_equal 'show_speed', message.action
+    assert_equal Hash.new, message.parameters
+  end
+
+
+
 end
