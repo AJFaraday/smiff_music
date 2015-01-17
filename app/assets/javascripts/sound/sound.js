@@ -36,8 +36,7 @@ var Sound = {
         Sound.samples[sample_name].load_sample();
       });
       // load synths
-      attributes['synths'].forEach(function (attrs) {
-        name = attrs['name'];
+      $.each(attributes['synths'], function (name, attrs) {
         Sound.synths[name] = new Synth(attrs);
       });
 

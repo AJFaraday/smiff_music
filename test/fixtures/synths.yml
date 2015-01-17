@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  osc_type: MyString
+  attack_time: 1.5
+  decay_time: 1.5
+  sustain_level: 1.5
+  release_time: 1.5
+  muted: false
+  step_size: 1
+  step_count: 1
+
+two:
+  name: MyString
+  osc_type: MyString
+  attack_time: 1.5
+  decay_time: 1.5
+  sustain_level: 1.5
+  release_time: 1.5
+  muted: false
+  step_size: 1
+  step_count: 1

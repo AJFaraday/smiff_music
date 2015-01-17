@@ -1,0 +1,11 @@
+---
+sine:
+  name: sine
+  osc_type: sine
+  attack_time: 0.1
+  decay_time: 0.3
+  sustain_level: 0.3
+  release_time: 0.5
+  muted: false
+  step_size: 16
+  step_count: 32

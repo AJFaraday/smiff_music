@@ -1,7 +1,7 @@
 class Messages::FormatBuilder
 
   def build_messages
-    definitions = YAML.load_file(File.join(Rails.root,'lib','messages','definitions.yml'))
+    definitions = YAML.load_file(File.join(Rails.root,'db','seed','message_definitions.yml'))
     definitions.each do |name, params|
       if already_created?(params['name'])
         update_format(params)

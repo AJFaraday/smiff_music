@@ -2,6 +2,8 @@
    init_params = Sample.sound_init_params
    init_params.merge!(Pattern.sound_init_params)
    init_params.merge!(SystemSetting.sound_init_params)
+   init_params.merge!(Synth.sound_init_params)
+
    init_params.merge!({version: PatternStore.version})
 %>
 

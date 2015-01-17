@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229123702) do
+ActiveRecord::Schema.define(version: 20150117212134) do
 
   create_table "message_formats", force: true do |t|
     t.string   "name"
@@ -45,10 +45,26 @@ ActiveRecord::Schema.define(version: 20141229123702) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "muted",                            default: false
+    t.string   "purpose",                          default: "event"
+    t.integer  "synth_id"
   end
 
   create_table "samples", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "synths", force: true do |t|
+    t.string   "name"
+    t.string   "osc_type"
+    t.float    "attack_time"
+    t.float    "decay_time"
+    t.float    "sustain_level"
+    t.float    "release_time"
+    t.boolean  "muted"
+    t.integer  "step_size"
+    t.integer  "step_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,5 +1,9 @@
 class Pattern < ActiveRecord::Base
 
+  validate :purpose, inclusion: %w{event note_on note_off}
+
+  belongs_to :synth
+
   after_initialize :set_default_bits
 
   after_save :modify_pattern_store
