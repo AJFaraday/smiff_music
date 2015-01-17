@@ -40,14 +40,18 @@ class Synth < ActiveRecord::Base
       self.patterns.create!(
         muted: false,
         active:  true,
-        purpose: 'note_on'
+        purpose: 'note_on',
+        step_count: step_count,
+        step_size: step_size
       )
     end
     unless self.patterns.note_off
       self.patterns.create!(
         muted: false,
         active: true,
-        purpose: 'note_off'
+        purpose: 'note_off',
+        step_count: step_count,
+        step_size: step_size
       )
     end
   end
@@ -58,6 +62,7 @@ class Synth < ActiveRecord::Base
     all.each do |synth|
       hash[:synths][synth.name] = synth.sound_init_params
     end
+    hash
   end
 
   def sound_init_params
@@ -67,6 +72,23 @@ class Synth < ActiveRecord::Base
       decay_time: decay_time,
       sustain_level: sustain_level,
       release_time: release_time,
+      muted: muted,
+      note_on_steps: patterns.note_on.bits,
+      note_off_steps: patterns.note_off.bits,
+      step_count: step_count
+    }
+  end
+
+  def Synth.to_hash
+    result = {}
+    all.each do |synth|
+      result[synth.name] = synth.to_hash
+    end
+    result
+  end
+
+  def to_hash
+    {
       muted: muted,
       note_on_steps: patterns.note_on.bits,
       note_off_steps: patterns.note_off.bits

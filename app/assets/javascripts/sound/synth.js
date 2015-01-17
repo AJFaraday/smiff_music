@@ -1,28 +1,58 @@
 function Synth(attrs) {
 
+  // setup two pattern attributes
+  this.note_on_steps = attrs['note_on_steps'] || 0
+  this.note_off_steps = attrs['note_off_steps'] || 0
+  this.step_count = attrs['step_count'] || 16
+  this.pitch = 69;
+
+  // setup envelope params
   this.attack_time = attrs['attack_time'] || 0.05;
   this.decay_time = attrs['decay_time'] || 0.05;
   this.sustain_level = attrs['sustain_level'] || 0.3;
   this.release_time = attrs['release_time'] || 0.5;
 
+  // setup web audio stuff
   this.oscillator = Sound.context.createOscillator();
   this.master_gain = Sound.context.createGain();
   this.master_gain.gain.value = 0.6;
   this.envelope_gain = Sound.context.createGain();
   this.envelope_gain.gain.value = 0;
-
   this.oscillator.type = attrs['osc_type'] || 'sine';
-
   this.oscillator.connect(this.envelope_gain);
   this.envelope_gain.connect(this.master_gain);
   this.master_gain.connect(Sound.master_gain);
-
   this.oscillator.start(0);
 
-  this.set_pitch = function (midi) {
-    hz = 27.5 * Math.pow(2, ((midi - 21) / 12));
-    this.oscillator.frequency.value = hz;
+  this.set_step_info = function() {
+    this.note_on_step_string = this.note_on_steps.toString(2).leftJustify(this.step_count, '0');
+    this.note_off_step_string = this.note_off_steps.toString(2).leftJustify(this.step_count, '0');
+    this.length = this.note_on_step_string.length
   };
+  this.set_step_info();
+
+  // actual playback function
+  this.play_step = function(step) {
+    step = step % this.length;
+    if (this.note_on_step_string[step] == '1' && !this.muted) {
+      this.attack();
+    } else if (this.note_off_step_string[step] == '1') {
+      this.release();
+    }
+    // TODO case to change pitch
+  }
+
+  // functions used in playback
+  this.set_pitch = function (midi) {
+    this.pitch = midi;
+    hz = 27.5 * Math.pow(2, ((midi - 21) / 12));
+    this.oscillator.frequency.setTargetAtTime(
+      hz,
+      Sound.context.currentTime,
+      0.010 //todo make this an attribute too
+    );
+  };
+  this.set_pitch(69);
 
   this.attack = function () {
     // up to 1 in attack time

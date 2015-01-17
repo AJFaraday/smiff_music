@@ -19,7 +19,9 @@ class PatternStore
   end
 
   def PatternStore.build_hash
-    @@hash = Pattern.to_hash
+    @@hash = {}
+    @@hash['patterns'] = Pattern.to_hash
+    @@hash['synths'] = Synth.to_hash
     @@hash['bpm'] = SystemSetting['bpm']
     @@hash['version'] = PatternStore.version
     @@hash
@@ -27,7 +29,9 @@ class PatternStore
 
   def PatternStore.modify_hash(changed_entity, value=nil)
     if changed_entity.is_a?(Pattern)
-      PatternStore.hash[changed_entity.name] = changed_entity.to_hash
+      PatternStore.hash['patterns'][changed_entity.name] = changed_entity.to_hash
+    elsif changed_entity.is_a?(Synth)
+      PatternStore.hash['synths'][changed_entity.name] = changed_entity.to_hash
     elsif changed_entity.is_a?(String)
       if value
         case changed_entity

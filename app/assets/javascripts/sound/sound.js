@@ -18,8 +18,12 @@ var Sound = {
     if (this.context) {
       this.init_player_controls();
       this.display_already_loaded_samples();
-      $.each(this.samples, function(key,sample){sample.setup_row()});
-      $.each(this.patterns, function(key, pattern){pattern.setup_row()});
+      $.each(this.samples, function (key, sample) {
+        sample.setup_row()
+      });
+      $.each(this.patterns, function (key, pattern) {
+        pattern.setup_row()
+      });
     } else {
       this.get_context();
       this.user_gain = this.context.createGain();
@@ -52,7 +56,7 @@ var Sound = {
   },
 
   display_already_loaded_samples:function () {
-    $('.indicator').each(function(i,indicator) {
+    $('.indicator').each(function (i, indicator) {
       if (Sound.samples[indicator.id].audio) {
         $(indicator).addClass('done')
       }
@@ -97,8 +101,7 @@ var Sound = {
     var step_counts = []
     for (key in Sound.patterns) {
       step_counts = step_counts.concat(Sound.patterns[key].step_string.length);
-    }
-    ;
+    };
     Sound.lowest_common_multiple = Sound.LCM(step_counts);
   },
 
@@ -112,12 +115,22 @@ var Sound = {
             Sound.set_bpm(attrs);
           } else if (key == 'version') {
             Sound.version = attrs;
-          } else {
-            pattern = Sound.patterns[key];
-            pattern.step_source = attrs['steps'];
-            pattern.muted = attrs['muted'];
-            pattern.set_step_info();
-            pattern.display();
+          } else if (key == 'patterns') {
+            $.each(attrs, function (key, attrs) {
+              pattern = Sound.patterns[key];
+              pattern.step_source = attrs['steps'];
+              pattern.muted = attrs['muted'];
+              pattern.set_step_info();
+              pattern.display();
+            });
+          } else if (key == 'synths') {
+            $.each(attrs, function (key, attrs) {
+              synth = Sound.synths[key];
+              synth.note_on_steps = attrs['note_on_steps'];
+              synth.note_off_steps = attrs['note_off_steps'];
+              synth.muted = attrs['muted'];
+              synth.set_step_info();
+            });
           }
         });
       },
@@ -147,6 +160,9 @@ var Sound = {
   play_step:function (step) {
     $.each(this.patterns, function (name, pattern) {
       pattern.play_step(step)
+    });
+    $.each(this.synths, function (name, synth) {
+      synth.play_step(step)
     });
     this.step += 1;
     this.reset_step();

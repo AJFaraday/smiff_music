@@ -18,7 +18,7 @@ class Pattern < ActiveRecord::Base
 
   def Pattern.sound_init_params
     patterns = {}
-    all.each do |pattern|
+    where(purpose: 'event').each do |pattern|
       patterns[pattern.name] = pattern.to_hash
     end
     {
@@ -28,7 +28,7 @@ class Pattern < ActiveRecord::Base
 
   def Pattern.to_hash
     result = {}
-    all.each do |pattern|
+    where(purpose: 'event').each do |pattern|
       result[pattern.name] = pattern.to_hash
     end
     result
