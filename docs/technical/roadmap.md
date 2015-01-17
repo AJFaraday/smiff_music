@@ -82,9 +82,19 @@ Version 0.3
 ** Additive
 ** Subtractive
 ** Wave shaping (change oscillator wave shape)
-* Help patch for each synth
+* Help page for each synth
 
 End point: There is an interesting selection of synths which can be modified via the terminal. 
+
+Version 0.4 (important)
+-----------------------
+
+0.4 is important, currently when a change is made, the version incriments and then the whole current state of all patterns is sent down to the js instance.
+
+It needs to keep a record of what changed on each version, and only send down the updated elements. This will keep the amount of data returned to a minimum, improve performance and make version 1 viable for web deployment.
+
+* Update of pattern store stores changed element for each version
+* pattern update only returns elements changed in newer versions
 
 Version 1
 ---------
