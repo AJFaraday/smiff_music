@@ -1,9 +1,9 @@
-function Synth() {
+function Synth(attrs) {
 
-  this.attack_time = 0.05;
-  this.decay_time = 0.05;
-  this.sustain_level = 0.3;
-  this.release_time = 0.5;
+  this.attack_time = attrs['attack_time'] || 0.05;
+  this.decay_time = attrs['decay_time'] || 0.05;
+  this.sustain_level = attrs['sustain_level'] || 0.3;
+  this.release_time = attrs['release_time'] || 0.5;
 
   this.oscillator = Sound.context.createOscillator();
   this.master_gain = Sound.context.createGain();
@@ -11,7 +11,7 @@ function Synth() {
   this.envelope_gain = Sound.context.createGain();
   this.envelope_gain.gain.value = 0;
 
-  this.oscillator.type = 'sine';
+  this.oscillator.type = attrs['osc_type'] || 'sine';
 
   this.oscillator.connect(this.envelope_gain);
   this.envelope_gain.connect(this.master_gain);
@@ -19,7 +19,7 @@ function Synth() {
 
   this.oscillator.start(0);
 
-  this.set_frequency = function (midi) {
+  this.set_pitch = function (midi) {
     hz = 27.5 * Math.pow(2, ((midi - 21) / 12));
     this.oscillator.frequency.value = hz;
   };

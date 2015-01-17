@@ -3,6 +3,7 @@ var Sound = {
   context:null,
   samples:{},
   patterns:{},
+  synths:{},
   sixteenth_time:100,
   step:0,
   lowest_common_multiple:0,
@@ -34,6 +35,13 @@ var Sound = {
         Sound.samples[sample_name] = new Sample(sample_name);
         Sound.samples[sample_name].load_sample();
       });
+      // load synths
+      attributes['synths'].forEach(function (attrs) {
+        name = attrs['name'];
+        Sound.synths[name] = new Synth(attrs);
+      });
+
+
       this.set_patterns(attributes['patterns']);
 
       this.init_player_controls();
