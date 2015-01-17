@@ -24,6 +24,13 @@ class Synth < ActiveRecord::Base
 
   end
 
+
+  after_save :modify_pattern_store
+
+  def modify_pattern_store
+    PatternStore.modify_hash(self)
+  end
+
   def Synth.build_seeds
     definitions = YAML.load_file(File.join(Rails.root, 'db', 'seed', 'synths.yml'))
     definitions.each do |name, params|
@@ -41,6 +48,7 @@ class Synth < ActiveRecord::Base
         muted: false,
         active:  true,
         purpose: 'note_on',
+        name: "#{self.name}_note_on",
         step_count: step_count,
         step_size: step_size
       )
@@ -50,6 +58,7 @@ class Synth < ActiveRecord::Base
         muted: false,
         active: true,
         purpose: 'note_off',
+        name: "#{self.name}_note_off",
         step_count: step_count,
         step_size: step_size
       )
