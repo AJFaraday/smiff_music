@@ -1,5 +1,7 @@
 <dl>
 
+  <canvas id="envelope_chart" width="500" height="200"></canvas>
+
   <% [:attack_time, :decay_time].each do |param| %>
     <dt><%= Synth.human_attribute_name(param) %></dt>
     <dd><%= (synth.send(param) * 1000).to_i %> ms</dd>
@@ -12,3 +14,25 @@
   <dd><%= (synth.release_time * 1000).to_i %> ms</dd>
 
 </dl>
+
+<script type='text/javascript'>
+
+  var ctx = $("#envelope_chart").get(0).getContext("2d");
+  var data = {
+    labels: <%= raw Array.new(synth.chart_data.length, '').to_json %>,
+    datasets: [
+      {
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        data: <%= raw synth.chart_data.to_json %>
+      }
+    ]
+  };
+  var options = {
+    bezierCurve: false,
+    animation: false,
+    showScale: false
+  };
+
+  var envelope_chart = new Chart(ctx).Line(data, options);
+</script>

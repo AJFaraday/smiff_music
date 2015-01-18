@@ -1,7 +1,9 @@
-<h2>Synth: <%= synth.name %></h2>
+<h2><%= t('.synth') %>: <%= synth.name %></h2>
 
 <%= render partial: 'synths/synth_parameters', locals: {synth: synth} %>
 
+<h3><%= t('.sequence') %></h3>
 <%= render partial: 'synths/melody_table', locals: {synth: synth} %>
 
+<h3><%= t('.envelope') %></h3>
 <%= render partial: 'synths/envelope', locals: {synth: synth} %>
