@@ -26,7 +26,7 @@ table.patterns{
   margin: 0;
 }
 
-th.step_header {
+table.patterns thead tr th.step_header {
   padding: 0px;
   margin: 0px;
   font-size:10px;
@@ -34,12 +34,12 @@ th.step_header {
 }
 
 
-td.step {
+table.patterns tbody tr td.step {
   padding: 0px;
   margin: 0px;
 }
 
-td.step div {
+table.patterns tbody tr td.step div {
   width: $step_size ;
   height: $step_size ;
   padding: 0px;
@@ -48,19 +48,19 @@ td.step div {
 }
 
 
-td.step.inactive div {
+table.patterns tbody tr td.step.inactive div {
   background-color: #ffffff ;
 }
 
-td.step.inactive.marker div {
+table.patterns tbody tr td.step.inactive.marker div {
   background-color: #dddddd;
 }
 
-td.step.active div {
+table.patterns tbody tr td.step.active div {
   background-color: #666666 ;
 }
 
 
-tr.muted td.step.active div {
+table.patterns tbody tr.muted td.step.active div {
   background-color: #bbbbbb;
 }

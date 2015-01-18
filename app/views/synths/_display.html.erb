@@ -1,12 +1,7 @@
 <h2>Synth: <%= synth.name %></h2>
 
+<%= render partial: 'synths/synth_parameters', locals: {synth: synth} %>
+
 <%= render partial: 'synths/melody_table', locals: {synth: synth} %>
 
-<div class=row>
-  <div class=col-md-6>
-    <%= render partial: 'synths/synth_parameters', locals: {synth: synth} %>
-  </div>
-  <div class=col-md-6>
-    <%= render partial: 'synths/envelope_parameters', locals: {synth: synth} %>
-  </div>
-</div>
+<%= render partial: 'synths/envelope', locals: {synth: synth} %>
