@@ -3,10 +3,8 @@
   <dd><%= synth.osc_type %></dd>
 
   <dt><%= Synth.human_attribute_name(:min_note) %></dt>
-  <%# TODO helper to display notes %>
-  <dd><%= synth.min_note %></dd>
+  <dd><%= display_midi_note(synth.min_note) %></dd>
 
   <dt><%= Synth.human_attribute_name(:max_note) %></dt>
-  <%# TODO helper to display notes %>
-  <dd><%= synth.max_note %></dd>
+  <dd><%= display_midi_note(synth.max_note) %></dd>
 </dl>
