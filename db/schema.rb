@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117212134) do
+ActiveRecord::Schema.define(version: 20150118133222) do
 
   create_table "message_formats", force: true do |t|
     t.string   "name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20150117212134) do
     t.integer  "step_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "pitches"
   end
 
   create_table "system_settings", force: true do |t|

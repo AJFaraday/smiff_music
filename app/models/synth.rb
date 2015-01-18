@@ -12,6 +12,8 @@ class Synth < ActiveRecord::Base
 
   after_create :generate_patterns
 
+  serialize :pitches
+
   has_many :patterns do
 
     def note_on
@@ -24,6 +26,9 @@ class Synth < ActiveRecord::Base
 
   end
 
+  def pitches
+    super || self.pitches = Array.new(self.step_count)
+  end
 
   after_save :modify_pattern_store
 
@@ -84,7 +89,8 @@ class Synth < ActiveRecord::Base
       muted: muted,
       note_on_steps: patterns.note_on.bits,
       note_off_steps: patterns.note_off.bits,
-      step_count: step_count
+      step_count: step_count,
+      pitches: pitches
     }
   end
 
@@ -100,7 +106,8 @@ class Synth < ActiveRecord::Base
     {
       muted: muted,
       note_on_steps: patterns.note_on.bits,
-      note_off_steps: patterns.note_off.bits
+      note_off_steps: patterns.note_off.bits,
+      pitches: pitches
     }
   end
 

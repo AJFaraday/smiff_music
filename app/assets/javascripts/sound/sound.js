@@ -197,6 +197,9 @@ var Sound = {
     if (Sound.player_active) {
       clearInterval(Sound.player);
       Sound.player_active = false;
+      $.each(this.synths, function(key,synth) {
+        synth.release();
+      });
     }
     $('#stop_button').hide();
     $('#play_button').show();

@@ -4,7 +4,9 @@ function Synth(attrs) {
   this.note_on_steps = attrs['note_on_steps'] || 0
   this.note_off_steps = attrs['note_off_steps'] || 0
   this.step_count = attrs['step_count'] || 16
+  this.pitches = attrs['pitches'] || [0,0,0,0,0,0,0,0];
   this.pitch = 69;
+  this.portamento = 0.005;
 
   // setup envelope params
   this.attack_time = attrs['attack_time'] || 0.05;
@@ -38,9 +40,12 @@ function Synth(attrs) {
       this.attack();
     } else if (this.note_off_step_string[step] == '1') {
       this.release();
-    }
-    // TODO case to change pitch
-  }
+      // for some readson both null and undefined equal undefined
+    };
+    if (this.pitches[step] != undefined ) {
+      this.set_pitch(this.pitches[step])
+    };
+  };
 
   // functions used in playback
   this.set_pitch = function (midi) {
@@ -49,7 +54,7 @@ function Synth(attrs) {
     this.oscillator.frequency.setTargetAtTime(
       hz,
       Sound.context.currentTime,
-      0.010 //todo make this an attribute too
+      this.portamento
     );
   };
   this.set_pitch(69);
