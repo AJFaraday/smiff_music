@@ -27,7 +27,26 @@ class Synth < ActiveRecord::Base
   end
 
   def pitches
-    super || self.pitches = Array.new(self.step_count)
+    super || self.pitches = Array.new(self.step_count || 0)
+  end
+
+  def pitch_at_step(step)
+    pitches[0..step].compact.last
+  end
+
+  def active_at_step(step)
+    note_on = patterns.note_on.pattern_bits
+    note_off = patterns.note_off.pattern_bits
+    active = nil
+    until active != nil do
+      if note_on[step]
+        active = true
+      elsif note_off[step]
+        active = false
+      end
+      step -= 1
+    end
+    active
   end
 
   after_save :modify_pattern_store

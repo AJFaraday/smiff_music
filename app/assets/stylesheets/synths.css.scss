@@ -1,0 +1,52 @@
+$step_size: 15px ;
+
+table.synth_pattern{
+  border: none;
+  border-collapse: collapse;
+  padding: 0;
+  margin: 0;
+}
+
+table.synth_pattern thead tr th.step_header {
+  padding: 0px;
+  margin: 0px;
+  font-size:10px;
+  text-align: center;
+}
+
+table.synth_pattern tbody tr th {
+  font-size:10px;
+}
+
+table.synth_pattern tbody tr td.step {
+  padding: 0px;
+  margin: 0px;
+}
+
+table.synth_pattern tbody tr td.step div {
+  width: $step_size ;
+  height: $step_size ;
+  padding: 0px;
+  margin: 0px;
+  border: 1px black solid;
+}
+
+table.synth_pattern tbody tr td.step.inactive div {
+  background-color: #ffffff ;
+}
+
+table.synth_pattern tbody tr td.step.inactive.marker div {
+  background-color: #dddddd;
+}
+
+table.synth_pattern tbody tr td.step.note_start div {
+  background-color: #555555 ;
+}
+
+table.synth_pattern tbody tr td.step.note_continues div {
+  background-color: #999999 ;
+}
+
+table.synth_pattern tbody tr.muted td.step.active div {
+  background-color: #bbbbbb;
+}

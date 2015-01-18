@@ -9,3 +9,5 @@ sine:
   muted: false
   step_size: 16
   step_count: 32
+  min_note: 58
+  max_note: 72
