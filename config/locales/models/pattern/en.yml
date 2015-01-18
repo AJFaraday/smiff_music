@@ -14,6 +14,9 @@ en:
         bits: Bits (internal)
         active: Active
         pattern_indexes: Note Positions
+        purpose: Type
+        synth_id: Synth ID
+
     errors:
       pattern:
         not_found: "This pattern (id: %{id}) was not found."

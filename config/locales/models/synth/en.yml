@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    synth:
+      one: Synth
+      other: Synths
+    attributes:
+      synth:
+        name: Name
+        osc_type: Wave Shape
+        attack_time: Attack
+        decay_time: Decay
+        sustain_level: Sustain
+        release_time: Release
+        muted: Muted
+        step_size: Note Value
+        step_count: Size
+        pitches: Sequence
+        min_note: Lowest Note
+        max_note: Highest Note
