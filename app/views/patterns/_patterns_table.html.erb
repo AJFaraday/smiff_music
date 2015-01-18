@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <th><%= t('.sample') %></th>
-    <% steps = @patterns.where(purpose: 'event').collect{|x|x.step_count}.reduce(:lcm) %>
+    <% steps = @patterns.all.collect{|x|x.step_count}.max %>
     <% steps.times do |step| %>
       <th class='step_header'>
         <%= step + 1 %>
@@ -28,5 +28,39 @@
       <% end %>
     </tr>
   <% end %>
+
+  <% Synth.all.each do |synth| %>
+    <tr>
+      <td colspan="<%= steps %>">
+        <%= synth.name %>
+      </td>
+    </tr>
+    <% (synth.min_note..synth.max_note).to_a.reverse.each do |note| %>
+      <tr class='overview_melody' title="<%= note %>">
+        <%# TODO helper to display midi note name %>
+        <th></th>
+        <% synth.step_count.times do |step| %>
+          <%# TODO helper to get class for synth, note and step %>
+          <% kls = (step % 4 == 0) ? 'marker ' : '' %>
+          <% if synth.pitch_at_step(step) == note
+               if synth.patterns.note_on.pattern_indexes.include?(step)
+                 kls << 'note_start'
+               elsif synth.active_at_step(step)
+                 kls << 'note_continues'
+               else
+                 kls << 'inactive'
+               end
+             else
+               kls << 'inactive'
+             end %>
+          <td class="step <%= kls %>"
+              id="<%= synth.name %>_note_<%= note %>_step_<%= step %>">
+            <div></div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+
   </tbody>
 </table>

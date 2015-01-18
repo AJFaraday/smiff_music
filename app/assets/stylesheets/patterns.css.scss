@@ -64,3 +64,31 @@ table.patterns tbody tr td.step.active div {
 table.patterns tbody tr.muted td.step.active div {
   background-color: #bbbbbb;
 }
+
+table.patterns tbody tr.overview_melody {
+}
+table.patterns tbody tr.overview_melody th {
+}
+table.patterns tbody tr.overview_melody td.step div {
+  width: $step_size ;
+  height: $step_size / 2 ;
+  border-width: 0px;
+  border-left: 1px lightgrey solid;
+}
+
+table.patterns tbody tr.overview_melody  td.step.note_start div {
+  background-color: #555555 ;
+}
+
+table.patterns tbody tr.overview_melody  td.step.note_continues div {
+  background-color: #999999 ;
+}
+
+table.patterns tbody tr.muted.overview_melody  td.step.note_start div {
+  background-color: #aaaaaa ;
+}
+
+table.patterns tbody tr.muted.overview_melody  td.step.note_continues div {
+  background-color: #dddddd ;
+}
+

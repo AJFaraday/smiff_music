@@ -1,37 +1,37 @@
-<dl>
+<div class=row>
+  <div class='col-md-6'>
+    <canvas id="synth_<%= synth.id %>_envelope_chart" width="500" height="200"></canvas>
+  </div>
 
-  <canvas id="envelope_chart" width="500" height="200"></canvas>
+  <div class='col-md-6'>
+    <dl>
 
-  <% [:attack_time, :decay_time].each do |param| %>
-    <dt><%= Synth.human_attribute_name(param) %></dt>
-    <dd><%= (synth.send(param) * 1000).to_i %> ms</dd>
-  <% end %>
+      <% [:attack_time, :decay_time].each do |param| %>
+        <dt><%= Synth.human_attribute_name(param) %></dt>
+        <dd><%= (synth.send(param) * 1000).to_i %> ms</dd>
+      <% end %>
 
-  <dt><%= Synth.human_attribute_name(:systain_level) %></dt>
-  <dd><%= (synth.sustain_level * 100).to_i %>%</dd>
+      <dt><%= Synth.human_attribute_name(:systain_level) %></dt>
+      <dd><%= (synth.sustain_level * 100).to_i %>%</dd>
 
-  <dt><%= Synth.human_attribute_name(:release_time) %></dt>
-  <dd><%= (synth.release_time * 1000).to_i %> ms</dd>
+      <dt><%= Synth.human_attribute_name(:release_time) %></dt>
+      <dd><%= (synth.release_time * 1000).to_i %> ms</dd>
 
-</dl>
+    </dl>
+  </div>
+
+</div>
 
 <script type='text/javascript'>
+  // TODO add this to the synth init js
 
-  var ctx = $("#envelope_chart").get(0).getContext("2d");
-  var data = {
-    labels: <%= raw Array.new(synth.chart_data.length, '').to_json %>,
-    datasets: [
-      {
-        fillColor: "rgba(220,220,220,0.2)",
-        strokeColor: "rgba(220,220,220,1)",
-        data: <%= raw synth.chart_data.to_json %>
-      }
-    ]
-  };
+  var ctx = $("#synth_<%= synth.id %>_envelope_chart").get(0).getContext("2d");
+  var data = <%= raw synth.chart_data_full.to_json %>;
   var options = {
-    bezierCurve: false,
-    animation: false,
-    showScale: false
+    bezierCurve:false,
+    animation:false,
+    showScale:false,
+    showTooltips:false
   };
 
   var envelope_chart = new Chart(ctx).Line(data, options);

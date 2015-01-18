@@ -47,6 +47,10 @@ table.synth_pattern tbody tr td.step.note_continues div {
   background-color: #999999 ;
 }
 
-table.synth_pattern tbody tr.muted td.step.active div {
-  background-color: #bbbbbb;
+table.synth_pattern tbody tr.muted td.step.note_start div {
+  background-color: #aaaaaa;
+}
+
+table.synth_pattern tbody tr.muted td.step.note_continues div {
+  background-color: #dddddd ;
 }

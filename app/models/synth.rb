@@ -140,7 +140,6 @@ class Synth < ActiveRecord::Base
       (decay_time * 1000).to_i,
       (release_time * 1000).to_i
     ]
-    puts envelope_times.inspect
     gcd = envelope_times.reduce(:gcd)
 
     @chart_data << 0
@@ -153,6 +152,20 @@ class Synth < ActiveRecord::Base
     (((release_time * 1000) / gcd) - 1).to_i.times{@chart_data << nil}
     @chart_data << 0
     @chart_data
+  end
+
+  # This uses chart_data above to generate full params for the chart plugin
+  def chart_data_full
+    {
+      labels: Array.new(chart_data.length, ''),
+      datasets: [
+      {
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        data: chart_data
+      }
+    ]
+  }
   end
 
 end
