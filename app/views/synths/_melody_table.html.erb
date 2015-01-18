@@ -1,7 +1,6 @@
 <table class=synth_pattern >
   <thead>
   <tr>
-    <th></th>
     <% synth.step_count.times do |step| %>
       <th class="step_header"><%= step + 1 %></th>
     <% end %>
@@ -9,9 +8,8 @@
   </thead>
   <tbody>
   <% (synth.min_note..synth.max_note).to_a.reverse.each do |note| %>
-    <tr>
-      <%# TODO helper to display midi note name %>
-      <th><%= note %></th>
+    <%# TODO helper to display midi note name %>
+    <tr title="<%= note %>">
       <% synth.step_count.times do |step| %>
         <%# TODO helper to get class for synth, note and step %>
         <% kls = (step % 4 == 0) ? 'marker ' : '' %>

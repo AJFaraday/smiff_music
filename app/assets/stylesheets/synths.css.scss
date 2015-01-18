@@ -15,7 +15,7 @@ table.synth_pattern thead tr th.step_header {
 }
 
 table.synth_pattern tbody tr th {
-  font-size:10px;
+  font-size:5px;
 }
 
 table.synth_pattern tbody tr td.step {
@@ -25,7 +25,7 @@ table.synth_pattern tbody tr td.step {
 
 table.synth_pattern tbody tr td.step div {
   width: $step_size ;
-  height: $step_size ;
+  height: $step_size / 2 ;
   padding: 0px;
   margin: 0px;
   border-left: 1px lightgrey solid;
