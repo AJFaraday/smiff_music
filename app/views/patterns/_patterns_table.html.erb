@@ -31,9 +31,9 @@
 
   <% Synth.all.each do |synth| %>
     <tr>
-      <td colspan="<%= steps %>">
+      <th colspan="<%= steps %>">
         <%= synth.name %>
-      </td>
+      </th>
     </tr>
     <% (synth.min_note..synth.max_note).to_a.reverse.each do |note| %>
       <tr class='overview_melody' title="<%= note %>">
