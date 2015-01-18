@@ -30,6 +30,10 @@ class Synth < ActiveRecord::Base
     super || self.pitches = Array.new(self.step_count || 0)
   end
 
+  def range
+    (max_note - min_note) + 1
+  end
+
   def pitch_at_step(step)
     pitches[0..step].compact.last
   end

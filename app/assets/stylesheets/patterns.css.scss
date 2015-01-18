@@ -39,6 +39,10 @@ table.patterns tbody tr td.step {
   margin: 0px;
 }
 
+table.patterns tbody tr td {
+  font-size:10px;
+}
+
 table.patterns tbody tr td.step div {
   width: $step_size ;
   height: $step_size ;
