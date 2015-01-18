@@ -8,6 +8,7 @@ p1:
   bits:
   active: true
   muted: false
+  purpose: 'event'
 p2:
   id: 2
   name: snare
@@ -17,6 +18,7 @@ p2:
   bits:
   active: true
   muted: false
+  purpose: 'event'
 p3:
   id: 3
   name: hihat
@@ -26,6 +28,7 @@ p3:
   bits:
   active: true
   muted: false
+  purpose: 'event'
 p4:
   id: 4
   name: crash
@@ -35,6 +38,7 @@ p4:
   bits:
   active: true
   muted: false
+  purpose: 'event'
 p5:
   id: 5
   name: tom1
@@ -44,6 +48,7 @@ p5:
   bits:
   active: true
   muted: false
+  purpose: 'event'
 p6:
   id: 6
   name: tom2
@@ -53,6 +58,7 @@ p6:
   bits:
   active: true
   muted: false
+  purpose: 'event'
 p7:
   id: 7
   name: tom3
@@ -62,3 +68,22 @@ p7:
   bits:
   active: true
   muted: false
+  purpose: 'event'
+sine_note_on:
+  id: 8
+  name: sine_note_on
+  step_size: 16
+  step_count: 32
+  active: true
+  muted: false
+  purpose: 'note_on'
+  synth_id: 1
+sine_note_off:
+  id: 9
+  name: sine_note_off
+  step_size: 16
+  step_count: 32
+  active: true
+  muted: false
+  purpose: 'note_off'
+  synth_id: 1

@@ -3,7 +3,7 @@ module Messages::Actions::MuteUnmuteAll
   def mute_unmute_all(args)
     mode = args['mode'][0]
     Pattern.update_all(muted: mode == 'mute')
-    PatternStore.hash.each{|k,value| value[:muted] = mode == 'mute' if value.is_a?(Hash)}
+    PatternStore.hash['patterns'].each{|k,value| value[:muted] = mode == 'mute' if value.is_a?(Hash)}
     PatternStore.version += 1
     return {
       response: 'success',

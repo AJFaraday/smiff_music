@@ -1,23 +1,14 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  osc_type: MyString
-  attack_time: 1.5
-  decay_time: 1.5
-  sustain_level: 1.5
-  release_time: 1.5
+sine:
+  id: 1
+  name: sine
+  osc_type: sine
+  attack_time: 0.1
+  decay_time: 0.3
+  sustain_level: 0.3
+  release_time: 0.5
   muted: false
-  step_size: 1
-  step_count: 1
-
-two:
-  name: MyString
-  osc_type: MyString
-  attack_time: 1.5
-  decay_time: 1.5
-  sustain_level: 1.5
-  release_time: 1.5
-  muted: false
-  step_size: 1
-  step_count: 1
+  step_size: 16
+  step_count: 32
+  min_note: 58
+  max_note: 72

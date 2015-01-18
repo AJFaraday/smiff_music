@@ -26,6 +26,12 @@ class Synth < ActiveRecord::Base
 
   end
 
+  after_save :modify_pattern_store
+
+  def modify_pattern_store
+    PatternStore.modify_hash(self)
+  end
+
   def pitches
     super || self.pitches = Array.new(self.step_count || 0)
   end
@@ -53,11 +59,6 @@ class Synth < ActiveRecord::Base
     active
   end
 
-  after_save :modify_pattern_store
-
-  def modify_pattern_store
-    PatternStore.modify_hash(self)
-  end
 
   def Synth.build_seeds
     definitions = YAML.load_file(File.join(Rails.root, 'db', 'seed', 'synths.yml'))

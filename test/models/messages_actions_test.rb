@@ -32,7 +32,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
 
   def test_add_steps_one_step
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.add_steps(
       {
@@ -49,7 +49,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.pattern_indexes
     )
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_add_steps_out_of_range
@@ -78,7 +78,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_add_steps_list
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.add_steps(
       {
@@ -95,11 +95,11 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.pattern_indexes
     )
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_add_steps_block
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.add_steps(
       {
@@ -117,11 +117,11 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.pattern_indexes
     )
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_add_steps_block_with_skipping
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.add_steps(
       {
@@ -140,41 +140,41 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.pattern_indexes
     )
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_clear_all_drums
     Pattern.first.update_attribute :pattern_indexes, [0,1,2]
     Pattern.last.update_attribute :pattern_indexes, [0,1,2]
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_all_drums({})
     assert_equal 'success', result[:response]
     assert_equal("I've cleared all of the drum patterns.", result[:display])
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_clear_patterns_one
     Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_patterns({'pattern_names' => ['kick']})
     assert_equal 'success', result[:response]
     assert_equal("I've cleared the kick pattern", result[:display])
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_clear_patterns_list
     Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_patterns({'pattern_names' => ['kick', 'snare', 'hihat']})
     assert_equal 'success', result[:response]
     assert_equal("I've cleared the kick, snare and hihat patterns", result[:display])
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_clear_patterns_no_pattern
@@ -185,7 +185,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
   def test_clear_steps_one
     Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_steps(
       {
@@ -204,7 +204,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.pattern_indexes
     )
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
 
@@ -235,7 +235,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
   def test_clear_steps_list
     Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_steps(
       {
@@ -252,13 +252,13 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.pattern_indexes
     )
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
 
   def test_clear_steps_block
     Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_steps(
       {
@@ -276,12 +276,12 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.pattern_indexes
     )
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_clear_steps_block_with_skipping
     Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
-    kick_bits = PatternStore.hash['kick'][:steps]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_steps(
       {
@@ -300,7 +300,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.pattern_indexes
     )
 
-    assert_not_equal kick_bits, PatternStore.hash['kick'][:steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
   def test_list_drums
@@ -323,7 +323,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
   def test_mute_one
     pattern = Pattern.where(:name => 'kick').first
     pattern.update_attribute(:muted, false)
-    refute PatternStore.hash['kick'][:muted]
+    refute PatternStore.hash['patterns']['kick'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
@@ -339,13 +339,13 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     pattern.reload
     assert_equal true, pattern.muted
-    assert PatternStore.hash['kick'][:muted]
+    assert PatternStore.hash['patterns']['kick'][:muted]
   end
 
   def test_mute_list
     Pattern.first.update_attribute(:muted, false)
     patterns = Pattern.where(:name => ['kick','snare','hihat'])
-    refute PatternStore.hash['kick'][:muted]
+    refute PatternStore.hash['patterns']['kick'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
@@ -363,13 +363,13 @@ class MessagesActionsTest < ActiveSupport::TestCase
       assert_equal true, pattern.muted
     end
 
-    assert PatternStore.hash['kick'][:muted]
+    assert PatternStore.hash['patterns']['kick'][:muted]
   end
 
   def test_unmute_one
     pattern = Pattern.where(:name => 'kick').first
     pattern.update_attribute(:muted, true)
-    assert PatternStore.hash['kick'][:muted]
+    assert PatternStore.hash['patterns']['kick'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
@@ -385,13 +385,13 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     pattern.reload
     assert_equal false, pattern.muted
-    refute PatternStore.hash['kick'][:muted]
+    refute PatternStore.hash['patterns']['kick'][:muted]
   end
 
   def test_unmute_list
     patterns = Pattern.where(:name => ['kick','snare','hihat'])
     patterns.each{|pattern| pattern.update_attribute :muted, true}
-    assert PatternStore.hash['kick'][:muted]
+    assert PatternStore.hash['patterns']['kick'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
@@ -409,7 +409,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
       pattern.reload
       assert_equal false, pattern.muted
     end
-    refute PatternStore.hash['kick'][:muted]
+    refute PatternStore.hash['patterns']['kick'][:muted]
   end
 
   def test_set_speed
@@ -559,7 +559,7 @@ tom3----------------------------------
       result[:display]
     )
     Pattern.all.each{|p| assert p.muted}
-    assert PatternStore.hash['kick'][:muted]
+    assert PatternStore.hash['patterns']['kick'][:muted]
   end
 
   def test_unmute_all
@@ -572,7 +572,7 @@ tom3----------------------------------
       result[:display]
     )
     Pattern.all.each{|p| refute p.muted}
-    refute PatternStore.hash['kick'][:muted]
+    refute PatternStore.hash['patterns']['kick'][:muted]
   end
 
   def test_show_includes_mute_info

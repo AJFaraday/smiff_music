@@ -13,10 +13,10 @@ class PatternStoreTest < ActiveSupport::TestCase
     hash = PatternStore.build_hash
     assert_equal SystemSetting['bpm'], hash['bpm']
     assert_equal PatternStore.version, hash['version']
-    assert_instance_of Hash, hash['kick']
+    assert_instance_of Hash, hash['patterns']['kick']
     assert_equal(
       %i{steps sample step_count muted},
-      hash['kick'].keys
+      hash['patterns']['kick'].keys
     )
   end
 
@@ -25,7 +25,7 @@ class PatternStoreTest < ActiveSupport::TestCase
     pattern = Pattern.find_by_name('snare')
     pattern.update_attribute(:pattern_indexes, [4,7,8])
     assert_not_equal(hash, PatternStore.hash)
-    assert_not_equal(hash['snare'], PatternStore.hash['snare'])
+    assert_not_equal(hash['patterns']['snare'], PatternStore.hash['patterns']['snare'])
   end
 
   def test_modify_hash_for_bpm
