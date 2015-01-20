@@ -41,6 +41,7 @@ class MessageTest < ActiveSupport::TestCase
 
   def test_run_valid_message
     message = Message.parse('show kick, snare and hihat')
+    PatternStore.hash['patterns']['kick']['steps'] = 0
     result = message.run
     assert_instance_of Hash, result
     assert_equal %i{response display version}, result.keys
@@ -377,3 +378,4 @@ class MessageTest < ActiveSupport::TestCase
   end
 
 end
+                                                 *
