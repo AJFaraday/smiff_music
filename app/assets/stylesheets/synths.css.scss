@@ -39,18 +39,36 @@ table.synth_pattern tbody tr td.step.inactive.marker div {
   background-color: #dddddd;
 }
 
-table.synth_pattern tbody tr td.step.note_start div {
-  background-color: #555555 ;
+table.synth_pattern tbody tr  td.step.note_start div {
+  background: linear-gradient(to right, #555555, #999999, #999999) ;
 }
 
-table.synth_pattern tbody tr td.step.note_continues div {
+table.synth_pattern tbody tr  td.step.note_continues div {
   background-color: #999999 ;
 }
 
-table.synth_pattern tbody tr.muted td.step.note_start div {
-  background-color: #aaaaaa;
+table.synth_pattern tbody tr  td.step.note_end div {
+  background: linear-gradient(to right, #999999, #ffffff) ;
 }
 
-table.synth_pattern tbody tr.muted td.step.note_continues div {
-  background-color: #dddddd ;
+table.synth_pattern tbody tr  td.step.marker.note_end div {
+  background: linear-gradient(to right, #999999, #dddddd) ;
 }
+
+
+table.synth_pattern tbody tr.muted  td.step.note_start div {
+  background: linear-gradient(to right, #aaaaaa, #cccccc, #cccccc) ;
+}
+
+table.synth_pattern tbody tr.muted  td.step.note_continues div {
+  background-color: #cccccc ;
+}
+
+table.synth_pattern tbody tr.muted  td.step.note_end div {
+  background: linear-gradient(to right, #cccccc, #ffffff) ;
+}
+
+table.synth_pattern tbody tr.muted  td.step.marker.note_end div {
+  background: linear-gradient(to right, #cccccc, #dddddd) ;
+}
+

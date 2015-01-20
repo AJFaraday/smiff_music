@@ -81,18 +81,34 @@ table.patterns tbody tr.overview_melody td.step div {
 }
 
 table.patterns tbody tr.overview_melody  td.step.note_start div {
-  background-color: #555555 ;
+  background: linear-gradient(to right, #555555, #999999, #999999) ;
 }
+
 
 table.patterns tbody tr.overview_melody  td.step.note_continues div {
   background-color: #999999 ;
 }
 
+table.patterns tbody tr.overview_melody  td.step.note_end div {
+  background: linear-gradient(to right, #999999, #ffffff) ;
+}
+
+table.patterns tbody tr.overview_melody  td.step.marker.note_end div {
+  background: linear-gradient(to right, #999999, #dddddd) ;
+}
+
 table.patterns tbody tr.muted.overview_melody  td.step.note_start div {
-  background-color: #aaaaaa ;
+  background: linear-gradient(to right, #aaaaaa, #cccccc, #cccccc) ;
 }
 
 table.patterns tbody tr.muted.overview_melody  td.step.note_continues div {
-  background-color: #dddddd ;
+  background-color: #cccccc ;
 }
 
+table.patterns tbody tr.muted.overview_melody  td.step.note_end div {
+  background: linear-gradient(to right, #cccccc, #ffffff) ;
+}
+
+table.patterns tbody tr.muted.overview_melody  td.step.note_end div {
+  background: linear-gradient(to right, #cccccc, #dddddd) ;
+}
