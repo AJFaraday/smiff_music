@@ -28,47 +28,19 @@ class Synth < ActiveRecord::Base
 
   after_save :modify_pattern_store
 
-  def modify_pattern_store
-    PatternStore.modify_hash(self)
-  end
-
-  def pitches
-    super || self.pitches = Array.new(self.step_count || 0)
-  end
-
-  def range
-    (max_note - min_note) + 1
-  end
-
-  def pitch_at_step(step)
-    pitches[0..step].compact.last
-  end
-
-  def active_at_step(step)
-    note_on = patterns.note_on.pattern_bits
-    note_off = patterns.note_off.pattern_bits
-    active = nil
-    until active != nil do
-      if note_on[step]
-        active = true
-      elsif note_off[step]
-        active = false
-      end
-      step -= 1
-    end
-    active
-  end
-
-
   def Synth.build_seeds
     definitions = YAML.load_file(File.join(Rails.root, 'db', 'seed', 'synths.yml'))
     definitions.each do |name, params|
       if Synth.where(name: name).any?
-        Synth.where(name: name).first.update_attributes(params)
+      Synth.where(name: name).first.update_attributes(params)
       else
         Synth.create!(params)
       end
     end
+  end
+
+  def modify_pattern_store
+    PatternStore.modify_hash(self)
   end
 
   def generate_patterns
@@ -93,6 +65,37 @@ class Synth < ActiveRecord::Base
       )
     end
   end
+
+  def pitches
+    super || self.pitches = Array.new(self.step_count || 0)
+  end
+
+  def range
+    (max_note - min_note) + 1
+  end
+
+
+
+  def pitch_at_step(step)
+    pitches[0..step].compact.last
+  end
+
+  def active_at_step(step)
+    note_on = patterns.note_on.pattern_bits
+    note_off = patterns.note_off.pattern_bits
+    active = nil
+    until active != nil or step < 0 do
+      if note_on[step]
+        active = true
+      elsif note_off[step]
+        active = false
+      end
+      step -= 1
+    end
+    active
+  end
+
+
 
 
   def Synth.sound_init_params
