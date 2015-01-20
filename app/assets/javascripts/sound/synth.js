@@ -36,16 +36,30 @@ function Synth(attrs) {
   // actual playback function
   this.play_step = function(step) {
     step = step % this.length;
-    if (this.note_on_step_string[step] == '1' && !this.muted) {
+    if (this.note_on_at_step(step) && !this.muted) {
       this.attack();
-    } else if (this.note_off_step_string[step] == '1') {
+      if (this.note_off_at_step(step)) {
+        setTimeout(
+          this.release(),
+          ((this.attack_time + this.decay_time) * 1000)
+        );
+      }
+    } else if (this.note_on_at_step(step) == '1') {
       this.release();
       // for some readson both null and undefined equal undefined
     };
     if (this.pitches[step] != undefined ) {
-      this.set_pitch(this.pitches[step])
+      this.set_pitch(this.pitches[step]);
     };
   };
+
+  this.note_on_at_step = function(step) {
+    (this.note_on_step_string[step] == '1');
+  };
+
+  this.note_off_at_step = function(step) {
+    (this.note_off_step_string[step] == '1');
+  }
 
   // functions used in playback
   this.set_pitch = function (midi) {
