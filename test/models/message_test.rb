@@ -46,14 +46,10 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal %i{response display version}, result.keys
     assert result[:version]
     assert_equal 'success', result[:response]
-    assert_equal(
-      "------1---5---9---13--17--21--25--29--
-kick---------------------------------- 
-snare--------------------------------- 
-hihat--------------------------------- 
-",
-      result[:display]
-    )
+    assert_includes(result[:display], "------1---5---9---13--17--21--25--29--")
+    assert_includes(result[:display], "kick----------------------------------")
+    assert_includes(result[:display], "snare---------------------------------")
+    assert_includes(result[:display], "hihat---------------------------------")
   end
 
   def test_statuses
