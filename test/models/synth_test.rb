@@ -184,9 +184,9 @@ class SynthTest < ActiveSupport::TestCase
   #             |   |
   # pitch ----#-#---------
   # on    ----#-#---------
-  # off   ----------#-----
+  # off   -----#----#-----
   #
-  # note: it does not create noteoff for previous note
+  # note: it does creates noteoff for previous note
   #
   def test_add_note_cutting_across
     synth = Synth.find(1)
@@ -229,7 +229,7 @@ class SynthTest < ActiveSupport::TestCase
   # pitch ----#-----------
   # on    ----#-----------
   # off   --------#-------
-  #      +      |   |
+  #      +      |   |      (legato, implemented later)
   # pitch ----#-#---------
   # on    ----#-#---------
   # off   ----------#-----
@@ -248,7 +248,8 @@ class SynthTest < ActiveSupport::TestCase
     assert_equal 60, synth.pitches[4]
     assert_equal 62, synth.pitches[6]
     assert_equal [4, 6], synth.patterns.note_on.pattern_indexes
-    assert_equal [10], synth.patterns.note_off.pattern_indexes
+
+    synth.patterns.note_off.update_attribute(:pattern_indexes, [10])
 
     synth.remove_note(6)
     assert_equal 60, synth.pitches[4]
