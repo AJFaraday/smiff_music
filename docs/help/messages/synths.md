@@ -36,4 +36,16 @@ Any new notes will be 2 steps long
 > play C 4, D 4, E 4, F 4, G 4, G4, G4 from step 1
 <pre>
 
+## Remove note
+
+Possible message forms for removing a specific note, all synth sounds in a given range or a given note or notes.
+
+<pre>
+> do not play sine on step 1
+> do not play sine on steps 1 to 16
+> do not play C# 4 on sine
+> do not play C 4, D 4, E4 on sine
+> do not play C 4 to G 4 on sine
+</pre>
+
 
