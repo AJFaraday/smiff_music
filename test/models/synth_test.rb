@@ -244,7 +244,8 @@ class SynthTest < ActiveSupport::TestCase
     assert_equal [4], synth.patterns.note_on.pattern_indexes
     assert_equal [7], synth.patterns.note_off.pattern_indexes
 
-    remove_note(4)
+
+    synth.remove_note(4)
     assert_equal nil, synth.pitches[4]
     assert_equal [], synth.patterns.note_on.pattern_indexes
     assert_equal [], synth.patterns.note_off.pattern_indexes
