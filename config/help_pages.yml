@@ -62,3 +62,6 @@
         - title: clear
           anchor: clear
           file: '/docs/help/messages/drums/clear.md'
+    - title: Synths
+      anchor: synths
+      file: '/docs/help/messages/synths.md'
