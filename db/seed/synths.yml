@@ -11,3 +11,16 @@ sine:
   step_count: 32
   min_note: 58
   max_note: 72
+
+square:
+  name: square
+  osc_type: square
+  attack_time: 0.1
+  decay_time: 0.1
+  sustain_level: 0.8
+  release_time: 0.2
+  muted: false
+  step_size: 16
+  step_count: 32
+  min_note: 58
+  max_note: 72
