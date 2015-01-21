@@ -26,6 +26,16 @@ class Synth < ActiveRecord::Base
 
   end
 
+  def note_on
+    return @note_on if @note_on
+    @note_on = patterns.note_on
+  end
+
+  def note_off
+    return @note_off if @note_off
+    @note_off = patterns.note_off
+  end
+
   after_save :modify_pattern_store
 
   def Synth.build_seeds
@@ -175,5 +185,34 @@ class Synth < ActiveRecord::Base
     ]
   }
   end
+
+  def add_note(pitch, start_step, length)
+    end_step = start_step + (length - 1)
+    Synth.transaction do
+      clear_range(start_step, end_step)
+      # add note_off if previous step is active.
+      if self.active_at_step(start_step - 1)
+        note_off.pattern_indexes += [start_step - 1]
+      end
+      # add note_on and pitch if next step is active.
+      if self.active_at_step(start_step + 1)
+        note_on.pattern_indexes += [end_step + 1]
+        pitches[end_step + 1] = pitch_at_step(end_step + 1)
+      end
+      pitches[start_step] = pitch
+      note_on.pattern_indexes += [start_step]
+      note_off.pattern_indexes += [end_step]
+      note_on.save!
+      note_off.save!
+      save!
+    end
+  end
+
+  def clear_range(start_step, end_step)
+    (start_step..end_step).each{|index| pitches[index] = nil}
+    note_on.pattern_indexes -= (start_step..end_step).to_a
+    note_off.pattern_indexes -= (start_step..end_step).to_a
+  end
+
 
 end

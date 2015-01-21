@@ -161,10 +161,10 @@ class SynthTest < ActiveSupport::TestCase
   # for an empty synth pattern
   #
   #       #   #   #   #
-  #           |   |
+  #           |  |
   # pitch ----#-----------
   # on    ----#-----------
-  # off   --------#-------
+  # off   -------#--------
   #
   def test_add_note_simple
     synth = Synth.find(1)
@@ -172,19 +172,19 @@ class SynthTest < ActiveSupport::TestCase
     synth.add_note(60,4,4)
     assert_equal 60, synth.pitches[4]
     assert_equal [4], synth.patterns.note_on.pattern_indexes
-    assert_equal [8], synth.patterns.note_off.pattern_indexes
+    assert_equal [7], synth.patterns.note_off.pattern_indexes
   end
 
   #
   #       #   #   #   #
-  #           |   |
-  # pitch ----#-----------
+  #           |  |
+  # pitch ----1-----------
   # on    ----#-----------
-  # off   --------#-------
-  #             |   |
-  # pitch ----#-#---------
+  # off   -------#--------
+  #             |  |
+  # pitch ----1-2---------
   # on    ----#-#---------
-  # off   -----#----#-----
+  # off   -----#---#------
   #
   # note: it does creates noteoff for previous note
   #
@@ -192,13 +192,40 @@ class SynthTest < ActiveSupport::TestCase
     synth = Synth.find(1)
 
     synth.add_note(60,4,4)
-    synth.add_note(62,6,8)
+    synth.add_note(62,6,4)
 
     assert_equal 60, synth.pitches[4]
     assert_equal 62, synth.pitches[6]
     assert_equal [4, 6], synth.patterns.note_on.pattern_indexes
-    assert_equal [10], synth.patterns.note_off.pattern_indexes
+    assert_equal [5, 9], synth.patterns.note_off.pattern_indexes
   end
+
+  #       #   #   #   #
+  #       |       |
+  # pitch 1---------------
+  # on    #---------------
+  # off   --------#-------
+  #           ||
+  # pitch 1---2--1--------
+  # on    #---#-#---------
+  # off   ---#-#--#-------
+  #
+  def test_add_note_within_other_note
+    synth = Synth.find(1)
+    synth.add_note(60,0,9)
+    assert_equal 60, synth.pitches[0]
+    assert_equal [0], synth.patterns.note_on.pattern_indexes
+    assert_equal [8], synth.patterns.note_off.pattern_indexes
+
+    synth.add_note(62,4,2)
+    assert_equal 60, synth.pitches[0]
+    assert_equal 62, synth.pitches[4]
+    assert_equal 60, synth.pitches[6]
+    assert_equal [0,4,6], synth.patterns.note_on.pattern_indexes
+    assert_equal [3,5,8], synth.patterns.note_off.pattern_indexes
+  end
+
+
 
   # back-end method to remove a note
   #
@@ -208,14 +235,14 @@ class SynthTest < ActiveSupport::TestCase
   #           |   |
   # pitch ----#-----------
   # on    ----#-----------
-  # off   --------#-------
+  # off   -------#--------
   def test_remove_note_simple
     synth = Synth.find(1)
 
     synth.add_note(60,4,4)
     assert_equal 60, synth.pitches[4]
     assert_equal [4], synth.patterns.note_on.pattern_indexes
-    assert_equal [8], synth.patterns.note_off.pattern_indexes
+    assert_equal [7], synth.patterns.note_off.pattern_indexes
 
     remove_note(4)
     assert_equal nil, synth.pitches[4]

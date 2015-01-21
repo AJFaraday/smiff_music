@@ -17,3 +17,7 @@ en:
         pitches: Sequence
         min_note: Lowest Note
         max_note: Highest Note
+    errors:
+      synth:
+        note_too_high: Sorry, that note is too higher than the maximum of %{max}.
+        note_too_low: Sorry, that note is too lower than the maximum of %{min}.

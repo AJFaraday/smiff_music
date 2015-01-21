@@ -20,7 +20,7 @@ class MessageTest < ActiveSupport::TestCase
       ),
       result[:display]
     )
-    assert_equal('error',result[:response])
+    assert_equal('error', result[:response])
     assert_equal Message::FAILED_STATE, message.status
   end
 
@@ -282,13 +282,12 @@ class MessageTest < ActiveSupport::TestCase
   end
 
 
-
   def test_mute_one_pattern
     message = Message.parse('mute kick')
     assert_equal 'mute_unmute', message.action
     assert_equal(
       ({
-        "pattern_names"=>["kick", "", nil, "", nil],
+        "pattern_names" => ["kick", "", nil, "", nil],
         'mode' => 'mute'
       }),
       message.parameters
@@ -300,7 +299,7 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal 'mute_unmute', message.action
     assert_equal(
       ({
-        "pattern_names"=>["kick", ", snare", ", snare", " and hihat", "hihat"],
+        "pattern_names" => ["kick", ", snare", ", snare", " and hihat", "hihat"],
         'mode' => 'mute'
       }),
       message.parameters
@@ -312,7 +311,7 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal 'mute_unmute', message.action
     assert_equal(
       ({
-        "pattern_names"=>["kick", "", nil, "", nil],
+        "pattern_names" => ["kick", "", nil, "", nil],
         'mode' => 'unmute'
       }),
       message.parameters
@@ -324,7 +323,7 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal 'mute_unmute', message.action
     assert_equal(
       ({
-        "pattern_names"=>["kick", ", snare", ", snare", " and hihat", "hihat"],
+        "pattern_names" => ["kick", ", snare", ", snare", " and hihat", "hihat"],
         'mode' => 'unmute'
       }),
       message.parameters
@@ -354,7 +353,7 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal 'clear_patterns', message.action
     assert_equal(
       ({
-        "pattern_names"=>["kick", "", nil, "", nil]
+        "pattern_names" => ["kick", "", nil, "", nil]
       }),
       message.parameters
     )
@@ -365,7 +364,7 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal 'clear_patterns', message.action
     assert_equal(
       ({
-        "pattern_names"=>["kick", ", snare", ", snare", " and hihat", "hihat"]
+        "pattern_names" => ["kick", ", snare", ", snare", " and hihat", "hihat"]
       }),
       message.parameters
     )
@@ -374,8 +373,7 @@ class MessageTest < ActiveSupport::TestCase
   def test_clear_all
     message = Message.parse('clear all drums')
     assert_equal 'clear_all_drums', message.action
-    assert_equal(Hash.new,message.parameters)
+    assert_equal(Hash.new, message.parameters)
   end
 
 end
-                                                 *
