@@ -11,6 +11,12 @@ class Synth < ActiveRecord::Base
   validate :release_time, numericality: {greater_than: 0, less_than: 5}
 
   after_create :generate_patterns
+  before_save :save_patterns
+
+  def save_patterns
+    note_on.save! if note_on
+    note_off.save! if note_off
+  end
 
   serialize :pitches
 
@@ -94,11 +100,12 @@ class Synth < ActiveRecord::Base
     note_on = patterns.note_on.pattern_bits
     note_off = patterns.note_off.pattern_bits
     active = nil
+    return true if note_on[step]
     until active != nil or step < 0 do
-      if note_on[step]
-        active = true
-      elsif note_off[step]
+      if note_off[step]
         active = false
+      elsif note_on[step]
+        active = true
       end
       step -= 1
     end
@@ -193,8 +200,6 @@ class Synth < ActiveRecord::Base
       pitches[start_step] = pitch
       note_on.pattern_indexes += [start_step]
       note_off.pattern_indexes += [end_step]
-      note_on.save!
-      note_off.save!
       save!
     end
   end
@@ -210,7 +215,7 @@ class Synth < ActiveRecord::Base
     note_on.pattern_indexes -= (start_step..end_step).to_a
     note_off.pattern_indexes -= (start_step..end_step).to_a
     # add note_off if previous step is active.
-    if self.active_at_step(start_step - 1)
+    if self.active_at_step(start_step - 1) and start_step != 0
       note_off.pattern_indexes += [start_step - 1]
     end
   end
@@ -219,8 +224,7 @@ class Synth < ActiveRecord::Base
     if pitches[start_step]
       end_step = note_off.pattern_indexes.select{|x|x >= start_step}.sort[0]
       clear_range(start_step, end_step)
-      note_on.save!
-      note_off.save!
+      save!
       true
     else
       nil

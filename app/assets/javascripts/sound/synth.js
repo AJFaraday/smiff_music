@@ -6,7 +6,7 @@ function Synth(attrs) {
   this.step_count = attrs['step_count'] || 16
   this.pitches = attrs['pitches'] || [0,0,0,0,0,0,0,0];
   this.pitch = 69;
-  this.portamento = 0.005;
+  this.portamento = 0.001;
 
   // setup envelope params
   this.attack_time = attrs['attack_time'] || 0.05;
@@ -43,23 +43,23 @@ function Synth(attrs) {
           this.release(),
           ((this.attack_time + this.decay_time) * 1000)
         );
-      }
-    } else if (this.note_on_at_step(step) == '1') {
+      };
+    } else if (this.note_off_at_step(step)) {
       this.release();
-      // for some readson both null and undefined equal undefined
     };
+    // for some reason both null and undefined equal undefined
     if (this.pitches[step] != undefined ) {
       this.set_pitch(this.pitches[step]);
     };
   };
 
   this.note_on_at_step = function(step) {
-    (this.note_on_step_string[step] == '1');
+    return this.note_on_step_string[step] == '1';
   };
 
   this.note_off_at_step = function(step) {
-    (this.note_off_step_string[step] == '1');
-  }
+    return this.note_off_step_string[step] == '1';
+  };
 
   // functions used in playback
   this.set_pitch = function (midi) {
@@ -90,7 +90,10 @@ function Synth(attrs) {
 
   this.release = function () {
     this.envelope_gain.gain.setTargetAtTime(
-      0, Sound.context.currentTime, this.release_time
+      0,
+      // adding 100ms seems to help avoid the envelope action being missed.
+      (Sound.context.currentTime + 0.1),
+      this.release_time
     );
   };
 
