@@ -34,7 +34,7 @@ Any new notes will be 2 steps long
 
 > play C# 4 on step 5
 > play C 4, D 4, E 4, F 4, G 4, G4, G4 from step 1
-<pre>
+</pre>
 
 ## Remove note
 
