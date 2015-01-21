@@ -10,7 +10,7 @@ module SynthsHelper
         kls << 'note_start'
       elsif synth.active_at_step(step)
         kls << 'note_continues'
-      elsif synth.patterns.note_off.pattern_indexes.include?(step)
+      elsif synth.patterns.note_off.pattern_indexes.include?(step) and synth.active_at_step(step - 1)
         kls << 'note_end'
       else
         kls << 'inactive'
