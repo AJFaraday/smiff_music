@@ -20,12 +20,14 @@ There are four things we neet to know to add a note to a synth in SMIFF:
 Options:
 
 Complete message style:
+
 <pre>
 > play C# 4 on step 5 on sine for 2 steps
 > play C# 4, D 2, E 2 on step 5 on sine for 2 steps each
 </pre>
 
 pre-settings style:
+
 <pre>
 > set synth to sine
 Any new notes will be added to 'sine' synthesiser
