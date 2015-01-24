@@ -9,7 +9,7 @@ class Pattern < ActiveRecord::Base
   after_save :modify_pattern_store
 
   def modify_pattern_store
-    PatternStore.modify_hash(self)
+    PatternStore.modify_hash(self) if self.purpose == 'event'
   end
 
   def set_default_bits
