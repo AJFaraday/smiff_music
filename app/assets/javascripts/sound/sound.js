@@ -128,6 +128,7 @@ var Sound = {
               synth = Sound.synths[key];
               synth.note_on_steps = attrs['note_on_steps'];
               synth.note_off_steps = attrs['note_off_steps'];
+              synth.pitches = attrs['pitches']
               synth.muted = attrs['muted'];
               synth.set_step_info();
             });

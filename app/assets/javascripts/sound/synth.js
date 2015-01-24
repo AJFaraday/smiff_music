@@ -30,6 +30,7 @@ function Synth(attrs) {
     this.note_on_step_string = this.note_on_steps.toString(2).leftJustify(this.step_count, '0');
     this.note_off_step_string = this.note_off_steps.toString(2).leftJustify(this.step_count, '0');
     this.length = this.note_on_step_string.length
+
   };
   this.set_step_info();
 
