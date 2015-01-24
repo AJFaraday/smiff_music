@@ -204,6 +204,17 @@ class Synth < ActiveRecord::Base
     end
   end
 
+  def remove_note(start_step)
+    if pitches[start_step]
+      end_step = note_off.pattern_indexes.select{|x|x >= start_step}.sort[0]
+      clear_range(start_step, end_step)
+      save!
+      true
+    else
+      nil
+    end
+  end
+
   def clear_range(start_step, end_step)
     # add note_on and pitch if next step is active.
     if self.active_at_step(end_step + 1)
@@ -217,17 +228,6 @@ class Synth < ActiveRecord::Base
     # add note_off if previous step is active.
     if self.active_at_step(start_step - 1) and start_step != 0
       note_off.pattern_indexes += [start_step - 1]
-    end
-  end
-
-  def remove_note(start_step)
-    if pitches[start_step]
-      end_step = note_off.pattern_indexes.select{|x|x >= start_step}.sort[0]
-      clear_range(start_step, end_step)
-      save!
-      true
-    else
-      nil
     end
   end
 

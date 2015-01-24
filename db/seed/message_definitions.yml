@@ -150,3 +150,14 @@ set_note_length:
   variables:
     - 'note_steps'
   weight: 2
+
+add_note:
+  name: add_note
+  regex: 'play ([a-g][#]?)(?: )?([0-9]+) (?:from|on) step ([0-9]+)'
+  action: add_note
+  variables:
+    - 'note_name'
+    - 'octave'
+    - 'start_step'
+  weight: 2
+
