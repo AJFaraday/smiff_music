@@ -134,3 +134,11 @@ show_all_drums:
   regex: 'show all(?: drums)?'
   action: 'show_all_drums'
   weight: 2
+
+set_synth:
+  name: set_synth
+  regex:  'set synth to (\w+)'
+  action: set_synth
+  variables:
+    - 'synth'
+  weight: 2

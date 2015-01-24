@@ -7,20 +7,21 @@ class Message < ActiveRecord::Base
   RUN_STATE = 2 # The message was run, and was able to take place. It is now ended.
 
   cattr_accessor :failure_log
+  cattr_accessor :message_log
+
 
   belongs_to :message_format
   serialize :parameters
 
-  def Message.parse(text)
-    message = Message.new(
-      source_text: text
-    )
+  def Message.parse(text,session_params={})
+    message = Message.new(source_text: text)
     parser = Messages::Parser.new
     parser.parse(text.downcase)
     if parser.parsed
       message.message_format = parser.message_format
       message.action = parser.message_format.action
       message.parameters = parser.parameters
+      message.parameters = session_params.merge(message.parameters)
       message.status = Message::PENDING_STATE
     else
       message.status = Message::INVALID_STATE
@@ -39,6 +40,7 @@ class Message < ActiveRecord::Base
           self.status = Message::FAILED_STATE
           log_failure(result)
       end
+      log_message(result)
       result[:version] = PatternStore.version
       save!
       return result
@@ -71,6 +73,23 @@ class Message < ActiveRecord::Base
       Message.failure_log.info("[failure] #{self.source_text}")
     end
   end
+
+  def Message.message_log
+    return @@message_log if @@message_log
+    logfile = File.open(File.join(Rails.root, 'log', 'all_messages.log'), 'a')
+    logfile.sync = true
+    @@message_log = Logger.new(logfile)
+    @@message_log
+  end
+
+  def log_message(result=nil)
+    if result
+      Message.message_log.info("[#{result[:response]}] #{self.source_text}")
+    else
+      Message.message_log.info("[failure] #{self.source_text}")
+    end
+  end
+
 
   def failed?
     status == FAILED_STATE
