@@ -1,0 +1,37 @@
+module Messages::Actions::SetNoteLength
+
+  def set_note_length(args)
+    note_length = args['note_steps'][0].to_i
+    errors = errors_for_note_length(note_length)
+    if errors.none?
+      return {
+        response: 'success',
+        display: I18n.t(
+          'actions.set_note_length.note_length_set',
+          note_length: note_length
+        ),
+        session: { note_length: note_length }
+      }
+    else
+      return {
+        response: 'failure',
+        display: I18n.t(
+          'actions.set_note_length.length_not_set',
+          note_length: note_length,
+          error: errors[0]
+        )
+      }
+    end
+  end
+
+  def errors_for_note_length(note_length)
+    errors = []
+    if note_length < 1
+      errors << I18n.t('actions.set_note_length.too_short')
+    elsif note_length > 16
+      errors << I18n.t('actions.set_note_length.too_long')
+    end
+    errors
+  end
+
+end

@@ -142,3 +142,11 @@ set_synth:
   variables:
     - 'synth'
   weight: 2
+
+set_note_length:
+  name: set_note_length
+  regex: 'set note length to ([0-9]+)(?: steps)?'
+  action: set_note_length
+  variables:
+    - 'note_steps'
+  weight: 2
