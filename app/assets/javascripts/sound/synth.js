@@ -18,7 +18,7 @@ function Synth(attrs) {
   // setup web audio stuff
   this.oscillator = Sound.context.createOscillator();
   this.master_gain = Sound.context.createGain();
-  this.master_gain.gain.value = 0.6;
+  this.master_gain.gain.value = ((this.sustain_level * -1) + 1) * 0.8;
   this.envelope_gain = Sound.context.createGain();
   this.envelope_gain.gain.value = 0;
   this.oscillator.type = attrs['osc_type'] || 'sine';
@@ -139,7 +139,9 @@ function Synth(attrs) {
       if(synth.pitch_at_step(step) == pitch) {
         if(synth.note_on_at_step(step)) {
           cell.addClass('note_start');
-          active = true;
+          if (!synth.note_off_at_step(step)) {
+            active = true;
+          };
         } else if (synth.note_off_at_step(step)) {
           cell.addClass('note_end');
           active = false;
