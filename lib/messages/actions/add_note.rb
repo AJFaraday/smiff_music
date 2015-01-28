@@ -3,7 +3,7 @@ module Messages::Actions::AddNote
   include SynthsHelper
 
   def add_note(args)
-    puts args
+    notes = munge_note_names(args['note_names'])
     synth = Synth.find_by_name(args['synth'])
     note = translate_note_to_midi(args['note_name'].upcase, args['octave'])
     errors = errors_for_synth_and_note(synth, note)
@@ -19,6 +19,12 @@ module Messages::Actions::AddNote
         synth: synth.name
       )
     }
+  end
+
+  def munge_note_names(note_names)
+    # get rid of spaces inside note names
+    tidied_note_names = note_names.split(/([a-z])[ ]+([0-9])/).join
+
   end
 
   def errors_for_synth_and_note(synth, note)
