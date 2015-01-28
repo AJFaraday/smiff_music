@@ -6,10 +6,12 @@ show_multiple:
   action: 'show_patterns'
   weight: 0
 
-clear_all_drums:
-  name: 'clear_all_drums'
-  regex: 'clear all drums'
-  action: 'clear_all_drums'
+clear_all:
+  name: 'clear_all'
+  regex: 'clear all( drums| synths|)'
+  variables:
+    - 'group'
+  action: 'clear_all'
   weight: 2
 
 clear_multiple_patterns:

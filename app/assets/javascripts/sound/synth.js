@@ -1,5 +1,8 @@
 function Synth(attrs) {
 
+  this.name = attrs['name'];
+  this.muted = attrs['muted'];
+
   // setup two pattern attributes
   this.note_on_steps = attrs['note_on_steps'] || 0
   this.note_off_steps = attrs['note_off_steps'] || 0
@@ -7,7 +10,6 @@ function Synth(attrs) {
   this.pitches = attrs['pitches'] || [0,0,0,0,0,0,0,0];
   this.pitch = 69;
   this.portamento = 0.001;
-  this.name = attrs['name'];
 
   // setup envelope params
   this.attack_time = attrs['attack_time'] || 0.05;

@@ -32,7 +32,7 @@ en:
     show_speed:
       info: "The speed is %{bpm} beats per minute"
     clear_all_drums:
-      success: "I've cleared all of the drum patterns."
+      success: "I've cleared all of the%{group} patterns."
     mute_unmute:
       mute: muted
       unmute: unmuted
