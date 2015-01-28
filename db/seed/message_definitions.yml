@@ -123,9 +123,10 @@ mute_unmute:
 
 mute_unmute_all:
   name: 'mute_or_unmute_all_drums'
-  regex: '(unmute|mute) all drums'
+  regex: '(unmute|mute) all( drums| synths|)'
   variables:
     - 'mode'
+    - 'group'
   action: 'mute_unmute_all'
   weight: 1
 

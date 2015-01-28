@@ -42,7 +42,7 @@ en:
     mute_unmute_all:
       mute: muted
       unmute: unmuted
-      success: "I've %{action} all of the drum patterns."
+      success: "I've %{action} all of the%{group} patterns."
     set_synth:
       synth_set: "I've set the current synth to %{synth}, any notes you add will be added to %{synth}"
       synth_not_found: "Sorry, I couldn't find a synth named %{synth}"
