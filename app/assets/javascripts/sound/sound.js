@@ -131,6 +131,7 @@ var Sound = {
               synth.pitches = attrs['pitches']
               synth.muted = attrs['muted'];
               synth.set_step_info();
+              synth.display();
             });
           }
         });

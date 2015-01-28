@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <th><%= t('.drums') %></th>
-    <% steps = @patterns.all.collect{|x|x.step_count}.max %>
+    <% steps = @patterns.all.collect { |x| x.step_count }.max %>
     <% steps.times do |step| %>
       <th class='step_header'>
         <%= step + 1 %>
@@ -28,12 +28,11 @@
       <% end %>
     </tr>
   <% end %>
+  </tbody>
 
   <% Synth.all.each do |synth| %>
     <%= render partial: 'patterns/overview_melody', locals: {synth: synth} %>
   <% end %>
-
-  </tbody>
 
 
 </table>

@@ -7,6 +7,7 @@ function Synth(attrs) {
   this.pitches = attrs['pitches'] || [0,0,0,0,0,0,0,0];
   this.pitch = 69;
   this.portamento = 0.001;
+  this.name = attrs['name'];
 
   // setup envelope params
   this.attack_time = attrs['attack_time'] || 0.05;
@@ -97,6 +98,63 @@ function Synth(attrs) {
       this.release_time
     );
   };
+
+  this.pitch_at_step = function(step) {
+    pitch_slice = this.pitches.slice(0,(step + 1))
+    pitch_slice = pitch_slice.filter(function(n){ return n != null });
+    return pitch_slice.pop();
+  };
+
+  this.display = function() {
+    this.set_diagram('tbody#synth_'+this.name+'_overview');
+    this.set_diagram('tbody#synth_'+this.name+'_table');
+  };
+
+  this.set_diagram = function(tbody_id) {
+    this.clear_diagram(tbody_id);
+    diagram = $(tbody_id);
+    synth = this;
+    $.each(diagram.children(), function(index,row) {
+      synth.set_row(row);
+    });
+  };
+
+  this.clear_diagram = function(tbody_id) {
+    cells = $(''+tbody_id+' tr td');
+    cells.removeClass('note_start');
+    cells.removeClass('note_continues');
+    cells.removeClass('note_end');
+    cells.removeClass('inactive');
+  };
+
+  this.set_row = function(row) {
+    row = $(row);
+    synth = this;
+    active = false;
+    $.each(row.children('td'), function(index,cell) {
+      cell = $(cell);
+      pitch = cell.data('pitch');
+      step = cell.data('step');
+
+      if(synth.pitch_at_step(step) == pitch) {
+        if(synth.note_on_at_step(step)) {
+          cell.addClass('note_start');
+          active = true;
+        } else if (synth.note_off_at_step(step)) {
+          cell.addClass('note_end');
+          active = false;
+        } else if (active) {
+          cell.addClass('note_continues');
+        } else {
+          cell.addClass('inactive');
+        };
+      } else {
+        cell.addClass('inactive');
+      };
+
+    });
+  };
+
 
 }
 

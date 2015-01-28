@@ -1,17 +1,24 @@
-<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>&nbsp;</td>
+</tr>
+<tbody id="synth_<%= synth.name %>_overview">
 <% (synth.min_note..synth.max_note).to_a.reverse.each_with_index do |note, index| %>
-  <tr class='overview_melody' title="<%= display_midi_note(note) %>">
+  <tr class='overview_melody'
+      title="<%= display_midi_note(note) %>">
     <% if index == 0 %>
       <th rowspan="<%= synth.range %>" valign=top>
         <%= synth.name %>
       </th>
-  <% end %>
+    <% end %>
     <% synth.step_count.times do |step| %>
-      <% kls = step_class(synth,step,note) %>
+      <% kls = step_class(synth, step, note) %>
       <td class="<%= kls %>"
-          id="<%= synth.name %>_note_<%= note %>_step_<%= step %>">
+          data-pitch="<%= note %>"
+          data-step="<%= step %>"
+      >
         <div></div>
       </td>
     <% end %>
   </tr>
 <% end %>
+</tbody>
