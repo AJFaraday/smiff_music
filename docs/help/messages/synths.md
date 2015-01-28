@@ -50,4 +50,55 @@ Possible message forms for removing a specific note, all synth sounds in a given
 > do not play C 4 to G 4 on sine
 </pre>
 
+## mute
+
+<pre>
+mute sine
+mute sine, square and triangle
+</pre>
+
+This will mute a synth, keeping it from sounding in playback.
+
+You can still modify melodies while they are muted.
+
+## mute all synths
+
+<pre>
+mute all synths
+</pre>
+
+This will mute all synth patterns, maintaining the pattern but preventing them from making a sound.
+
+Not to be confused with:
+
+<pre>
+mute all
+</pre>
+
+Which will mute all patterns, not just the synths.
+
+## unmute
+
+<pre>
+unmute sine
+unmute sine, square and triangle
+</pre>
+
+This will unmute a synth, meaning it will now be heard.
+
+### unmute all synths
+
+<pre>
+unmute all drums
+</pre>
+
+This will unmute all muted synth patterns, all patterns will now sound.
+
+Not to be confused with:
+
+<pre>
+unmute all
+</pre>
+
+Which will unmute all patterns, not just the synths.
 
