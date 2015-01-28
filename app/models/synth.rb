@@ -232,5 +232,10 @@ class Synth < ActiveRecord::Base
     end
   end
 
+  def clear
+    clear_range(0, self.step_count)
+    save!
+  end
+
 
 end
