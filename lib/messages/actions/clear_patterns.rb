@@ -1,18 +1,19 @@
 module Messages::Actions::ClearPatterns
 
-  attr_accessor :pattern_names
-  attr_accessor :patterns
 
   def clear_patterns(args)
-    self.pattern_names = munge_list(args['pattern_names'])
-    self.patterns = Pattern.where(name: self.pattern_names)
-    return pattern_not_found(self.pattern_names) unless self.patterns.any?
-    self.patterns.each{|x| x.update_attribute(:bits, 0)}
+    names = munge_list(args['pattern_names'])
+    patterns = Pattern.where(name: names)
+    synths = Synth.where(name: names)
+    things = patterns + synths
+    return pattern_not_found(names) unless things.any?
+    patterns.each{|x| x.update_attribute(:bits, 0)}
+    synths.each{|x| x.clear }
     return {
       response: 'success',
       display: I18n.t(
-        "actions.clear.success.#{self.patterns.count > 1 ? 'other' : 'one'}",
-        names: self.pattern_names.to_sentence(
+        "actions.clear.success.#{things.count > 1 ? 'other' : 'one'}",
+        names: names.to_sentence(
           last_word_connector: ' and '
         )
       )

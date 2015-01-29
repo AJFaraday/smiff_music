@@ -142,7 +142,7 @@ function Synth(attrs) {
         if(synth.note_on_at_step(step)) {
           cell.addClass('note_start');
           if (!synth.note_off_at_step(step)) {active = true};
-        } else if (synth.note_off_at_step(step)) {
+        } else if (synth.note_off_at_step(step) && active) {
           cell.addClass('note_end');
           active = false;
         } else if (active) {

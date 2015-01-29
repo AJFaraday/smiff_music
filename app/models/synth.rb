@@ -216,7 +216,7 @@ class Synth < ActiveRecord::Base
     end
   end
 
-  def clear_range(start_step, end_step)
+  def clear_range(start_step, end_step, skip_note_off = false)
     # add note_on and pitch if next step is active.
     if self.active_at_step(end_step + 1)
       note_on.pattern_indexes += [end_step + 1]
@@ -225,7 +225,7 @@ class Synth < ActiveRecord::Base
     # clear contents
     (start_step..end_step).each{|index| pitches[index] = nil}
     note_on.pattern_indexes -= (start_step..end_step).to_a
-    note_off.pattern_indexes -= (start_step..end_step).to_a
+    note_off.pattern_indexes -= (start_step..end_step).to_a unless skip_note_off
     # add note_off if previous step is active.
     if self.active_at_step(start_step - 1) and start_step != 0
       note_off.pattern_indexes += [start_step - 1]
@@ -233,7 +233,7 @@ class Synth < ActiveRecord::Base
   end
 
   def clear
-    clear_range(0, self.step_count)
+    clear_range(0, (self.step_count - 1), true)
     save!
   end
 
