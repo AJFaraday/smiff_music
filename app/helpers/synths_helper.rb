@@ -28,7 +28,6 @@ module SynthsHelper
   end
 
   def translate_note_to_midi(note_name)
-    puts note_name
     match_data = note_name.match /([a-zA-Z][#]?)(?: )?([0-9])/
     note = match_data[1].upcase
     octave = match_data[2].to_i

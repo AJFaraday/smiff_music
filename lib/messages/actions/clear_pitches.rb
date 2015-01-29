@@ -21,7 +21,6 @@ module Messages::Actions::ClearPitches
       start_note = parse_note_names(args['start_note'])[0]
       end_note = parse_note_names(args['end_note'])[0]
       edges = [translate_note_to_midi(start_note),translate_note_to_midi(end_note)].sort
-      puts edges.inspect
       (edges[0]..edges[1]).to_a.each{|pitch| synth.clear_pitch(pitch)}
       {
         response: 'successs',
