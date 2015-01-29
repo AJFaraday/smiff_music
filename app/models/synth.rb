@@ -48,7 +48,7 @@ class Synth < ActiveRecord::Base
     definitions = YAML.load_file(File.join(Rails.root, 'db', 'seed', 'synths.yml'))
     definitions.each do |name, params|
       if Synth.where(name: name).any?
-      Synth.where(name: name).first.update_attributes(params)
+        Synth.where(name: name).first.update_attributes(params)
       else
         Synth.create!(params)
       end
@@ -63,7 +63,7 @@ class Synth < ActiveRecord::Base
     unless self.patterns.note_on
       self.patterns.create!(
         muted: false,
-        active:  true,
+        active: true,
         purpose: 'note_on',
         name: "#{self.name}_note_on",
         step_count: step_count,
@@ -91,7 +91,6 @@ class Synth < ActiveRecord::Base
   end
 
 
-
   def pitch_at_step(step)
     pitches[0..step].compact.last
   end
@@ -111,8 +110,6 @@ class Synth < ActiveRecord::Base
     end
     active
   end
-
-
 
 
   def Synth.sound_init_params
@@ -169,13 +166,13 @@ class Synth < ActiveRecord::Base
     gcd = envelope_times.reduce(:gcd)
 
     @chart_data << 0
-    (((attack_time * 1000) / gcd) - 1).to_i.times{@chart_data << nil}
+    (((attack_time * 1000) / gcd) - 1).to_i.times { @chart_data << nil }
     @chart_data << 1
-    (((decay_time * 1000) / gcd) - 1).to_i.times{@chart_data << nil}
+    (((decay_time * 1000) / gcd) - 1).to_i.times { @chart_data << nil }
     @chart_data << sustain_level
-    (((attack_time * 1000) + (decay_time * 1000)) / gcd).to_i.times{@chart_data << nil}
+    (((attack_time * 1000) + (decay_time * 1000)) / gcd).to_i.times { @chart_data << nil }
     @chart_data << sustain_level
-    (((release_time * 1000) / gcd) - 1).to_i.times{@chart_data << nil}
+    (((release_time * 1000) / gcd) - 1).to_i.times { @chart_data << nil }
     @chart_data << 0
     @chart_data
   end
@@ -185,13 +182,13 @@ class Synth < ActiveRecord::Base
     {
       labels: Array.new(chart_data.length, ''),
       datasets: [
-      {
-        fillColor: "rgba(220,220,220,0.2)",
-        strokeColor: "rgba(220,220,220,1)",
-        data: chart_data
-      }
-    ]
-  }
+        {
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "rgba(220,220,220,1)",
+          data: chart_data
+        }
+      ]
+    }
   end
 
   def add_note(pitch, start_step, length)
@@ -206,11 +203,20 @@ class Synth < ActiveRecord::Base
   end
 
   def remove_note(start_step)
-    if pitches[start_step]
-      end_step = note_off.pattern_indexes.select{|x|x >= start_step}.sort[0]
-      clear_range(start_step, end_step)
-      save!
-      true
+    if active_at_step(start_step)
+      pitch = pitches[start_step]
+      until pitch or start_step < 0
+        start_step -= 1
+        pitch = pitches[start_step]
+      end
+      if pitch
+        end_step = note_off.pattern_indexes.select { |x| x >= start_step }.sort[0]
+        clear_range(start_step, end_step)
+        save!
+        true
+      else
+        nil
+      end
     else
       nil
     end
@@ -223,7 +229,7 @@ class Synth < ActiveRecord::Base
       pitches[end_step + 1] = pitch_at_step(end_step + 1)
     end
     # clear contents
-    (start_step..end_step).each{|index| pitches[index] = nil}
+    (start_step..end_step).each { |index| pitches[index] = nil }
     note_on.pattern_indexes -= (start_step..end_step).to_a
     note_off.pattern_indexes -= (start_step..end_step).to_a unless skip_note_off
     # add note_off if previous step is active.

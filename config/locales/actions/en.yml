@@ -21,6 +21,9 @@ en:
         one: "Now no longer playing %{name} on step %{steps}"
         other: "Now no longer playing %{name} on steps %{steps}"
       out_of_range: "Sorry, I can't clear these steps because some are out of range (1 to %{max})"
+      no_steps_to_remove:
+        one: "Sorry, I couldn't find a note on step %{steps}"
+        other: "Sorry, I couldn't find any notes on steps %{steps}"
     clear:
       success:
         one: "I've cleared the %{names} pattern"
