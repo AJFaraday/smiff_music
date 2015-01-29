@@ -62,6 +62,24 @@ module Messages::Actions::ClearSteps
     end
   end
 
+  def clear_block_from_synth_skipping(args)
+    edges = [args['start_step'].to_i, args['end_step'].to_i]
+    steps = (edges.min..edges.max).to_a
+    steps.reject! { |x| (x - edges.min + 1) % (args['block_size'].to_i + 1) != 1 }
+    steps.each{|step| self.synth.clear_range(step - 1,step - 1)}
+    self.synth.save!
+    return {
+      response: 'success',
+      display: I18n.t(
+        "actions.clear_steps.success.other",
+        name: self.synth.name,
+        steps: steps.to_sentence(
+          last_word_connector: ' and '
+        )
+      )
+    }
+  end
+
   def clear_block_from_synth(args)
     steps = (args['start_step']..args['end_step']).to_a
     self.synth.clear_range(
