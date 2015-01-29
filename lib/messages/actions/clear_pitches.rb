@@ -20,7 +20,8 @@ module Messages::Actions::ClearPitches
     elsif args.keys.include?('start_note') and args.keys.include?('end_note')
       start_note = parse_note_names(args['start_note'])[0]
       end_note = parse_note_names(args['end_note'])[0]
-      edges = [start_note,end_note].sort
+      edges = [translate_note_to_midi(start_note),translate_note_to_midi(end_note)].sort
+      puts edges.inspect
       (edges[0]..edges[1]).to_a.each{|pitch| synth.clear_pitch(pitch)}
       {
         response: 'successs',
