@@ -156,8 +156,8 @@ set_note_length:
 
 add_note:
   name: add_note
-  regex: 'play (([a-g][#]?(?: )?[0-9]+[,]+)*)(?:from|on) step ([0-9]+)'
-  action: add_note
+  regex: 'play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+)'
+  action: add_notes
   variables:
     - 'note_names'
     - 'extra'

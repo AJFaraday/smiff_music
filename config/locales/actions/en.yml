@@ -51,7 +51,8 @@ en:
       length_not_set: "Sorry, I wasn't able to set the note length to %{note_length}. %{error}"
       too_long: "That's too long, the maximum is 16 steps."
       too_short: "That's too short, it must be at least 1 step."
-    add_note:
+    add_notes:
       note_added: "I'll now play %{note} from step %{step} on the %{synth} synth"
       note_too_high: "Sorry, that's too high for %{synth} to play, it only goes up to %{max}."
       note_too_low: "Sorry, that's too low for %{synth} to play, it only goes down to %{min}"
+      melody_added: "I've added this melody to %{synth} from step %{start_step}."

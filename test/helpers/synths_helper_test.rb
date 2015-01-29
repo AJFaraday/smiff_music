@@ -34,30 +34,30 @@ class SynthsHelperTest < ActionView::TestCase
 
   def test_translate_note_to_midi
     assert_equal(
-      SynthsHelper.translate_note_to_midi('C', '4'),
+      SynthsHelper.translate_note_to_midi('C 4'),
       60
     )
     assert_equal(
-      SynthsHelper.translate_note_to_midi('A', '4'),
+      SynthsHelper.translate_note_to_midi('A 4'),
       69
     )
     assert_equal(
-      SynthsHelper.translate_note_to_midi('C', '5'),
+      SynthsHelper.translate_note_to_midi('C 5'),
       72
     )
   end
 
   def test_translate_note_to_midi_sharps
     assert_equal(
-      SynthsHelper.translate_note_to_midi('C#', '4'),
+      SynthsHelper.translate_note_to_midi('C# 4'),
       61
     )
     assert_equal(
-      SynthsHelper.translate_note_to_midi('A#', '4'),
+      SynthsHelper.translate_note_to_midi('A#4'),
       70
     )
     assert_equal(
-      SynthsHelper.translate_note_to_midi('C#', '5'),
+      SynthsHelper.translate_note_to_midi('C#5'),
       73
     )
   end

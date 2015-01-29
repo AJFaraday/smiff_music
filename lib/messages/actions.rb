@@ -7,7 +7,7 @@ class Messages::Actions
     set_speed show_speed speed_up speed_down list_drums
     clear_all mute_unmute mute_unmute_all show_all_drums
     set_synth set_note_length
-    add_note
+    add_notes
   }
 
   extend Messages::Actions::Show
@@ -25,7 +25,7 @@ class Messages::Actions
   extend Messages::Actions::ShowAllDrums
   extend Messages::Actions::SetSynth
   extend Messages::Actions::SetNoteLength
-  extend Messages::Actions::AddNote
+  extend Messages::Actions::AddNotes
 
 
   def self.run(action, arguments)

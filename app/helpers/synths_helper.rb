@@ -27,9 +27,13 @@ module SynthsHelper
     "#{note_name} #{octave}"
   end
 
-  def translate_note_to_midi(note_name, octave)
-    return "#{note_name} is not a note" unless NOTE_NAMES.include?(note_name)
-    octave_semitone = NOTE_NAMES.index(note_name)
+  def translate_note_to_midi(note_name)
+    puts note_name
+    match_data = note_name.match /([a-zA-Z][#]?)(?: )?([0-9])/
+    note = match_data[1].upcase
+    octave = match_data[2].to_i
+    return "#{note} is not a note" unless NOTE_NAMES.include?(note)
+    octave_semitone = NOTE_NAMES.index(note)
     ((octave.to_i + 1) * 12) + octave_semitone
   end
 
