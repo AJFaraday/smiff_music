@@ -65,3 +65,26 @@
     - title: Synths
       anchor: synths
       file: '/docs/help/messages/synths.md'
+      children:
+        - title: play
+          anchor: play_synth
+          file: '/docs/help/messages/synths/play.md'
+        - title: do not play
+          anchor: do_not_play_synth
+          file: '/docs/help/messages/synths/do_not_play.md'
+        - title: mute
+          anchor: mute_synth
+          file: '/docs/help/messages/synths/mute.md'
+        - title: mute all synths
+          anchor: mute_all_synths
+          file: '/docs/help/messages/synths/mute_all.md'
+        - title: unmute
+          anchor: unmute_synth
+          file: '/docs/help/messages/synths/unmute.md'
+        - title: unmute all synths
+          anchor: unmute_all_synths
+          file: '/docs/help/messages/synths/unmute_all.md'
+        - title: clear
+          anchor: clear_synth
+          file: '/docs/help/messages/synths/clear.md'
+
