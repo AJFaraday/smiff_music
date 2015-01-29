@@ -41,7 +41,7 @@ class MessageTest < ActiveSupport::TestCase
 
   def test_run_valid_message
     message = Message.parse('show kick, snare and hihat')
-    PatternStore.hash['patterns']['kick']['steps'] = 0
+    PatternStore.hash = nil
     result = message.run
     assert_instance_of Hash, result
     assert_equal %i{response display version}, result.keys
@@ -138,12 +138,6 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('show all drums')
     assert_equal 'show_all_drums', message.action
     assert_equal Hash.new, message.parameters
-  end
-
-  def test_show_one_drum
-    message = Message.parse('show kick')
-    assert_equal 'show_patterns', message.action
-    assert_equal ({'pattern_names' => ["kick", "", nil, "", nil]}), message.parameters
   end
 
   def test_show_one_drum
@@ -372,7 +366,7 @@ class MessageTest < ActiveSupport::TestCase
 
   def test_clear_all
     message = Message.parse('clear all drums')
-    assert_equal 'clear_all_drums', message.action
+    assert_equal 'clear_all', message.action
     assert_equal(Hash.new, message.parameters)
   end
 

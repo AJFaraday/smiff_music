@@ -103,7 +103,7 @@ module Messages::Actions::ClearSteps
   # this sets the array, steps, indexes to true
   def remove_steps(steps)
     modified_steps = steps.collect { |x| x.to_i - 1 }
-    out_of_range_steps = modified_steps.select { |x| x.to_i < 1 or x.to_i > self.pattern.step_count }
+    out_of_range_steps = steps.select { |x| x.to_i < 1 or x.to_i > self.pattern.step_count }
     return out_of_range_warning if out_of_range_steps.any?
     self.pattern.pattern_indexes -= modified_steps
     self.pattern.save!

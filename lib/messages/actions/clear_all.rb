@@ -28,7 +28,7 @@ module Messages::Actions::ClearAll
       response: 'success',
       display: I18n.t(
         'actions.clear_all_drums.success',
-        group: args['group'][0]
+        group: args['group'][0].singularize
       )
     }
   end

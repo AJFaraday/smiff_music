@@ -11,9 +11,9 @@ show_multiple:
   weight: 0
 clear_all_drums:
   id: 2
-  name: clear_all_drums
-  regex: clear all drums
-  action: clear_all_drums
+  name: clear_all
+  regex: 'clear all( drums| synths|)'
+  action: clear_all
   variables: 
   created_at: 2015-01-02 15:06:14.000000000 Z
   updated_at: 2015-01-14 19:09:48.000000000 Z

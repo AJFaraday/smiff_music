@@ -148,7 +148,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     Pattern.last.update_attribute :pattern_indexes, [0,1,2]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
-    result = Messages::Actions.clear_all_drums({})
+    result = Messages::Actions.clear_all({'group' => [' drums']})
     assert_equal 'success', result[:response]
     assert_equal("I've cleared all of the drum patterns.", result[:display])
 
@@ -552,10 +552,10 @@ tom3----------------------------------
 
   def test_mute_all
 
-    result = Messages::Actions.mute_unmute_all({'mode' => ['mute']})
+    result = Messages::Actions.mute_unmute_all({'mode' => 'mute', 'group' => ' drums'})
     assert_equal('success', result[:response])
     assert_equal(
-      I18n.t('actions.mute_unmute_all.success', action: 'muted'),
+      I18n.t('actions.mute_unmute_all.success', action: 'muted', group: ' drum'),
       result[:display]
     )
     Pattern.all.each{|p| assert p.muted}
@@ -564,11 +564,11 @@ tom3----------------------------------
 
   def test_unmute_all
     Pattern.first.update_attribute(:muted, true)
-    result = Messages::Actions.mute_unmute_all({'mode' => ['unmute']})
+    result = Messages::Actions.mute_unmute_all({'mode' => 'unmute', 'group' => ' drums'})
 
     assert_equal('success', result[:response])
     assert_equal(
-      I18n.t('actions.mute_unmute_all.success', action: 'unmuted'),
+      I18n.t('actions.mute_unmute_all.success', action: 'unmuted', group: ' drum'),
       result[:display]
     )
     Pattern.all.each{|p| refute p.muted}
