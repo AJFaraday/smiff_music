@@ -202,6 +202,14 @@ class Synth < ActiveRecord::Base
     end
   end
 
+  def clear_pitch(midi_note)
+    self.pitches.each_with_index do |pitch, index|
+      if pitch == midi_note
+        remove_note(index)
+      end
+    end
+  end
+
   def remove_note(start_step)
     if active_at_step(start_step)
       pitch = pitches[start_step]
@@ -221,6 +229,8 @@ class Synth < ActiveRecord::Base
       nil
     end
   end
+
+
 
   def clear_range(start_step, end_step, skip_note_off = false)
     # add note_on and pitch if next step is active.

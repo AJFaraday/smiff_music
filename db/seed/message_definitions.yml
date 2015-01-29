@@ -164,3 +164,22 @@ add_note:
     - 'start_step'
   weight: 2
 
+clear_pitches:
+  name: clear_pitches
+  regex: 'do not play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)on ([a-z]+)'
+  action: clear_pitches
+  variables:
+    - 'note_names'
+    - 'extra'
+    - 'synth'
+  weight: 1
+
+clear_pitch_range:
+  name: clear_pitch_range
+  regex: 'do not play ([a-gA-G][#]?(?: )?[0-9]+) to ([a-gA-G][#]?(?: )?[0-9]+) on ([a-z]+)'
+  action: clear_pitches
+  variables:
+    - 'start_note'
+    - 'end_note'
+    - 'synth'
+  weight: 1

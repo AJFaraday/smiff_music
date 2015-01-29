@@ -7,7 +7,7 @@ class Messages::Actions
     set_speed show_speed speed_up speed_down list_drums
     clear_all mute_unmute mute_unmute_all show_all_drums
     set_synth set_note_length
-    add_notes
+    add_notes clear_pitches
   }
 
   extend Messages::Actions::Show
@@ -26,6 +26,7 @@ class Messages::Actions
   extend Messages::Actions::SetSynth
   extend Messages::Actions::SetNoteLength
   extend Messages::Actions::AddNotes
+  extend Messages::Actions::ClearPitches
 
 
   def self.run(action, arguments)
@@ -81,7 +82,11 @@ class Messages::Actions
     end
   end
 
-
+  def self.parse_note_names(note_names)
+    # get rid of spaces inside note names
+    tidied_note_names = note_names.split(/([a-z])[ ]+([0-9])/).join
+    tidied_note_names.split(/[, ]+/)
+  end
 
 
 end

@@ -6,7 +6,7 @@ module Messages::Actions::AddNotes
     synth = Synth.find_by_name(args['synth'])
     notes = parse_note_names(args['note_names'])
     notes = notes.collect{|note| translate_note_to_midi(note)}
-    puts notes.inspect
+
     if notes.count == 1
       return add_single_note(notes, synth, args)
     else
@@ -50,12 +50,6 @@ module Messages::Actions::AddNotes
         synth: synth.name
       )
     }
-  end
-
-  def parse_note_names(note_names)
-    # get rid of spaces inside note names
-    tidied_note_names = note_names.split(/([a-z])[ ]+([0-9])/).join
-    tidied_note_names.split(/[, ]+/)
   end
 
   def errors_for_synth_and_note(synth, note)
