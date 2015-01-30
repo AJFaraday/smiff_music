@@ -1,4 +1,10 @@
-$step_size: 15px ;
+$step_size: 15px;
+$marker-background: #dddddd;
+$inactive-background: #ffffff;
+$note-start: #555555;
+$note-middle: #999999;
+$muted-note-start: #aaaaaa;
+$muted-note-middle: #cccccc;
 
 table.synth_pattern{
   border: none;
@@ -32,43 +38,43 @@ table.synth_pattern tbody tr td.step div {
 }
 
 table.synth_pattern tbody tr td.step.inactive div {
-  background-color: #ffffff ;
+  background-color: $inactive-background;
 }
 
 table.synth_pattern tbody tr td.step.inactive.marker div {
-  background-color: #dddddd;
+  background-color: $marker-background;
 }
 
 table.synth_pattern tbody tr  td.step.note_start div {
-  background: linear-gradient(to right, #555555, #999999, #999999) ;
+  background: linear-gradient(to right, $note-start, $note-middle, $note-middle) ;
 }
 
 table.synth_pattern tbody tr  td.step.note_continues div {
-  background-color: #999999 ;
+  background-color: $note-middle;
 }
 
 table.synth_pattern tbody tr  td.step.note_end div {
-  background: linear-gradient(to right, #999999, #ffffff) ;
+  background: linear-gradient(to right, $note-middle, $inactive-background) ;
 }
 
 table.synth_pattern tbody tr  td.step.marker.note_end div {
-  background: linear-gradient(to right, #999999, #dddddd) ;
+  background: linear-gradient(to right, $note-middle, $marker-background) ;
 }
 
 
 table.synth_pattern tbody tr.muted  td.step.note_start div {
-  background: linear-gradient(to right, #aaaaaa, #cccccc, #cccccc) ;
+  background: linear-gradient(to right, $muted-note-start, $muted-note-middle, $muted-note-middle) ;
 }
 
 table.synth_pattern tbody tr.muted  td.step.note_continues div {
-  background-color: #cccccc ;
+  background-color: $muted-note-middle;
 }
 
 table.synth_pattern tbody tr.muted  td.step.note_end div {
-  background: linear-gradient(to right, #cccccc, #ffffff) ;
+  background: linear-gradient(to right, $muted-note-middle, $inactive-background) ;
 }
 
 table.synth_pattern tbody tr.muted  td.step.marker.note_end div {
-  background: linear-gradient(to right, #cccccc, #dddddd) ;
+  background: linear-gradient(to right, $muted-note-middle, $marker-background) ;
 }
 
