@@ -1,9 +1,11 @@
+$link-colour: white;
+
+
+
 #main_section {
   width:79%;
   padding: 20px;
   float: left;
-  //position:fixed !important;
-  //position:absolute;
   overflow-y:auto;
 }
 
@@ -19,7 +21,7 @@
 }
 
 .help_list a, .help_list a:hover {
-  color:white;
+  color: $link-colour;
 }
 
 .help_list ul{
@@ -28,7 +30,7 @@
 }
 
 .help_list ul a, .help_list ul a:hover {
-  color:white;
+  color: $link-colour;
 }
 
 .help_list ul ul{
@@ -42,7 +44,7 @@
 }
 
 .help_list ul ul a, .help_list ul ul a:hover {
-  color:white;
+  color: $link-colour;
 }
 
 .help_section{
