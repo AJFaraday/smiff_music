@@ -1,4 +1,11 @@
-// console section
+$console-background: black;
+$console-text: #00ff00;
+$console-error: #ff0000;
+$console-failure: #ffff00;
+$input-background: #333333;
+$button-background: #777777;
+$button-light: white;
+$button-shadow: #555555;
 
 #console {
   min-height: 390px;
@@ -9,27 +16,27 @@
   width: 100%;
   height: 300px;  
   border-radius: 5px;
-  background-color: black ;
-  color: #00ff00 ;
+  background-color: $console-background;
+  color: $console-text;
   padding: 10px;
   overflow-y: auto;
   font-family: monaco, Consolas, 'Lucida Console', monospace;
 }
 
 #console #readout .input {
-  color: #00ff00;
+  color: $console-text;
 }
 
 #console #readout .success {
-  color: #00ff00;
+  color: $console-text;
 }
 
 #console #readout .error {
-  color: #ff0000;
+  color: $console-error;
 }
 
 #console #readout .failure {
-  color: #ffff00;
+  color: $console-failure;
 }
 
 #console #input {
@@ -37,7 +44,7 @@
   width: 89%;
   height: 45px;
   border-radius: 5px;
-  background-color: #333333;
+  background-color: $input-background;
   padding: 5px;
   margin-top:10px;
 }
@@ -51,21 +58,21 @@
   width: 10%; 
   height: 45px;
   margin-top: 10px;
-  background-color: #777777;
+  background-color: $button-background;
   border-radius: 5px ;
   text-align: center;
   font-size: 30px;
   padding:2px;
-  border-top: solid white 2px;
-  border-left: solid white 2px;
-  border-bottom: solid #555555 2px;
-  border-right: solid #555555 2px;
+  border-top: solid $button-light 2px;
+  border-left: solid $button-light 2px;
+  border-bottom: solid $button-shadow 2px;
+  border-right: solid $button-shadow 2px;
 }
 
 #console #submit:active, #console #submit.active {
-  border-top: solid #555555 2px;
-  border-left: solid #555555 2px;
-  border-bottom: solid white 2px;
-  border-right: solid white 2px;
+  border-top: solid $button-shadow 2px;
+  border-left: solid $button-shadow 2px;
+  border-bottom: solid $button-light 2px;
+  border-right: solid $button-light 2px;
 }
 
