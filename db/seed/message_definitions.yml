@@ -154,14 +154,25 @@ set_note_length:
     - 'note_steps'
   weight: 2
 
-add_note:
-  name: add_note
+add_notes:
+  name: add_notes
   regex: 'play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+)'
   action: add_notes
   variables:
     - 'note_names'
     - 'extra'
     - 'start_step'
+  weight: 1
+
+add_notes_skipping:
+  name: add_notes_skipping
+  regex: 'play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+) skipping ([0-9]+)'
+  action: add_notes
+  variables:
+    - 'note_names'
+    - 'extra'
+    - 'start_step'
+    - 'block_size'
   weight: 2
 
 clear_pitches:
@@ -172,7 +183,7 @@ clear_pitches:
     - 'note_names'
     - 'extra'
     - 'synth'
-  weight: 1
+  weight: 2
 
 clear_pitch_range:
   name: clear_pitch_range
@@ -182,4 +193,4 @@ clear_pitch_range:
     - 'start_note'
     - 'end_note'
     - 'synth'
-  weight: 1
+  weight: 2

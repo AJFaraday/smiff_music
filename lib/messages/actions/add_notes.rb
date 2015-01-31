@@ -17,6 +17,7 @@ module Messages::Actions::AddNotes
   def add_multiple_notes(notes, synth, args)
     step = (args['start_step'].to_i - 1)
     note_steps = args['note_steps'].to_i
+    block_size = args['block_size'].to_i
     notes.each do |note|
       errors = errors_for_synth_and_note(synth, note)
       return errors if errors
@@ -24,6 +25,7 @@ module Messages::Actions::AddNotes
     notes.each do |note|
       synth.add_note(note, step, note_steps)
       step += note_steps
+      step += block_size
     end
     {
       response: 'success',
