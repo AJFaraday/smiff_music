@@ -23,6 +23,7 @@ module Messages::Actions::AddNotes
       return errors if errors
     end
     notes.each do |note|
+      return melody_too_long(synth) if step >= synth.step_count
       synth.add_note(note, step, note_steps)
       step += note_steps
       step += block_size
@@ -37,11 +38,23 @@ module Messages::Actions::AddNotes
     }
   end
 
+  def melody_too_long(synth)
+    {
+      response: 'failure',
+      display: I18n.t(
+        'actions.add_notes.melody_too_long',
+        limit: synth.step_count,
+        synth: synth.name
+      )
+    }
+  end
+
   def add_single_note(notes, synth, args)
     note = notes[0]
     errors = errors_for_synth_and_note(synth, note)
     return errors if errors
 
+    return melody_too_long(synth) if (args['start_step'].to_i - 1) >= synth.step_count
     synth.add_note(note, (args['start_step'].to_i - 1), args['note_steps'].to_i)
     {
       response: 'success',

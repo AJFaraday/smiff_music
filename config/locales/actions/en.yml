@@ -59,6 +59,7 @@ en:
       note_too_high: "Sorry, that's too high for %{synth} to play, it only goes up to %{max}."
       note_too_low: "Sorry, that's too low for %{synth} to play, it only goes down to %{min}"
       melody_added: "I've added this melody to %{synth} from step %{start_step}."
+      melody_too_long: "Sorry, that would spill off the end of the pattern. %{synth} only has %{limit} steps."
     clear_pitches:
       list_cleared: "I will no longer play %{synth} on step %{note_names}"
       range_cleared: "I'll no longer play %{synth} from %{start} to %{end}"
