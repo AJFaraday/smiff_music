@@ -771,11 +771,162 @@ tom3----------------------------------
         'note_steps' => '2'
       }
     )
+    assert_equal(
+      {
+        response: 'success',
+        display: "I'll now play C 4 from step 1 on the sine synth"
+      },
+      result
+    )
     synth.reload
     assert_equal [0], synth.note_on.pattern_indexes
     assert_equal [1], synth.note_off.pattern_indexes
     assert_equal 60, synth.pitches[0]
   end
+
+  def test_add_notes_single_too_high
+    result = Messages::Actions.add_notes(
+      {
+        'note_names' => 'c9',
+        'start_step' => '1',
+        'synth' => 'sine',
+        'note_steps' => '2'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, that's too high for sine to play, it only goes up to C 5."
+      },
+      result
+    )
+  end
+
+  def test_add_notes_single_too_low
+    result = Messages::Actions.add_notes(
+      {
+        'note_names' => 'c1',
+        'start_step' => '1',
+        'synth' => 'sine',
+        'note_steps' => '2'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, that's too low for sine to play, it only goes down to A# 3"
+      },
+      result
+    )
+  end
+
+
+  def test_add_notes_list
+    synth = Synth.find_by_name('sine')
+    result = Messages::Actions.add_notes(
+      {
+        'note_names' => 'c4, d4, e4',
+        'start_step' => '1',
+        'synth' => 'sine',
+        'note_steps' => '2'
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: "I've added this melody to sine from step 1."
+      },
+      result
+    )
+    synth.reload
+    assert_equal [0,2,4], synth.note_on.pattern_indexes
+    assert_equal [1,3,5], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[0]
+    assert_equal 62, synth.pitches[2]
+    assert_equal 64, synth.pitches[4]
+  end
+
+  def test_add_notes_list_skipping
+    synth = Synth.find_by_name('sine')
+    result = Messages::Actions.add_notes(
+      {
+        'note_names' => 'c4, d4, e4',
+        'start_step' => '1',
+        'synth' => 'sine',
+        'note_steps' => '2',
+        'block_size' => '1'
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: "I've added this melody to sine from step 1."
+      },
+      result
+    )
+    synth.reload
+    assert_equal [0,3,6], synth.note_on.pattern_indexes
+    assert_equal [1,4,7], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[0]
+    assert_equal 62, synth.pitches[3]
+    assert_equal 64, synth.pitches[6]
+  end
+
+
+  def test_add_notes_list_too_high
+    result = Messages::Actions.add_notes(
+      {
+        'note_names' => 'c4, c9, d4',
+        'start_step' => '1',
+        'synth' => 'sine',
+        'note_steps' => '2'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, that's too high for sine to play, it only goes up to C 5."
+      },
+      result
+    )
+  end
+
+  def test_add_notes_list_too_low
+    result = Messages::Actions.add_notes(
+      {
+        'note_names' => 'c4, c1, d4',
+        'start_step' => '1',
+        'synth' => 'sine',
+        'note_steps' => '2'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, that's too low for sine to play, it only goes down to A# 3"
+      },
+      result
+    )
+  end
+
+  def test_add_notes_list_too_long
+    result = Messages::Actions.add_notes(
+      {
+        'note_names' => 'c4, d4',
+        'start_step' => '1',
+        'synth' => 'sine',
+        'note_steps' => '32'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, that would spill off the end of the pattern. sine only has 32 steps."
+      },
+      result
+    )
+  end
+
 
 
 end
