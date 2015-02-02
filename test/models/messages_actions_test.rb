@@ -56,7 +56,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     result = Messages::Actions.add_steps(
       {
         'pattern_name' => 'kick',
-        'steps' => ['92','93','94']
+        'steps' => ['92', '93', '94']
       }
     )
     assert_equal 'failure', result[:response]
@@ -83,7 +83,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     result = Messages::Actions.add_steps(
       {
         'pattern_name' => 'kick',
-        'steps' => ['3','9','14']
+        'steps' => ['3', '9', '14']
       }
     )
     assert_equal 'success', result[:response]
@@ -91,7 +91,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     pattern = Pattern.find_by_name('kick')
     assert_equal(
-      [2,8,13],
+      [2, 8, 13],
       pattern.pattern_indexes
     )
 
@@ -113,7 +113,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     pattern = Pattern.find_by_name('kick')
     assert_equal(
-      [2,3,4,5,6],
+      [2, 3, 4, 5, 6],
       pattern.pattern_indexes
     )
 
@@ -136,7 +136,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     pattern = Pattern.find_by_name('kick')
     assert_equal(
-      [2,4,6],
+      [2, 4, 6],
       pattern.pattern_indexes
     )
 
@@ -144,12 +144,12 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_clear_all
-    Synth.first.note_on.update_attribute :pattern_indexes, [0,1,2]
-    Synth.last.note_on.update_attribute :pattern_indexes, [0,1,2]
+    Synth.first.note_on.update_attribute :pattern_indexes, [0, 1, 2]
+    Synth.last.note_on.update_attribute :pattern_indexes, [0, 1, 2]
     Synth.first.note_off.update_attribute :pattern_indexes, [4]
     Synth.last.note_off.update_attribute :pattern_indexes, [4]
-    Pattern.first.update_attribute :pattern_indexes, [0,1,2]
-    Pattern.last.update_attribute :pattern_indexes, [0,1,2]
+    Pattern.first.update_attribute :pattern_indexes, [0, 1, 2]
+    Pattern.last.update_attribute :pattern_indexes, [0, 1, 2]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_all({'group' => ['']})
@@ -162,8 +162,8 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_clear_all_drums
-    Pattern.first.update_attribute :pattern_indexes, [0,1,2]
-    Pattern.last.update_attribute :pattern_indexes, [0,1,2]
+    Pattern.first.update_attribute :pattern_indexes, [0, 1, 2]
+    Pattern.last.update_attribute :pattern_indexes, [0, 1, 2]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_all({'group' => [' drums']})
@@ -174,22 +174,22 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_clear_all_synths
-    Synth.first.note_on.update_attribute :pattern_indexes, [0,1,2]
-    Synth.last.note_on.update_attribute :pattern_indexes, [0,1,2]
+    Synth.first.note_on.update_attribute :pattern_indexes, [0, 1, 2]
+    Synth.last.note_on.update_attribute :pattern_indexes, [0, 1, 2]
     Synth.first.note_off.update_attribute :pattern_indexes, [4]
     Synth.last.note_off.update_attribute :pattern_indexes, [4]
-    
+
     result = Messages::Actions.clear_all({'group' => [' synths']})
     assert_equal 'success', result[:response]
     assert_equal("I've cleared all of the synth patterns.", result[:display])
-    
+
     assert_equal 0, PatternStore.hash['synths']['sine'][:note_on_steps]
     assert_equal 0, PatternStore.hash['synths']['square'][:note_on_steps]
   end
 
 
   def test_clear_patterns_one_drum
-    Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
+    Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_patterns({'pattern_names' => ['kick']})
@@ -200,7 +200,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_clear_patterns_list
-    Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
+    Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_patterns({'pattern_names' => ['kick', 'snare', 'hihat']})
@@ -211,13 +211,13 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_clear_patterns_no_pattern
-    result = Messages::Actions.clear_patterns({'pattern_names' => ['dog','cat','fridge']})
+    result = Messages::Actions.clear_patterns({'pattern_names' => ['dog', 'cat', 'fridge']})
     assert_equal 'failure', result[:response]
     assert_equal "Sorry, I can't find any patterns named dog, cat and fridge", result[:display]
   end
 
   def test_clear_steps_one
-    Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
+    Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_steps(
@@ -233,7 +233,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     )
     pattern = Pattern.find_by_name('kick')
     assert_equal(
-      [1,2,3,4,5,6],
+      [1, 2, 3, 4, 5, 6],
       pattern.pattern_indexes
     )
 
@@ -245,7 +245,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     result = Messages::Actions.clear_steps(
       {
         'pattern_name' => 'kick',
-        'steps' => ['92','93','94']
+        'steps' => ['92', '93', '94']
       }
     )
     assert_equal 'failure', result[:response]
@@ -267,13 +267,13 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_clear_steps_list
-    Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
+    Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_steps(
       {
         'pattern_name' => 'kick',
-        'steps' => ['3','5','6']
+        'steps' => ['3', '5', '6']
       }
     )
     assert_equal 'success', result[:response]
@@ -281,7 +281,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     pattern = Pattern.find_by_name('kick')
     assert_equal(
-      [0,1,3,6],
+      [0, 1, 3, 6],
       pattern.pattern_indexes
     )
 
@@ -290,7 +290,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
 
   def test_clear_steps_block
-    Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
+    Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_steps(
@@ -305,7 +305,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     pattern = Pattern.find_by_name('kick')
     assert_equal(
-      [0,4,5,6],
+      [0, 4, 5, 6],
       pattern.pattern_indexes
     )
 
@@ -313,7 +313,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_clear_steps_block_with_skipping
-    Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
+    Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
     result = Messages::Actions.clear_steps(
@@ -329,7 +329,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     pattern = Pattern.find_by_name('kick')
     assert_equal(
-      [0,1,3,5],
+      [0, 1, 3, 5],
       pattern.pattern_indexes
     )
 
@@ -399,7 +399,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
   def test_mute_list
     Pattern.first.update_attribute(:muted, false)
-    patterns = Pattern.where(:name => ['kick','snare','hihat'])
+    patterns = Pattern.where(:name => ['kick', 'snare', 'hihat'])
     refute PatternStore.hash['patterns']['kick'][:muted]
     synth = Synth.where(:name => 'sine').first
     synth.update_attribute(:muted, false)
@@ -407,7 +407,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     result = Messages::Actions.mute_unmute(
       {
-        'pattern_names' => ['kick', 'snare', 'hihat','sine'],
+        'pattern_names' => ['kick', 'snare', 'hihat', 'sine'],
         'mode' => 'mute'
       }
     )
@@ -474,8 +474,8 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
 
   def test_unmute_list
-    patterns = Pattern.where(:name => ['kick','snare','hihat'])
-    patterns.each{|pattern| pattern.update_attribute :muted, true}
+    patterns = Pattern.where(:name => ['kick', 'snare', 'hihat'])
+    patterns.each { |pattern| pattern.update_attribute :muted, true }
     assert PatternStore.hash['patterns']['kick'][:muted]
     synth = Synth.where(:name => 'sine').first
     synth.update_attribute(:muted, true)
@@ -483,7 +483,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
     result = Messages::Actions.mute_unmute(
       {
-        'pattern_names' => ['kick', 'snare', 'hihat','sine'],
+        'pattern_names' => ['kick', 'snare', 'hihat', 'sine'],
         'mode' => 'unmute'
       }
     )
@@ -608,7 +608,7 @@ kick---------------------------------
   def test_show_list
     def test_show_one_pattern
       result = Messages::Actions.show_patterns(
-        {'pattern_names' => ['kick','snare','hihat']}
+        {'pattern_names' => ['kick', 'snare', 'hihat']}
       )
       display = "------1---5---9---13--17--21--25--29--
 kick---------------------------------- 
@@ -638,7 +638,7 @@ tom3----------------------------------
     assert_equal(
       display,
       result[:display]
-    )    
+    )
   end
 
   def test_mute_all
@@ -649,7 +649,7 @@ tom3----------------------------------
       I18n.t('actions.mute_unmute_all.success', action: 'muted', group: ' drum'),
       result[:display]
     )
-    Pattern.all.each{|p| assert p.muted}
+    Pattern.all.each { |p| assert p.muted }
     assert PatternStore.hash['patterns']['kick'][:muted]
   end
 
@@ -662,7 +662,7 @@ tom3----------------------------------
       I18n.t('actions.mute_unmute_all.success', action: 'unmuted', group: ' drum'),
       result[:display]
     )
-    Pattern.all.each{|p| refute p.muted}
+    Pattern.all.each { |p| refute p.muted }
     refute PatternStore.hash['patterns']['kick'][:muted]
   end
 
@@ -673,6 +673,110 @@ tom3----------------------------------
     Pattern.update_all(:muted => true)
     result = Messages::Actions.show_all_drums({})
     assert result[:display].include?('(muted)')
-  end 
+  end
+
+  def test_set_note_length
+    result = Messages::Actions.set_note_length(
+      {
+        'note_steps' => ['4']
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: "I've set the note length to 4 steps. Any notes you add now will be 4 steps long.",
+        session: {note_steps: 4}
+      },
+      result
+    )
+  end
+
+  def test_set_note_length_too_short
+    result = Messages::Actions.set_note_length(
+      {
+        'note_steps' => ['0']
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, I wasn't able to set the note length to 0. That's too short, it must be at least 1 step."
+      },
+      result
+    )
+  end
+
+  def test_set_note_length_too_long
+    result = Messages::Actions.set_note_length(
+      {
+        'note_steps' => ['99']
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, I wasn't able to set the note length to 99. That's too long, the maximum is 16 steps."
+      },
+      result
+    )
+  end
+
+  def test_set_synth
+    result = Messages::Actions.set_synth(
+      {'synth' => ['sine']}
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: "I've set the current synth to sine, any notes you add will be added to sine",
+        session: {synth: 'sine'}
+      },
+      result
+    )
+  end
+
+  def test_set_synth_not_found
+    result = Messages::Actions.set_synth(
+      {'synth' => ['super']}
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, I couldn't find a synth named super"
+      },
+      result
+    )
+  end
+
+  def test_add_notes_not_found
+    result = Messages::Actions.add_notes(
+      {'synth' => ['super']}
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: "Sorry, I can't find any patterns named super"
+      },
+      result
+    )
+  end
+
+  def test_add_notes_single
+    synth = Synth.find_by_name('sine')
+    result = Messages::Actions.add_notes(
+      {
+        'note_names' => 'c4',
+        'start_step' => '1',
+        'synth' => 'sine',
+        'note_steps' => '2'
+      }
+    )
+    synth.reload
+    assert_equal [0], synth.note_on.pattern_indexes
+    assert_equal [1], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[0]
+  end
+
 
 end
+

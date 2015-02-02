@@ -50,7 +50,7 @@ en:
       synth_set: "I've set the current synth to %{synth}, any notes you add will be added to %{synth}"
       synth_not_found: "Sorry, I couldn't find a synth named %{synth}"
     set_note_length:
-      note_length_set: "I've set the note length to %{note_length} steps. Any notes you add now will bee %{note_length} steps long."
+      note_length_set: "I've set the note length to %{note_length} steps. Any notes you add now will be %{note_length} steps long."
       length_not_set: "Sorry, I wasn't able to set the note length to %{note_length}. %{error}"
       too_long: "That's too long, the maximum is 16 steps."
       too_short: "That's too short, it must be at least 1 step."

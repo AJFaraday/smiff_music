@@ -4,6 +4,7 @@ module Messages::Actions::AddNotes
 
   def add_notes(args)
     synth = Synth.find_by_name(args['synth'])
+    return self.pattern_not_found(args['synth']) unless synth
     notes = parse_note_names(args['note_names'])
     notes = notes.collect{|note| translate_note_to_midi(note)}
 
