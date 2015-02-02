@@ -87,3 +87,22 @@ sine_note_off:
   muted: false
   purpose: 'note_off'
   synth_id: 1
+
+square_note_on:
+  id: 10
+  name: square_note_on
+  step_size: 16
+  step_count: 32
+  active: true
+  muted: false
+  purpose: 'note_on'
+  synth_id: 2
+square_note_off:
+  id: 11
+  name: square_note_off
+  step_size: 16
+  step_count: 32
+  active: true
+  muted: false
+  purpose: 'note_off'
+  synth_id: 2

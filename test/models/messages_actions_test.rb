@@ -143,6 +143,24 @@ class MessagesActionsTest < ActiveSupport::TestCase
     assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
+  def test_clear_all
+    Synth.first.note_on.update_attribute :pattern_indexes, [0,1,2]
+    Synth.last.note_on.update_attribute :pattern_indexes, [0,1,2]
+    Synth.first.note_off.update_attribute :pattern_indexes, [4]
+    Synth.last.note_off.update_attribute :pattern_indexes, [4]
+    Pattern.first.update_attribute :pattern_indexes, [0,1,2]
+    Pattern.last.update_attribute :pattern_indexes, [0,1,2]
+    kick_bits = PatternStore.hash['patterns']['kick'][:steps]
+
+    result = Messages::Actions.clear_all({'group' => ['']})
+    assert_equal 'success', result[:response]
+    assert_equal("I've cleared all of the patterns.", result[:display])
+
+    assert_equal 0, PatternStore.hash['synths']['sine'][:note_on_steps]
+    assert_equal 0, PatternStore.hash['synths']['square'][:note_on_steps]
+    assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
+  end
+
   def test_clear_all_drums
     Pattern.first.update_attribute :pattern_indexes, [0,1,2]
     Pattern.last.update_attribute :pattern_indexes, [0,1,2]
@@ -155,7 +173,22 @@ class MessagesActionsTest < ActiveSupport::TestCase
     assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
-  def test_clear_patterns_one
+  def test_clear_all_synths
+    Synth.first.note_on.update_attribute :pattern_indexes, [0,1,2]
+    Synth.last.note_on.update_attribute :pattern_indexes, [0,1,2]
+    Synth.first.note_off.update_attribute :pattern_indexes, [4]
+    Synth.last.note_off.update_attribute :pattern_indexes, [4]
+    
+    result = Messages::Actions.clear_all({'group' => [' synths']})
+    assert_equal 'success', result[:response]
+    assert_equal("I've cleared all of the synth patterns.", result[:display])
+    
+    assert_equal 0, PatternStore.hash['synths']['sine'][:note_on_steps]
+    assert_equal 0, PatternStore.hash['synths']['square'][:note_on_steps]
+  end
+
+
+  def test_clear_patterns_one_drum
     Pattern.first.update_attribute :pattern_indexes, [0,1,2,3,4,5,6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
@@ -320,7 +353,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
   end
 
-  def test_mute_one
+  def test_mute_one_pattern
     pattern = Pattern.where(:name => 'kick').first
     pattern.update_attribute(:muted, false)
     refute PatternStore.hash['patterns']['kick'][:muted]
@@ -342,20 +375,45 @@ class MessagesActionsTest < ActiveSupport::TestCase
     assert PatternStore.hash['patterns']['kick'][:muted]
   end
 
-  def test_mute_list
-    Pattern.first.update_attribute(:muted, false)
-    patterns = Pattern.where(:name => ['kick','snare','hihat'])
-    refute PatternStore.hash['patterns']['kick'][:muted]
+  def test_mute_one_synth
+    synth = Synth.where(:name => 'sine').first
+    synth.update_attribute(:muted, false)
+    refute PatternStore.hash['synths']['sine'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
-        'pattern_names' => ['kick', 'snare', 'hihat'],
+        'pattern_names' => ['sine'],
         'mode' => 'mute'
       }
     )
     assert_equal 'success', result[:response]
     assert_equal(
-      "I've muted the kick, snare and hihat patterns",
+      "I've muted the sine pattern",
+      result[:display]
+    )
+
+    synth.reload
+    assert_equal true, synth.muted
+    assert PatternStore.hash['synths']['sine'][:muted]
+  end
+
+  def test_mute_list
+    Pattern.first.update_attribute(:muted, false)
+    patterns = Pattern.where(:name => ['kick','snare','hihat'])
+    refute PatternStore.hash['patterns']['kick'][:muted]
+    synth = Synth.where(:name => 'sine').first
+    synth.update_attribute(:muted, false)
+    refute PatternStore.hash['synths']['sine'][:muted]
+
+    result = Messages::Actions.mute_unmute(
+      {
+        'pattern_names' => ['kick', 'snare', 'hihat','sine'],
+        'mode' => 'mute'
+      }
+    )
+    assert_equal 'success', result[:response]
+    assert_equal(
+      "I've muted the kick, snare, hihat and sine patterns",
       result[:display]
     )
 
@@ -364,9 +422,13 @@ class MessagesActionsTest < ActiveSupport::TestCase
     end
 
     assert PatternStore.hash['patterns']['kick'][:muted]
+    synth.reload
+    assert_equal true, synth.muted
+    assert PatternStore.hash['synths']['sine'][:muted]
+
   end
 
-  def test_unmute_one
+  def test_unmute_one_drum
     pattern = Pattern.where(:name => 'kick').first
     pattern.update_attribute(:muted, true)
     assert PatternStore.hash['patterns']['kick'][:muted]
@@ -388,20 +450,46 @@ class MessagesActionsTest < ActiveSupport::TestCase
     refute PatternStore.hash['patterns']['kick'][:muted]
   end
 
-  def test_unmute_list
-    patterns = Pattern.where(:name => ['kick','snare','hihat'])
-    patterns.each{|pattern| pattern.update_attribute :muted, true}
-    assert PatternStore.hash['patterns']['kick'][:muted]
+  def test_unmute_one_synth
+    synth = Synth.where(:name => 'sine').first
+    synth.update_attribute(:muted, true)
+    assert PatternStore.hash['synths']['sine'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
-        'pattern_names' => ['kick', 'snare', 'hihat'],
+        'pattern_names' => ['sine'],
         'mode' => 'unmute'
       }
     )
     assert_equal 'success', result[:response]
     assert_equal(
-      "I've unmuted the kick, snare and hihat patterns",
+      "I've unmuted the sine pattern",
+      result[:display]
+    )
+
+    synth.reload
+    refute synth.muted
+    refute PatternStore.hash['synths']['sine'][:muted]
+  end
+
+
+  def test_unmute_list
+    patterns = Pattern.where(:name => ['kick','snare','hihat'])
+    patterns.each{|pattern| pattern.update_attribute :muted, true}
+    assert PatternStore.hash['patterns']['kick'][:muted]
+    synth = Synth.where(:name => 'sine').first
+    synth.update_attribute(:muted, true)
+    assert PatternStore.hash['synths']['sine'][:muted]
+
+    result = Messages::Actions.mute_unmute(
+      {
+        'pattern_names' => ['kick', 'snare', 'hihat','sine'],
+        'mode' => 'unmute'
+      }
+    )
+    assert_equal 'success', result[:response]
+    assert_equal(
+      "I've unmuted the kick, snare, hihat and sine patterns",
       result[:display]
     )
 
@@ -410,6 +498,9 @@ class MessagesActionsTest < ActiveSupport::TestCase
       assert_equal false, pattern.muted
     end
     refute PatternStore.hash['patterns']['kick'][:muted]
+    synth.reload
+    refute synth.muted
+    refute PatternStore.hash['synths']['sine'][:muted]
   end
 
   def test_set_speed

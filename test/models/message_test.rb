@@ -434,6 +434,103 @@ class MessageTest < ActiveSupport::TestCase
     )
   end
 
+  def test_set_synth
+    message = Message.parse('set synth to sine')
+    assert_equal 'set_synth', message.action
+    assert_equal(
+      {'synth' => ['sine']},
+      message.parameters
+    )
+  end
+
+  def test_set_note_length
+    message = Message.parse('set note length to 4')
+    assert_equal 'set_note_length', message.action
+    assert_equal(
+      {'note_steps' => ['4']},
+      message.parameters
+    )
+  end
+
+  def test_add_notes_one_note
+    message = Message.parse('play c4 on step 1')
+    assert_equal 'add_notes', message.action
+    assert_equal(
+      {
+        'note_names' => 'c4 ',
+        'extra' => 'c4 ',
+        'start_step' => '1'
+      },
+      message.parameters
+    )
+  end
+
+  def test_add_notes_melody
+    message = Message.parse('play c4, d4, f#4 on step 1')
+    assert_equal 'add_notes', message.action
+    assert_equal(
+      {
+        'note_names' => 'c4, d4, f#4 ',
+        'extra' => 'f#4 ',
+        'start_step' => '1'
+      },
+      message.parameters
+    )
+  end
+
+  def test_add_notes_melody_with_gaps
+    message = Message.parse('play c4, d4, f#4 on step 1 skipping 2')
+    assert_equal 'add_notes', message.action
+    assert_equal(
+      {
+        'note_names' => 'c4, d4, f#4 ',
+        'extra' => 'f#4 ',
+        'start_step' => '1',
+        'block_size' => '2'
+      },
+      message.parameters
+    )
+  end
+
+  def test_clear_pitches_one_pitch
+    message = Message.parse('do not play c#4 on sine')
+    assert_equal 'clear_pitches', message.action
+    assert_equal(
+      {
+        'note_names' => 'c#4 ',
+        'extra' => 'c#4 ',
+        'synth' => 'sine'
+      },
+      message.parameters
+    )
+  end
+
+  def test_clear_pitches_list
+    message = Message.parse('do not play c#4, d4, d#4 on sine')
+    assert_equal 'clear_pitches', message.action
+    assert_equal(
+      {
+        'note_names' => 'c#4, d4, d#4 ',
+        'extra' => 'd#4 ',
+        'synth' => 'sine'
+      },
+      message.parameters
+    )
+  end
+
+  def test_clear_pitches_range
+    message = Message.parse('do not play c#4 to g4 on sine')
+    assert_equal 'clear_pitches', message.action
+    assert_equal(
+      {
+        'start_note' => 'c#4',
+        'end_note' => 'g4',
+        'synth' => 'sine'
+      },
+      message.parameters
+    )
+  end
+
 
 
 end
