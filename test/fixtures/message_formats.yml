@@ -6,17 +6,18 @@ show_multiple:
   action: show_patterns
   variables:
   - pattern_names
-  created_at: 2015-01-02 15:06:14.000000000 Z
-  updated_at: 2015-01-14 19:09:48.000000000 Z
+  created_at: 2015-01-31 17:36:21.000000000 Z
+  updated_at: 2015-01-31 17:36:21.000000000 Z
   weight: 0
-clear_all_drums:
+clear_all:
   id: 2
   name: clear_all
-  regex: 'clear all( drums| synths|)'
+  regex: clear all( drums| synths|)
   action: clear_all
-  variables: 
-  created_at: 2015-01-02 15:06:14.000000000 Z
-  updated_at: 2015-01-14 19:09:48.000000000 Z
+  variables:
+  - group
+  created_at: 2015-01-31 17:36:21.000000000 Z
+  updated_at: 2015-01-31 17:36:21.000000000 Z
   weight: 2
 clear_multiple_patterns:
   id: 3
@@ -25,8 +26,8 @@ clear_multiple_patterns:
   action: clear_patterns
   variables:
   - pattern_names
-  created_at: 2015-01-02 15:06:14.000000000 Z
-  updated_at: 2015-01-14 19:09:48.000000000 Z
+  created_at: 2015-01-31 17:36:21.000000000 Z
+  updated_at: 2015-01-31 17:36:21.000000000 Z
   weight: 0
 play_multiple:
   id: 4
@@ -36,8 +37,8 @@ play_multiple:
   variables:
   - pattern_name
   - steps
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:48.000000000 Z
+  created_at: 2015-01-31 17:36:21.000000000 Z
+  updated_at: 2015-01-31 17:36:21.000000000 Z
   weight: 0
 play_range:
   id: 5
@@ -48,8 +49,8 @@ play_range:
   - pattern_name
   - start_step
   - end_step
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:48.000000000 Z
+  created_at: 2015-01-31 17:36:21.000000000 Z
+  updated_at: 2015-01-31 17:36:21.000000000 Z
   weight: 1
 play_range_skipping:
   id: 6
@@ -61,8 +62,8 @@ play_range_skipping:
   - start_step
   - end_step
   - block_size
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:48.000000000 Z
+  created_at: 2015-01-31 17:36:21.000000000 Z
+  updated_at: 2015-01-31 17:36:21.000000000 Z
   weight: 2
 clear_multiple:
   id: 7
@@ -72,8 +73,8 @@ clear_multiple:
   variables:
   - pattern_name
   - steps
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:21.000000000 Z
+  updated_at: 2015-01-31 17:36:21.000000000 Z
   weight: 1
 clear_range:
   id: 8
@@ -84,8 +85,8 @@ clear_range:
   - pattern_name
   - start_step
   - end_step
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:21.000000000 Z
+  updated_at: 2015-01-31 17:36:21.000000000 Z
   weight: 2
 clear_range_skipping:
   id: 9
@@ -97,8 +98,8 @@ clear_range_skipping:
   - start_step
   - end_step
   - block_size
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
   weight: 3
 show_speed:
   id: 10
@@ -106,8 +107,8 @@ show_speed:
   regex: show (?:speed|bpm)
   action: show_speed
   variables: 
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
   weight: 2
 speed_up:
   id: 11
@@ -115,8 +116,8 @@ speed_up:
   regex: speed up
   action: speed_up
   variables: 
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
   weight: 0
 speed_down:
   id: 12
@@ -124,8 +125,8 @@ speed_down:
   regex: "(?:slow|speed) down"
   action: speed_down
   variables: 
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
   weight: 0
 set_speed:
   id: 13
@@ -134,8 +135,8 @@ set_speed:
   action: set_speed
   variables:
   - bpm
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
   weight: 0
 list_drums:
   id: 14
@@ -143,8 +144,8 @@ list_drums:
   regex: list drums
   action: list_drums
   variables: 
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
   weight: 2
 mute_or_unmute_drums:
   id: 15
@@ -154,18 +155,19 @@ mute_or_unmute_drums:
   variables:
   - mode
   - pattern_names
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:49.000000000 Z
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
   weight: 0
 mute_or_unmute_all_drums:
   id: 16
   name: mute_or_unmute_all_drums
-  regex: "(unmute|mute) all drums"
+  regex: "(unmute|mute) all( drums| synths|)"
   action: mute_unmute_all
   variables:
   - mode
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:50.000000000 Z
+  - group
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
   weight: 1
 show all drums:
   id: 17
@@ -173,6 +175,77 @@ show all drums:
   regex: 'show all(?: drums)?'
   action: show_all_drums
   variables: 
-  created_at: 2015-01-02 15:06:15.000000000 Z
-  updated_at: 2015-01-14 19:09:50.000000000 Z
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
+  weight: 2
+set_synth:
+  id: 18
+  name: set_synth
+  regex: set synth to (\w+)
+  action: set_synth
+  variables:
+  - synth
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
+  weight: 2
+set_note_length:
+  id: 19
+  name: set_note_length
+  regex: 'set note length to ([0-9]+)(?: steps)?'
+  action: set_note_length
+  variables:
+  - note_steps
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
+  weight: 2
+add_notes:
+  id: 20
+  name: add_notes
+  regex: 'play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+)'
+  action: add_notes
+  variables:
+  - note_names
+  - extra
+  - start_step
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
+  weight: 1
+add_notes_skipping:
+  id: 21
+  name: add_notes_skipping
+  regex: 'play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+) skipping
+    ([0-9]+)'
+  action: add_notes
+  variables:
+  - note_names
+  - extra
+  - start_step
+  - block_size
+  created_at: 2015-01-31 17:36:22.000000000 Z
+  updated_at: 2015-01-31 17:36:22.000000000 Z
+  weight: 2
+clear_pitches:
+  id: 22
+  name: clear_pitches
+  regex: 'do not play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)on ([a-z]+)'
+  action: clear_pitches
+  variables:
+  - note_names
+  - extra
+  - synth
+  created_at: 2015-01-31 17:36:23.000000000 Z
+  updated_at: 2015-01-31 17:36:23.000000000 Z
+  weight: 2
+clear_pitch_range:
+  id: 23
+  name: clear_pitch_range
+  regex: 'do not play ([a-gA-G][#]?(?: )?[0-9]+) to ([a-gA-G][#]?(?: )?[0-9]+) on
+    ([a-z]+)'
+  action: clear_pitches
+  variables:
+  - start_note
+  - end_note
+  - synth
+  created_at: 2015-01-31 17:36:23.000000000 Z
+  updated_at: 2015-01-31 17:36:23.000000000 Z
   weight: 2

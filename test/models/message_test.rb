@@ -41,6 +41,7 @@ class MessageTest < ActiveSupport::TestCase
 
   def test_run_valid_message
     message = Message.parse('show kick, snare and hihat')
+    Pattern.find_by_name('kick').update_attributes(:bits => 0)
     PatternStore.hash = nil
     result = message.run
     assert_instance_of Hash, result
@@ -95,13 +96,13 @@ class MessageTest < ActiveSupport::TestCase
   def test_set_speed_with_bpm
     message = Message.parse('set speed to 140 bpm')
     assert_equal 'set_speed', message.action
-    assert_equal ({'bpm' => ['140']}), message.parameters
+    assert_equal({'bpm' => ['140']}, message.parameters)
   end
 
   def test_set_speed_without_bpm
     message = Message.parse('set speed to 140')
     assert_equal 'set_speed', message.action
-    assert_equal ({'bpm' => ['140']}), message.parameters
+    assert_equal({'bpm' => ['140']}, message.parameters)
   end
 
   def test_speed_up
@@ -144,7 +145,7 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('show kick, snare and hihat')
     assert_equal 'show_patterns', message.action
     assert_equal(
-      ({'pattern_names' => ["kick", ", snare", ", snare", " and hihat", "hihat"]}),
+      {'pattern_names' => ["kick", ", snare", ", snare", " and hihat", "hihat"]},
       message.parameters
     )
   end
@@ -153,10 +154,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('play kick on step 1')
     assert_equal 'add_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'steps' => ["1", "", nil, "", nil]
-      }),
+      },
       message.parameters
     )
   end
@@ -165,10 +166,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('play kick on steps 1, 2, 3')
     assert_equal 'add_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'steps' => ["1", ", 2, 3", ", 3", "", nil]
-      }),
+      },
       message.parameters
     )
   end
@@ -177,10 +178,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('play kick on steps 1, 2 and 3')
     assert_equal 'add_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'steps' => ["1", ", 2", ", 2", " and 3", "3"]
-      }),
+      },
       message.parameters
     )
   end
@@ -189,11 +190,11 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('play kick on steps 1 to 5')
     assert_equal 'add_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'start_step' => '1',
         'end_step' => '5'
-      }),
+      },
       message.parameters
     )
   end
@@ -202,12 +203,12 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('play kick on steps 1 to 5 skipping 2')
     assert_equal 'add_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'start_step' => '1',
         'end_step' => '5',
         'block_size' => '2'
-      }),
+      },
       message.parameters
     )
   end
@@ -216,10 +217,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('do not play kick on step 1')
     assert_equal 'clear_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'steps' => ["1", "", nil, "", nil]
-      }),
+      },
       message.parameters
     )
   end
@@ -228,10 +229,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('do not play kick on steps 1, 2, 3')
     assert_equal 'clear_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'steps' => ["1", ", 2, 3", ", 3", "", nil]
-      }),
+      },
       message.parameters
     )
   end
@@ -240,10 +241,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('do not play kick on steps 1, 2 and 3')
     assert_equal 'clear_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'steps' => ["1", ", 2", ", 2", " and 3", "3"]
-      }),
+      },
       message.parameters
     )
   end
@@ -252,11 +253,11 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('do not play kick on steps 1 to 5')
     assert_equal 'clear_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'start_step' => '1',
         'end_step' => '5'
-      }),
+      },
       message.parameters
     )
   end
@@ -265,12 +266,12 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('do not play kick on steps 1 to 5 skipping 2')
     assert_equal 'clear_steps', message.action
     assert_equal(
-      ({
+      {
         'pattern_name' => "kick",
         'start_step' => '1',
         'end_step' => '5',
         'block_size' => '2'
-      }),
+      },
       message.parameters
     )
   end
@@ -280,10 +281,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('mute kick')
     assert_equal 'mute_unmute', message.action
     assert_equal(
-      ({
+      {
         "pattern_names" => ["kick", "", nil, "", nil],
         'mode' => 'mute'
-      }),
+      },
       message.parameters
     )
   end
@@ -292,10 +293,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('mute kick, snare and hihat')
     assert_equal 'mute_unmute', message.action
     assert_equal(
-      ({
+      {
         "pattern_names" => ["kick", ", snare", ", snare", " and hihat", "hihat"],
         'mode' => 'mute'
-      }),
+      },
       message.parameters
     )
   end
@@ -304,10 +305,10 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('unmute kick')
     assert_equal 'mute_unmute', message.action
     assert_equal(
-      ({
+      {
         "pattern_names" => ["kick", "", nil, "", nil],
         'mode' => 'unmute'
-      }),
+      },
       message.parameters
     )
   end
@@ -316,28 +317,64 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('unmute kick, snare and hihat')
     assert_equal 'mute_unmute', message.action
     assert_equal(
-      ({
+      {
         "pattern_names" => ["kick", ", snare", ", snare", " and hihat", "hihat"],
         'mode' => 'unmute'
-      }),
+      },
       message.parameters
     )
   end
 
   def test_mute_all
+    message = Message.parse('mute all')
+    assert_equal 'mute_unmute_all', message.action
+    assert_equal(
+      {'mode' => 'mute', 'group' => ''},
+      message.parameters
+    )
+  end
+
+  def test_mute_all_drums
     message = Message.parse('mute all drums')
     assert_equal 'mute_unmute_all', message.action
     assert_equal(
-      ({'mode' => ['mute']}),
+      {'mode' => 'mute', 'group' => ' drums'},
+      message.parameters
+    )
+  end
+
+  def test_mute_all_synths
+    message = Message.parse('mute all synths')
+    assert_equal 'mute_unmute_all', message.action
+    assert_equal(
+      {'mode' => 'mute', 'group' => ' synths'},
       message.parameters
     )
   end
 
   def test_unmute_all
+    message = Message.parse('unmute all')
+    assert_equal 'mute_unmute_all', message.action
+    assert_equal(
+      {'mode' => 'unmute', 'group' => ''},
+      message.parameters
+    )
+  end
+
+  def test_unmute_all_drums
     message = Message.parse('unmute all drums')
     assert_equal 'mute_unmute_all', message.action
     assert_equal(
-      ({'mode' => ['unmute']}),
+      {'mode' => 'unmute', 'group' => ' drums'},
+      message.parameters
+    )
+  end
+
+  def test_unmute_all_synths
+    message = Message.parse('unmute all synths')
+    assert_equal 'mute_unmute_all', message.action
+    assert_equal(
+      {'mode' => 'unmute', 'group' => ' synths'},
       message.parameters
     )
   end
@@ -346,9 +383,9 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('clear kick')
     assert_equal 'clear_patterns', message.action
     assert_equal(
-      ({
+      {
         "pattern_names" => ["kick", "", nil, "", nil]
-      }),
+      },
       message.parameters
     )
   end
@@ -357,17 +394,46 @@ class MessageTest < ActiveSupport::TestCase
     message = Message.parse('clear kick, snare and hihat')
     assert_equal 'clear_patterns', message.action
     assert_equal(
-      ({
+      {
         "pattern_names" => ["kick", ", snare", ", snare", " and hihat", "hihat"]
-      }),
+      },
+      message.parameters
+    )
+  end
+
+  def test_clear_all_drums
+    message = Message.parse('clear all drums')
+    assert_equal 'clear_all', message.action
+    assert_equal(
+      {
+        'group' => [' drums']
+      },
+      message.parameters
+    )
+  end
+
+  def test_clear_all_synths
+    message = Message.parse('clear all synths')
+    assert_equal 'clear_all', message.action
+    assert_equal(
+      {
+        'group' => [' synths']
+      },
       message.parameters
     )
   end
 
   def test_clear_all
-    message = Message.parse('clear all drums')
+    message = Message.parse('clear all')
     assert_equal 'clear_all', message.action
-    assert_equal(Hash.new, message.parameters)
+    assert_equal(
+      {
+        'group' => ['']
+      },
+      message.parameters
+    )
   end
+
+
 
 end
