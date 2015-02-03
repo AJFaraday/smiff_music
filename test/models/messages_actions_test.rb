@@ -216,7 +216,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     assert_equal "Sorry, I can't find any patterns named dog, cat and fridge", result[:display]
   end
 
-  def test_clear_steps_one
+  def test_drum_clear_steps_one
     Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
@@ -241,7 +241,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
 
-  def test_clear_steps_out_of_range
+  def test_drum_clear_steps_out_of_range
     result = Messages::Actions.clear_steps(
       {
         'pattern_name' => 'kick',
@@ -255,7 +255,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     )
   end
 
-  def test_clear_steps_no_pattern
+  def test_drum_clear_steps_no_pattern
     result = Messages::Actions.clear_steps(
       {
         'pattern_name' => 'tabla',
@@ -266,7 +266,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     assert_equal "Sorry, I can't find any patterns named tabla", result[:display]
   end
 
-  def test_clear_steps_list
+  def test_drum_clear_steps_list
     Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
@@ -289,7 +289,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
 
-  def test_clear_steps_block
+  def test_drum_clear_steps_block
     Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
@@ -312,7 +312,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
 
-  def test_clear_steps_block_with_skipping
+  def test_drum_clear_steps_block_with_skipping
     Pattern.first.update_attribute :pattern_indexes, [0, 1, 2, 3, 4, 5, 6]
     kick_bits = PatternStore.hash['patterns']['kick'][:steps]
 
@@ -593,11 +593,29 @@ class MessagesActionsTest < ActiveSupport::TestCase
   end
 
   def test_show_one_pattern
+    Pattern.find_by_name('kick').update_attributes(bits: 0)
+    PatternStore.hash = nil
     result = Messages::Actions.show_patterns(
       {'pattern_names' => ['kick']}
     )
     display = "-----1---5---9---13--17--21--25--29--
-kick---------------------------------
+kick---------------------------------"
+    assert_includes(
+      result[:display],
+      display
+    )
+  end
+
+  def test_show_list
+    Pattern.find_by_name('kick').update_attributes(bits: 0)
+    PatternStore.hash = nil
+    result = Messages::Actions.show_patterns(
+      {'pattern_names' => ['kick', 'snare', 'hihat']}
+    )
+    display = "------1---5---9---13--17--21--25--29--
+kick---------------------------------- 
+snare--------------------------------- 
+hihat--------------------------------- 
 "
     assert_equal(
       display,
@@ -605,25 +623,9 @@ kick---------------------------------
     )
   end
 
-  def test_show_list
-    def test_show_one_pattern
-      result = Messages::Actions.show_patterns(
-        {'pattern_names' => ['kick', 'snare', 'hihat']}
-      )
-      display = "------1---5---9---13--17--21--25--29--
-kick---------------------------------- 
-snare--------------------------------- 
-hihat--------------------------------- 
-"
-      assert_equal(
-        display,
-        result[:display]
-      )
-    end
-
-  end
-
   def test_show_all
+    Pattern.find_by_name('kick').update_attributes(bits: 0)
+    PatternStore.hash = nil
     result = Messages::Actions.show_all_drums({})
     assert_equal('success', result[:response])
     display = "------1---5---9---13--17--21--25--29--
@@ -839,8 +841,8 @@ tom3----------------------------------
       result
     )
     synth.reload
-    assert_equal [0,2,4], synth.note_on.pattern_indexes
-    assert_equal [1,3,5], synth.note_off.pattern_indexes
+    assert_equal [0, 2, 4], synth.note_on.pattern_indexes
+    assert_equal [1, 3, 5], synth.note_off.pattern_indexes
     assert_equal 60, synth.pitches[0]
     assert_equal 62, synth.pitches[2]
     assert_equal 64, synth.pitches[4]
@@ -865,8 +867,8 @@ tom3----------------------------------
       result
     )
     synth.reload
-    assert_equal [0,3,6], synth.note_on.pattern_indexes
-    assert_equal [1,4,7], synth.note_off.pattern_indexes
+    assert_equal [0, 3, 6], synth.note_on.pattern_indexes
+    assert_equal [1, 4, 7], synth.note_off.pattern_indexes
     assert_equal 60, synth.pitches[0]
     assert_equal 62, synth.pitches[3]
     assert_equal 64, synth.pitches[6]
@@ -927,6 +929,181 @@ tom3----------------------------------
     )
   end
 
+  def test_synth_clear_one_step
+    synth = Synth.find_by_name('sine')
+    synth.add_note(60, 0, 4)
+    assert_equal [0], synth.note_on.pattern_indexes
+    assert_equal [3], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[0]
+
+    result = Messages::Actions.clear_steps(
+      {
+        'pattern_name' => 'sine',
+        'steps' => ['2']
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: I18n.t(
+          "actions.clear_steps.success.one",
+          name: synth.name,
+          steps: '2'
+        )
+      },
+      result
+    )
+    synth.reload
+    synth.note_on.reload
+    synth.note_off.reload
+    assert_equal [], synth.note_on.pattern_indexes
+    assert_equal [], synth.note_off.pattern_indexes
+    assert_equal nil, synth.pitches[0]
+  end
+
+  def test_synth_clear_list_of_steps
+    synth = Synth.find_by_name('sine')
+    synth.add_note(60, 0, 4)
+    synth.add_note(68, 8, 4)
+    assert_equal [0, 8], synth.note_on.pattern_indexes
+    assert_equal [3, 11], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[0]
+    assert_equal 68, synth.pitches[8]
+
+    result = Messages::Actions.clear_steps(
+      {
+        'pattern_name' => 'sine',
+        'steps' => ['2 and 10']
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: I18n.t(
+          "actions.clear_steps.success.other",
+          name: synth.name,
+          steps: ['2', '10'].to_sentence(last_word_connector: ' or ')
+        )
+      },
+      result
+    )
+    synth.reload
+    synth.note_on.reload
+    synth.note_off.reload
+    assert_equal [], synth.note_on.pattern_indexes
+    assert_equal [], synth.note_off.pattern_indexes
+    assert_equal nil, synth.pitches[0]
+    assert_equal nil, synth.pitches[8]
+  end
+
+  def test_synth_clear_one_step_none_to_remove
+    result = Messages::Actions.clear_steps(
+      {
+        'pattern_name' => 'sine',
+        'steps' => ['2']
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: I18n.t(
+          "actions.clear_steps.no_steps_to_remove.one",
+          name: 'sine',
+          steps: '2'
+        )
+      },
+      result
+    )
+  end
+
+  def test_synth_clear_list_of_steps_none_to_remove
+    result = Messages::Actions.clear_steps(
+      {
+        'pattern_name' => 'sine',
+        'steps' => ['2 and 10']
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: I18n.t(
+          "actions.clear_steps.no_steps_to_remove.other",
+          name: 'sine',
+          steps: ['2', '10'].to_sentence(last_word_connector: ' and ')
+        )
+      },
+      result
+    )
+  end
+
+  def test_synth_clear_block
+    synth = Synth.find_by_name('sine')
+    synth.add_note(60, 0, 8)
+    assert_equal [0], synth.note_on.pattern_indexes
+    assert_equal [7], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[0]
+
+    result = Messages::Actions.clear_steps(
+      {
+        'pattern_name' => 'sine',
+        'start_step' => '3',
+        'end_step' => '5'
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: I18n.t(
+          "actions.clear_steps.success.other",
+          name: synth.name,
+          steps: ['3', '4', '5'].to_sentence(last_word_connector: ' and ')
+        )
+      },
+      result
+    )
+    synth.reload
+    synth.note_on.reload
+    synth.note_off.reload
+    assert_equal [0, 5], synth.note_on.pattern_indexes
+    assert_equal [1, 7], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[0]
+    assert_equal 60, synth.pitches[5]
+  end
+
+  def test_synth_clear_block_skipping
+    synth = Synth.find_by_name('sine')
+    synth.add_note(60, 0, 8)
+    assert_equal [0], synth.note_on.pattern_indexes
+    assert_equal [7], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[0]
+
+    result = Messages::Actions.clear_steps(
+      {
+        'pattern_name' => 'sine',
+        'start_step' => '1',
+        'end_step' => '8',
+        'block_size' => '2'
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: I18n.t(
+          "actions.clear_steps.success.other",
+          name: synth.name,
+          steps: ['1', '4', '7'].to_sentence(last_word_connector: ' and ')
+        )
+      },
+      result
+    )
+    synth.reload
+    synth.note_on.reload
+    synth.note_off.reload
+    assert_equal [1, 4], synth.note_on.pattern_indexes
+    assert_equal [2, 5, 7], synth.note_off.pattern_indexes
+    assert_equal 60, synth.pitches[1]
+    assert_equal 60, synth.pitches[4]
+  end
 
 
 end

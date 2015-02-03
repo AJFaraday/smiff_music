@@ -44,9 +44,7 @@ module Messages::Actions::ClearSteps
         display: I18n.t(
           "actions.clear_steps.success.#{steps.count > 1 ? 'other' : 'one'}",
           name: self.synth.name,
-          steps: steps.to_sentence(
-            last_word_connector: ' or '
-          )
+          steps: steps.to_sentence(last_word_connector: ' or ')
         )
       }
     else

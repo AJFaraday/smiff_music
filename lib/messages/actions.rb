@@ -1,7 +1,5 @@
 class Messages::Actions
 
-  require 'active_support'
-
   AVAILABLE_ACTIONS = %w{
     show_patterns add_steps clear_patterns clear_steps
     set_speed show_speed speed_up speed_down list_drums
