@@ -135,11 +135,13 @@ For each of these you can perform one of a number of actions:
 
 ### list
 
-You can find the names of all drums with this command:
+Example:
 
 <pre>
 list drums
 </pre>
+
+You can find the names of all drums with this command.
 
 The result is a lot like the list above:
 
@@ -349,17 +351,83 @@ There are four things we neet to know to add a note to a synth in SMIFF:
 * starting step (e.g.: 5)
 * length (e.g.: 4)
 
+## list synths
+
+Example:
+
+<pre>
+> list synths
+</pre>
+
+This shows a list of the available synths.
+
+The result will look a little like this:
+
+<pre>
+* sine
+* square
+</pre>
+## show
+
+Example:
+
+<pre>
+> show sine
+</pre>
+
+This will display a text representation of the notes being played on this synth.
+
+<pre>
+> show sine
+-----1---5---9---13--17--21--25--29--
+C 5----------------------------------
+B 4----------------------------------
+A# 4---------------------------------
+A 4----------------------------------
+G# 4---------------------------------
+G 4----------------------------------
+F# 4---------------------------------
+F 4----------------------------------
+E 4------##--------------------------
+D# 4---------------------------------
+D 4----##----------------------------
+C# 4---------------------------------
+C 4--##------------------------------
+B 3----------------------------------
+A# 3---------------------------------
+</pre>
+
+Unlike drums, you can only show the contents of one synth at a time.
 ## play
+
+In order to play notes, SMIFF needs to know which instrument they will be played on and how long each note should be.
+
+They have default values, but you can change them yourself like this.
 
 <pre>
 > set synth to sine
 Any new notes will be added to 'sine' synthesiser
 > set note length to 2 steps
 Any new notes will be 2 steps long
-
-> play C# 4 on step 5
-> play C 4, D 4, E 4, F 4, G 4, G4, G4 from step 1
 </pre>
+
+You tell it the pitch of a note with two parts:
+
+* A note name, which is a letter which can be sharpened with the hash (#) symbol
+* The octave number
+
+The note name will be C, C#, D, D#, E, F, F#, G, G#, A, A# or B.
+
+<pre>
+> play C# 4 on step 5
+> play C 4, D 4, E 4, F 4, G 4, G 4, G 4 from step 1
+> play C 4, D 4, E 4, F 4, G 4, G 4, G 4 from step 1 skipping 4
+</pre>
+
+The last message form plays a melody of notes of your given length, but will leave a gap of 4 after each note.
+
+
+
 ## do not play
 
 After adding one or more notes to a synth they can then be removed.
