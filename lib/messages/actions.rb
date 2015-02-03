@@ -6,6 +6,7 @@ class Messages::Actions
     clear_all mute_unmute mute_unmute_all show_all_drums
     set_synth set_note_length
     add_notes clear_pitches
+    list_synths
   }
 
   extend Messages::Actions::Show
@@ -17,6 +18,7 @@ class Messages::Actions
   extend Messages::Actions::SpeedUp
   extend Messages::Actions::SpeedDown
   extend Messages::Actions::ListDrums
+  extend Messages::Actions::ListSynths
   extend Messages::Actions::ClearAll
   extend Messages::Actions::MuteUnmute
   extend Messages::Actions::MuteUnmuteAll

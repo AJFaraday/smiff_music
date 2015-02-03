@@ -114,6 +114,12 @@ list_drums:
   action: 'list_drums'
   weight: 2
 
+list_synths:
+  name: 'list_synths'
+  regex: 'list synths'
+  action: 'list_synths'
+  weight: 2
+
 mute_unmute:
   name: 'mute_or_unmute_drums'
   regex: '(unmute|mute) (\w+)((, \w+)*)((?: and (\w+))*)'
@@ -194,3 +200,5 @@ clear_pitch_range:
     - 'end_note'
     - 'synth'
   weight: 2
+  
+  

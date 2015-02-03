@@ -350,7 +350,17 @@ class MessagesActionsTest < ActiveSupport::TestCase
 ",
       result[:display]
     )
+  end
 
+  def test_list_synths
+    result = Messages::Actions.list_synths({})
+    assert_equal 'success', result[:response]
+    assert_equal(
+      "* sine
+* square
+",
+      result[:display]
+    )
   end
 
   def test_mute_one_pattern
@@ -620,6 +630,34 @@ hihat---------------------------------
     assert_equal(
       display,
       result[:display]
+    )
+  end
+
+  def test_show_one_synth
+    synth = Synth.find_by_name('sine')
+    synth.add_note(60, 5, 4)
+    result = Messages::Actions.show_patterns(
+      {'pattern_names' => ['sine']}
+    )
+    display = "-----1---5---9---13--17--21--25--29--
+C 5----------------------------------
+B 4----------------------------------
+A# 4---------------------------------
+A 4----------------------------------
+G# 4---------------------------------
+G 4----------------------------------
+F# 4---------------------------------
+F 4----------------------------------
+E 4----------------------------------
+D# 4---------------------------------
+D 4----------------------------------
+C# 4---------------------------------
+C 4-------####-----------------------
+B 3----------------------------------
+A# 3---------------------------------"
+    assert_includes(
+      result[:display],
+      display
     )
   end
 

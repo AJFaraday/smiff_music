@@ -129,6 +129,13 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal Hash.new, message.parameters
   end
 
+  def test_list_synths
+    message = Message.parse('list synths')
+    assert_equal 'list_synths', message.action
+    assert_equal Hash.new, message.parameters
+  end
+
+
   def test_show_all
     message = Message.parse('show all')
     assert_equal 'show_all_drums', message.action
