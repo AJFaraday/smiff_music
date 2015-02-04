@@ -84,7 +84,7 @@ class Messages::Actions
 
   def self.parse_note_names(note_names)
     # get rid of spaces inside note names
-    tidied_note_names = note_names.split(/([a-z])[ ]+([0-9])/).join
+    tidied_note_names = note_names.split(/([a-z])[ ]+([0-9])/).collect{|x| x.gsub(' ','')}.join
     tidied_note_names.split(/[, ]+/)
   end
 
