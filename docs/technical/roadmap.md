@@ -1,6 +1,14 @@
 Future Development Roadmap
 --------------------------
 
+History
+-------
+
+This is a short summary of the completion dates of specific versions.
+
+* Version 0 - 5th January
+* Version 0.1 - 4th February
+
 Versions
 --------
 
