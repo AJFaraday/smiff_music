@@ -2,14 +2,16 @@
 
 The idea is simple, people send a tweet then the SMIFF Music app makes music. Only the music is written, modified and interacted with by many people over the web. Hopefully producing an unending and infinitely modifiable, constantly developing and organic piece of music where all are involved.
 
-Version Zero is just a drum machine, but future plans include melodic patterns, tonal control, modifying effects.
+It is primarily controlled via a set of terminal-style commands which are designed to get the information required to create and modify music in as 'plain-english' a way as possible.
+
+SMIFF is currently at version 0.1, in which users can define drums and melodies. 
 
 Components:
 
 * Ruby on Rails app - serves data on the current content of the music, and the web audio player. 
 * Web-audio player - using the web audio api, this will produce the sound spontaneously on the client computer.
-* Twitter search - This will look for tweets addressed to the account and makes the recommended changes to the sound. (future plan)
-* Twitter account - This will be the mark of tweets being sent to SMIFF, and may return some patterns on request. (future plan)
+
+There is an end-game plan to allow users to send the terminal-style messages which control SMIFF via twitter, allowing users to change the SMIFF music from anywhere.
 
 ## Dependencies
 
@@ -38,4 +40,5 @@ When the app is running you can select 'help' in the header to see the formatted
 It is also available as an amalgamated .md file in `/docs/help/help.md` or in github at [https://github.com/AJFaraday/smiff\_music/blob/master/docs/help/help.md](https://github.com/AJFaraday/smiff_music/blob/master/docs/help/help.md)
 
 There are some technical docs for developers in /docs/technical
+
 
