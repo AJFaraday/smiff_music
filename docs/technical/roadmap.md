@@ -111,6 +111,12 @@ End point: I can deploy this to a production server and people do not tweet me b
 (in other words, users do not see error messages)
 
 
+--------------------------------------------------------
+
+Future (some suggested features): 
+
+* speech/singing synthesis "lyrics from twitter"
+* Click control on the diagrams
 
 
 
