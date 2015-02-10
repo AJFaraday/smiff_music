@@ -162,7 +162,7 @@ set_note_length:
 
 add_notes:
   name: add_notes
-  regex: 'play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+)'
+  regex: 'play (([a-gA-G][#b]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+)'
   action: add_notes
   variables:
     - 'note_names'
@@ -172,7 +172,7 @@ add_notes:
 
 add_notes_skipping:
   name: add_notes_skipping
-  regex: 'play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+) skipping ([0-9]+)'
+  regex: 'play (([a-gA-G][#b]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+) skipping ([0-9]+)'
   action: add_notes
   variables:
     - 'note_names'
@@ -183,7 +183,7 @@ add_notes_skipping:
 
 clear_pitches:
   name: clear_pitches
-  regex: 'do not play (([a-gA-G][#]?(?: )?[0-9]+[, ]+)*)on ([a-z]+)'
+  regex: 'do not play (([a-gA-G][#b]?(?: )?[0-9]+[, ]+)*)on ([a-z]+)'
   action: clear_pitches
   variables:
     - 'note_names'
@@ -193,7 +193,7 @@ clear_pitches:
 
 clear_pitch_range:
   name: clear_pitch_range
-  regex: 'do not play ([a-gA-G][#]?(?: )?[0-9]+) to ([a-gA-G][#]?(?: )?[0-9]+) on ([a-z]+)'
+  regex: 'do not play ([a-gA-G][#b]?(?: )?[0-9]+) to ([a-gA-G][#b]?(?: )?[0-9]+) on ([a-z]+)'
   action: clear_pitches
   variables:
     - 'start_note'

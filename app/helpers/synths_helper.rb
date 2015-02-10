@@ -1,7 +1,19 @@
 module SynthsHelper
 
-  NOTE_NAMES = %w(C C# D D# E F F# G G# A A# B)
+  BASE_NOTE_NAMES = %w{C D E F G A B}
 
+  BASE_NOTE_NAME_INDEXES = {
+    'C' => 0, 'D' => 2, 'E' => 4, 'F' => 5,
+    'G' => 7, 'A' => 9, 'B' => 11
+  }
+
+  VALID_NOTE_NAMES = %w(
+    C  D  E  F  G  A  B
+    C# D# E# F# G# A# B#
+    CB DB EB FB GB AB BB
+  )
+
+  DISPLAY_NOTE_NAMES = %W{C C# D D# E F F# G G# A A# B}
 
   def step_class(synth, step,note)
     kls = (step % 4 == 0) ? 'step marker ' : 'step '
@@ -22,17 +34,19 @@ module SynthsHelper
   end
 
   def display_midi_note(midi)
-    note_name = NOTE_NAMES[(midi - 24) % 12]
+    note_name = DISPLAY_NOTE_NAMES[(midi - 24) % 12]
     octave = (midi - 12) / 12
     "#{note_name} #{octave}"
   end
 
   def translate_note_to_midi(note_name)
-    match_data = note_name.match /([a-zA-Z][#]?)(?: )?([0-9])/
+    match_data = note_name.match /([a-zA-Z][#b]?)(?: )?([0-9])/
     note = match_data[1].upcase
     octave = match_data[2].to_i
-    return "#{note} is not a note" unless NOTE_NAMES.include?(note)
-    octave_semitone = NOTE_NAMES.index(note)
+    return "#{note} is not a note" unless VALID_NOTE_NAMES.include?(note)
+    octave_semitone = BASE_NOTE_NAME_INDEXES[note[0].upcase]
+    octave_semitone += 1 if note[1] == '#'
+    octave_semitone -= 1 if note[1] == 'B'
     ((octave.to_i + 1) * 12) + octave_semitone
   end
 
