@@ -13,8 +13,8 @@ class Message < ActiveRecord::Base
   belongs_to :message_format
   serialize :parameters
 
-  def Message.parse(text,session_params={})
-    message = Message.new(source_text: text)
+  def Message.parse(text, session_params={})
+    message = Message.new(source_text: text[0..250])
     parser = Messages::Parser.new
     parser.parse(text.downcase)
     if parser.parsed
@@ -45,16 +45,28 @@ class Message < ActiveRecord::Base
       save!
       return result
     elsif self.invalid?
-      log_failure
-      self.status = Message::FAILED_STATE
-      save!
-      return {
-        display: I18n.t(
-        'messages.errors.message_unfound',
-        :message => self.source_text
-      ),
-        response: 'error'
-      }
+      if self.source_text.length >= 250
+        log_failure
+        self.status = Message::FAILED_STATE
+        save!
+        return {
+          display: I18n.t(
+            'messages.errors.message_too_long'
+          ),
+          response: 'error'
+        }
+      else
+        log_failure
+        self.status = Message::FAILED_STATE
+        save!
+        return {
+          display: I18n.t(
+            'messages.errors.message_unfound',
+            :message => self.source_text
+          ),
+          response: 'error'
+        }
+      end
     end
   end
 

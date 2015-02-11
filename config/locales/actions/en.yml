@@ -2,6 +2,7 @@ en:
   messages:
     errors:
       message_unfound: "Sorry, I can't understand this message: '%{message}'"
+      message_too_long: "Don't be silly, that message is over two hundred and fifty letters long. Try a shorter one."
       not_implemented: "Sorry, it looks like this action '%{action}' is not yet implemented."
       pattern_not_found: "Sorry, I can't find any patterns named %{names}"
       could_not_run: "Sorry, I couldn't run this action. Something nasty and technical happened. Tweet @MarmiteJunction about it."
