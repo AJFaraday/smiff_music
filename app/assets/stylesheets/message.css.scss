@@ -21,6 +21,7 @@ $button-shadow: #555555;
   padding: 10px;
   overflow-y: auto;
   font-family: monaco, Consolas, 'Lucida Console', monospace;
+  word-wrap: break-word;
 }
 
 #console #readout .input {
