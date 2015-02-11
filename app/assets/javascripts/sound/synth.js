@@ -32,14 +32,12 @@ function Synth(attrs) {
   this.set_step_info = function() {
     this.note_on_step_string = this.note_on_steps.toString(2).leftJustify(this.step_count, '0');
     this.note_off_step_string = this.note_off_steps.toString(2).leftJustify(this.step_count, '0');
-    this.length = this.note_on_step_string.length
-
   };
   this.set_step_info();
 
   // actual playback function
   this.play_step = function(step) {
-    step = step % this.length;
+    step = step % this.step_count;
     if (this.note_on_at_step(step) && !this.muted) {
       this.attack();
       if (this.note_off_at_step(step)) {
