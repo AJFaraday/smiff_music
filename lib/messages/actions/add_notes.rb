@@ -57,13 +57,12 @@ module Messages::Actions::AddNotes
 
     return melody_too_long(synth) if (args['start_step'].to_i - 1) >= synth.step_count
     note_name = parse_note_names(args['note_names'])[0]
-    note_for_display = "#{note_name[0].upcase}#{note_name[1] if ['#','b'].include?(note_name[1])} #{note_name[-1]}"
     synth.add_note(note, (args['start_step'].to_i - 1), args['note_steps'].to_i)
     {
       response: 'success',
       display: I18n.t(
         'actions.add_notes.note_added',
-        note: note_for_display,
+        note: parsed_note_display(note_name),
         step: args['start_step'],
         synth: synth.name
       )

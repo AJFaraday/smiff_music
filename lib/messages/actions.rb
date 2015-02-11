@@ -88,6 +88,9 @@ class Messages::Actions
     tidied_note_names.split(/[, ]+/)
   end
 
+  def self.parsed_note_display(note_name)
+    "#{note_name[0].upcase}#{note_name[1] if ['#','b'].include?(note_name[1])} #{note_name[-1]}"
+  end
 
 end
 
