@@ -104,6 +104,17 @@ It needs to keep a record of what changed on each version, and only send down th
 * Update of pattern store stores changed element for each version
 * pattern update only returns elements changed in newer versions
 
+Version 0.5
+-----------
+
+0.5 is an important bit of UI improvement, help messages:
+
+* overview help message (introduces other help messages)
+* Help message for drums
+* Modified help message for individual drums
+* Help message for synths
+* Modified help messages for individual synths
+
 Version 1
 ---------
 
@@ -118,6 +129,11 @@ End point: I can deploy this to a production server and people do not tweet me b
 
 (in other words, users do not see error messages)
 
+Version 2
+----------
+
+* Feedback on what other users are changing at a given time
+* Mouse interactions with grids 
 
 --------------------------------------------------------
 
