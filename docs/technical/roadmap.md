@@ -129,7 +129,11 @@ End point: I can deploy this to a production server and people do not tweet me b
 
 (in other words, users do not see error messages)
 
+Version 2
+----------
 
+* Feedback on what other users are changing at a given time
+* Mouse interactions with grids 
 
 --------------------------------------------------------
 
