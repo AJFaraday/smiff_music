@@ -132,7 +132,8 @@ class Synth < ActiveRecord::Base
       note_off_steps: patterns.note_off.bits,
       step_count: step_count,
       pitches: pitches,
-      name: name
+      name: name,
+      constructor: 'SimpleSynth'
     }
   end
 

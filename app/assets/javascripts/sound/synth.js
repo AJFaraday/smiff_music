@@ -18,16 +18,15 @@ function Synth(attrs) {
   this.release_time = attrs['release_time'] || 0.5;
 
   // setup web audio stuff
-  this.oscillator = Sound.context.createOscillator();
   this.master_gain = Sound.context.createGain();
   this.master_gain.gain.value = ((this.sustain_level * -1) + 1) * 0.8;
+  this.master_gain.connect(Sound.master_gain);
+
   this.envelope_gain = Sound.context.createGain();
   this.envelope_gain.gain.value = 0;
-  this.oscillator.type = attrs['osc_type'] || 'sine';
-  this.oscillator.connect(this.envelope_gain);
   this.envelope_gain.connect(this.master_gain);
-  this.master_gain.connect(Sound.master_gain);
-  this.oscillator.start(0);
+
+
 
   this.set_step_info = function() {
     this.note_on_step_string = this.note_on_steps.toString(2).leftJustify(this.step_count, '0');
@@ -63,18 +62,6 @@ function Synth(attrs) {
     return this.note_off_step_string[step] == '1';
   };
 
-  // functions used in playback
-  this.set_pitch = function (midi) {
-    this.pitch = midi;
-    hz = 27.5 * Math.pow(2, ((midi - 21) / 12));
-    this.oscillator.frequency.setTargetAtTime(
-      hz,
-      Sound.context.currentTime,
-      this.portamento
-    );
-  };
-  this.set_pitch(69);
-
   this.attack = function () {
     // up to 1 in attack time
     this.envelope_gain.gain.setTargetAtTime(
@@ -104,6 +91,10 @@ function Synth(attrs) {
     pitch_slice = pitch_slice.filter(function(n){ return n != null });
     return pitch_slice.pop();
   };
+
+  this.set_pitch = function(midi) {
+    console.log("Calling set_pitch in base synth constructor, should be child type of synth.")
+  }
 
   this.display = function() {
     this.set_diagram('tbody#synth_'+this.name+'_overview');
@@ -157,5 +148,4 @@ function Synth(attrs) {
 
 
 }
-
 

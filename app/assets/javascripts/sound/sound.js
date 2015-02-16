@@ -41,7 +41,8 @@ var Sound = {
       });
       // load synths
       $.each(attributes['synths'], function (name, attrs) {
-        Sound.synths[name] = new Synth(attrs);
+        constructor = eval(attrs['constructor']);
+        Sound.synths[name] = new constructor(attrs);
       });
 
 
