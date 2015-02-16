@@ -71,7 +71,7 @@ Synth types
 Simple synths have one oscillator with a given wave shape:
 
   new Synth({
-    type: 'SimpleSynth',
+    constructor: 'SimpleSynth',
     osc_type: 'sine',
     attack_time: 0.1,
     decay_time: 0.2,
@@ -93,11 +93,12 @@ In addition to the attributes required by all synths, FM will need to know:
 
 * fm_frequency (as a proportion of the pitch, how fast will the modulation be, percentage)
 * fm_depth (as a proportion of the pitch, how much the frequency will change, percentage)
-* (possibly) fm_wave_shape
+* fm_wave_shape (a waveshape, sine, square, triangle, saw etc.)
 
   new FmSynth({
-    type: 'FMSynth',
+    constructor: 'FMSynth',
     fm_frequency: 40,
     fm_depth: 20,
+    fm_wave_shape: 'sine'
     ...
   })

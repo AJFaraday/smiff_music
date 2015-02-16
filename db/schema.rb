@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118142146) do
+ActiveRecord::Schema.define(version: 20150216210750) do
 
   create_table "message_formats", force: true do |t|
     t.string   "name"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20150118142146) do
     t.string   "pitches"
     t.integer  "min_note"
     t.integer  "max_note"
+    t.string   "constructor",   default: "SimpleSynth"
+    t.string   "parameters"
   end
 
   create_table "system_settings", force: true do |t|

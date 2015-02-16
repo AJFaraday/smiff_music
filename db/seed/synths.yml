@@ -11,6 +11,7 @@ sine:
   step_count: 32
   min_note: 58
   max_note: 72
+  constructor: SimpleSynth
 
 square:
   name: square
@@ -24,3 +25,21 @@ square:
   step_count: 32
   min_note: 58
   max_note: 72
+  constructor: SimpleSynth
+
+fm:
+  name: fm
+  osc_type:
+  attack_time: 0.2
+  decay_time: 0.2
+  sustain_level: 0.7
+  release_time: 0.2
+  muted: false
+  step_size: 16
+  step_count: 32
+  min_note: 58
+  max_note: 72
+  constructor: FMSynth
+  fm_frequency: 30
+  fm_depth: 50
+  fm_waveshape: 'sine'

@@ -20,6 +20,4 @@ function SimpleSynth(attrs) {
   };
   this.set_pitch(69);
 
-
-
 }

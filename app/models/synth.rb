@@ -1,6 +1,5 @@
 class Synth < ActiveRecord::Base
 
-
   validate :name, presence: true
   validate :osc_type,
            presence: true,
@@ -13,6 +12,21 @@ class Synth < ActiveRecord::Base
   after_create :generate_patterns
   before_save :save_patterns
 
+  # For FMSynth synths
+  store :parameters,
+        accessors: [:fm_frequency, :fm_depth, :fm_waveshape],
+        coder: JSON
+  validates_numericality_of :fm_frequency,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'FMSynth'}
+  validates_numericality_of :fm_depth,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'FMSynth'}
+  validates_presence_of :fm_waveshape, if: lambda{self.constructor == 'FMSynth'}
+
+
   def save_patterns
     note_on.save! if note_on
     note_off.save! if note_off
@@ -20,7 +34,7 @@ class Synth < ActiveRecord::Base
 
   serialize :pitches
 
-  has_many :patterns do
+  has_many :patterns, dependent: :destroy do
 
     def note_on
       where(purpose: 'note_on').first
@@ -121,7 +135,7 @@ class Synth < ActiveRecord::Base
   end
 
   def sound_init_params
-    {
+    params = {
       osc_type: osc_type,
       attack_time: attack_time,
       decay_time: decay_time,
@@ -133,8 +147,10 @@ class Synth < ActiveRecord::Base
       step_count: step_count,
       pitches: pitches,
       name: name,
-      constructor: 'SimpleSynth'
+      constructor: constructor
     }
+    params.merge!(self.parameters.symbolize_keys)
+    params
   end
 
   def Synth.to_hash
@@ -146,12 +162,14 @@ class Synth < ActiveRecord::Base
   end
 
   def to_hash
-    {
+    params = {
       muted: muted,
       note_on_steps: patterns.note_on.bits,
       note_off_steps: patterns.note_off.bits,
       pitches: pitches
     }
+    params.merge!(self.parameters.symbolize_keys)
+    params
   end
 
   attr_accessor :chart_data
