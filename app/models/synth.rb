@@ -36,6 +36,11 @@ class Synth < ActiveRecord::Base
                         in: ['sine','square','sawtooth','triangle'],
                         if: lambda{self.constructor == 'FMSynth'}
 
+  cattr_accessor :types
+
+  def Synth.types
+    @@types ||= YAML.load_file(File.join(Rails.root, 'config', 'synth_types.yml'))
+  end
 
 
   def save_patterns
