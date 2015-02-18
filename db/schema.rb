@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216210750) do
+ActiveRecord::Schema.define(version: 20150218205721) do
 
   create_table "message_formats", force: true do |t|
     t.string   "name"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20150216210750) do
 
   create_table "synths", force: true do |t|
     t.string   "name"
-    t.string   "osc_type"
     t.float    "attack_time"
     t.float    "decay_time"
     t.float    "sustain_level"
