@@ -1143,6 +1143,176 @@ tom3----------------------------------
     assert_equal 60, synth.pitches[4]
   end
 
+  def test_describe_synth
+    synth = Synth.find_by_name('sine')
+
+    result = Messages::Actions.describe_synth(
+      {
+        'synth' => ['sine']
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: synth.description
+      },
+      result
+    )
+  end
+
+  def test_describe_failed
+    synth = Synth.find_by_name('sine')
+
+    result = Messages::Actions.describe_synth(
+      {
+        'synth' => ['nope']
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: I18n.t('messages.errors.synth_not_found', synth: 'nope')
+      },
+      result
+    )
+  end
+
+
+  def test_list_params_synth
+    synth = Synth.find_by_name('sine')
+
+    result = Messages::Actions.list_params(
+      {
+        'synth' => ['sine']
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: synth.parameter_list
+      },
+      result
+    )
+  end
+
+  def test_list_params_failed
+    synth = Synth.find_by_name('sine')
+
+    result = Messages::Actions.list_params(
+      {
+        'synth' => ['nope']
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: I18n.t('messages.errors.synth_not_found', synth: 'nope')
+      },
+      result
+    )
+  end
+
+  def test_set_param_synth
+    synth = Synth.find_by_name('sine')
+
+    result = Messages::Actions.set_param(
+      {
+        'synth' => 'sine',
+        'parameter' => 'volume',
+        'value' => '50'
+      }
+    )
+    assert_equal(
+      {
+        response: 'success',
+        display: synth.description
+      },
+      result
+    )
+
+    synth.reload
+    assert_equal 50, synth.volume
+  end
+
+  def test_set_param_synth_not_found
+    result = Messages::Actions.set_param(
+      {
+        'synth' => 'nope',
+        'parameter' => 'volume',
+        'value' => '50'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: I18n.t('messages.errors.synth_not_found', synth: 'nope')
+      },
+      result
+    )
+  end
+
+  def test_set_param_parameter_not_found
+    result = Messages::Actions.set_param(
+      {
+        'synth' => 'sine',
+        'parameter' => 'awesomeness',
+        'value' => '50'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: I18n.t('messages.errors.parameter_not_found', parameter: 'awesomeness')
+      },
+      result
+    )
+  end
+
+  def test_set_param_value_too_high
+    result = Messages::Actions.set_param(
+      {
+        'synth' => 'synth',
+        'parameter' => 'volume',
+        'value' => '500'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: I18n.t(
+          'actions.set_param.value_too_high',
+          synth: 'sine',
+          parameter: 'volume',
+          value: '500',
+          max: '100'
+        )
+      },
+      result
+    )
+  end
+
+  def test_set_param_value_too_low
+    result = Messages::Actions.set_param(
+      {
+        'synth' => 'synth',
+        'parameter' => 'volume',
+        'value' => '-1'
+      }
+    )
+    assert_equal(
+      {
+        response: 'failure',
+        display: I18n.t(
+          'actions.set_param.value_too_low',
+          synth: 'sine',
+          parameter: 'volume',
+          value: '-1',
+          min: '0'
+        )
+      },
+      result
+    )
+  end
 
 end
 
