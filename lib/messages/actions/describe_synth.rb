@@ -12,7 +12,7 @@ module Messages::Actions::DescribeSynth
         response: 'failure',
         display: I18n.t(
           'messages.errors.synth_not_found',
-          synth: args['synth']
+          synth: args['synth'][0]
         )
       }
     end
