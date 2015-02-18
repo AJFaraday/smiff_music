@@ -1,11 +1,11 @@
-module Messages::Actions::DescribeSynth
+module Messages::Actions::ListParams
 
-  def describe_synth(args)
+  def list_params(args)
     synth = Synth.find_by_name(args['synth'])
     if synth
       return {
         response: 'success',
-        display: synth.description
+        display: synth.parameter_list
       }
     else
       return {

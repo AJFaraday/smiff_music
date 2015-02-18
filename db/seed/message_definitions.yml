@@ -209,3 +209,11 @@ describe_synth:
     - 'synth'
   weight: 0
 
+list_params:
+  name: list_params
+  regex: 'list (?:params|parameters) for (\w+)'
+  action: list_params
+  variables:
+    - synth
+  weight: 0
+

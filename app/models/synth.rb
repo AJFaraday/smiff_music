@@ -1,7 +1,7 @@
 class Synth < ActiveRecord::Base
 
   validate :name, presence: true
-  validate :osc_type,
+  validate :waveshape,
            presence: true,
            inclusion: %w{sine square saw triangle}
   validate :attack_time, numericality: {greater_than: 0, less_than: 2}
@@ -16,7 +16,7 @@ class Synth < ActiveRecord::Base
         accessors: [
           # For FMSynth synths
           :fm_frequency, :fm_depth, :fm_waveshape,
-          :volume
+          :volume, :waveshape
         ],
         coder: JSON
 
@@ -71,6 +71,14 @@ class Synth < ActiveRecord::Base
 TEXT
     type['parameters'].each do |parameter|
       result << "* #{parameter['name']} - #{parameter['description']}"
+    end
+    result
+  end
+
+  def parameter_list
+    result = ''
+    type['parameters'].each do |parameter|
+      result << "* #{parameter['name']} (#{self.send(parameter['name'])})\n"
     end
     result
   end
@@ -169,7 +177,7 @@ TEXT
 
   def sound_init_params
     params = {
-      osc_type: osc_type,
+      osc_type: waveshape,
       attack_time: attack_time,
       decay_time: decay_time,
       sustain_level: sustain_level,

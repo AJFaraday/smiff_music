@@ -1,7 +1,7 @@
 ---
 sine:
   name: sine
-  osc_type: sine
+  waveshape: sine
   attack_time: 0.1
   decay_time: 0.3
   sustain_level: 0.3
@@ -16,7 +16,7 @@ sine:
 
 square:
   name: square
-  osc_type: square
+  waveshape: square
   attack_time: 0.1
   decay_time: 0.1
   sustain_level: 0.8
@@ -31,7 +31,7 @@ square:
 
 fm:
   name: fm
-  osc_type:
+  waveshape:
   attack_time: 0.2
   decay_time: 0.2
   sustain_level: 0.7
