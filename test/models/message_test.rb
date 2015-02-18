@@ -538,6 +538,31 @@ class MessageTest < ActiveSupport::TestCase
     )
   end
 
+  def test_describe_synths
+    message = Message.parse('describe sine')
+    assert_equal 'describe_synth', message.action
+    assert_equal(
+      {'synth' => ['sine']},
+      message.parameters
+    )
+  end
 
+  def test_list_params
+    message = Message.parse('list params for sine')
+    assert_equal 'list_params', message.action
+    assert_equal(
+      {'synth' => ['sine']},
+      message.parameters
+    )
+  end
+
+  def test_list_parameterss
+    message = Message.parse('list parameters for sine')
+    assert_equal 'list_params', message.action
+    assert_equal(
+      {'synth' => ['sine']},
+      message.parameters
+    )
+  end
 
 end
