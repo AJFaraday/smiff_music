@@ -2,7 +2,7 @@
 sine:
   id: 1
   name: sine
-  osc_type: sine
+  parameters: '{"waveshape":"sine","volume":50}'
   attack_time: 0.1
   decay_time: 0.3
   sustain_level: 0.3
@@ -16,7 +16,7 @@ sine:
 square:
   id: 2
   name: square
-  osc_type: square
+  parameters: '{"waveshape":"square","volume":50}'
   attack_time: 0.1
   decay_time: 0.3
   sustain_level: 0.3

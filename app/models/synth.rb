@@ -177,7 +177,7 @@ TEXT
 
   def sound_init_params
     params = {
-      osc_type: waveshape,
+      waveshape: waveshape,
       attack_time: attack_time,
       decay_time: decay_time,
       sustain_level: sustain_level,

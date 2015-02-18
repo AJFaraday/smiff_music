@@ -6,7 +6,7 @@ en:
     attributes:
       synth:
         name: Name
-        osc_type: Wave Shape
+        waveshape: Wave Shape
         attack_time: Attack
         decay_time: Decay
         sustain_level: Sustain

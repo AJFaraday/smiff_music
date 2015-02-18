@@ -3,7 +3,7 @@ function SimpleSynth(attrs) {
   Synth.apply(this, arguments);
 
   this.oscillator = Sound.context.createOscillator();
-  this.oscillator.type = attrs['osc_type'] || 'sine';
+  this.oscillator.type = attrs['waveshape'] || 'sine';
   this.oscillator.connect(this.envelope_gain);
   this.oscillator.start(0);
 

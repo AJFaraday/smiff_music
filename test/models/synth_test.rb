@@ -11,7 +11,8 @@ class SynthTest < ActiveSupport::TestCase
   def test_new_synth_has_patterns_and_pitches
     synth = Synth.create!(
       name: 'synth',
-      osc_type: 'sine',
+      waveshape: 'sine',
+      volume: 50,
       attack_time: 0.1,
       decay_time: 0.1,
       sustain_level: 0.1,
@@ -72,7 +73,7 @@ class SynthTest < ActiveSupport::TestCase
     synth = Synth.find(1)
     params = synth.sound_init_params
 
-    assert_equal synth.osc_type, params[:osc_type]
+    assert_equal synth.waveshape, params[:waveshape]
     assert_equal synth.attack_time, params[:attack_time]
     assert_equal synth.decay_time, params[:decay_time]
     assert_equal synth.sustain_level, params[:sustain_level]

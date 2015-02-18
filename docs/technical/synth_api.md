@@ -72,7 +72,7 @@ Simple synths have one oscillator with a given wave shape:
 
   new Synth({
     constructor: 'SimpleSynth',
-    osc_type: 'sine',
+    waveshape: 'sine',
     attack_time: 0.1,
     decay_time: 0.2,
     sustain_level: 0.5,
