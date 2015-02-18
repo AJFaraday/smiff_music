@@ -67,8 +67,11 @@
       file: '/docs/help/messages/synths.md'
       children:
         - title: list
-          anchor: list_synth
+          anchor: list_synths
           file: '/docs/help/messages/synths/list.md'
+        - title: describe
+          anchor: describe
+          file: '/docs/help/messages/synths/describe.md'
         - title: show
           anchor: show_synth
           file: '/docs/help/messages/synths/show.md'
@@ -93,4 +96,10 @@
         - title: clear
           anchor: clear_synth
           file: '/docs/help/messages/synths/clear.md'
+        - titile: list parameters
+          anchor: list_params
+          file: '/docs/help/messages/synths/list_params.md'
+        - titile: set parameter
+          anchor: set_param
+          file: '/docs/help/messages/synths/set_params.md'
 

@@ -12,10 +12,18 @@ class Synth < ActiveRecord::Base
   after_create :generate_patterns
   before_save :save_patterns
 
-  # For FMSynth synths
   store :parameters,
-        accessors: [:fm_frequency, :fm_depth, :fm_waveshape],
+        accessors: [
+          # For FMSynth synths
+          :fm_frequency, :fm_depth, :fm_waveshape,
+          :volume
+        ],
         coder: JSON
+
+  validates_numericality_of :volume,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100
+  # For FMSynth synths
   validates_numericality_of :fm_frequency,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
@@ -24,7 +32,10 @@ class Synth < ActiveRecord::Base
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
                             if: lambda{self.constructor == 'FMSynth'}
-  validates_presence_of :fm_waveshape, if: lambda{self.constructor == 'FMSynth'}
+  validates_presence_of :fm_waveshape,
+                        in: ['sine','square','sawtooth','triangle'],
+                        if: lambda{self.constructor == 'FMSynth'}
+
 
 
   def save_patterns

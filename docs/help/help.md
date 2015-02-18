@@ -338,9 +338,9 @@ Which will clear all patterns, not just the drums.
 
 _Note:_ this is speculative, no messages are set just yet.
 
-Synth is short for synthesiser, a device which produces a sound from it's component parts.
+Synth is short for synthesizer, a device which produces a sound from it's component parts.
 
-In the context of SMIFF a synthesiser will play a note at a specific pitch, which starts at a given step and runs for a given amount of time.
+In the context of SMIFF a synthesizer will play a note at a specific pitch, which starts at a given step and runs for a given amount of time.
 
 SMIFF's synthesizers are monophonic, they will only play one note at any given time.
 
@@ -406,7 +406,7 @@ They have default values, but you can change them yourself like this.
 
 <pre>
 > set synth to sine
-Any new notes will be added to 'sine' synthesiser
+Any new notes will be added to 'sine' synthesizer
 > set note length to 2 steps
 Any new notes will be 2 steps long
 </pre>

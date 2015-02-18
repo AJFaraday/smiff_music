@@ -1,11 +1,13 @@
 ## do not play
 
-After adding one or more notes to a synth they can then be removed.
+Examples:
 
 <pre>
 > do not play sine on step 1
 > do not play sine on steps 1, 7 and 14
 </pre>
+
+After adding one or more notes to a synth they can then be removed.
 
 These messages will remove whichever note is playing at any of the steps mentioned.
 

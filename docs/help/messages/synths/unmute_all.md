@@ -1,5 +1,7 @@
 ### unmute all synths
 
+Example:
+
 <pre>
 unmute all drums
 </pre>

@@ -1,5 +1,7 @@
 ## unmute
 
+Example:
+
 <pre>
 unmute sine
 unmute sine, square and triangle

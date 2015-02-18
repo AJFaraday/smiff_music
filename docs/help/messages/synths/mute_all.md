@@ -1,5 +1,7 @@
 ## mute all synths
 
+Example:
+
 <pre>
 mute all synths
 </pre>

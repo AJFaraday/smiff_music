@@ -1,9 +1,9 @@
 Synth API
 ---------
 
-Versions 0.2 onwards involve synthesisers which work by various algorithms and methods.
+Versions 0.2 onwards involve synthesizers which work by various algorithms and methods.
 
-This is a *minimum* API which outlines functions which every type of synthesiser.
+This is a *minimum* API which outlines functions which every type of synthesizer.
 
 Expected attributes:
 

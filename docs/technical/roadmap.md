@@ -67,18 +67,18 @@ Version 0.2
 
 0.2 will focus on modifying synthesis parameters.
 
-* An FM synthesiser with a few changeable parameters
+* An FM synthesizer with a few changeable parameters
 ** Volume
 ** Modulation frequency
 ** Modulation depth 
 * Messages for setting synthesis parameters
-* Displaying synthesiser with pattern and synth params
+* Displaying synthesizer with pattern and synth params
 * Help page which oulines synth and parameters
 * Help page for changing synthesis parameters
 * Test new code
 * JS unit tests checking synth params change
 
-End point: I can modify the parameters of a synthesiser which changes the sound whilst it plays.
+End point: I can modify the parameters of a synthesizer which changes the sound whilst it plays.
 
 Version 0.3
 -----------

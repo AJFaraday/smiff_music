@@ -1,5 +1,7 @@
 ## mute
 
+Examples:
+
 <pre>
 mute sine
 mute sine, square and triangle

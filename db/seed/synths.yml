@@ -12,6 +12,7 @@ sine:
   min_note: 58
   max_note: 72
   constructor: SimpleSynth
+  volume: 40
 
 square:
   name: square
@@ -26,6 +27,7 @@ square:
   min_note: 58
   max_note: 72
   constructor: SimpleSynth
+  volume: 40
 
 fm:
   name: fm
@@ -43,3 +45,4 @@ fm:
   fm_frequency: 30
   fm_depth: 50
   fm_waveshape: 'sine'
+  volume: 40
