@@ -6,7 +6,7 @@ class Messages::Actions
     clear_all mute_unmute mute_unmute_all show_all_drums
     set_synth set_note_length
     add_notes clear_pitches
-    list_synths
+    list_synths describe_synth
   }
 
   extend Messages::Actions::Show
@@ -27,7 +27,7 @@ class Messages::Actions
   extend Messages::Actions::SetNoteLength
   extend Messages::Actions::AddNotes
   extend Messages::Actions::ClearPitches
-
+  extend Messages::Actions::DescribeSynth
 
   def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)

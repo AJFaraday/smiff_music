@@ -201,4 +201,11 @@ clear_pitch_range:
     - 'synth'
   weight: 2
   
+describe_synth:
+  name: describe_synth
+  regex: 'describe (\w+)'
+  action: describe_synth
+  variables:
+    - 'synth'
+  weight: 0
 

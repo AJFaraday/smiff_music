@@ -64,4 +64,5 @@ en:
     clear_pitches:
       list_cleared: "I will no longer play %{synth} on step %{note_names}"
       range_cleared: "I'll no longer play %{synth} from %{start} to %{end}"
-
+    describe_synth:
+      synth_not_found: "Sorry, I can't find a synth named '%{synth}'"
