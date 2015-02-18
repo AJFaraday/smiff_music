@@ -1,13 +1,13 @@
 SimpleSynth:
   name: Simple
-  decription: >
+  description: >
     A simple synthesizer which produces one single tone
     which can be one of a number of wave shapes.
   parameters:
     - name: volume
       description: >
         How loudly the synth plays.
-    - name: fm_waveshape
+    - name: waveshape
       description: >
         The wave shape of the tone. It can be sine, square, sawtooth or triangle.
 FMSynth:

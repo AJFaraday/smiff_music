@@ -36,17 +36,7 @@ class Synth < ActiveRecord::Base
                         in: ['sine','square','sawtooth','triangle'],
                         if: lambda{self.constructor == 'FMSynth'}
 
-  cattr_accessor :types
-
-  def Synth.types
-    @@types ||= YAML.load_file(File.join(Rails.root, 'config', 'synth_types.yml'))
-  end
-
-
-  def save_patterns
-    note_on.save! if note_on
-    note_off.save! if note_off
-  end
+  after_save :modify_pattern_store
 
   serialize :pitches
 
@@ -62,17 +52,28 @@ class Synth < ActiveRecord::Base
 
   end
 
-  def note_on
-    return @note_on if @note_on
-    @note_on = patterns.note_on
+  cattr_accessor :types
+
+  def Synth.types
+    @@types ||= YAML.load_file(File.join(Rails.root, 'config', 'synth_types.yml'))
   end
 
-  def note_off
-    return @note_off if @note_off
-    @note_off = patterns.note_off
+  attr_accessor :type
+
+  def type
+    @type ||= Synth.types[constructor]
   end
 
-  after_save :modify_pattern_store
+  def description
+    result = <<TEXT
+'#{name}' is a #{type['name']} synthesizer.
+#{type['description']}Parameters:
+TEXT
+    type['parameters'].each do |parameter|
+      result << "* #{parameter['name']} - #{parameter['description']}"
+    end
+    result
+  end
 
   def Synth.build_seeds
     definitions = YAML.load_file(File.join(Rails.root, 'db', 'seed', 'synths.yml'))
@@ -83,6 +84,22 @@ class Synth < ActiveRecord::Base
         Synth.create!(params)
       end
     end
+  end
+
+  def save_patterns
+    note_on.save! if note_on
+    note_off.save! if note_off
+  end
+
+
+  def note_on
+    return @note_on if @note_on
+    @note_on = patterns.note_on
+  end
+
+  def note_off
+    return @note_off if @note_off
+    @note_off = patterns.note_off
   end
 
   def modify_pattern_store
@@ -287,6 +304,8 @@ class Synth < ActiveRecord::Base
     clear_range(0, (self.step_count - 1), true)
     save!
   end
+
+
 
 
 end
