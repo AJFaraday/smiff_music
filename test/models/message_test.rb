@@ -565,8 +565,7 @@ class MessageTest < ActiveSupport::TestCase
     )
   end
 
-  # pending
-  def test_set_parameter
+  def test_set_parameter_no_param
     message = Message.parse('set sine volume to 10')
     assert_equal 'set_param', message.action
     assert_equal(
@@ -578,5 +577,33 @@ class MessageTest < ActiveSupport::TestCase
       message.parameters
     )
   end
+
+  def test_set_parameter_with_param
+    message = Message.parse('set sine param volume to 10')
+    assert_equal 'set_param', message.action
+    assert_equal(
+      {
+        'synth' => 'sine',
+        'parameter' => 'volume',
+        'value' => '10'
+      },
+      message.parameters
+    )
+  end
+
+  def test_set_parameter_with_parameter
+    message = Message.parse('set sine parameter volume to 10')
+    assert_equal 'set_param', message.action
+    assert_equal(
+      {
+        'synth' => 'sine',
+        'parameter' => 'volume',
+        'value' => '10'
+      },
+      message.parameters
+    )
+  end
+
+
 
 end

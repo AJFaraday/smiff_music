@@ -13,13 +13,7 @@ module Messages::Actions::SetSynth
         session: { synth: synth_name }
       }
     else
-      return {
-        response: 'failure',
-        display: I18n.t(
-          'actions.set_synth.synth_not_found',
-          synth: synth_name
-        )
-      }
+      return synth_not_found(synth_name)
     end
   end
 

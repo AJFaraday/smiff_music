@@ -782,7 +782,7 @@ tom3----------------------------------
     assert_equal(
       {
         response: 'failure',
-        display: "Sorry, I couldn't find a synth named super"
+        display: "Sorry, I can't find a synth named 'super'"
       },
       result
     )
@@ -1225,13 +1225,18 @@ tom3----------------------------------
     assert_equal(
       {
         response: 'success',
-        display: synth.description
+        display: I18n.t(
+          'actions.set_param.success',
+          synth: 'sine',
+          param: 'volume',
+          value: '50'
+        )
       },
       result
     )
 
     synth.reload
-    assert_equal 50, synth.volume
+    assert_equal '50', synth.volume
   end
 
   def test_set_param_synth_not_found
@@ -1271,7 +1276,7 @@ tom3----------------------------------
   def test_set_param_value_too_high
     result = Messages::Actions.set_param(
       {
-        'synth' => 'synth',
+        'synth' => 'sine',
         'parameter' => 'volume',
         'value' => '500'
       }
@@ -1280,11 +1285,11 @@ tom3----------------------------------
       {
         response: 'failure',
         display: I18n.t(
-          'actions.set_param.value_too_high',
+          'actions.set_param.validation_failed',
           synth: 'sine',
-          parameter: 'volume',
+          param: 'volume',
           value: '500',
-          max: '100'
+          error: 'must be less than or equal to 100'
         )
       },
       result
@@ -1294,7 +1299,7 @@ tom3----------------------------------
   def test_set_param_value_too_low
     result = Messages::Actions.set_param(
       {
-        'synth' => 'synth',
+        'synth' => 'sine',
         'parameter' => 'volume',
         'value' => '-1'
       }
@@ -1303,11 +1308,11 @@ tom3----------------------------------
       {
         response: 'failure',
         display: I18n.t(
-          'actions.set_param.value_too_low',
+          'actions.set_param.validation_failed',
           synth: 'sine',
-          parameter: 'volume',
+          param: 'volume',
           value: '-1',
-          min: '0'
+          error: 'must be greater than or equal to 0'
         )
       },
       result

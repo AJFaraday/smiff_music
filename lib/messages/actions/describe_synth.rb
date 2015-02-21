@@ -8,13 +8,7 @@ module Messages::Actions::DescribeSynth
         display: synth.description
       }
     else
-      return {
-        response: 'failure',
-        display: I18n.t(
-          'messages.errors.synth_not_found',
-          synth: args['synth'][0]
-        )
-      }
+      return synth_not_found(args['synth'][0])
     end
   end
 

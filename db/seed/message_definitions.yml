@@ -217,3 +217,12 @@ list_params:
     - synth
   weight: 0
 
+set_params:
+  name: set_params
+  regex: 'set (\w+)(?: parameter| param)? (\w+) to (\w+)'
+  action: set_param
+  variables:
+    - synth
+    - parameter
+    - value
+  weight: 0

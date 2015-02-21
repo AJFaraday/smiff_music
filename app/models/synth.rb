@@ -83,6 +83,11 @@ TEXT
     result
   end
 
+  def parameter_names
+    parameters.keys
+  end
+
+
   def Synth.build_seeds
     definitions = YAML.load_file(File.join(Rails.root, 'db', 'seed', 'synths.yml'))
     definitions.each do |name, params|

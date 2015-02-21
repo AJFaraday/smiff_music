@@ -6,7 +6,7 @@ class Messages::Actions
     clear_all mute_unmute mute_unmute_all show_all_drums
     set_synth set_note_length
     add_notes clear_pitches
-    list_synths describe_synth list_params
+    list_synths describe_synth list_params set_param
   }
 
   extend Messages::Actions::Show
@@ -29,6 +29,8 @@ class Messages::Actions
   extend Messages::Actions::ClearPitches
   extend Messages::Actions::DescribeSynth
   extend Messages::Actions::ListParams
+  extend Messages::Actions::SetParam
+
 
   def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)
@@ -59,6 +61,16 @@ class Messages::Actions
         names: pattern_names.to_sentence(
           last_word_connector: ' and '
         )
+      )
+    }
+  end
+
+  def self.synth_not_found(synth_name)
+    return {
+      response: 'failure',
+      display: I18n.t(
+        'messages.errors.synth_not_found',
+        synth: synth_name
       )
     }
   end
