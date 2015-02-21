@@ -1267,7 +1267,8 @@ tom3----------------------------------
     assert_equal(
       {
         response: 'failure',
-        display: I18n.t('messages.errors.parameter_not_found', parameter: 'awesomeness')
+        display: I18n.t('messages.errors.parameter_not_found',
+                        synth: 'sine', parameter: 'awesomeness')
       },
       result
     )

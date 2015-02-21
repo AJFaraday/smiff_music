@@ -20,4 +20,20 @@ function SimpleSynth(attrs) {
   };
   this.set_pitch(69);
 
+  this.re_set = function(attrs) {
+    this.note_on_steps = attrs['note_on_steps'];
+    this.note_off_steps = attrs['note_off_steps'];
+    this.pitches = attrs['pitches'];
+    this.muted = attrs['muted'];
+    this.set_step_info();
+    this.display();
+    // todo handle parameters
+    this.set_volume(attrs['volume']);
+    this.set_waveshape(attrs['waveshape']);
+  };
+
+  this.set_waveshape = function(waveshape) {
+    this.oscillator.type = waveshape;
+  };
+
 }

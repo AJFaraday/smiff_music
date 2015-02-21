@@ -119,20 +119,12 @@ var Sound = {
           } else if (key == 'patterns') {
             $.each(attrs, function (key, attrs) {
               pattern = Sound.patterns[key];
-              pattern.step_source = attrs['steps'];
-              pattern.muted = attrs['muted'];
-              pattern.set_step_info();
-              pattern.display();
+              pattern.re_set(attrs);
             });
           } else if (key == 'synths') {
             $.each(attrs, function (key, attrs) {
               synth = Sound.synths[key];
-              synth.note_on_steps = attrs['note_on_steps'];
-              synth.note_off_steps = attrs['note_off_steps'];
-              synth.pitches = attrs['pitches']
-              synth.muted = attrs['muted'];
-              synth.set_step_info();
-              synth.display();
+              synth.re_set(attrs);
             });
           }
         });

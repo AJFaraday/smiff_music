@@ -17,6 +17,12 @@ function Pattern(attrs) {
   };
   this.set_step_info();
 
+  this.re_set = function (attrs) {
+    this.step_source = attrs['steps'];
+    this.muted = attrs['muted'];
+    this.set_step_info();
+    this.display();
+  };
 
   this.play_step = function (step) {
     step = step % this.length;

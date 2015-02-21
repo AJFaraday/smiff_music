@@ -36,4 +36,32 @@ function FMSynth(attrs) {
   };
   this.set_pitch(69);
 
+  this.re_set = function(attrs) {
+    this.note_on_steps = attrs['note_on_steps'];
+    this.note_off_steps = attrs['note_off_steps'];
+    this.pitches = attrs['pitches'];
+    this.muted = attrs['muted'];
+    this.set_step_info();
+    this.display();
+    // todo handle parameters
+    this.set_volume(attrs['volume']);
+    this.set_fm_waveshape(attrs['fm_waveshape']);
+    this.set_fm_frequency(attrs['fm_frequency']);
+    this.set_fm_depth(attrs['fm_depth']);
+  };
+
+
+  this.set_fm_waveshape = function(waveshape) {
+    this.modulator.type = waveshape;
+  };
+
+  this.set_fm_frequency = function(frequency) {
+    this.fm_frequency = frequency;
+  };
+
+  this.set_fm_depth = function(depth) {
+    this.fm_depth = depth;
+  }
+
+
 }

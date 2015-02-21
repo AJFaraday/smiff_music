@@ -6,6 +6,7 @@ en:
       not_implemented: "Sorry, it looks like this action '%{action}' is not yet implemented."
       pattern_not_found: "Sorry, I can't find any patterns named %{names}"
       synth_not_found: "Sorry, I can't find a synth named '%{synth}'"
+      parameter_not_found: "Sorry, %{synth} doesn't have a parameter named '%{parameter}'"
       could_not_run: "Sorry, I couldn't run this action. Something nasty and technical happened. Tweet @MarmiteJunction about it."
   actions: 
     show_patterns: 

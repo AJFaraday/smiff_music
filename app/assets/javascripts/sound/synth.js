@@ -4,9 +4,9 @@ function Synth(attrs) {
   this.muted = attrs['muted'];
 
   // setup two pattern attributes
-  this.note_on_steps = attrs['note_on_steps'] || 0
-  this.note_off_steps = attrs['note_off_steps'] || 0
-  this.step_count = attrs['step_count'] || 16
+  this.note_on_steps = attrs['note_on_steps'] || 0;
+  this.note_off_steps = attrs['note_off_steps'] || 0;
+  this.step_count = attrs['step_count'] || 16;
   this.pitches = attrs['pitches'] || [0,0,0,0,0,0,0,0];
   this.pitch = 69;
   this.portamento = 0.001;
@@ -17,15 +17,23 @@ function Synth(attrs) {
   this.sustain_level = attrs['sustain_level'] || 0.3;
   this.release_time = attrs['release_time'] || 0.5;
 
+
+  // accepts volume from 1 to 100
+  // converts to 0 to 1
+  this.set_volume = function(volume) {
+    volume = parseInt(volume) / 100;
+    this.master_gain.gain.value = ((this.sustain_level * -1) + 1) * volume;
+    this.volume = volume;
+  };
+
   // setup web audio stuff
   this.master_gain = Sound.context.createGain();
-  this.master_gain.gain.value = ((this.sustain_level * -1) + 1) * 0.8;
+  this.set_volume(attrs['volume']);
   this.master_gain.connect(Sound.master_gain);
 
   this.envelope_gain = Sound.context.createGain();
   this.envelope_gain.gain.value = 0;
   this.envelope_gain.connect(this.master_gain);
-
 
 
   this.set_step_info = function() {
@@ -44,14 +52,14 @@ function Synth(attrs) {
           this.release(),
           ((this.attack_time + this.decay_time) * 1000)
         );
-      };
+      }
     } else if (this.note_off_at_step(step)) {
       this.release();
-    };
+    }
     // for some reason both null and undefined equal undefined
     if (this.pitches[step] != undefined ) {
       this.set_pitch(this.pitches[step]);
-    };
+    }
   };
 
   this.note_on_at_step = function(step) {
@@ -87,14 +95,18 @@ function Synth(attrs) {
   };
 
   this.pitch_at_step = function(step) {
-    pitch_slice = this.pitches.slice(0,(step + 1))
+    pitch_slice = this.pitches.slice(0,(step + 1));
     pitch_slice = pitch_slice.filter(function(n){ return n != null });
     return pitch_slice.pop();
   };
 
   this.set_pitch = function(midi) {
-    console.log("Calling set_pitch in base synth constructor, should be child type of synth.")
-  }
+    console.log("Calling set_pitch in base synth constructor, should be child type of synth.");
+  };
+
+  this.re_set = function(midi) {
+    console.log("Calling re_set in base synth constructor, should be child type of synth.");
+  };
 
   this.display = function() {
     this.set_diagram('tbody#synth_'+this.name+'_overview');
@@ -138,10 +150,10 @@ function Synth(attrs) {
           cell.addClass('note_continues');
         } else {
           cell.addClass('inactive');
-        };
+        }
       } else {
         cell.addClass('inactive');
-      };
+      }
 
     });
   };
