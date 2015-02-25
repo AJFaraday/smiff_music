@@ -16,7 +16,6 @@ soprano:
 
 alto:
   name: anne
-  waveshape: square
   attack_time: 0.1
   decay_time: 0.1
   sustain_level: 0.8
@@ -27,6 +26,9 @@ alto:
   min_note: 67
   max_note: 91
   constructor: AMSynth
+  am_frequency: 30
+  am_depth: 50
+  am_waveshape: 'sawtooth'
   volume: 40
 
 tenor:
@@ -41,8 +43,8 @@ tenor:
   min_note: 60
   max_note: 84
   constructor: FMSynth
-  fm_frequency: 30
-  fm_depth: 50
+  fm_frequency: 40
+  fm_depth: 80
   fm_waveshape: 'sine'
   volume: 40
 

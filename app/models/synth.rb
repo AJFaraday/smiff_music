@@ -16,6 +16,8 @@ class Synth < ActiveRecord::Base
         accessors: [
           # For FMSynth synths
           :fm_frequency, :fm_depth, :fm_waveshape,
+          # For AMSynth synths
+          :am_frequency, :am_depth, :am_waveshape,
           :volume, :waveshape
         ],
         coder: JSON
@@ -35,6 +37,19 @@ class Synth < ActiveRecord::Base
   validates_presence_of :fm_waveshape,
                         in: ['sine','square','sawtooth','triangle'],
                         if: lambda{self.constructor == 'FMSynth'}
+
+  # For AMSynth synths
+  validates_numericality_of :am_frequency,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'AMSynth'}
+  validates_numericality_of :am_depth,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'AMSynth'}
+  validates_presence_of :am_waveshape,
+                        in: ['sine','square','sawtooth','triangle'],
+                        if: lambda{self.constructor == 'AMSynth'}
 
   after_save :modify_pattern_store
 
