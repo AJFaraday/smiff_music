@@ -30,3 +30,24 @@ FMSynth:
     - name: fm_waveshape
       description: >
         The wave shape of the modulator. It can be sine, square, sawtooth or triangle.
+AMSynth:
+  name: Amplitude Modulation
+  description: >
+    AM synthesisers produce two sound waves,
+    one is the tone you hear (called the 'carrier')
+    and teh other (called the 'modulator') changes
+    the volume of the carrier. At speed, producing
+    a richer tone.
+  parameters:
+    - name: volume
+      description: >
+        How loudly the synth plays.
+    - name: am_depth
+      description: >
+        How much the modulator changes the frequency of the carrier.
+    - name: am_frequency
+      description: >
+        The frequency of the modulator, as a proportion of the pitch.
+    - name: am_waveshape
+      description: >
+        The wave shape of the modulator. It can be sine, square, sawtooth or triangle.
