@@ -90,10 +90,10 @@ Version 0.3
 ** AM
 ** Additive
 ** Subtractive
-** Wave shaping (change oscillator wave shape)
+** Wave shaping (change oscillator wave shape) - was covered in 0.2
 * Help page for each synth
 
-End point: There is an interesting selection of synths which can be modified via the terminal. 
+End point: There is an interesting selection of synths which can be modified via the terminal.
 
 Version 0.4 (important)
 -----------------------
