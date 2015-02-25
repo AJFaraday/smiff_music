@@ -1,21 +1,21 @@
 ---
-sine:
-  name: sine
-  waveshape: sine
+soprano:
+  name: sarah
   attack_time: 0.1
   decay_time: 0.3
-  sustain_level: 0.3
+  sustain_level: 0.7
   release_time: 0.5
   muted: false
   step_size: 16
   step_count: 32
-  min_note: 58
-  max_note: 72
+  min_note: 72
+  max_note: 96
   constructor: SimpleSynth
+  waveshape: sine
   volume: 40
 
-square:
-  name: square
+alto:
+  name: anne
   waveshape: square
   attack_time: 0.1
   decay_time: 0.1
@@ -24,14 +24,30 @@ square:
   muted: false
   step_size: 16
   step_count: 32
-  min_note: 58
-  max_note: 72
-  constructor: SimpleSynth
+  min_note: 67
+  max_note: 91
+  constructor: AMSynth
   volume: 40
 
-fm:
-  name: fm
-  waveshape:
+tenor:
+  name: trevor
+  attack_time: 0.4
+  decay_time: 0.2
+  sustain_level: 0.7
+  release_time: 0.5
+  muted: false
+  step_size: 16
+  step_count: 32
+  min_note: 60
+  max_note: 84
+  constructor: FMSynth
+  fm_frequency: 30
+  fm_depth: 50
+  fm_waveshape: 'sine'
+  volume: 40
+
+bass:
+  name: brian
   attack_time: 0.2
   decay_time: 0.2
   sustain_level: 0.7
@@ -39,10 +55,8 @@ fm:
   muted: false
   step_size: 16
   step_count: 32
-  min_note: 58
-  max_note: 72
-  constructor: FMSynth
-  fm_frequency: 30
-  fm_depth: 50
-  fm_waveshape: 'sine'
+  min_note: 52
+  max_note: 76
+  constructor: SimpleSynth
+  waveshape: square
   volume: 40
