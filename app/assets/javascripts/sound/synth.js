@@ -89,7 +89,7 @@ function Synth(attrs) {
     this.envelope_gain.gain.setTargetAtTime(
       0,
       // adding 100ms seems to help avoid the envelope action being missed.
-      (Sound.context.currentTime + this.attack_time + this.release_time),
+      (Sound.context.currentTime + (this.attack_time) + (this.release_time)),
       this.release_time
     );
   };

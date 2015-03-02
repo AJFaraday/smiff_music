@@ -62,3 +62,21 @@ bass:
   constructor: SimpleSynth
   waveshape: square
   volume: 40
+
+polly:
+  name: polly
+  attack_time: 0.4
+  decay_time: 0.2
+  sustain_level: 0.7
+  release_time: 0.5
+  muted: false
+  step_size: 16
+  step_count: 32
+  min_note: 72
+  max_note: 91
+  constructor: PolySynth
+  sine_level: 60
+  square_level: 20
+  sawtooth_level: 20
+  triangle_level: 100
+  volume: 40

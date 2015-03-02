@@ -65,14 +65,14 @@ PolySynth:
       description: >
         How loudly the synth plays.
     - name: sine_level
-      description:
+      description: >
         How much of the sine tone will be heard.
     - name: square_level
-      description:
+      description: >
         How much of the square tone will be heard.
     - name: sawtooth_level
-      description:
+      description: >
         How much of the sawtooth tone will be heard.
     - name: triangle_level
-      description:
+      description: >
         How much of the triangle tone will be heard.

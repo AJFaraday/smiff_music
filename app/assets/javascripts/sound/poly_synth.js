@@ -16,17 +16,18 @@ function PolySynth(attrs) {
     synth.osc = osc;
 
     gain = Sound.context.createGain();
-    gain.gain.value = gain_value;
+    gain.gain.value = gain_value / 100;
     synth.gain = gain;
 
     osc.connect(gain);
     gain.connect(this.normalise_gain);
-    synths[type] = synth;
+    this.synths[type] = synth;
   };
 
   this.normalise_volume = function() {
-    synth_gains = synths.map(function(synth){
-      return synth.gain.gain.value();
+    poly = this;
+    synth_gains = Object.keys(this.synths).map(function(synth_name,i){
+      return poly.synths[synth_name].gain.gain.value;
     });
     gain_sum = 0;
     $.each(synth_gains,function() {gain_sum += this;});
@@ -39,14 +40,15 @@ function PolySynth(attrs) {
   this.add_synth('triangle', (attrs['triangle_level'] || 70));
   this.normalise_volume();
 
-  this.set_pitch = function(){
-    this.pitch = midi;
+  this.set_pitch = function(midi){
+    poly = this;
     hz = 27.5 * Math.pow(2, ((midi - 21) / 12));
-    $.each(this.synths, function(synth) {
+    $.each(this.synths, function(name,synth) {
+      console.log(this.portamento);
       synth.osc.frequency.setTargetAtTime(
         hz,
         Sound.context.currentTime,
-        this.portamento
+        poly.portamento
       )
     });
   };
