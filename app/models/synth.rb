@@ -14,11 +14,17 @@ class Synth < ActiveRecord::Base
 
   store :parameters,
         accessors: [
+          # for SimpleSynth synths
+          :waveshape,
           # For FMSynth synths
           :fm_frequency, :fm_depth, :fm_waveshape,
           # For AMSynth synths
           :am_frequency, :am_depth, :am_waveshape,
-          :volume, :waveshape
+          # for PolySynth synths
+          :sine_level, :square_level,
+          :sawtooth_level, :triangle_level,
+          # for all synths
+          :volume
         ],
         coder: JSON
 
@@ -50,6 +56,25 @@ class Synth < ActiveRecord::Base
   validates_presence_of :am_waveshape,
                         in: ['sine','square','sawtooth','triangle'],
                         if: lambda{self.constructor == 'AMSynth'}
+
+  # for PolySynth synths
+  validates_numericality_of :sine_level,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'PolySynth'}
+  validates_numericality_of :square_level,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'PolySynth'}
+  validates_numericality_of :sawtooth_level,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'PolySynth'}
+  validates_numericality_of :triangle_level,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'PolySynth'}
+
 
   after_save :modify_pattern_store
 
