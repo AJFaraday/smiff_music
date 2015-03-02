@@ -65,7 +65,7 @@ function AMSynth(attrs) {
 
   this.set_am_depth = function(depth) {
     this.am_depth = depth;
-  }
+  };
 
 
 }

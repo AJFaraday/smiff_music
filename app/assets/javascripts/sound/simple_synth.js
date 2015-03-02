@@ -27,7 +27,6 @@ function SimpleSynth(attrs) {
     this.muted = attrs['muted'];
     this.set_step_info();
     this.display();
-    // todo handle parameters
     this.set_volume(attrs['volume']);
     this.set_waveshape(attrs['waveshape']);
   };
