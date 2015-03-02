@@ -63,6 +63,8 @@ Used in drawing diagrams, this is the most recent change of pitch at a given ste
 
 This makes all expected changes to the UI based on the patterns of the synth.
 
+All synths respond to the 'volume' attribute.
+
 Synth types
 -----------
 
@@ -70,6 +72,7 @@ Synth types
 
 Simple synths have one oscillator with a given wave shape:
 
+<pre>
   new Synth({
     constructor: 'SimpleSynth',
     waveshape: 'sine',
@@ -82,12 +85,15 @@ Simple synths have one oscillator with a given wave shape:
     note_off_steps: 0,
     step_count: 32,
     pitches: [],
-    name: 'sine'
+    name: 'sine',
+    volume: 0.3
   })
+</pre>
+
 
 *Frequency Modulation*
 
-FM syths implement a frequency modulation algorithm
+FM synths implement a frequency modulation algorithm
 
 In addition to the attributes required by all synths, FM will need to know:
 
@@ -95,6 +101,7 @@ In addition to the attributes required by all synths, FM will need to know:
 * fm_depth (as a proportion of the pitch, how much the frequency will change, percentage)
 * fm_wave_shape (a waveshape, sine, square, triangle, saw etc.)
 
+<pre>
   new FmSynth({
     constructor: 'FMSynth',
     fm_frequency: 40,
@@ -102,3 +109,49 @@ In addition to the attributes required by all synths, FM will need to know:
     fm_wave_shape: 'sine'
     ...
   })
+</pre>
+
+*Amplitude Modulation*
+
+AM synths implement an amplitude modulation algorithm
+
+In addition to the attributes required by all synths, AM will need to know:
+
+* am_frequency (as a proportion of the pitch, how fast will the modulation be, percentage)
+* am_depth (as a proportion of the pitch, how much the frequency will change, percentage)
+* am_wave_shape (a waveshape, sine, square, triangle, saw etc.)
+
+<pre>
+  new AmSynth({
+    constructor: 'AMSynth',
+    fm_frequency: 40,
+    fm_depth: 20,
+    fm_wave_shape: 'sine',
+    volume: 0.3
+    ...
+  })
+</pre>
+
+*Polyphonic Synthesis*
+
+Polyphonic synthesisers use a selection of oscillators in varying proportions
+
+In addition to the attributes required by all synths, poly snyhts will need to know:
+
+* sine_level - volume for a sine shaped oscillator
+* square_level - volume for a square shaped oscillator
+* sawtooth_level - volume for a sawtooth shaped oscillator
+* triangle_level - volume for a triangle shaped oscillator
+
+<pre>
+  new PolySynth({
+    constructor: 'PolySynth',
+    sine_level: 60,
+    square_level: 40,
+    sawtooth_level: 40,
+    triangle_level: 100,
+    volume: 0.3
+    ...
+  })
+</pre>
+

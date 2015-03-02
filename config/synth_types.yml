@@ -51,3 +51,28 @@ AMSynth:
     - name: am_waveshape
       description: >
         The wave shape of the modulator. It can be sine, square, sawtooth or triangle.
+PolySynth:
+  name: Polyphonic
+  description: >
+    Polyphonic (poly) synthesisers produce four audible waves
+    at the same frequency but with different wave shapes. 
+    You can adjust the level of each one. After which they 
+    are normalised to the same volume, this means that you 
+    are really setting the proportions of each wave shape
+    will be heard.
+  parameters:
+    - name: volume
+      description: >
+        How loudly the synth plays.
+    - name: sine_level
+      description:
+        How much of the sine tone will be heard.
+    - name: square_level
+      description:
+        How much of the square tone will be heard.
+    - name: sawtooth_level
+      description:
+        How much of the sawtooth tone will be heard.
+    - name: triangle_level
+      description:
+        How much of the triangle tone will be heard.
