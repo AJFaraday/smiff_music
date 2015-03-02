@@ -101,5 +101,5 @@
           file: '/docs/help/messages/synths/list_params.md'
         - titile: set parameter
           anchor: set_param
-          file: '/docs/help/messages/synths/set_params.md'
+          file: '/docs/help/messages/synths/set_param.md'
 
