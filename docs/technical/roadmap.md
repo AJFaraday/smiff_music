@@ -69,9 +69,9 @@ Version 0.2
 0.2 will focus on modifying synthesis parameters.
 
 * An FM synthesizer with a few changeable parameters
-** Volume
-** Modulation frequency
-** Modulation depth 
+  * Volume
+  * Modulation frequency
+  * Modulation depth 
 * Messages for setting synthesis parameters
 * Displaying synthesizer with pattern and synth params
 * Help page which oulines synth and parameters
