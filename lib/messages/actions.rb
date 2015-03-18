@@ -54,6 +54,7 @@ class Messages::Actions
   end
 
   def self.pattern_not_found(pattern_names)
+    pattern_names = pattern_names.to_a
     {
       response: 'failure',
       display: I18n.t(
