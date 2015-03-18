@@ -4,7 +4,7 @@ The idea is simple, people send a tweet then the SMIFF Music app makes music. On
 
 It is primarily controlled via a set of terminal-style commands which are designed to get the information required to create and modify music in as 'plain-english' a way as possible.
 
-SMIFF is currently at version 0.1, in which users can define drums and melodies. 
+SMIFF is currently at version 0.3, in which users can define drums and melodies, as well as selecting from a variety of synthesisers and modifying their sounds. 
 
 Components:
 
