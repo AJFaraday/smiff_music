@@ -6,9 +6,10 @@ History
 
 This is a short summary of the completion dates of specific versions.
 
-* Version 0 - 5th January
-* Version 0.1 - 4th February
-* Version 0.2 - 25th February
+* Version 0 - 5th January 2015
+* Version 0.1 - 4th February 2015
+* Version 0.2 - 25th February 2015
+* Version 0.3 - 18th March 2015
 
 Versions
 --------
