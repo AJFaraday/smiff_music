@@ -50,17 +50,17 @@ tenor:
 
 bass:
   name: brian
-  attack_time: 0.2
-  decay_time: 0.2
+  attack_time: 0.1
+  decay_time: 0.1
   sustain_level: 0.7
-  release_time: 0.2
+  release_time: 0.1
   muted: false
   step_size: 16
   step_count: 32
   min_note: 52
   max_note: 76
-  constructor: SimpleSynth
-  waveshape: square
+  constructor: SubSynth
+  bandwidth: 20,
   volume: 40
 
 polly:

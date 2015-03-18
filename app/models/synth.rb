@@ -23,6 +23,8 @@ class Synth < ActiveRecord::Base
           # for PolySynth synths
           :sine_level, :square_level,
           :sawtooth_level, :triangle_level,
+          # for SubSynth synths
+          :bandwidth,
           # for all synths
           :volume
         ],
@@ -75,6 +77,11 @@ class Synth < ActiveRecord::Base
                             less_than_or_equal_to: 100,
                             if: lambda{self.constructor == 'PolySynth'}
 
+  # for SubSynth synths
+  validates_numericality_of :bandwidth,
+                            greater_than_or_equal_to: 0,
+                            less_than_or_equal_to: 100,
+                            if: lambda{self.constructor == 'SubSynth'}
 
   after_save :modify_pattern_store
 
