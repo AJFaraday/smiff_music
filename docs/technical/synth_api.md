@@ -155,3 +155,20 @@ In addition to the attributes required by all synths, poly snyhts will need to k
   })
 </pre>
 
+*Subtractive Synthesis*
+
+A subtractive synthesiser starts with white noise and filters out unwanted frequencies.
+
+In addition to the attributes required by all synths, poly snyhts will need to know:
+
+* bandwidth - how wide the band of audible frequencies is.
+
+<pre>
+  new SubSynth({
+    constructor: 'SubSynth',
+    bandwidth: 20,
+    volume: 0.3
+    ...
+  })
+</pre>
+
