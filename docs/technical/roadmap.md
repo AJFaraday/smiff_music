@@ -87,10 +87,10 @@ Version 0.3
 0.3 will focus on a wider variety of synths 
 
 * Some more synths
-** AM
-** Additive
-** Subtractive
-** Wave shaping (change oscillator wave shape) - was covered in 0.2
+  * AM
+  * Polysynth
+  * Subtractive
+  * Wave shaping (change oscillator wave shape) - was covered in 0.2
 * Help page for each synth
 
 End point: There is an interesting selection of synths which can be modified via the terminal.
