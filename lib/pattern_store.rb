@@ -31,7 +31,7 @@ class PatternStore
     PatternStore.changed_entities ||= []
     entities = PatternStore.changed_entities[version.to_i..PatternStore.version].to_a.uniq.compact
     return {} if entities.none?
-    result = {}
+    result = {'version' => PatternStore.version}
     entities.each do |entity|
       if entity.is_a?(Pattern)
         result['patterns'] ||= {}
@@ -39,6 +39,10 @@ class PatternStore
       elsif entity.is_a?(Synth)
         result['synths'] ||= {}
         result['synths'][entity.name] = entity.to_hash
+      elsif entity == Pattern
+        result['patterns'] = Pattern.to_hash
+      elsif entity == Synth
+        result['synths'] = Synth.to_hash
       elsif entity == 'bpm'
         result['bpm'] = SystemSetting['bpm']
       end
