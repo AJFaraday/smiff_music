@@ -14,7 +14,7 @@ class PatternsController < ApplicationController
           # unnecessary modifications being made client-side
           render nothing: true
         else
-          render json: PatternStore.hash.to_json
+          render json: PatternStore.hash_for_version(params[:version]).to_json
         end
       end
     end
