@@ -10,6 +10,17 @@ SimpleSynth:
     - name: waveshape
       description: >
         The wave shape of the tone. It can be sine, square, sawtooth or triangle.
+SubSynth:
+  name: Subtractive
+  description: >
+    A subtractive synthesiser produces white noise, then filters out unwanted frequencies.
+  parameters:
+    - name: volume
+      description: >
+        How loudly the synth plays.
+    - name: bandwidth
+      description: >
+        The amount of frequency either side of the note which is allowed through.
 FMSynth:
   name: Frequency Modulation
   description: >
