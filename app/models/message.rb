@@ -41,6 +41,7 @@ class Message < ActiveRecord::Base
           log_failure(result)
       end
       log_message(result)
+      PatternStore.increment_version
       result[:version] = PatternStore.version
       save!
       return result
