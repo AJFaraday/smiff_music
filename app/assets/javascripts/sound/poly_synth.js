@@ -44,7 +44,6 @@ function PolySynth(attrs) {
     poly = this;
     hz = 27.5 * Math.pow(2, ((midi - 21) / 12));
     $.each(this.synths, function(name,synth) {
-      console.log(this.portamento);
       synth.osc.frequency.setTargetAtTime(
         hz,
         Sound.context.currentTime,

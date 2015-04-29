@@ -9,6 +9,9 @@
     - title: 'What does SMIFF do?'
       anchor: does_what
       file: '/docs/help/introduction/what_does_smiff_do.md'
+    - title: "Quick-start Guide"
+      anchor: quickstart
+      file: '/docs/help/introduction/quick_start_guide.md'
 - title: Using the Terminal
   anchor: terminal
   file: '/docs/help/terminal.md'
@@ -96,10 +99,10 @@
         - title: clear
           anchor: clear_synth
           file: '/docs/help/messages/synths/clear.md'
-        - titile: list parameters
+        - title: list parameters
           anchor: list_params
           file: '/docs/help/messages/synths/list_params.md'
-        - titile: set parameter
+        - title: set parameter
           anchor: set_param
           file: '/docs/help/messages/synths/set_param.md'
 

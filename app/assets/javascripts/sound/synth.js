@@ -83,15 +83,19 @@ function Synth(attrs) {
       (Sound.context.currentTime + this.attack_time),
       this.decay_time
     );
+    this.sounding = true;
   };
 
   this.release = function () {
-    this.envelope_gain.gain.setTargetAtTime(
-      0,
-      // adding 100ms seems to help avoid the envelope action being missed.
-      (Sound.context.currentTime + (this.attack_time) + (this.release_time)),
-      this.release_time
-    );
+    if (this.sounding == true) {
+      this.envelope_gain.gain.setTargetAtTime(
+        0,
+        // adding 100ms seems to help avoid the envelope action being missed.
+        (Sound.context.currentTime + (this.attack_time) + (this.release_time)),
+        this.release_time
+      );
+      this.sounding = false; 
+    }
   };
 
   this.pitch_at_step = function(step) {

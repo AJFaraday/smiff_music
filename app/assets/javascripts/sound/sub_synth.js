@@ -59,11 +59,9 @@ function SubSynth(attrs) {
   this.set_bandwidth = function(bandwidth) {
     // q = (((bandwidth - 1) * -1) + 100) * 40;
     q = ((((bandwidth * -1) + 100) + 1) * 40);
-    console.log('Q = ' + q);
     this.filter.Q.value = q;
     gain_val = (((bandwidth) * -1) + 120) * 8;
     this.make_up_gain.gain.value = gain_val;
-    console.log('make up gain = ' + gain_val);
   };
 
 }
