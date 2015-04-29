@@ -9,6 +9,9 @@
     - title: 'What does SMIFF do?'
       anchor: does_what
       file: '/docs/help/introduction/what_does_smiff_do.md'
+    - title: "Quick-start Guide"
+      anchor: quickstart
+      file: '/docs/help/introduction/quick_start_guide.md'
 - title: Using the Terminal
   anchor: terminal
   file: '/docs/help/terminal.md'
