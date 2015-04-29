@@ -96,10 +96,10 @@
         - title: clear
           anchor: clear_synth
           file: '/docs/help/messages/synths/clear.md'
-        - titile: list parameters
+        - title: list parameters
           anchor: list_params
           file: '/docs/help/messages/synths/list_params.md'
-        - titile: set parameter
+        - title: set parameter
           anchor: set_param
           file: '/docs/help/messages/synths/set_param.md'
 

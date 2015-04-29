@@ -3,7 +3,6 @@
 </li>
 <% if page['children'] %>
   <ul>
-
     <% page['children'].each do |child| %>
       <%= render partial: 'help_nav_menu_item', locals: {page: child} %>
   <% end  %>
