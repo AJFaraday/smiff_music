@@ -69,7 +69,7 @@ var Sound = {
     if (step_time != Sound.sixteenth_time) {
       Sound.sixteenth_time = step_time;
       if (Sound.player_active) {
-        clearInterval(Sound.player);
+        clearCorrectingInterval(Sound.player);
         Sound.player_active = false;
         Sound.play(false)
       }
@@ -176,7 +176,7 @@ var Sound = {
         Sound.step = 0;
       }
       ;
-      Sound.player = setInterval(
+      Sound.player = setCorrectingInterval(
         function () {
           Sound.play_step(Sound.step)
         },
@@ -190,7 +190,7 @@ var Sound = {
 
   stop:function () {
     if (Sound.player_active) {
-      clearInterval(Sound.player);
+      clearCorrectingInterval(Sound.player);
       Sound.player_active = false;
       $.each(this.synths, function(key,synth) {
         synth.release();
