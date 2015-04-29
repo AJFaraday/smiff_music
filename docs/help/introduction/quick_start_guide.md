@@ -62,6 +62,7 @@ So, how about some tunes to go with it? Here`s some building blocks, I`ll leave 
 > set synth to brain
 > play c3, c3, g3, c3 from step 1 skipping 1
 > play c4, c4, g4, c4 from step 17 skipping 1
+> mute all drums
 </pre>
 
 Now, go play :)
