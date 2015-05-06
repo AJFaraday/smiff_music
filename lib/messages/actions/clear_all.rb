@@ -17,12 +17,11 @@ module Messages::Actions::ClearAll
         PatternStore.increment_version(Pattern)
       else
         PatternStore.hash['patterns'].each { |k, value| value[:steps] = 0 }
-        Pattern.all.each{|x| PatternStore.increment_version(x)}
 
         Pattern.where(purpose: ['note_on', 'event']).update_all(bits: 0)
         Synth.update_all(pitches: nil)
-        PatternStore.hash['synths'].each do |k, value| #
-          value[:note_off_steps] = 0
+        PatternStore.hash['synths'].each do |k, value|
+          value[:note_on_steps] = 0
           value[:pitches] = Synth.first.pitches
         end
         PatternStore.increment_version(Synth)
