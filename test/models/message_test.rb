@@ -604,6 +604,17 @@ class MessageTest < ActiveSupport::TestCase
     )
   end
 
+  def test_play
+    message = Message.parse('play')
+    assert_equal 'play', message.action
+    assert_equal({}, message.parameters)
+  end 
+
+  def test_stop
+    message = Message.parse('stop')
+    assert_equal 'stop', message.action
+    assert_equal({}, message.parameters)
+  end
 
 
 end

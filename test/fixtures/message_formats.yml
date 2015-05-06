@@ -291,3 +291,17 @@ set_param:
   created_at: 2015-02-21 10:38:36.000000000 Z
   updated_at: 2015-02-21 10:38:36.000000000 Z
   weight: 0
+play:
+  id: 28
+  name: play
+  regex: 'play'
+  action: 'play'
+  weight: 0
+stop:
+  id: 29
+  name: stop
+  regex: 'stop'
+  action: 'stop'
+  weight: 0
+
+

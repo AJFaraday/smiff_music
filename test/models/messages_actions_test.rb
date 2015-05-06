@@ -1319,6 +1319,31 @@ tom3----------------------------------
       result
     )
   end
+  
+  def test_play
+    result = Messages::Actions.play({})
+    assert_equal(
+      {
+        response: 'success',
+        display: I18n.t('actions.play.success'),
+        javascript: 'Sound.play();'
+      },
+      result
+    )
+  end
+
+  def test_stop
+    result = Messages::Actions.stop({})
+    assert_equal(
+      {
+        response: 'success',
+        display: I18n.t('actions.stop.success'),
+        javascript: 'Sound.stop();'
+      },
+      result
+    )
+  end
+
 
 end
 
