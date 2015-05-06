@@ -136,6 +136,7 @@ Version 2
 ----------
 
 * Feedback on what other users are changing at a given time
+* Feedback on how many people are listening/interacting
 * Mouse interactions with grids 
 
 --------------------------------------------------------
