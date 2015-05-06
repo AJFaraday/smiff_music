@@ -53,6 +53,7 @@ var Console = {
         {message:this.message},
         function (response) {
           console.log(response);
+          eval(response['javascript']);
           var feedback = "<div class='" + response['response'] + "'>";
           feedback = feedback.concat(response['display'].replace(/\n/g, "<br/>"));
           feedback = feedback.concat('</div>');
