@@ -9,7 +9,7 @@ class PlayerTest < ActionDispatch::IntegrationTest
     assert page.has_css?('div#stop_button', visible: true)
     result = page.evaluate_script('Sound.player')
     assert result.is_a?(Integer)
-    assert result > 0
+    assert result >= 0
     assert page.evaluate_script('Sound.player_active')
   end
 

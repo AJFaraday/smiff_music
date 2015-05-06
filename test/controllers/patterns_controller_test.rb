@@ -12,19 +12,37 @@ class PatternsControllerTest < ActionController::TestCase
     assert_template 'messages/_console'
   end
 
-  def test_index_json_no_version
-    get :index, format: 'json'
-    assert_equal PatternStore.hash.to_json, response.body
-  end
 
   def test_index_json_old_version
-    get :index, version: SystemSetting['pattern_version'].to_i - 1, format: 'json'
-    assert_equal PatternStore.hash.to_json, response.body
+    synth1 = Synth.first
+    PatternStore.increment_version(synth1)
+    version = PatternStore.version
+    synth2 = Synth.last
+    PatternStore.increment_version(synth2)
+    get :index, version: version - 1, format: 'json'
+    assert_equal(
+      {
+        :version => version + 1,
+        :synths => {
+          synth1.name => synth1.to_hash,
+          synth2.name => synth2.to_hash
+        }
+      }.to_json,
+      response.body
+    )
   end
 
   def test_index_json_current_version
-    get :index, version: PatternStore.hash['version'], format: 'json'
-    assert_equal ' ', response.body
+    synth = Synth.first
+    PatternStore.increment_version(synth)
+    get :index, version: PatternStore.hash['version'] - 1, format: 'json'
+    assert_equal(
+      { 
+        :version => PatternStore.version,
+        :synths => {synth.name => synth.to_hash}
+      }.to_json, 
+      response.body
+    )
   end
 
 end
