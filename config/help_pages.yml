@@ -23,6 +23,12 @@
       anchor: messages_player
       file: '/docs/help/messages/player.md'
       children:
+        - title: play
+          anchor: play
+          file: '/docs/help/messages/player/play.md'
+        - title: stop
+          anchor: stop
+          file: '/docs/help/messages/player/stop.md'
         - title: show speed
           anchor: show_speed
           file: '/docs/help/messages/player/show_speed.md'

@@ -9,6 +9,10 @@ en:
       parameter_not_found: "Sorry, %{synth} doesn't have a parameter named '%{parameter}'"
       could_not_run: "Sorry, I couldn't run this action. Something nasty and technical happened. Tweet @MarmiteJunction about it."
   actions: 
+    play:
+      success: "I'm playing music now."
+    stop:
+      success: "I'm not playing music now."
     show_patterns: 
       errors: 
         no_pattern: "Sorry, I can't find any patterns named '%{names}'"

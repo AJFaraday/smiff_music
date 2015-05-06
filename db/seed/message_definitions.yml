@@ -226,3 +226,17 @@ set_params:
     - parameter
     - value
   weight: 0
+
+play:
+  name: play
+  regex: 'play'
+  action: play
+  variables: 
+  weight: 0
+
+stop:
+  name: stop
+  regex: 'stop'
+  action: stop
+  variables:
+  weight: 0
