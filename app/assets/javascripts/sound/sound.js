@@ -69,9 +69,7 @@ var Sound = {
     if (step_time != Sound.sixteenth_time) {
       Sound.sixteenth_time = step_time;
       if (Sound.player_active) {
-        clearCorrectingInterval(Sound.player);
-        Sound.player_active = false;
-        Sound.play(false)
+        changeCorrectingInterval(Sound.player,step_time);
       }
     }
   },
