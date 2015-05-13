@@ -117,6 +117,14 @@ function Synth(attrs) {
     this.set_diagram('tbody#synth_'+this.name+'_table');
   };
 
+  this.display_params = function(params) {
+    for(var param in params) {
+      class_name = "#synth_" + this.name + '_' + param
+      console.log(class_name);
+      $(class_name).html(params[param]);
+    };
+  };
+
   this.set_diagram = function(tbody_id) {
     this.clear_diagram(tbody_id);
     diagram = $(tbody_id);

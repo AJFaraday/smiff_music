@@ -123,6 +123,8 @@ var Sound = {
             $.each(attrs, function (key, attrs) {
               synth = Sound.synths[key];
               synth.re_set(attrs);
+              synth.display(attrs);
+              synth.display_params(attrs);
             });
           }
         });

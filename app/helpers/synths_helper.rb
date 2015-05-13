@@ -34,12 +34,12 @@ module SynthsHelper
   end
 
   def display_parameter(synth, param)
-    class_name = "synth_#{synth.id}_#{param}"
+    html_id = "synth_#{synth.name}_#{param}"
     output = content_tag(:dt, Synth.human_attribute_name(param))
     if [:max_note, :min_note].include?(param)
-      output << content_tag(:dd, display_midi_note(synth.send(param)), :class => class_name)
+      output << content_tag(:dd, display_midi_note(synth.send(param)), :id => html_id)
     else
-      output << content_tag(:dd, synth.send(param), :class => class_name)
+      output << content_tag(:dd, synth.send(param), :id => html_id)
     end
     output
   end
