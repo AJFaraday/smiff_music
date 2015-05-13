@@ -1,5 +1,5 @@
 <% 
-  split_point = (synth.parameters.count / 2) - 1
+  split_point = (synth.display_parameters.count.to_f / 2.0).ceil
   split_point = 0 if split_point < 0
 %>
 
@@ -7,15 +7,9 @@
 
   <div class='col-md-6'>
     <dl>
-      <dt><%= Synth.human_attribute_name(:min_note) %></dt>
-      <dd><%= display_midi_note(synth.min_note) %></dd>
-
-      <dt><%= Synth.human_attribute_name(:max_note) %></dt>
-      <dd><%= display_midi_note(synth.max_note) %></dd>
  
-      <% synth.parameters.keys[0..split_point].each do |param| %>
-        <dt><%= Synth.human_attribute_name(param) %></dt>
-	<dd><%= synth.send(param) %></dd>  
+      <% synth.display_parameters[0..(split_point - 1)].each do |param| %>
+        <%= display_parameter(synth, param) %>
       <% end %>
 
     </dl>
@@ -23,9 +17,8 @@
 
   <div class='col-md-6'>
     <dl>
-      <% synth.parameters.keys[split_point..-1].each do |param| %>
-        <dt><%= Synth.human_attribute_name(param) %></dt>
-        <dd><%= synth.send(param) %></dd>
+      <% synth.display_parameters[(split_point)..-1].each do |param| %>
+        <%= display_parameter(synth, param) %>
       <% end %>
     </dl>
   </div>

@@ -33,6 +33,17 @@ module SynthsHelper
     kls
   end
 
+  def display_parameter(synth, param)
+    class_name = "synth_#{synth.id}_#{param}"
+    output = content_tag(:dt, Synth.human_attribute_name(param))
+    if [:max_note, :min_note].include?(param)
+      output << content_tag(:dd, display_midi_note(synth.send(param)), :class => class_name)
+    else
+      output << content_tag(:dd, synth.send(param), :class => class_name)
+    end
+    output
+  end
+
   def display_midi_note(midi)
     note_name = DISPLAY_NOTE_NAMES[(midi - 24) % 12]
     octave = (midi - 12) / 12

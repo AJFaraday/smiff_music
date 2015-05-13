@@ -111,6 +111,10 @@ class Synth < ActiveRecord::Base
     @type ||= Synth.types[constructor]
   end
 
+  def display_parameters
+    [:max_note, :min_note].concat(parameters.keys)
+  end 
+
   def description
     result = <<TEXT
 '#{name}' is a #{type['name']} synthesizer.
