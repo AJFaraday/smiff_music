@@ -17,6 +17,19 @@ en:
         pitches: Sequence
         min_note: Lowest Note
         max_note: Highest Note
+        am_depth: am_depth
+        am_frequency: am_frequency
+        am_waveshape: am_waveshape
+        bandwidth: bandwidth
+        fm_depth: fm_depth
+        fm_frequency: fm_frequency
+        fm_waveshape: fm_waveshape
+        sawtooth_level: sawtooth_level
+        sine_level: sine_level
+        square_level: square_level
+        triangle_level: triangle_level
+        volume: volume
+        waveshape: waveshape
     errors:
       synth:
         note_too_high: Sorry, that note is too higher than the maximum of %{max}.
