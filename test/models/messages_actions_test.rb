@@ -156,7 +156,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     assert_equal 'success', result[:response]
     assert_equal("I've cleared all of the patterns.", result[:display])
 
-    assert_equal 0, PatternStore.hash['synths']['sine'][:note_on_steps]
+    assert_equal 0, PatternStore.hash['synths']['trevor'][:note_on_steps]
     assert_equal 0, PatternStore.hash['synths']['square'][:note_on_steps]
     assert_not_equal kick_bits, PatternStore.hash['patterns']['kick'][:steps]
   end
@@ -183,7 +183,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     assert_equal 'success', result[:response]
     assert_equal("I've cleared all of the synth patterns.", result[:display])
 
-    assert_equal 0, PatternStore.hash['synths']['sine'][:note_on_steps]
+    assert_equal 0, PatternStore.hash['synths']['trevor'][:note_on_steps]
     assert_equal 0, PatternStore.hash['synths']['square'][:note_on_steps]
   end
 
@@ -356,7 +356,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
     result = Messages::Actions.list_synths({})
     assert_equal 'success', result[:response]
     assert_equal(
-      "* sine
+      "* trevor
 * square
 ",
       result[:display]
@@ -380,50 +380,51 @@ class MessagesActionsTest < ActiveSupport::TestCase
       result[:display]
     )
 
-    pattern.reload
     assert_equal true, pattern.muted
     assert PatternStore.hash['patterns']['kick'][:muted]
   end
 
   def test_mute_one_synth
-    synth = Synth.where(:name => 'sine').first
+    synth = Synth.where(:name => 'trevor').first
+    synth.clear
+    synth.note_off_pattern.clear
+
     synth.update_attribute(:muted, false)
-    refute PatternStore.hash['synths']['sine'][:muted]
+    refute PatternStore.hash['synths']['trevor'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
-        'pattern_names' => ['sine'],
+        'pattern_names' => ['trevor'],
         'mode' => 'mute'
       }
     )
     assert_equal 'success', result[:response]
     assert_equal(
-      "I've muted the sine pattern",
+      "I've muted the trevor pattern",
       result[:display]
     )
 
-    synth.reload
     assert_equal true, synth.muted
-    assert PatternStore.hash['synths']['sine'][:muted]
+    assert PatternStore.hash['synths']['trevor'][:muted]
   end
 
   def test_mute_list
     Pattern.first.update_attribute(:muted, false)
     patterns = Pattern.where(:name => ['kick', 'snare', 'hihat'])
     refute PatternStore.hash['patterns']['kick'][:muted]
-    synth = Synth.where(:name => 'sine').first
+    synth = Synth.where(:name => 'trevor').first
     synth.update_attribute(:muted, false)
-    refute PatternStore.hash['synths']['sine'][:muted]
+    refute PatternStore.hash['synths']['trevor'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
-        'pattern_names' => ['kick', 'snare', 'hihat', 'sine'],
+        'pattern_names' => ['kick', 'snare', 'hihat', 'trevor'],
         'mode' => 'mute'
       }
     )
     assert_equal 'success', result[:response]
     assert_equal(
-      "I've muted the kick, snare, hihat and sine patterns",
+      "I've muted the kick, snare, hihat and trevor patterns",
       result[:display]
     )
 
@@ -432,9 +433,8 @@ class MessagesActionsTest < ActiveSupport::TestCase
     end
 
     assert PatternStore.hash['patterns']['kick'][:muted]
-    synth.reload
     assert_equal true, synth.muted
-    assert PatternStore.hash['synths']['sine'][:muted]
+    assert PatternStore.hash['synths']['trevor'][:muted]
 
   end
 
@@ -455,31 +455,29 @@ class MessagesActionsTest < ActiveSupport::TestCase
       result[:display]
     )
 
-    pattern.reload
     assert_equal false, pattern.muted
     refute PatternStore.hash['patterns']['kick'][:muted]
   end
 
   def test_unmute_one_synth
-    synth = Synth.where(:name => 'sine').first
+    synth = Synth.where(:name => 'trevor').first
     synth.update_attribute(:muted, true)
-    assert PatternStore.hash['synths']['sine'][:muted]
+    assert PatternStore.hash['synths']['trevor'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
-        'pattern_names' => ['sine'],
+        'pattern_names' => ['trevor'],
         'mode' => 'unmute'
       }
     )
     assert_equal 'success', result[:response]
     assert_equal(
-      "I've unmuted the sine pattern",
+      "I've unmuted the trevor pattern",
       result[:display]
     )
 
-    synth.reload
     refute synth.muted
-    refute PatternStore.hash['synths']['sine'][:muted]
+    refute PatternStore.hash['synths']['trevor'][:muted]
   end
 
 
@@ -487,30 +485,28 @@ class MessagesActionsTest < ActiveSupport::TestCase
     patterns = Pattern.where(:name => ['kick', 'snare', 'hihat'])
     patterns.each { |pattern| pattern.update_attribute :muted, true }
     assert PatternStore.hash['patterns']['kick'][:muted]
-    synth = Synth.where(:name => 'sine').first
+    synth = Synth.where(:name => 'trevor').first
     synth.update_attribute(:muted, true)
-    assert PatternStore.hash['synths']['sine'][:muted]
+    assert PatternStore.hash['synths']['trevor'][:muted]
 
     result = Messages::Actions.mute_unmute(
       {
-        'pattern_names' => ['kick', 'snare', 'hihat', 'sine'],
+        'pattern_names' => ['kick', 'snare', 'hihat', 'trevor'],
         'mode' => 'unmute'
       }
     )
     assert_equal 'success', result[:response]
     assert_equal(
-      "I've unmuted the kick, snare, hihat and sine patterns",
+      "I've unmuted the kick, snare, hihat and trevor patterns",
       result[:display]
     )
 
     patterns.each do |pattern|
-      pattern.reload
       assert_equal false, pattern.muted
     end
     refute PatternStore.hash['patterns']['kick'][:muted]
-    synth.reload
     refute synth.muted
-    refute PatternStore.hash['synths']['sine'][:muted]
+    refute PatternStore.hash['synths']['trevor'][:muted]
   end
 
   def test_set_speed
@@ -634,13 +630,16 @@ hihat---------------------------------
   end
 
   def test_show_one_synth
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
+
     synth.add_note(60, 5, 4)
     result = Messages::Actions.show_patterns(
-      {'pattern_names' => ['sine']}
+      {'pattern_names' => ['trevor']}
     )
     display = "-----1---5---9---13--17--21--25--29--
-C 5----------------------------------
+C 6----------------------------------
 B 4----------------------------------
 A# 4---------------------------------
 A 4----------------------------------
@@ -654,7 +653,7 @@ D 4----------------------------------
 C# 4---------------------------------
 C 4-------####-----------------------
 B 3----------------------------------
-A# 3---------------------------------"
+C 4---------------------------------"
     assert_includes(
       result[:display],
       display
@@ -763,13 +762,13 @@ tom3----------------------------------
 
   def test_set_synth
     result = Messages::Actions.set_synth(
-      {'synth' => ['sine']}
+      {'synth' => ['trevor']}
     )
     assert_equal(
       {
         response: 'success',
-        display: "I've set the current synth to sine, any notes you add will be added to sine",
-        session: {synth: 'sine'}
+        display: "I've set the current synth to trevor, any notes you add will be added to trevor",
+        session: {synth: 'trevor'}
       },
       result
     )
@@ -802,25 +801,27 @@ tom3----------------------------------
   end
 
   def test_add_notes_single
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
+
     result = Messages::Actions.add_notes(
       {
         'note_names' => 'c4',
         'start_step' => '1',
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'note_steps' => '2'
       }
     )
     assert_equal(
       {
         response: 'success',
-        display: "I'll now play C 4 from step 1 on the sine synth"
+        display: "I'll now play C 4 from step 1 on the trevor synth"
       },
       result
     )
-    synth.reload
-    assert_equal [0], synth.note_on.pattern_indexes
-    assert_equal [1], synth.note_off.pattern_indexes
+    assert_equal [0], synth.note_on_pattern.pattern_indexes
+    assert_equal [1], synth.note_off_pattern.pattern_indexes
     assert_equal 60, synth.pitches[0]
   end
 
@@ -829,14 +830,14 @@ tom3----------------------------------
       {
         'note_names' => 'c9',
         'start_step' => '1',
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'note_steps' => '2'
       }
     )
     assert_equal(
       {
         response: 'failure',
-        display: "Sorry, that's too high for sine to play, it only goes up to C 5."
+        display: "Sorry, that's too high for trevor to play, it only goes up to C 6."
       },
       result
     )
@@ -847,14 +848,14 @@ tom3----------------------------------
       {
         'note_names' => 'c1',
         'start_step' => '1',
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'note_steps' => '2'
       }
     )
     assert_equal(
       {
         response: 'failure',
-        display: "Sorry, that's too low for sine to play, it only goes down to A# 3"
+        display: "Sorry, that's too low for trevor to play, it only goes down to C 4"
       },
       result
     )
@@ -862,37 +863,42 @@ tom3----------------------------------
 
 
   def test_add_notes_list
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('sarah')
+    synth.clear
+    synth.note_off_pattern.clear
+
     result = Messages::Actions.add_notes(
       {
-        'note_names' => 'c4, d4, e4',
+        'note_names' => 'c5, d5, e5',
         'start_step' => '1',
-        'synth' => 'sine',
+        'synth' => 'sarah',
         'note_steps' => '2'
       }
     )
     assert_equal(
       {
         response: 'success',
-        display: "I've added this melody to sine from step 1."
+        display: "I've added this melody to sarah from step 1."
       },
       result
     )
-    synth.reload
-    assert_equal [0, 2, 4], synth.note_on.pattern_indexes
-    assert_equal [1, 3, 5], synth.note_off.pattern_indexes
-    assert_equal 60, synth.pitches[0]
-    assert_equal 62, synth.pitches[2]
-    assert_equal 64, synth.pitches[4]
+    assert_equal [0, 2, 4], synth.note_on_pattern.pattern_indexes
+    assert_equal [1, 3, 5], synth.note_off_pattern.pattern_indexes
+    assert_equal 72, synth.pitches[0]
+    assert_equal 74, synth.pitches[2]
+    assert_equal 76, synth.pitches[4]
   end
 
   def test_add_notes_list_skipping
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
+
     result = Messages::Actions.add_notes(
       {
         'note_names' => 'c4, d4, e4',
         'start_step' => '1',
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'note_steps' => '2',
         'block_size' => '1'
       }
@@ -900,13 +906,12 @@ tom3----------------------------------
     assert_equal(
       {
         response: 'success',
-        display: "I've added this melody to sine from step 1."
+        display: "I've added this melody to trevor from step 1."
       },
       result
     )
-    synth.reload
-    assert_equal [0, 3, 6], synth.note_on.pattern_indexes
-    assert_equal [1, 4, 7], synth.note_off.pattern_indexes
+    assert_equal [0, 3, 6], synth.note_on_pattern.pattern_indexes
+    assert_equal [1, 4, 7], synth.note_off_pattern.pattern_indexes
     assert_equal 60, synth.pitches[0]
     assert_equal 62, synth.pitches[3]
     assert_equal 64, synth.pitches[6]
@@ -918,14 +923,14 @@ tom3----------------------------------
       {
         'note_names' => 'c4, c9, d4',
         'start_step' => '1',
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'note_steps' => '2'
       }
     )
     assert_equal(
       {
         response: 'failure',
-        display: "Sorry, that's too high for sine to play, it only goes up to C 5."
+        display: "Sorry, that's too high for trevor to play, it only goes up to C 6."
       },
       result
     )
@@ -936,14 +941,14 @@ tom3----------------------------------
       {
         'note_names' => 'c4, c1, d4',
         'start_step' => '1',
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'note_steps' => '2'
       }
     )
     assert_equal(
       {
         response: 'failure',
-        display: "Sorry, that's too low for sine to play, it only goes down to A# 3"
+        display: "Sorry, that's too low for trevor to play, it only goes down to C 4"
       },
       result
     )
@@ -954,29 +959,32 @@ tom3----------------------------------
       {
         'note_names' => 'c4, d4',
         'start_step' => '1',
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'note_steps' => '32'
       }
     )
     assert_equal(
       {
         response: 'failure',
-        display: "Sorry, that would spill off the end of the pattern. sine only has 32 steps."
+        display: "Sorry, that would spill off the end of the pattern. trevor only has 32 steps."
       },
       result
     )
   end
 
   def test_synth_clear_one_step
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
+
     synth.add_note(60, 0, 4)
-    assert_equal [0], synth.note_on.pattern_indexes
-    assert_equal [3], synth.note_off.pattern_indexes
+    assert_equal [0], synth.note_on_pattern.pattern_indexes
+    assert_equal [3], synth.note_off_pattern.pattern_indexes
     assert_equal 60, synth.pitches[0]
 
     result = Messages::Actions.clear_steps(
       {
-        'pattern_name' => 'sine',
+        'pattern_name' => 'trevor',
         'steps' => ['2']
       }
     )
@@ -991,26 +999,26 @@ tom3----------------------------------
       },
       result
     )
-    synth.reload
-    synth.note_on.reload
-    synth.note_off.reload
-    assert_equal [], synth.note_on.pattern_indexes
-    assert_equal [], synth.note_off.pattern_indexes
+    assert_equal [], synth.note_on_pattern.pattern_indexes
+    assert_equal [], synth.note_off_pattern.pattern_indexes
     assert_equal nil, synth.pitches[0]
   end
 
   def test_synth_clear_list_of_steps
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
+
     synth.add_note(60, 0, 4)
     synth.add_note(68, 8, 4)
-    assert_equal [0, 8], synth.note_on.pattern_indexes
-    assert_equal [3, 11], synth.note_off.pattern_indexes
+    assert_equal [0, 8], synth.note_on_pattern.pattern_indexes
+    assert_equal [3, 11], synth.note_off_pattern.pattern_indexes
     assert_equal 60, synth.pitches[0]
     assert_equal 68, synth.pitches[8]
 
     result = Messages::Actions.clear_steps(
       {
-        'pattern_name' => 'sine',
+        'pattern_name' => 'trevor',
         'steps' => ['2 and 10']
       }
     )
@@ -1025,11 +1033,8 @@ tom3----------------------------------
       },
       result
     )
-    synth.reload
-    synth.note_on.reload
-    synth.note_off.reload
-    assert_equal [], synth.note_on.pattern_indexes
-    assert_equal [], synth.note_off.pattern_indexes
+    assert_equal [], synth.note_on_pattern.pattern_indexes
+    assert_equal [], synth.note_off_pattern.pattern_indexes
     assert_equal nil, synth.pitches[0]
     assert_equal nil, synth.pitches[8]
   end
@@ -1037,7 +1042,7 @@ tom3----------------------------------
   def test_synth_clear_one_step_none_to_remove
     result = Messages::Actions.clear_steps(
       {
-        'pattern_name' => 'sine',
+        'pattern_name' => 'trevor',
         'steps' => ['2']
       }
     )
@@ -1046,7 +1051,7 @@ tom3----------------------------------
         response: 'failure',
         display: I18n.t(
           "actions.clear_steps.no_steps_to_remove.one",
-          name: 'sine',
+          name: 'trevor',
           steps: '2'
         )
       },
@@ -1057,7 +1062,7 @@ tom3----------------------------------
   def test_synth_clear_list_of_steps_none_to_remove
     result = Messages::Actions.clear_steps(
       {
-        'pattern_name' => 'sine',
+        'pattern_name' => 'trevor',
         'steps' => ['2 and 10']
       }
     )
@@ -1066,7 +1071,7 @@ tom3----------------------------------
         response: 'failure',
         display: I18n.t(
           "actions.clear_steps.no_steps_to_remove.other",
-          name: 'sine',
+          name: 'trevor',
           steps: ['2', '10'].to_sentence(last_word_connector: ' and ')
         )
       },
@@ -1075,15 +1080,18 @@ tom3----------------------------------
   end
 
   def test_synth_clear_block
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
+
     synth.add_note(60, 0, 8)
-    assert_equal [0], synth.note_on.pattern_indexes
-    assert_equal [7], synth.note_off.pattern_indexes
+    assert_equal [0], synth.note_on_pattern.pattern_indexes
+    assert_equal [7], synth.note_off_pattern.pattern_indexes
     assert_equal 60, synth.pitches[0]
 
     result = Messages::Actions.clear_steps(
       {
-        'pattern_name' => 'sine',
+        'pattern_name' => 'trevor',
         'start_step' => '3',
         'end_step' => '5'
       }
@@ -1099,25 +1107,25 @@ tom3----------------------------------
       },
       result
     )
-    synth.reload
-    synth.note_on.reload
-    synth.note_off.reload
-    assert_equal [0, 5], synth.note_on.pattern_indexes
-    assert_equal [1, 7], synth.note_off.pattern_indexes
+    assert_equal [0, 5], synth.note_on_pattern.pattern_indexes
+    assert_equal [1, 7], synth.note_off_pattern.pattern_indexes
     assert_equal 60, synth.pitches[0]
     assert_equal 60, synth.pitches[5]
   end
 
   def test_synth_clear_block_skipping
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
+
     synth.add_note(60, 0, 8)
-    assert_equal [0], synth.note_on.pattern_indexes
-    assert_equal [7], synth.note_off.pattern_indexes
+    assert_equal [0], synth.note_on_pattern.pattern_indexes
+    assert_equal [7], synth.note_off_pattern.pattern_indexes
     assert_equal 60, synth.pitches[0]
 
     result = Messages::Actions.clear_steps(
       {
-        'pattern_name' => 'sine',
+        'pattern_name' => 'trevor',
         'start_step' => '1',
         'end_step' => '8',
         'block_size' => '2'
@@ -1134,21 +1142,20 @@ tom3----------------------------------
       },
       result
     )
-    synth.reload
-    synth.note_on.reload
-    synth.note_off.reload
-    assert_equal [1, 4], synth.note_on.pattern_indexes
-    assert_equal [2, 5, 7], synth.note_off.pattern_indexes
+    assert_equal [1, 4], synth.note_on_pattern.pattern_indexes
+    assert_equal [2, 5, 7], synth.note_off_pattern.pattern_indexes
     assert_equal 60, synth.pitches[1]
     assert_equal 60, synth.pitches[4]
   end
 
   def test_describe_synth
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
 
     result = Messages::Actions.describe_synth(
       {
-        'synth' => ['sine']
+        'synth' => ['trevor']
       }
     )
     assert_equal(
@@ -1161,7 +1168,9 @@ tom3----------------------------------
   end
 
   def test_describe_failed
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
 
     result = Messages::Actions.describe_synth(
       {
@@ -1179,11 +1188,13 @@ tom3----------------------------------
 
 
   def test_list_params_synth
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
 
     result = Messages::Actions.list_params(
       {
-        'synth' => ['sine']
+        'synth' => ['trevor']
       }
     )
     assert_equal(
@@ -1196,7 +1207,9 @@ tom3----------------------------------
   end
 
   def test_list_params_failed
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
 
     result = Messages::Actions.list_params(
       {
@@ -1213,11 +1226,13 @@ tom3----------------------------------
   end
 
   def test_set_param_synth
-    synth = Synth.find_by_name('sine')
+    synth = Synth.find_by_name('trevor')
+    synth.clear
+    synth.note_off_pattern.clear
 
     result = Messages::Actions.set_param(
       {
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'parameter' => 'volume',
         'value' => '50'
       }
@@ -1227,7 +1242,7 @@ tom3----------------------------------
         response: 'success',
         display: I18n.t(
           'actions.set_param.success',
-          synth: 'sine',
+          synth: 'trevor',
           param: 'volume',
           value: '50'
         )
@@ -1235,7 +1250,6 @@ tom3----------------------------------
       result
     )
 
-    synth.reload
     assert_equal '50', synth.volume
   end
 
@@ -1259,7 +1273,7 @@ tom3----------------------------------
   def test_set_param_parameter_not_found
     result = Messages::Actions.set_param(
       {
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'parameter' => 'awesomeness',
         'value' => '50'
       }
@@ -1268,7 +1282,7 @@ tom3----------------------------------
       {
         response: 'failure',
         display: I18n.t('messages.errors.parameter_not_found',
-                        synth: 'sine', parameter: 'awesomeness')
+                        synth: 'trevor', parameter: 'awesomeness')
       },
       result
     )
@@ -1277,7 +1291,7 @@ tom3----------------------------------
   def test_set_param_value_too_high
     result = Messages::Actions.set_param(
       {
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'parameter' => 'volume',
         'value' => '500'
       }
@@ -1287,7 +1301,7 @@ tom3----------------------------------
         response: 'failure',
         display: I18n.t(
           'actions.set_param.validation_failed',
-          synth: 'sine',
+          synth: 'trevor',
           param: 'volume',
           value: '500',
           error: 'must be less than or equal to 100'
@@ -1300,7 +1314,7 @@ tom3----------------------------------
   def test_set_param_value_too_low
     result = Messages::Actions.set_param(
       {
-        'synth' => 'sine',
+        'synth' => 'trevor',
         'parameter' => 'volume',
         'value' => '-1'
       }
@@ -1310,7 +1324,7 @@ tom3----------------------------------
         response: 'failure',
         display: I18n.t(
           'actions.set_param.validation_failed',
-          synth: 'sine',
+          synth: 'trevor',
           param: 'volume',
           value: '-1',
           error: 'must be greater than or equal to 0'

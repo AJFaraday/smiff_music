@@ -12,22 +12,22 @@ class PatternTest < ActiveSupport::TestCase
     params = Pattern.sound_init_params
     assert_equal [:patterns], params.keys
     patterns = params[:patterns]
-    Pattern.where(purpose: 'event').all.each do |pattern|
+    Pattern.all.select{|p|p.purpose == 'event'}.each do |pattern|
       assert_includes patterns.keys, pattern.name
     end
   end
 
   def test_class_to_hash
     params = Pattern.to_hash
-    Pattern.where(purpose: 'event').each do |pattern|
+    Pattern.all.select{|p|p.purpose == 'event'}.each do |pattern|
       assert_includes params.keys, pattern.name
     end
-    pattern = Pattern.first
+    pattern = Pattern.all.select{|p|p.purpose == 'event'}[0]
     assert_equal pattern.to_hash, params[pattern.name]
   end
 
   def test_instance_to_hash
-    hash = Pattern.first.to_hash
+    hash = Pattern.all[0].to_hash
     assert_equal(
       %i{ steps sample step_count muted},
       hash.keys

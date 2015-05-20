@@ -38,8 +38,8 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   def test_run_valid_message
+    Pattern.all.each{|p|p.clear}
     message = Message.parse('show kick, snare and hihat')
-    Pattern.find_by_name('kick').update_attributes(:bits => 0)
     PatternStore.hash = nil
     result = message.run
     assert_instance_of Hash, result

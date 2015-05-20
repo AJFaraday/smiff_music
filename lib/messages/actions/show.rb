@@ -8,7 +8,7 @@ module Messages::Actions::Show
     self.pattern_names = munge_list(args['pattern_names'])
 
     begin
-      self.patterns = Pattern.where(:name => self.pattern_names)
+      self.patterns = Pattern.all.select{|p|self.pattern_names.include?(p.name)}
       self.synth = Synth.find_by_name(self.pattern_names[0])
       if self.patterns.any?
         return {

@@ -23,7 +23,7 @@ class PatternStoreTest < ActiveSupport::TestCase
   def test_modify_hash_for_pattern
     hash = Hash.new(PatternStore.hash)
     pattern = Pattern.find_by_name('snare')
-    pattern.update_attribute(:pattern_indexes, [4,7,8])
+    pattern.pattern_indexes = [4,7,8]
     assert_not_equal(hash, PatternStore.hash)
     assert_not_equal(hash['patterns']['snare'], PatternStore.hash['patterns']['snare'])
   end
