@@ -17,7 +17,4 @@ sample_names.each do |sample|
   Sample.create(name: sample)
 end
 
-
-Messages::FormatBuilder.new.build_messages
-
 Synth.build_seeds
