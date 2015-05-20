@@ -1,24 +1,13 @@
-class Pattern < ActiveRecord::Base
+class Pattern < InMemoryBase
 
-  validate :purpose, inclusion: %w{event note_on note_off}
-
-  belongs_to :synth
-
-  after_initialize :set_default_bits
-
-  after_save :modify_pattern_store
-
-  def modify_pattern_store
+  def save
+    self.bits ||= 0
     PatternStore.modify_hash(self) if self.purpose == 'event'
   end
 
-  def set_default_bits
-    self.bits ||= 0
-  end 
-
   def Pattern.sound_init_params
     patterns = {}
-    where(purpose: 'event').each do |pattern|
+    all.select{|p|p.purpose == 'event'}.each do |pattern|
       patterns[pattern.name] = pattern.to_hash
     end
     {
@@ -28,7 +17,7 @@ class Pattern < ActiveRecord::Base
 
   def Pattern.to_hash
     result = {}
-    where(purpose: 'event').each do |pattern|
+    all.select{|p|p.purpose == 'event'}.each do |pattern|
       result[pattern.name] = pattern.to_hash
     end
     result
@@ -54,12 +43,17 @@ class Pattern < ActiveRecord::Base
 
   # feed this indexes (e.g. [0,4,8,10,12])
   def pattern_indexes=(indexes)
+    self.step_count ||= 32
     p_bits = ('0' * step_count)
     indexes.each do |index|
       p_bits[index] = '1'
     end
     self.bits = p_bits.rjust(self.step_count, '0').to_i(2)
   end 
+ 
+  def clear
+    self.pattern_indexes = []
+  end
 
   # returns an array of true or false for positions
   def pattern_bits

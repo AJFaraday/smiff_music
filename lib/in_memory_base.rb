@@ -1,5 +1,7 @@
 class InMemoryBase < OpenStruct
 
+  include ActiveModel::Validations
+
   class << self
     attr_accessor :all
   end 
@@ -8,6 +10,14 @@ class InMemoryBase < OpenStruct
     super(attrs)
     self.class.all ||= []
     self.class.all << self
+  end
+
+  def self.first
+    self.all[0]
+  end 
+
+  def self.find_by_name(name)
+    self.all.select{|x|x.name == name}[0]
   end
 
   def self.build
