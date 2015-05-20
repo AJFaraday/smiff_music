@@ -26,11 +26,9 @@ class MessageTest < ActiveSupport::TestCase
 
 
   def test_parse_valid_message
-    message_format = MessageFormat.find_by_name('show_multiple')
-
     message = Message.parse('show kick, snare and hihat')
 
-    assert_equal message_format, message.message_format
+    assert_equal 'show_multiple', message.message_format.name
     assert_equal 'show_patterns', message.action
     assert_instance_of Hash, message.parameters
     # this gets munged into a much saner form later on...

@@ -10,7 +10,7 @@ class Message < ActiveRecord::Base
   cattr_accessor :message_log
 
 
-  belongs_to :message_format
+  attr_accessor :message_format
   serialize :parameters
 
   def Message.parse(text, session_params={})

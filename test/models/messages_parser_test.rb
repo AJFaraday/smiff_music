@@ -19,12 +19,10 @@ class MessagesParserTest < ActiveSupport::TestCase
   end
 
   def test_parse_valid_message
-    message_format = MessageFormat.find_by_name('show_multiple')
-
     parser = Messages::Parser.new
     parser.parse('show kick, snare and hihat')
     assert parser.parsed
-    assert_equal message_format, parser.message_format
+    assert_equal 'show_multiple', parser.message_format.name
     assert_equal(
       {"pattern_names"=>["kick", ", snare", ", snare", " and hihat", "hihat"]},
       parser.parameters

@@ -13,7 +13,7 @@ class Messages::Parser
     @@weight_regexes = {}
     @@used_weights = MessageFormat.all.collect{|x|x.weight}.uniq
     @@used_weights.each do |weight|
-      regexes = MessageFormat.where(weight: weight).collect{|x|x.regex}
+      regexes = MessageFormat.all.select{|f|f.weight == weight}.collect{|x|x.regex}
       @@weight_regexes[weight] = Regexp.union(regexes)
     end
     @@weight_regexes
@@ -23,7 +23,7 @@ class Messages::Parser
     weights = weight_regexes.keys.sort.reverse
     weights.each do |weight|
       if weight_regexes[weight] =~ text and !self.parsed
-        message_formats = MessageFormat.where(weight: weight)
+        message_formats = MessageFormat.all.select{|f|f.weight == weight}
         self.match_data = nil
         message_formats.each do |message_format|
           if self.match_data.nil?
