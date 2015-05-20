@@ -1,4 +1,4 @@
-class Message < ActiveRecord::Base
+class Message < InMemoryBase
 
   # Statuses: 
   FAILED_STATE = -1 # This has been run, but was unable to take place.
@@ -9,9 +9,7 @@ class Message < ActiveRecord::Base
   cattr_accessor :failure_log
   cattr_accessor :message_log
 
-
   attr_accessor :message_format
-  serialize :parameters
 
   def Message.parse(text, session_params={})
     message = Message.new(source_text: text[0..250])
@@ -42,13 +40,11 @@ class Message < ActiveRecord::Base
       end
       log_message(result)
       result[:version] = PatternStore.version
-      save!
       return result
     elsif self.invalid?
       if self.source_text.length >= 250
         log_failure
         self.status = Message::FAILED_STATE
-        save!
         return {
           display: I18n.t(
             'messages.errors.message_too_long'
@@ -58,7 +54,6 @@ class Message < ActiveRecord::Base
       else
         log_failure
         self.status = Message::FAILED_STATE
-        save!
         return {
           display: I18n.t(
             'messages.errors.message_unfound',

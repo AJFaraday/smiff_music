@@ -11,7 +11,7 @@ class Messages::Parser
   def weight_regexes
     return @@weight_regexes if @@weight_regexes
     @@weight_regexes = {}
-    @@used_weights = MessageFormat.all.collect{|x|x.weight}.uniq
+    @@used_weights = MessageFormat.all.collect{|x|x.weight}.uniq.compact
     @@used_weights.each do |weight|
       regexes = MessageFormat.all.select{|f|f.weight == weight}.collect{|x|x.regex}
       @@weight_regexes[weight] = Regexp.union(regexes)
