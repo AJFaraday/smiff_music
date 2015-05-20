@@ -1,6 +1,8 @@
 class InMemoryBase < OpenStruct
 
-  cattr_accessor :all
+  class << self
+    attr_accessor :all
+  end 
 
   def initialize(attrs={})
     super(attrs)
@@ -22,6 +24,5 @@ class InMemoryBase < OpenStruct
     puts er.message
     puts er.backtrace.join("\n")
   end
-
 
 end

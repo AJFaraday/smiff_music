@@ -1,0 +1,14 @@
+kick:
+  name: kick
+snare:
+  name: snare
+hihat:
+  name: hihat
+crash:
+  name: crash
+tom1:
+  name: tom1
+tom2:
+  name: tom2
+tom3:
+  name: tom3

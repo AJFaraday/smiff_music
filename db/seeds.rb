@@ -12,9 +12,4 @@
   end
 end
 
-sample_names = Pattern.where(purpose: 'event').collect { |x| x.instrument_name }
-sample_names.each do |sample|
-  Sample.create(name: sample)
-end
-
 Synth.build_seeds

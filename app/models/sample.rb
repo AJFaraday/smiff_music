@@ -1,4 +1,4 @@
-class Sample < ActiveRecord::Base
+class Sample < InMemoryBase
 
   def Sample.sound_init_params
     {

@@ -1,1 +1,2 @@
 MessageFormat.build
+Sample.build
