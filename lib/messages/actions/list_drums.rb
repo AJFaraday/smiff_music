@@ -9,7 +9,7 @@ module Messages::Actions::ListDrums
 
   def drum_list
     result = ''
-    names = Pattern.where(purpose: 'event').collect{|x|x.name}
+    names = Pattern.all.select{|x|x.purpose == 'event'}.collect{|x|x.name}
     names.each {|x| result << "* #{x}\n"}
     return result
   end

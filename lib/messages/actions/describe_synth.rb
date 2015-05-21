@@ -1,7 +1,7 @@
 module Messages::Actions::DescribeSynth
 
   def describe_synth(args)
-    synth = Synth.find_by_name(args['synth'])
+    synth = Synth.find_by_name(args['synth'][0])
     if synth
       return {
         response: 'success',

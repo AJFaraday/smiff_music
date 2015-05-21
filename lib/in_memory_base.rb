@@ -15,9 +15,25 @@ class InMemoryBase < OpenStruct
   def self.first
     self.all[0]
   end 
+ 
+  def self.last
+    self.all[-1]
+  end
 
   def self.find_by_name(name)
     self.all.select{|x|x.name == name}[0]
+  end
+
+  def update_attribute(attribute, value)
+    self.send("#{attribute}=", value)
+    save
+  end
+
+  def update_attributes(attrs={})
+    attrs.each do |attribute, value|
+      self.send("#{attribute}=", value)
+    end
+    save
   end
 
   def self.build

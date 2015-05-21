@@ -3,14 +3,15 @@ module Messages::Actions::MuteUnmute
 
   def mute_unmute(args)
     names = munge_list(args['pattern_names'])
-    patterns = Pattern.where(:name => names)
-    synths = Synth.where(:name => names)
+    patterns = Pattern.all.select{|x| names.include?(x.name)}
+    synths = Synth.all.select{|x| names.include?(x.name)}
     things = patterns + synths
 
     return pattern_not_found(names) if things.none?
 
     things.each do |thing|
-      thing.update_attribute(:muted,args['mode'] == 'mute')
+      thing.muted = (args['mode'] == 'mute')
+      thing.save
     end
 
     return {

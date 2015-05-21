@@ -99,7 +99,7 @@ TEXT
   end
 
   def parameter_names
-    parameters.keys
+    self.to_hash.keys
   end
 
   def save

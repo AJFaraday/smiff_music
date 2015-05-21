@@ -11,9 +11,8 @@ soprano:
   min_note: 72
   max_note: 96
   constructor: SimpleSynth
-  parameters:
-    volume: 40
-    waveshape: sine
+  volume: 40
+  waveshape: sine
 
 alto:
   name: anne
@@ -27,11 +26,10 @@ alto:
   min_note: 67
   max_note: 91
   constructor: AMSynth
-  parameters:
-    am_frequency: 30
-    am_depth: 50
-    am_waveshape: 'sawtooth'
-    volume: 40
+  am_frequency: 30
+  am_depth: 50
+  am_waveshape: 'sawtooth'
+  volume: 40
 
 tenor:
   name: trevor
@@ -45,11 +43,10 @@ tenor:
   min_note: 60
   max_note: 84
   constructor: FMSynth
-  parameters:
-    fm_frequency: 40
-    fm_depth: 80
-    fm_waveshape: 'sine'
-    volume: 40
+  fm_frequency: 40
+  fm_depth: 80
+  fm_waveshape: 'sine'
+  volume: 40
 
 bass:
   name: brian
@@ -63,9 +60,8 @@ bass:
   min_note: 52
   max_note: 76
   constructor: SubSynth
-  parameters:
-    bandwidth: 20,
-    volume: 40
+  bandwidth: 20,
+  volume: 40
 
 polly:
   name: polly
@@ -79,9 +75,8 @@ polly:
   min_note: 72
   max_note: 91
   constructor: PolySynth
-  parameters:
-    sine_level: 60
-    square_level: 20
-    sawtooth_level: 20
-    triangle_level: 100
-    volume: 40
+  sine_level: 60
+  square_level: 20
+  sawtooth_level: 20
+  triangle_level: 100
+  volume: 40

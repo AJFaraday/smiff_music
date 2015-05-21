@@ -22,6 +22,14 @@ hihat:
   active: true
   purpose: 'event'
   muted: false
+crash:
+  name: 'crash'
+  step_size: 16
+  step_count: 32
+  instrument_name: 'crash'
+  active: true
+  purpose: 'event'
+  muted: false
 tom1:
   name: 'tom1'
   step_size: 16
