@@ -12,7 +12,7 @@ class PatternTest < ActiveSupport::TestCase
     params = Pattern.sound_init_params
     assert_equal [:patterns], params.keys
     patterns = params[:patterns]
-    Pattern.where(purpose: 'event').all.each do |pattern|
+    Pattern.where(purpose: 'event').each do |pattern|
       assert_includes patterns.keys, pattern.name
     end
   end

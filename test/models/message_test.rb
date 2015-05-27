@@ -2,6 +2,12 @@ require './test/test_helper'
 
 class MessageTest < ActiveSupport::TestCase
 
+  def setup
+    MessageFormat.rebuild
+    Pattern.rebuild
+    Synth.rebuild
+  end
+
   def test_parse_unknown_message
     message = Message.parse('make an awesome beat')
     assert_nil message.message_format
