@@ -2,6 +2,13 @@ require './test/test_helper'
 
 class ConsoleTest < ActionDispatch::IntegrationTest
 
+  def setup
+    Synth.rebuild
+    Pattern.rebuild
+    Sample.rebuild
+    MessageFormat.rebuild
+  end
+
   def send_message(text)
     page.find('#terminal_tab').click
     fill_in('message', :with => text)

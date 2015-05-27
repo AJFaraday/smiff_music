@@ -2,6 +2,11 @@ require './test/test_helper'
 
 class PatternStoreTest < ActiveSupport::TestCase
 
+  def setup
+    Synth.rebuild
+    Pattern.rebuild
+  end
+
   def test_version_definition
     PatternStore.version = 9
     assert_equal 9, PatternStore.version
@@ -23,14 +28,14 @@ class PatternStoreTest < ActiveSupport::TestCase
   def test_modify_hash_for_pattern
     hash = Hash.new(PatternStore.hash)
     pattern = Pattern.find_by_name('snare')
-    pattern.update_attribute(:pattern_indexes, [4,7,8])
+    pattern.update_attribute(:pattern_indexes, [4, 7, 8])
     assert_not_equal(hash, PatternStore.hash)
     assert_not_equal(hash['patterns']['snare'], PatternStore.hash['patterns']['snare'])
   end
 
   def test_modify_hash_for_bpm
     hash = Hash.new(PatternStore.hash)
-    PatternStore.modify_hash('bpm',140)
+    PatternStore.modify_hash('bpm', 140)
     assert_not_equal(hash, PatternStore.hash)
     assert_not_equal(hash['bpm'], PatternStore.hash['bpm'])
   end

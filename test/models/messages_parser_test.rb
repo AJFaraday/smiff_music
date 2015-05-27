@@ -3,6 +3,10 @@ require './test/test_helper'
 # testing Messages::Parser
 class MessagesParserTest < ActiveSupport::TestCase
 
+  def setup
+    MessageFormat.rebuild
+  end
+
   def test_weight_regexes
     parser = Messages::Parser.new
     assert_instance_of Hash, parser.weight_regexes

@@ -2,6 +2,9 @@ require './test/test_helper'
 
 class PatternTest < ActiveSupport::TestCase
 
+  def setup
+    Pattern.rebuild
+  end
 
   def test_set_default_bits
     pattern = Pattern.new

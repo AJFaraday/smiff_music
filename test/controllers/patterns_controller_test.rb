@@ -2,6 +2,12 @@ require './test/test_helper'
 
 class PatternsControllerTest < ActionController::TestCase
 
+  def setup
+    Sample.rebuild
+    Synth.rebuild
+    Pattern.rebuild
+  end
+
   def test_index_main_page
     get :index
     assert_response :success
@@ -33,14 +39,15 @@ class PatternsControllerTest < ActionController::TestCase
   end
 
   def test_index_json_current_version
+
     synth = Synth.first
     PatternStore.increment_version(synth)
     get :index, version: PatternStore.hash['version'] - 1, format: 'json'
     assert_equal(
-      { 
+      {
         :version => PatternStore.version,
         :synths => {synth.name => synth.to_hash}
-      }.to_json, 
+      }.to_json,
       response.body
     )
   end

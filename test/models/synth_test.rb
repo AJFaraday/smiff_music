@@ -4,6 +4,7 @@ class SynthTest < ActiveSupport::TestCase
 
   def setup
     Synth.rebuild
+    Pattern.rebuild
     # there was some load-order issues in creating this
     PatternStore.hash
   end
