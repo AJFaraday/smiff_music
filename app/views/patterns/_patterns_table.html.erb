@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <th><%= t('.drums') %></th>
-    <% steps = @patterns.collect { |x| x.step_count }.max %>
+    <% steps = @patterns.collect { |x| x.step_count }.compact.max %>
     <% steps.times do |step| %>
       <th class='step_header'>
         <%= step + 1 %>

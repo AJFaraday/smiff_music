@@ -76,7 +76,7 @@ class Synth < InMemoryBase
   end
 
   def display_parameters
-    [:max_note, :min_note].concat(parameters.keys)
+    [:max_note, :min_note].concat(parameter_names)
   end 
 
   def description
@@ -99,7 +99,8 @@ TEXT
   end
 
   def parameter_names
-    self.to_hash.keys
+    # TODO a more select group of params here (just volume and type-specific params)
+    self.to_h.keys
   end
 
   def save
@@ -180,7 +181,7 @@ TEXT
       name: name,
       constructor: constructor
     }
-    params.merge!(self.parameters.symbolize_keys)
+    self.parameter_names.each{|x| params.merge!({x.to_sym => self.send(x)})}
     params
   end
 
