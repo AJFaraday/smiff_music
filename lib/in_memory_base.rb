@@ -52,14 +52,14 @@ class InMemoryBase < OpenStruct
     save
   end
 
-  def self.build
+  def self.build(show_message=true )
     source_records_path = File.join(Rails.root, 'config', 'seeds', "#{self.to_s.underscore.pluralize}.yml")
     if File.exist?(source_records_path)
       seeds = YAML.load_file(source_records_path)
       seeds.each do |label, attributes|
         self.new(attributes)
       end
-      puts "Initialised #{self.all.count} #{self} objects"
+      puts "Initialised #{self.all.count} #{self} objects" if show_message
     end
   rescue => er
     puts er.class
@@ -69,7 +69,7 @@ class InMemoryBase < OpenStruct
 
   def self.rebuild
     self.all = []
-    self.build
+    self.build(false)
   end
 
   def self.where(conditions={})
