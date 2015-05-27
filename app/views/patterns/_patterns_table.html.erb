@@ -1,38 +1,37 @@
 <table class="patterns">
   <thead>
-  <tr>
-    <th><%= t('.drums') %></th>
-    <% steps = @patterns.all.collect { |x| x.step_count }.max %>
-    <% steps.times do |step| %>
-      <th class='step_header'>
-        <%= step + 1 %>
-      </th>
-    <% end %>
-  </tr>
-  </thead>
-  <tbody>
-  <% @patterns.where(purpose: 'event').each do |pattern| %>
-
-    <tr id="<%= pattern.instrument_name %>" <%= 'class=muted' if pattern.muted %>>
-      <td>
-        <div class='indicator pre' id="<%= pattern.instrument_name %>"></div>
-        <%= pattern.name %>
-      </td>
-      <% pattern.step_count.times do |index| %>
-        <% kls = pattern.pattern_indexes.include?(index) ? 'active' : 'inactive' %>
-        <% kls += ' marker' if index % SystemSetting['group_marker_space'].to_i == 0 %>
-        <td class="step <%= kls %>"
-            id="<%= pattern.instrument_name %>_step_<%= index %>">
-          <div></div>
-        </td>
+    <tr>
+      <th><%= t('.drums') %></th>
+      <% steps = @patterns.collect { |x| x.step_count }.max %>
+      <% steps.times do |step| %>
+          <th class='step_header'>
+            <%= step + 1 %>
+          </th>
       <% end %>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @patterns.select { |p| p.purpose == 'event' }.each do |pattern| %>
+
+      <tr id="<%= pattern.instrument_name %>" <%= 'class=muted' if pattern.muted %>>
+        <td>
+          <div class='indicator pre' id="<%= pattern.instrument_name %>"></div>
+          <%= pattern.name %>
+        </td>
+        <% pattern.step_count.times do |index| %>
+            <% kls = pattern.pattern_indexes.include?(index) ? 'active' : 'inactive' %>
+            <% kls += ' marker' if index % SystemSetting['group_marker_space'].to_i == 0 %>
+            <td class="step <%= kls %>"
+                id="<%= pattern.instrument_name %>_step_<%= index %>">
+              <div></div>
+            </td>
+        <% end %>
+      </tr>
+    <% end %>
   </tbody>
 
   <% Synth.all.each do |synth| %>
     <%= render partial: 'patterns/overview_melody', locals: {synth: synth} %>
   <% end %>
-
-
+  
 </table>
