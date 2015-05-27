@@ -1,0 +1,242 @@
+show_multiple:
+  name: 'show_multiple'
+  regex: 'show (\w+)((, \w+)*)((?: and (\w+))*)'
+  variables:
+    - 'pattern_names'
+  action: 'show_patterns'
+  weight: 0
+
+clear_all:
+  name: 'clear_all'
+  regex: 'clear all( drums| synths|)'
+  variables:
+    - 'group'
+  action: 'clear_all'
+  weight: 2
+
+clear_multiple_patterns:
+  name: 'clear_multiple_patterns'
+  regex: 'clear (\w+)((, \w+)*)((?: and (\w+))*)'
+  variables:
+    - 'pattern_names'
+  action: 'clear_patterns'
+  weight: 0
+
+play_multiple:
+  name: 'play_multiple'
+  regex: 'play (\w+) on (?:steps|step) ([0-9]+)((, [0-9]+)*)((?: and ([0-9]+))*)'
+  variables:
+    - 'pattern_name'
+    - 'steps'
+  action: 'add_steps'
+  weight: 0
+
+play_range:
+  name: 'play_range'
+  regex: 'play (\w+) on steps ([0-9]+) to ([0-9]+)'
+  variables:
+    - 'pattern_name'
+    - 'start_step'
+    - 'end_step'
+  action: 'add_steps'
+  weight: 1
+
+play_range_skipping:
+  name: 'play_range_skipping'
+  regex: 'play (\w+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)'
+  variables: 
+    - 'pattern_name'
+    - 'start_step'
+    - 'end_step'
+    - 'block_size'
+  action: 'add_steps'
+  weight: 2
+
+clear_multiple:
+  name: 'clear_multiple'
+  regex: 'do not play (\w+) on (?:steps|step) ([0-9]+)((, [0-9]+)*)((?: and ([0-9]+))*)'
+  variables:
+    - 'pattern_name'
+    - 'steps'
+  action: 'clear_steps'
+  weight: 1
+
+clear_range:
+  name: 'clear_range'
+  regex: 'do not play (\w+) on steps ([0-9]+) to ([0-9]+)'
+  variables:
+    - 'pattern_name'
+    - 'start_step'
+    - 'end_step'
+  action: 'clear_steps'
+  weight: 2
+
+clear_range_skipping:
+  name: 'clear_range_skipping'
+  regex: 'do not play (\w+) on steps ([0-9]+) to ([0-9]+) skipping ([0-9]+)'
+  variables:
+    - 'pattern_name'
+    - 'start_step'
+    - 'end_step'
+    - 'block_size'
+  action: 'clear_steps'
+  weight: 3
+
+show_speed:
+  name: 'show_speed'
+  regex: 'show (?:speed|bpm)'
+  action: 'show_speed'
+  weight: 2
+
+speed_up:
+  name: 'speed_up'
+  regex: 'speed up'
+  action: 'speed_up'
+  weight: 0
+
+speed_down:
+  name: 'speed_down'
+  regex: '(?:slow|speed) down'
+  action: 'speed_down'
+  weight: 0
+
+set_speed:
+  name: 'set_speed'
+  regex: 'set speed to ([0-9]+)(?: bpm)?'
+  variables: 
+    - 'bpm'
+  action: 'set_speed'
+  weight: 0
+
+list_drums:
+  name: 'list_drums'
+  regex: 'list drums'
+  action: 'list_drums'
+  weight: 2
+
+list_synths:
+  name: 'list_synths'
+  regex: 'list synths'
+  action: 'list_synths'
+  weight: 2
+
+mute_unmute:
+  name: 'mute_or_unmute_drums'
+  regex: '(unmute|mute) (\w+)((, \w+)*)((?: and (\w+))*)'
+  variables:
+    - 'mode'
+    - 'pattern_names'
+  action: 'mute_unmute'
+  weight: 0
+
+mute_unmute_all:
+  name: 'mute_or_unmute_all_drums'
+  regex: '(unmute|mute) all( drums| synths|)'
+  variables:
+    - 'mode'
+    - 'group'
+  action: 'mute_unmute_all'
+  weight: 1
+
+show_all_drums:
+  name: 'show all drums'
+  regex: 'show all(?: drums)?'
+  action: 'show_all_drums'
+  weight: 2
+
+set_synth:
+  name: set_synth
+  regex:  'set synth to (\w+)'
+  action: set_synth
+  variables:
+    - 'synth'
+  weight: 2
+
+set_note_length:
+  name: set_note_length
+  regex: 'set note length to ([0-9]+)(?: steps)?'
+  action: set_note_length
+  variables:
+    - 'note_steps'
+  weight: 2
+
+add_notes:
+  name: add_notes
+  regex: 'play (([a-gA-G][#b]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+)'
+  action: add_notes
+  variables:
+    - 'note_names'
+    - 'extra'
+    - 'start_step'
+  weight: 1
+
+add_notes_skipping:
+  name: add_notes_skipping
+  regex: 'play (([a-gA-G][#b]?(?: )?[0-9]+[, ]+)*)(?:from|on) step ([0-9]+) skipping ([0-9]+)'
+  action: add_notes
+  variables:
+    - 'note_names'
+    - 'extra'
+    - 'start_step'
+    - 'block_size'
+  weight: 2
+
+clear_pitches:
+  name: clear_pitches
+  regex: 'do not play (([a-gA-G][#b]?(?: )?[0-9]+[, ]+)*)on ([a-z]+)'
+  action: clear_pitches
+  variables:
+    - 'note_names'
+    - 'extra'
+    - 'synth'
+  weight: 2
+
+clear_pitch_range:
+  name: clear_pitch_range
+  regex: 'do not play ([a-gA-G][#b]?(?: )?[0-9]+) to ([a-gA-G][#b]?(?: )?[0-9]+) on ([a-z]+)'
+  action: clear_pitches
+  variables:
+    - 'start_note'
+    - 'end_note'
+    - 'synth'
+  weight: 2
+  
+describe_synth:
+  name: describe_synth
+  regex: 'describe (\w+)'
+  action: describe_synth
+  variables:
+    - 'synth'
+  weight: 0
+
+list_params:
+  name: list_params
+  regex: 'list (?:params|parameters) for (\w+)'
+  action: list_params
+  variables:
+    - synth
+  weight: 0
+
+set_params:
+  name: set_params
+  regex: 'set (\w+)(?: parameter| param)? (\w+) to (\w+)'
+  action: set_param
+  variables:
+    - synth
+    - parameter
+    - value
+  weight: 0
+
+play:
+  name: play
+  regex: 'play( )*$'
+  action: play
+  variables: 
+  weight: 0
+
+stop:
+  name: stop
+  regex: 'stop( )*$'
+  action: stop
+  variables:
+  weight: 0

@@ -1,0 +1,59 @@
+kick:
+  name: 'kick'
+  step_size: 16
+  step_count: 32
+  instrument_name: 'kick'
+  active: true
+  purpose: 'event'
+  muted: false
+snare:
+  name: 'snare'
+  step_size: 16
+  step_count: 32
+  instrument_name: 'snare'
+  active: true
+  purpose: 'event'
+  muted: false
+hihat:
+  name: 'hihat'
+  step_size: 16
+  step_count: 32
+  instrument_name: 'hihat'
+  active: true
+  purpose: 'event'
+  muted: false
+crash:
+  name: 'crash'
+  step_size: 16
+  step_count: 32
+  instrument_name: 'crash'
+  active: true
+  purpose: 'event'
+  muted: false
+tom1:
+  name: 'tom1'
+  step_size: 16
+  step_count: 32
+  instrument_name: 'tom1'
+  active: true
+  purpose: 'event'
+  muted: false
+tom2:
+  name: 'tom2'
+  step_size: 16
+  step_count: 32
+  instrument_name: 'tom2'
+  active: true
+  purpose: 'event'
+  muted: false
+tom3:
+  name: 'tom3'
+  step_size: 16
+  step_count: 32
+  instrument_name: 'tom3'
+  active: true
+  purpose: 'event'
+  muted: false
+
+
+
