@@ -1,7 +1,7 @@
 module Messages::Actions::ListParams
 
   def list_params(args)
-    synth = Synth.find_by_name(args['synth'])
+    synth = Synth.find_by_name(args['synth'][0])
     if synth
       return {
         response: 'success',

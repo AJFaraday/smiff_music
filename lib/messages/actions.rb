@@ -56,7 +56,7 @@ class Messages::Actions
   end
 
   def self.pattern_not_found(pattern_names)
-    pattern_names = pattern_names.to_a
+    pattern_names = [pattern_names] unless pattern_names.is_a?(Array)
     {
       response: 'failure',
       display: I18n.t(

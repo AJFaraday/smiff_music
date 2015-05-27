@@ -4,12 +4,12 @@ module Messages::Actions::MuteUnmuteAll
     mode = args['mode']
     group = args['group']
     if ['', ' drums'].include?(group)
-      Pattern.update_all(muted: mode == 'mute')
+      Pattern.all.each { |pattern| pattern.muted = (mode == 'mute'); pattern.save }
       PatternStore.hash['patterns'].each { |k, value| value[:muted] = mode == 'mute' if value.is_a?(Hash) }
       PatternStore.increment_version(Pattern)
     end
     if ['', ' synths'].include?(group)
-      Synth.update_all(muted: mode == 'mute')
+      Synth.all.each { |synth| synth.muted = (mode == 'mute'); synth.save }
       PatternStore.hash['synths'].each { |k, value| value[:muted] = mode == 'mute' if value.is_a?(Hash) }
       PatternStore.increment_version(Synth)
     end
