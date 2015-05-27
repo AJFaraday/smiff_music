@@ -1,4 +1,4 @@
-class Message < ActiveRecord::Base
+class Message < InMemoryBase
 
   # Statuses: 
   FAILED_STATE = -1 # This has been run, but was unable to take place.
@@ -10,8 +10,8 @@ class Message < ActiveRecord::Base
   cattr_accessor :message_log
 
 
-  belongs_to :message_format
-  serialize :parameters
+  attr_accessor :message_format
+  attr_accessor :parameters
 
   def Message.parse(text, session_params={})
     message = Message.new(source_text: text[0..250])

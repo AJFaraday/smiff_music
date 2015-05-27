@@ -1,20 +1,12 @@
-class Pattern < ActiveRecord::Base
+class Pattern < InMemoryBase
 
   validate :purpose, inclusion: %w{event note_on note_off}
 
-  belongs_to :synth
-
-  after_initialize :set_default_bits
-
-  after_save :modify_pattern_store
+  attr_accessor :synth
 
   def modify_pattern_store
     PatternStore.modify_hash(self) if self.purpose == 'event'
   end
-
-  def set_default_bits
-    self.bits ||= 0
-  end 
 
   def Pattern.sound_init_params
     patterns = {}

@@ -1,4 +1,4 @@
-class Synth < ActiveRecord::Base
+class Synth < InMemoryBase
 
   validate :name, presence: true
   validate :waveshape,
@@ -9,27 +9,6 @@ class Synth < ActiveRecord::Base
   validate :sustain_level, numericality: {greater_than: 0, less_than: 1}
   validate :release_time, numericality: {greater_than: 0, less_than: 5}
 
-  after_create :generate_patterns
-  before_save :save_patterns
-
-  store :parameters,
-        accessors: [
-          # for SimpleSynth synths
-          :waveshape,
-          # For FMSynth synths
-          :fm_frequency, :fm_depth, :fm_waveshape,
-          # For AMSynth synths
-          :am_frequency, :am_depth, :am_waveshape,
-          # for PolySynth synths
-          :sine_level, :square_level,
-          :sawtooth_level, :triangle_level,
-          # for SubSynth synths
-          :bandwidth,
-          # for all synths
-          :volume
-        ],
-        coder: JSON
-
   validates_numericality_of :volume,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100
@@ -37,67 +16,51 @@ class Synth < ActiveRecord::Base
   validates_numericality_of :fm_frequency,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'FMSynth'}
+                            if: lambda { self.constructor == 'FMSynth' }
   validates_numericality_of :fm_depth,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'FMSynth'}
+                            if: lambda { self.constructor == 'FMSynth' }
   validates_presence_of :fm_waveshape,
-                        in: ['sine','square','sawtooth','triangle'],
-                        if: lambda{self.constructor == 'FMSynth'}
+                        in: ['sine', 'square', 'sawtooth', 'triangle'],
+                        if: lambda { self.constructor == 'FMSynth' }
 
   # For AMSynth synths
   validates_numericality_of :am_frequency,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'AMSynth'}
+                            if: lambda { self.constructor == 'AMSynth' }
   validates_numericality_of :am_depth,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'AMSynth'}
+                            if: lambda { self.constructor == 'AMSynth' }
   validates_presence_of :am_waveshape,
-                        in: ['sine','square','sawtooth','triangle'],
-                        if: lambda{self.constructor == 'AMSynth'}
+                        in: ['sine', 'square', 'sawtooth', 'triangle'],
+                        if: lambda { self.constructor == 'AMSynth' }
 
   # for PolySynth synths
   validates_numericality_of :sine_level,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'PolySynth'}
+                            if: lambda { self.constructor == 'PolySynth' }
   validates_numericality_of :square_level,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'PolySynth'}
+                            if: lambda { self.constructor == 'PolySynth' }
   validates_numericality_of :sawtooth_level,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'PolySynth'}
+                            if: lambda { self.constructor == 'PolySynth' }
   validates_numericality_of :triangle_level,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'PolySynth'}
+                            if: lambda { self.constructor == 'PolySynth' }
 
   # for SubSynth synths
   validates_numericality_of :bandwidth,
                             greater_than_or_equal_to: 0,
                             less_than_or_equal_to: 100,
-                            if: lambda{self.constructor == 'SubSynth'}
-
-  after_save :modify_pattern_store
-
-  serialize :pitches
-
-  has_many :patterns, dependent: :destroy do
-
-    def note_on
-      where(purpose: 'note_on').first
-    end
-
-    def note_off
-      where(purpose: 'note_off').first
-    end
-
-  end
+                            if: lambda { self.constructor == 'SubSynth' }
 
   cattr_accessor :types
 
@@ -113,7 +76,7 @@ class Synth < ActiveRecord::Base
 
   def display_parameters
     [:max_note, :min_note].concat(parameters.keys)
-  end 
+  end
 
   def description
     result = <<TEXT
@@ -135,62 +98,45 @@ TEXT
   end
 
   def parameter_names
-    parameters.keys
+    self.type['parameters'].collect { |p| p['name'] }
   end
-
-
-  def Synth.build_seeds
-    definitions = YAML.load_file(File.join(Rails.root, 'db', 'seed', 'synths.yml'))
-    definitions.each do |name, params|
-      if Synth.where(name: name).any?
-        Synth.where(name: name).first.update_attributes(params)
-      else
-        Synth.create!(params)
-      end
-    end
-  end
-
-  def save_patterns
-    note_on.save! if note_on
-    note_off.save! if note_off
-  end
-
 
   def note_on
     return @note_on if @note_on
-    @note_on = patterns.note_on
+    @note_on = note_on_pattern
   end
 
   def note_off
     return @note_off if @note_off
-    @note_off = patterns.note_off
+    @note_off = note_off_pattern
   end
 
   def modify_pattern_store
     PatternStore.modify_hash(self)
   end
 
-  def generate_patterns
-    unless self.patterns.note_on
-      self.patterns.create!(
-        muted: false,
-        active: true,
-        purpose: 'note_on',
-        name: "#{self.name}_note_on",
-        step_count: step_count,
-        step_size: step_size
-      )
-    end
-    unless self.patterns.note_off
-      self.patterns.create!(
-        muted: false,
-        active: true,
-        purpose: 'note_off',
-        name: "#{self.name}_note_off",
-        step_count: step_count,
-        step_size: step_size
-      )
-    end
+  def note_on_pattern
+    return @note_on_ptn if @note_on_ptn
+    @note_on_ptn = Pattern.create!(
+      muted: false,
+      active: true,
+      purpose: 'note_on',
+      name: "#{self.name}_note_on",
+      step_count: step_count,
+      step_size: step_size
+    )
+  end
+
+  def note_off_pattern
+    return @note_off_pattern if @note_off_pattern
+    @note_off_pattern = Pattern.create!(
+      muted: false,
+      active: true,
+      purpose: 'note_off',
+      name: "#{self.name}_note_off",
+      step_count: step_count,
+      step_size: step_size
+    )
   end
 
   def pitches
@@ -207,8 +153,8 @@ TEXT
   end
 
   def active_at_step(step)
-    note_on = patterns.note_on.pattern_bits
-    note_off = patterns.note_off.pattern_bits
+    note_on = note_on_pattern.pattern_bits
+    note_off = note_off_pattern.pattern_bits
     active = nil
     return true if note_on[step]
     until active != nil or step < 0 do
@@ -239,14 +185,22 @@ TEXT
       sustain_level: sustain_level,
       release_time: release_time,
       muted: muted,
-      note_on_steps: patterns.note_on.bits,
-      note_off_steps: patterns.note_off.bits,
+      note_on_steps: note_on_pattern.bits,
+      note_off_steps: note_off_pattern.bits,
       step_count: step_count,
       pitches: pitches,
       name: name,
       constructor: constructor
     }
     params.merge!(self.parameters.symbolize_keys)
+    params
+  end
+
+  def parameters
+    params = {}
+    parameter_names.each do |parameter_name|
+      params[parameter_name] = self.send(parameter_name)
+    end
     params
   end
 
@@ -261,11 +215,11 @@ TEXT
   def to_hash
     params = {
       muted: muted,
-      note_on_steps: patterns.note_on.bits,
-      note_off_steps: patterns.note_off.bits,
+      note_on_steps: note_on_pattern.bits,
+      note_off_steps: note_off_pattern.bits,
       pitches: pitches
     }
-    params.merge!(self.parameters.symbolize_keys)
+    #params.merge!(self.parameters.symbolize_keys)
     params
   end
 
@@ -309,13 +263,11 @@ TEXT
 
   def add_note(pitch, start_step, length)
     end_step = start_step + (length - 1)
-    Synth.transaction do
-      clear_range(start_step, end_step)
-      pitches[start_step] = pitch
-      note_on.pattern_indexes += [start_step]
-      note_off.pattern_indexes += [end_step]
-      save!
-    end
+    clear_range(start_step, end_step)
+    pitches[start_step] = pitch
+    note_on.pattern_indexes += [start_step]
+    note_off.pattern_indexes += [end_step]
+    save!
   end
 
   def clear_pitch(midi_note)
@@ -347,7 +299,6 @@ TEXT
   end
 
 
-
   def clear_range(start_step, end_step, skip_note_off = false)
     # add note_on and pitch if next step is active.
     if self.active_at_step(end_step + 1)
@@ -368,8 +319,6 @@ TEXT
     clear_range(0, (self.step_count - 1), true)
     save!
   end
-
-
 
 
 end

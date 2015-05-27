@@ -1,6 +1,5 @@
-class MessageFormat < ActiveRecord::Base
+class MessageFormat < InMemoryBase
 
-  serialize :variables
 
   def regex
     Regexp.new(super)
