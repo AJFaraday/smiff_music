@@ -3,9 +3,7 @@ require './test/test_helper'
 class MessageTest < ActiveSupport::TestCase
 
   def setup
-    MessageFormat.rebuild
-    Pattern.rebuild
-    Synth.rebuild
+    InMemory.rebuild
   end
 
   def test_parse_unknown_message

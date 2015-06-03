@@ -3,8 +3,7 @@ require './test/test_helper'
 class PatternStoreTest < ActiveSupport::TestCase
 
   def setup
-    Synth.rebuild
-    Pattern.rebuild
+    InMemory.rebuild
   end
 
   def test_version_definition

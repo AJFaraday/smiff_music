@@ -6,6 +6,7 @@ class PatternsControllerTest < ActionController::TestCase
     Sample.rebuild
     Synth.rebuild
     Pattern.rebuild
+    SystemSetting.rebuild
   end
 
   def test_index_main_page

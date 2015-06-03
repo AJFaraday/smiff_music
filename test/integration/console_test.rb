@@ -3,10 +3,7 @@ require './test/test_helper'
 class ConsoleTest < ActionDispatch::IntegrationTest
 
   def setup
-    Synth.rebuild
-    Pattern.rebuild
-    Sample.rebuild
-    MessageFormat.rebuild
+    InMemory.rebuild
   end
 
   def send_message(text)

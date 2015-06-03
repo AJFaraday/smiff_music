@@ -8,6 +8,15 @@ module InMemory
     SystemSetting.build
   end
 
+  def rebuild
+    MessageFormat.rebuild
+    Sample.rebuild
+    Pattern.rebuild
+    Synth.rebuild
+    SystemSetting.rebuild
+  end
+
   module_function :build
+  module_function :rebuild
 
 end

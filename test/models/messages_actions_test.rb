@@ -5,8 +5,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
 
   def setup
     PatternStore.hash = nil
-    Synth.rebuild
-    Pattern.rebuild
+    InMemory.rebuild
   end
 
   # this method is used to fix the rubbish input from list regexes

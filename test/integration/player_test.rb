@@ -3,9 +3,7 @@ require './test/test_helper'
 class PlayerTest < ActionDispatch::IntegrationTest
 
   def setup
-    Synth.rebuild
-    Pattern.rebuild
-    Sample.rebuild
+    InMemory.rebuild
   end
 
   def test_click_play
