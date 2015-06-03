@@ -2,6 +2,10 @@ require './test/test_helper'
 
 class ContextHelpTest < ActiveSupport::TestCase
 
+  def setup
+    InMemory.rebuild
+  end
+
   def test_substitutions_are_made
     path = File.join(Rails.root, 'docs', 'context_help', 'test.md')
     content = ContextHelp.render_file(
