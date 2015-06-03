@@ -1,4 +1,5 @@
 require 'github-markup'
+require 'github/markup'
 class Help
 
   cattr_accessor :pages
@@ -18,7 +19,6 @@ class Help
   end
 
   def Help.get_content(hash)
-    require 'github/markup'
     source = File.read(File.join(Rails.root, hash['file']))
     content = GitHub::Markup.render('.md', source)
     hash['content'] = content
