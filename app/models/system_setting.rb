@@ -1,6 +1,12 @@
-class SystemSetting < ActiveRecord::Base
+class SystemSetting < InMemoryBase
 
-  acts_as_settings
+  def SystemSetting.[](name)
+    SystemSetting.find_by_name(name).value
+  end
+
+  def SystemSetting.[]=(name,value)
+    SystemSetting.find_by_name(name).value=value
+  end
 
   def SystemSetting.sound_init_params
     {

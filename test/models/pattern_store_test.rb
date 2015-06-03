@@ -11,7 +11,7 @@ class PatternStoreTest < ActiveSupport::TestCase
     PatternStore.version = 9
     assert_equal 9, PatternStore.version
     assert_equal 9, PatternStore.hash['version']
-    assert_equal '9', SystemSetting['pattern_version']
+    assert_equal 9, SystemSetting['pattern_version']
   end
 
   def test_build_hash

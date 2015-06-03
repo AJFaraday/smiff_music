@@ -527,7 +527,7 @@ class MessagesActionsTest < ActiveSupport::TestCase
       "The speed is now 150 beats per minute",
       result[:display]
     )
-    assert_equal '150', SystemSetting['bpm']
+    assert_equal 150, SystemSetting['bpm']
     assert_equal 150, PatternStore.hash['bpm']
   end
 
@@ -562,8 +562,8 @@ class MessagesActionsTest < ActiveSupport::TestCase
       "The speed is now 125 beats per minute",
       result[:display]
     )
-    assert_equal '125', SystemSetting['bpm']
-    assert_equal '125', PatternStore.hash['bpm']
+    assert_equal 125, SystemSetting['bpm']
+    assert_equal 125, PatternStore.hash['bpm']
 
     result = Messages::Actions.speed_up({})
     assert_equal 'success', result[:response]
@@ -571,8 +571,8 @@ class MessagesActionsTest < ActiveSupport::TestCase
       "The speed is now 130 beats per minute",
       result[:display]
     )
-    assert_equal '130', SystemSetting['bpm']
-    assert_equal '130', PatternStore.hash['bpm']
+    assert_equal 130, SystemSetting['bpm']
+    assert_equal 130, PatternStore.hash['bpm']
 
   end
 
@@ -584,8 +584,8 @@ class MessagesActionsTest < ActiveSupport::TestCase
       "The speed is now 115 beats per minute",
       result[:display]
     )
-    assert_equal '115', SystemSetting['bpm']
-    assert_equal '115', PatternStore.hash['bpm']
+    assert_equal 115, SystemSetting['bpm']
+    assert_equal 115, PatternStore.hash['bpm']
 
     result = Messages::Actions.speed_down({})
     assert_equal 'success', result[:response]
@@ -593,8 +593,8 @@ class MessagesActionsTest < ActiveSupport::TestCase
       "The speed is now 110 beats per minute",
       result[:display]
     )
-    assert_equal '110', SystemSetting['bpm']
-    assert_equal '110', PatternStore.hash['bpm']
+    assert_equal 110, SystemSetting['bpm']
+    assert_equal  110, PatternStore.hash['bpm']
   end
 
   def test_show_speed

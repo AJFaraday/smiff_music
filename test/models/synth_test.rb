@@ -3,6 +3,7 @@ require './test/test_helper'
 class SynthTest < ActiveSupport::TestCase
 
   def setup
+    SystemSetting.rebuild
     Synth.rebuild
     Pattern.rebuild
     # there was some load-order issues in creating this

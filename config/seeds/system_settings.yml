@@ -1,0 +1,16 @@
+bpm: 
+  name: bpm
+  value: 120
+max_bpm:
+  name: max_bpm
+  value: 200
+min_bpm:
+  name: min_bpm
+  value: 60
+pattern_version:
+  name: pattern_version
+  value: 0
+group_marker_space:
+  name: group_marker_space
+  value: 4
+
