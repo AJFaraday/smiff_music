@@ -1,0 +1,16 @@
+drum:
+  class: Pattern
+  substitutions:
+    name: name
+  synonyms:
+    - drum
+    - rhythm
+synth:
+  class: Synth
+  substitutions:
+    name: name
+    parameters: parameter_list
+  synonyms:
+    - synth
+    - synthesiser
+    - instrument
