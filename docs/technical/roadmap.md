@@ -118,6 +118,10 @@ Version 0.5
 * Help message for synths
 * Modified help messages for individual synths
 
+*Note:* Due to the timing of some experients, version 0.5
+is the version I removed ActiveRecord from SMIFF. It has
+sped up ten-fold.
+
 Version 1
 ---------
 
