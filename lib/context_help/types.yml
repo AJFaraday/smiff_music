@@ -41,6 +41,12 @@ terminal:
     - terminal
     - console
     - 'command line'
+mute:
+  synonyms:
+    - mute
+unmute:
+  synonyms:
+    - unmute
 help:
   synonyms:
     - help
