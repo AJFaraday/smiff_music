@@ -1,6 +1,6 @@
 # Quick-start Guide
 
-So, there\`s a lot more help pages to get through if you want to know everything you can do with SMIFF, but what if you just want to wade right in, and work it out for yourself.
+So, there's a lot more help pages to get through if you want to know everything you can do with SMIFF, but what if you just want to wade right in, and work it out for yourself.
 
 First, go back to home, and click the terminal page.
 
@@ -25,7 +25,7 @@ So, if everything worked, you will be hearing a nice steady beat, and a little s
 > play tom2 on steps 1 to 32 skipping 4
 </pre>
 
-That\`s a lot to type, huh? There\`s a special feature of the SMIFF terminal. If you press up you can scroll through your previous commands and modify them before sending them again. Try this as we add more tom toms.
+That's a lot to type, huh? There's a special feature of the SMIFF terminal. If you press up you can scroll through your previous commands and modify them before sending them again. Try this as we add more tom toms.
 
 <pre>
 > play tom2 on steps 1 to 32 skipping 5
@@ -33,13 +33,13 @@ That\`s a lot to type, huh? There\`s a special feature of the SMIFF terminal. If
 > play tom3 on steps 1 to 32 skipping 2
 </pre>
 
-Okay, we\`ve got some pretty cool sounds going on, so perhaps we just want to hear the toms and not the snare?
+Okay, we've got some pretty cool sounds going on, so perhaps we just want to hear the toms and not the snare?
 
 <pre>
 > mute kick, snare and hihat
 </pre>
 
-But we can still change these patterns while we`re not listening to them:
+But we can still change these patterns while we're not listening to them:
 
 <pre>
 > play kick on steps 1 to 32 skipping 3
@@ -49,7 +49,7 @@ But we can still change these patterns while we`re not listening to them:
 > unmute all drums
 </pre>
 
-So, how about some tunes to go with it? Here\`s some building blocks, I\`ll leave you to explore from now on. The help page contains more detailed information on each command and instrument.
+So, how about some tunes to go with it? Here's some building blocks, I'll leave you to explore from now on. The help page contains more detailed information on each command and instrument.
 
 <pre>
 > set note length to 2
