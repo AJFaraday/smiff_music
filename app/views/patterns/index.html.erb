@@ -14,7 +14,7 @@
       </li>
       <% Synth.all.each do |synth| %>
         <li role=presentation>
-          <a href='#synth_<%= synth.id %>' aria-controls='synth_<%= synth.id %>' role=tab data-toggle="tab" id="synth_<%= synth.id %>_tab">
+          <a href='#synth_<%= synth.name %>' aria-controls='synth_<%= synth.name %>' role=tab data-toggle="tab" id="synth_<%= synth.name %>_tab">
             <%= synth.name %>
           </a>
         </li>
@@ -32,7 +32,7 @@
       </div>
 
       <% Synth.all.each do |synth| %>
-        <div role=tabpanel class='tab-pane' id="synth_<%= synth.id %>">
+        <div role=tabpanel class='tab-pane' id="synth_<%= synth.name %>">
           <%= render partial: 'synths/display', locals: {synth: synth} %>
         </div>
       <% end %>
