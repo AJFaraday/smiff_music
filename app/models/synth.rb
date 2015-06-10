@@ -74,6 +74,18 @@ class Synth < InMemoryBase
     @type ||= Synth.types[constructor]
   end
 
+  def type_name
+    self.type['name']
+  end
+
+  def display_min_note
+    SynthsHelper.display_midi_note(min_note)
+  end
+
+  def display_max_note
+    SynthsHelper.display_midi_note(max_note)
+  end
+
   def display_parameters
     [:max_note, :min_note].concat(parameters.keys)
   end
