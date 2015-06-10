@@ -17,8 +17,6 @@ module ContextHelp::Guesser
       # look to see if any synonyms are mentioned
       return self.for(name) if type['synonyms'].any? { |syn| text.include?(syn) }
     end
-    # if nothing can be found, apologise
-    self.help_unavailable
   end
 
 end

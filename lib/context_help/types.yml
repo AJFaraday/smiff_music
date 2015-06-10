@@ -9,8 +9,39 @@ synth:
   class: Synth
   substitutions:
     name: name
-    parameters: parameter_list
+    type: type_name
+    min_note: display_min_note
+    max_note: display_max_note
   synonyms:
     - synth
     - synthesiser
     - instrument
+clear:
+  synonyms:
+    - clear
+mute:
+  synonyms:
+    - mute
+play:
+  synonyms:
+    - play
+    - note
+    - add
+do_not_play:
+  synonyms:
+    - 'do not play'
+    - remove
+player:
+  synonyms:
+    - player
+    - speed
+    - bpm
+terminal:
+  synonyms:
+    - terminal
+    - console
+    - 'command line'
+help:
+  synonyms:
+    - help
+    - smiff

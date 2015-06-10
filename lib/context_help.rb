@@ -50,8 +50,4 @@ module ContextHelp
     message
   end
 
-  def ContextHelp.help_unavailable
-    I18n.t('context_help.unavailable')
-  end
-
 end

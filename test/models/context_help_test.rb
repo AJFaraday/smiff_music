@@ -33,11 +33,36 @@ class ContextHelpTest < ActiveSupport::TestCase
     help = ContextHelp.for('drum')
     assert_includes(
       help,
-      'Drums provide the rhythm for SMIFF. You could try these messsages to change some drums:'
+      'Drums provide the rhythm for SMIFF.'
     )
+    assert_includes(help, "* list drums")
     assert_includes(help, "* play kick on step 1")
     assert_includes(help, "* mute all drums")
     assert_includes(help, "* show all drums")
+  end
+
+  def test_help_for_synths
+    help = ContextHelp.for('synth')
+    assert_includes(
+      help,
+      'Synthesisers provide the melody and harmony for SMIFF.'
+    )
+    assert_includes(help, "* list synths")
+    assert_includes(help, "* set synth to anne")
+    assert_includes(help, "* mute all synths")
+    assert_includes(help, "* clear all synths")
+  end
+
+  def test_help_for_sarah_synth
+    help = ContextHelp.for('synth', 'sarah')
+    assert_includes(
+      help,
+      "'sarah' is a Simple synthesiser"
+    )
+    assert_includes(help, '* describe sarah')
+    assert_includes(help, '* play C 5 on step 1')
+    assert_includes(help, '* play C 5, C 7 from step 9')
+    assert_includes(help, '* do not play C 7 on sarah')
   end
 
   def test_help_for_unknown_type
