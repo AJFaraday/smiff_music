@@ -1,4 +1,6 @@
-Drums provide the rhythm for SMIFF. You could try these messsages to change some drums:
+Drums provide the rhythm for SMIFF. You can find out what they are with:
+* list drums
+You could try these messsages to change some drums:
 * play kick on step 1
 * play hihat on steps 1, 2 and 3
 * play snare on steps 9 to 13
