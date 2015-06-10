@@ -10,5 +10,6 @@
 * mute {name}
 * unmute {name}
 * clear {name}
+
 Or this one to see the {name} pattern:
 * show {name}
