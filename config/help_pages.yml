@@ -55,6 +55,7 @@
           anchor: drum_play
           file: '/docs/help/messages/drums/play.md'
         - title: do not play
+          anchor: drum_do_not_play
           file: '/docs/help/messages/drums/do_not_play.md'
         - title: mute
           anchor: mute
