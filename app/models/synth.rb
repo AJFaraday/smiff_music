@@ -192,6 +192,7 @@ TEXT
       name: name,
       constructor: constructor
     }
+    puts self.parameters
     params.merge!(self.parameters.symbolize_keys)
     params
   end
@@ -219,7 +220,7 @@ TEXT
       note_off_steps: note_off_pattern.bits,
       pitches: pitches
     }
-    #params.merge!(self.parameters.symbolize_keys)
+    params.merge!(self.parameters.symbolize_keys)
     params
   end
 
