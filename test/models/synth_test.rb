@@ -12,6 +12,7 @@ class SynthTest < ActiveSupport::TestCase
   def test_new_synth_has_patterns_and_pitches
     synth = Synth.create!(
       name: 'synth',
+      constructor: 'SimpleSynth',
       waveshape: 'sine',
       volume: 50,
       attack_time: 0.1,
