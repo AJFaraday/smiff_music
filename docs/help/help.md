@@ -4,7 +4,6 @@
 
 # SMIFF Music
 
-
 ## What is SMIFF?
 
 SMIFF Music is a web application by Andrew Faraday (@MarmiteJunction), exploring the use of the internet as a tool for creating music collaboratively.
@@ -63,8 +62,6 @@ There are a number of messages to modify the speed of the player.
 * set speed to 120 bpm
 * speed up
 * speed down
-
-
 
 ### show speed
 

@@ -12,6 +12,9 @@
     - title: "Quick-start Guide"
       anchor: quickstart
       file: '/docs/help/introduction/quick_start_guide.md'
+    - title: "Help!"
+      anchor: 'help'
+      file: '/docs/help/introduction/help.md'
 - title: Using the Terminal
   anchor: terminal
   file: '/docs/help/terminal.md'
