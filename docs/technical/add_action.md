@@ -4,7 +4,7 @@ This file documents how to add new actions to smiff music.
 
 ## Short Version
 
-* add message definition in db/seed/message_definitions.yml
+* add message definition in config/seeds/message_formats.yml
 * add action name to AVAILABLE_ACTIONS in /lib/messages/actions.rb
 * write action under a named module in lib/messages/actions/
 * add translation for your returned messages to /config/locales/actions/en.yml
@@ -22,7 +22,7 @@ This file documents how to add new actions to smiff music.
 
 The message definition declares the message a user will input to access the action, which action this will refer to and which arguments will be passed to it. 
 
-Message definitions are declared in /db/seed/definitions.yml
+Message definitions are declared in /config/seeds/message_formats.yml
 
 This is a typical definition 
 

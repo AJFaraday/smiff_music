@@ -240,3 +240,11 @@ stop:
   action: stop
   variables:
   weight: 0
+
+help:
+  name: help
+  regex: '(.*help.*)'
+  action: help
+  variables:
+    - message
+  weight:  0

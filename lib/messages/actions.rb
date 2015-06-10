@@ -7,7 +7,7 @@ class Messages::Actions
     set_synth set_note_length
     add_notes clear_pitches
     list_synths describe_synth list_params set_param
-    play stop
+    play stop help
   }
 
   extend Messages::Actions::Show
@@ -33,6 +33,7 @@ class Messages::Actions
   extend Messages::Actions::SetParam
   extend Messages::Actions::Play
   extend Messages::Actions::Stop
+  extend Messages::Actions::Help
 
   def self.run(action, arguments)
     if Messages::Actions::AVAILABLE_ACTIONS.include?(action)

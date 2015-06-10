@@ -33,9 +33,14 @@ module ContextHelp
   end
 
   def ContextHelp.for_type(type)
-    type = type.pluralize
-    source_file = File.join(Rails.root, 'docs', 'context_help', "#{type}.md")
-    ContextHelp.render_file(source_file)
+    plural_type = type.pluralize
+    source_file = File.join(Rails.root, 'docs', 'context_help', "#{plural_type}.md")
+    if File.exists?(source_file)
+      ContextHelp.render_file(source_file)
+    else
+      source_file = File.join(Rails.root, 'docs', 'context_help', "#{type}.md")
+      ContextHelp.render_file(source_file)
+    end
   end
 
   def ContextHelp.render_file(path, substitutions={})
