@@ -24,7 +24,7 @@
       file: '/docs/help/messages/player.md'
       children:
         - title: play
-          anchor: play
+          anchor: player_play
           file: '/docs/help/messages/player/play.md'
         - title: stop
           anchor: stop
@@ -52,7 +52,7 @@
           anchor: show
           file: '/docs/help/messages/drums/show.md'
         - title: play
-          anchor: play
+          anchor: drum_play
           file: '/docs/help/messages/drums/play.md'
         - title: do not play
           file: '/docs/help/messages/drums/do_not_play.md'
