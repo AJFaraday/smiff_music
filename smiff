@@ -3,6 +3,4 @@ require File.join(File.dirname(__FILE__),'config','cli_environment.rb')
 
 InMemory.build
 
-@cli = CommandLineInterface.new
-@cli.introduce
-loop { @cli.prompt }
+CommandLineInterface.new.run

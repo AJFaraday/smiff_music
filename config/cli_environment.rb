@@ -6,6 +6,8 @@ require 'ostruct'
 require 'yaml'
 require 'logger'
 
+require 'readline'
+
 directory = File.dirname(__FILE__)
 Dir["#{directory}/../lib/in_memory*.rb"].each { |file| require file }
 Dir["#{directory}/../app/models/*.rb"].each { |file| require file }

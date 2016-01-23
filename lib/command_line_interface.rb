@@ -20,7 +20,6 @@ class CommandLineInterface
       )
     )
     @session = HashWithIndifferentAccess.new(@session)
-    @messages = []
   end
 
   def introduce
@@ -29,11 +28,11 @@ class CommandLineInterface
     puts I18n.t('cli.introduction')
   end
 
-  def prompt
-    print '> '
-    text = gets
-    @messages << text
-    eval_message(text)
+  def run
+    introduce
+    while buf = Readline.readline("> ", true)
+      eval_message(buf)
+    end
   end
 
   def eval_message(text)
