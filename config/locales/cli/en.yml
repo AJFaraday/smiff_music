@@ -1,0 +1,8 @@
+en:
+  cli:
+    introduction: |
+      Welcome to SMIFF Music, command-line edition.
+
+      If you know SMIFF messages, you can type them in here.
+
+      If not, type help to get started.

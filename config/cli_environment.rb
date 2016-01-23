@@ -15,5 +15,9 @@ Dir["#{directory}/../lib/messages/actions/*.rb"].each { |file| require file }
 Dir["#{directory}/../lib/messages/*.rb"].each { |file| require file }
 Dir["#{directory}/../lib/*.rb"].each { |file| require file }
 
+I18n.load_path = Dir["#{directory}/../config/locales/**/*.yml"]
+I18n.load_path += Dir["#{directory}/../config/locales/*.yml"]
+I18n.backend.load_translations
+
 # Just for CLI
 require "#{directory}/../lib/command_line_interface.rb"

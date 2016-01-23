@@ -62,7 +62,7 @@ class Message < InMemoryBase
         return {
           display: I18n.t(
             'messages.errors.message_unfound',
-            :message => self.source_text
+            :message => self.source_text.strip
           ),
           response: 'error'
         }
@@ -72,7 +72,16 @@ class Message < InMemoryBase
 
   def Message.failure_log
     return @@failure_log if @@failure_log
-    logfile = File.open(File.join(Rails.root, 'log', 'failed_messages.log'), 'a')
+    logfile = File.open(
+      File.join(
+        File.dirname(__FILE__),
+        '..',
+        '..',
+        'log',
+        'failed_messages.log'
+      ),
+      'a'
+    )
     logfile.sync = true
     @@failure_log = Logger.new(logfile)
     @@failure_log
