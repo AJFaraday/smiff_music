@@ -1,2 +1,7 @@
 #!/usr/bin/env ruby
 require File.join(File.dirname(__FILE__),'config','cli_environment.rb')
+
+InMemory.build
+
+@cli = CommandLineInterface.new
+loop { @cli.prompt }

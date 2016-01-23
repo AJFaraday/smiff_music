@@ -1,7 +1,10 @@
 require 'rubygems'
 require 'active_support'
+require 'active_support/core_ext'
 require 'active_model'
 require 'ostruct'
+require 'yaml'
+require 'logger'
 
 directory = File.dirname(__FILE__)
 Dir["#{directory}/../lib/in_memory*.rb"].each { |file| require file }
@@ -12,3 +15,5 @@ Dir["#{directory}/../lib/messages/actions/*.rb"].each { |file| require file }
 Dir["#{directory}/../lib/messages/*.rb"].each { |file| require file }
 Dir["#{directory}/../lib/*.rb"].each { |file| require file }
 
+# Just for CLI
+require "#{directory}/../lib/command_line_interface.rb"

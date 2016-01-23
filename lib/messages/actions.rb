@@ -49,8 +49,8 @@ module Messages
         }
       end
     rescue => er
-      Rails.logger.info er.message
-      Rails.logger.info er.backtrace.join("\n")
+      puts er.message
+      puts er.backtrace.join("\n")
       return {
         response: 'error',
         display: I18n.t('messages.errors.could_not_run')
@@ -81,7 +81,6 @@ module Messages
     end
 
     def self.munge_list(list)
-      Rails.logger.info "munging #{list.inspect}"
       if list.is_a?(Array)
         list.compact!
         list.reject! { |x| x.blank? }

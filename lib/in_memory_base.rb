@@ -53,7 +53,13 @@ class InMemoryBase < OpenStruct
   end
 
   def self.build(show_message=true )
-    source_records_path = File.join(Rails.root, 'config', 'seeds', "#{self.to_s.underscore.pluralize}.yml")
+    source_records_path = File.join(
+      File.dirname(__FILE__),
+      '..',
+      'config',
+      'seeds',
+      "#{self.to_s.underscore.pluralize}.yml"
+    )
     if File.exist?(source_records_path)
       seeds = YAML.load_file(source_records_path)
       seeds.each do |label, attributes|

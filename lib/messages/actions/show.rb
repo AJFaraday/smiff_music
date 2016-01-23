@@ -34,8 +34,8 @@ module Messages
             }
           end
         rescue => er
-          Rails.logger.info er.message
-          Rails.logger.info er.backtrace.join("\n")
+          puts er.message
+          puts er.backtrace.join("\n")
           return {
             response: 'error',
             display: I18n.t(

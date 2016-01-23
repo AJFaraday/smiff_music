@@ -88,7 +88,16 @@ class Message < InMemoryBase
 
   def Message.message_log
     return @@message_log if @@message_log
-    logfile = File.open(File.join(Rails.root, 'log', 'all_messages.log'), 'a')
+    logfile = File.open(
+      File.join(
+        File.dirname(__FILE__),
+        '..',
+        '..',
+        'log',
+        'all_messages.log'
+      ),
+      'a'
+    )
     logfile.sync = true
     @@message_log = Logger.new(logfile)
     @@message_log

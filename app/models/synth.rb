@@ -65,7 +65,15 @@ class Synth < InMemoryBase
   cattr_accessor :types
 
   def Synth.types
-    @@types ||= YAML.load_file(File.join(Rails.root, 'config', 'synth_types.yml'))
+    @@types ||= YAML.load_file(
+      File.join(
+        File.dirname(__FILE__),
+        '..',
+        '..',
+        'config',
+        'synth_types.yml'
+      )
+    )
   end
 
   attr_accessor :type
