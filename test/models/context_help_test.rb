@@ -102,10 +102,4 @@ class ContextHelpTest < ActiveSupport::TestCase
     )
   end
 
-  def test_guesser_can_not_help
-    response = ContextHelp.guess("help me make awesome music")
-    assert_includes(response, "I'm sorry")
-    assert_includes(response, "I can't help you with that")
-  end
-
 end

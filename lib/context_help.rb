@@ -5,7 +5,13 @@ module ContextHelp
   cattr_accessor :types
 
   def ContextHelp.types
-    @@types ||= YAML.load_file(File.join(Rails.root, 'lib', 'context_help', 'types.yml'))
+    @@types ||= YAML.load_file(
+      File.join(
+        File.dirname(__FILE__),
+        'context_help',
+        'types.yml'
+      )
+    )
   end
 
   def ContextHelp.type_names
@@ -22,7 +28,10 @@ module ContextHelp
   end
 
   def ContextHelp.for_object(type, object_name)
-    source_file = File.join(Rails.root, 'docs', 'context_help', "#{type}.md")
+    source_file = File.join(
+      File.dirname(__FILE__), '..',
+      'docs', 'context_help', "#{type}.md"
+    )
     format = ContextHelp.types[type]
     object = format['class'].constantize.find_by_name(object_name)
     subs = {}
@@ -34,11 +43,17 @@ module ContextHelp
 
   def ContextHelp.for_type(type)
     plural_type = type.pluralize
-    source_file = File.join(Rails.root, 'docs', 'context_help', "#{plural_type}.md")
+    source_file = File.join(
+      File.dirname(__FILE__), '..',
+      'docs', 'context_help', "#{plural_type}.md"
+    )
     if File.exists?(source_file)
       ContextHelp.render_file(source_file)
     else
-      source_file = File.join(Rails.root, 'docs', 'context_help', "#{type}.md")
+      source_file = File.join(
+        File.dirname(__FILE__), '..',
+        'docs', 'context_help', "#{type}.md"
+      )
       ContextHelp.render_file(source_file)
     end
   end
