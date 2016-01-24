@@ -6,11 +6,13 @@ module Compile
         'kick' => 'sample :drum_bass_soft',
         'snare' => 'sample :drum_snare_soft',
         'hihat' => 'sample :drum_cymbal_closed',
-        'cymbal' => 'sample :drum_splash_soft, amp: 0.5',
+        'crash' => 'sample :drum_splash_soft, amp: 0.5',
         'tom1' => 'sample :drum_tom_low_soft',
         'tom2' => 'sample :drum_tom_mid_soft',
         'tom3' => 'sample :drum_tom_hi_soft'
       }
+
+      attr_accessor :command
 
       # source is the hash from Pattern#to_hash
       def initialize(attrs)
@@ -22,7 +24,11 @@ module Compile
       end
 
       def play_at_step?(step)
-        @bits[step] == '1'
+        !@muted and @bits[step] == '1'
+      end
+
+      def command
+        "  #{@command}\n"
       end
 
     end

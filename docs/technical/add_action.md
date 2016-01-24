@@ -122,7 +122,7 @@ Use github flavoured markup to format your help file, with one important differe
 
 Now add your method to the help index, or it will not be included in the help section of the app.
 
-modify /config/help_patches.yml
+modify /config/help_pages.yml
 
 ```yaml
 ---

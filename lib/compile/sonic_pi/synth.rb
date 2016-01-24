@@ -11,7 +11,7 @@ module Compile
       }
 
       def initialize(name, attrs)
-        @synth = Synth.find_by_name(name)
+        @synth = ::Synth.find_by_name(name)
         @pitches = attrs[:pitches]
         @step_count = @pitches.count
         @note_on_bits = attrs[:note_on_steps].to_s(2).rjust(@step_count, '0')

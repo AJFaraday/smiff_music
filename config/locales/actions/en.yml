@@ -75,3 +75,6 @@ en:
     set_param:
       success: "I've set the %{param} parameter to %{value} for %{synth}"
       validation_failed: "Sorry, I couldn't set %{param} to %{value} for %{synth} it %{error}"
+    compile:
+      unknown_compiler: "Sorry, I don't know how to compile to %{system}"
+      success: "I've written the code for %{system}"

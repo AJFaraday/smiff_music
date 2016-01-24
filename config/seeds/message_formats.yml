@@ -248,3 +248,11 @@ help:
   variables:
     - message
   weight:  0
+
+list_params:
+  name: compile
+  regex: 'compile(?: for| to)? ([\w-]+)'
+  action: compile
+  variables:
+    - system
+  weight: 0
