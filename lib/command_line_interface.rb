@@ -36,9 +36,14 @@ class CommandLineInterface
   end
 
   def eval_message(text)
+    exit if text =~ /exit/
     response = Message.parse(text, @session).run
-    @session.merge!(response[:session]) if response[:session]
+    update_session(response[:session])
     puts response[:display]
+  end
+
+  def update_session(hash)
+    @session.merge!(hash) if hash
   end
 
 end
