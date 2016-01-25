@@ -3,4 +3,4 @@ require File.join(File.dirname(__FILE__),'config','cli_environment.rb')
 
 InMemory.build
 
-CommandLineInterface.new.run
+CommandLine::Interface.new.run

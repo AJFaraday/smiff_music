@@ -23,4 +23,4 @@ I18n.load_path += Dir["#{directory}/../config/locales/*.yml"]
 I18n.backend.load_translations
 
 # Just for CLI
-require "#{directory}/../lib/command_line_interface.rb"
+Dir["#{directory}/../lib/command_line/*.rb"].each { |file| require file }
