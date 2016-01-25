@@ -2,7 +2,7 @@
 // console (built in js console)
 var Console = {
 
-  init:function () {
+  init: function () {
     Console.readout = $('#readout');
     Console.button = $('#submit');
     Console.field = $('#message');
@@ -11,7 +11,7 @@ var Console = {
       Console.send_message();
     });
 
-    Console.field.on('keydown', function(event) {
+    Console.field.on('keydown', function (event) {
       if (event.keyCode == 13) {
         Console.button.addClass('active');
       }
@@ -34,38 +34,40 @@ var Console = {
 
   },
 
-  message:'',
-  previous_messages:[],
-  message_pointer:0,
+  message: '',
+  previous_messages: [],
+  message_pointer: 0,
 
-  send_message:function () {
+  send_message: function () {
     this.message = this.field.val();
 
     this.previous_messages = this.previous_messages.concat(this.message);
     this.message_pointer = this.previous_messages.length;
-
-    this.display('<div class="input">> ' + this.message + '</div>');
     this.field.val('');
+    console.log(this.message);
+    jQuery.each(this.message.split(/[\n;]/), function (index, message) {
 
-    if (this.message.length > 0) {
-      $.post(
-        '/messages',
-        {message:this.message},
-        function (response) {
-          console.log(response);
-          eval(response['javascript']);
-          var feedback = "<div class='" + response['response'] + "'>";
-          feedback = feedback.concat(response['display'].replace(/\n/g, "<br/>"));
-          feedback = feedback.concat('</div>');
-          Console.display(feedback);
-          Sound.reset_patterns();
-        },
-        'json'
-      );
-    }
+      if (message.trim().length > 0) {
+        Console.display('<div class="input">> ' + message + '</div>');
+        $.post(
+          '/messages',
+          {message: message.trim()},
+          function (response) {
+            console.log(response);
+            eval(response['javascript']);
+            var feedback = "<div class='" + response['response'] + "'>";
+            feedback = feedback.concat(response['display'].replace(/\n/g, "<br/>"));
+            feedback = feedback.concat('</div>');
+            Console.display(feedback);
+            Sound.reset_patterns();
+          },
+          'json'
+        );
+      }
+    });
   },
 
-  next_message:function () {
+  next_message: function () {
     if (this.message_pointer != this.previous_messages.length) {
       this.message_pointer += 1
     }
@@ -77,7 +79,7 @@ var Console = {
     this.field.val(this.message);
   },
 
-  prev_message:function () {
+  prev_message: function () {
     if (this.message_pointer != 0) {
       this.message_pointer -= 1
     }
@@ -85,12 +87,12 @@ var Console = {
     this.field.val(this.message);
   },
 
-  display:function (content) {
+  display: function (content) {
     Console.readout.append(content);
     Console.scroll_to_bottom();
   },
 
-  scroll_to_bottom:function () {
+  scroll_to_bottom: function () {
     Console.readout.scrollTop(Console.readout[0].scrollHeight);
   }
 
