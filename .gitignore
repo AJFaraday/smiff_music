@@ -19,4 +19,4 @@
 
 /.idea
 
-/public/files/*.rb
+public/files/*.rb

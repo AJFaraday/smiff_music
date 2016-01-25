@@ -31,7 +31,11 @@ class CommandLineInterface
   def run
     introduce
     while buf = Readline.readline("> ", true)
-      eval_message(buf)
+      if buf.include?(';')
+        buf.split(';').each { |x| eval_message(x) }
+      else
+        eval_message(buf)
+      end
     end
   end
 
