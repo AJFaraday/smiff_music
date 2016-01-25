@@ -53,17 +53,50 @@ module Compile
       def step_loop
         result = ""
         result << "live_loop :smiff do\n"
+        step_time = 0.25
         (0..31).to_a.each do |step|
-          @drum_patterns.each do |drum_pattern|
-            if drum_pattern.play_at_step?(step)
-              result << drum_pattern.command
-            end
+          commands = []
+          commands << drum_commands_for_step(step)
+          commands << synth_commands_for_step(step)
+          if commands.compact.any?
+            result << "  sleep #{step_time}\n" unless step == 0
+            result << commands.join
+            step_time = 0.25
+          else
+            step_time += 0.25
           end
-          # TOOD synth plays
-          result << "  sleep 0.25\n"
         end
+        result << "  sleep #{step_time}\n"
         result << "end"
         result
+      end
+
+      def synth_commands_for_step(step)
+        result = ''
+        @synths.each do |synth|
+          if synth.start_note_at_step?(step)
+            result << synth.commands(step)
+          end
+        end
+        if result.blank?
+          nil
+        else
+          result
+        end
+      end
+
+      def drum_commands_for_step(step)
+        result = ''
+        @drum_patterns.each do |drum_pattern|
+          if drum_pattern.play_at_step?(step)
+            result << drum_pattern.command
+          end
+        end
+        if result.blank?
+          nil
+        else
+          result
+        end
       end
 
     end
