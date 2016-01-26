@@ -5,6 +5,7 @@ require 'active_model'
 require 'ostruct'
 require 'yaml'
 require 'logger'
+require 'pathname'
 
 require 'readline'
 

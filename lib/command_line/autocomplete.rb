@@ -34,7 +34,7 @@ module CommandLine
           @options << source
         end
       end
-      puts "#{options.count} options took #{Time.now - start_time} seconds"
+      #puts "#{options.count} options took #{Time.now - start_time} seconds"
     end
 
     def each_replacement(pattern, repl_keys)

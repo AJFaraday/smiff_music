@@ -7,3 +7,4 @@ en:
 
       If not, type help to get started.
     can_not_run_javascript: I'm sorry, I can't do that in the console.
+    file: "File: %{file}"

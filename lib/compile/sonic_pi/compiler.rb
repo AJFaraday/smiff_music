@@ -33,13 +33,13 @@ module Compile
 
       def write_file
         file_path = File.join(
-          File.dirname(__FILE__),
-          '..', '..', '..',
+          Pathname(__FILE__).dirname.parent.parent.parent,
           'public', 'files', file_name
         )
         File.open(file_path, 'w') do |file|
           file.write(self.code)
         end
+        file_path
       end
 
       def code

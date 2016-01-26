@@ -53,6 +53,7 @@ module CommandLine
       else
         puts response[:display]
       end
+      puts I18n.t('cli.file', file: response[:file]) if response[:file]
     end
 
     def update_session(hash)

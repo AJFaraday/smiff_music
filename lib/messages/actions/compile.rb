@@ -20,9 +20,9 @@ module Messages
             response: 'success',
             display: I18n.t(
               'actions.compile.success',
-              system: system,
-              file: file
-            )
+              system: system.titlecase
+            ),
+            file: file
           }
         else
           return {

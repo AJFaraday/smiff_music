@@ -251,7 +251,7 @@ help:
 
 list_params:
   name: compile
-  regex: 'compile(?: for| to)? ([\w- ]+)$'
+  regex: 'compile(?: for| to)? ([a-z\-_ ]+)'
   action: compile
   variables:
     - system
