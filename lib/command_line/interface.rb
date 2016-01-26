@@ -1,7 +1,8 @@
 module CommandLine
   class Interface
 
-    include CommandLine::InitReadline
+    include CommandLine::Readline
+    include CommandLine::Autocomplete
 
 
     LOGO = '         _____ __  __ _____ ______ ______
@@ -23,6 +24,7 @@ module CommandLine
       )
       @session = HashWithIndifferentAccess.new(@session)
       init_readline
+      $cli_interface = self
     end
 
     def introduce
@@ -33,7 +35,7 @@ module CommandLine
 
     def run
       introduce
-      while buf = Readline.readline("> ", true)
+      while buf = ::Readline.readline("> ", true)
         if buf.include?(';')
           buf.split(';').each { |x| eval_message(x) }
         else

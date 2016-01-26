@@ -1,25 +1,17 @@
 module CommandLine
-  module InitReadline
+  module Readline
+
+    attr_writer :options
 
     def init_readline
-      Readline.basic_word_break_characters = ''
-      Readline.completion_append_character = ''
-      Readline.completion_proc = completion_process
-    end
-
-    # TODO something better to replace this
-    def commands
-      [
-        'play kick on step 1',
-        'play kick on steps 1 to 32',
-        'play kick on steps 1 to 32 skipping 3',
-        'play c5 on step 1'
-      ].sort
+      ::Readline.basic_word_break_characters = ''
+      ::Readline.completion_append_character = ''
+      ::Readline.completion_proc = completion_process
     end
 
     def completion_process
       proc do |input|
-        options = commands.select { |x| !!x.match(/^#{Regexp.escape(input)}/) }
+        options = self.options.select { |x| !!x.match(/^#{Regexp.escape(input)}/) }
         if options.count == 0
           input
         elsif options.count == 1

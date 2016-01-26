@@ -1,5 +1,7 @@
 class Synth < InMemoryBase
 
+  include SynthsHelper
+
   validate :name, presence: true
   validate :waveshape,
            presence: true,
@@ -341,5 +343,10 @@ TEXT
     save!
   end
 
+  def note_names
+    (min_note..max_note).collect do |note_number|
+      display_midi_note(note_number).gsub(' ', '')
+    end
+  end
 
 end
