@@ -48,7 +48,11 @@ module CommandLine
       exit if text =~ /exit/
       response = Message.parse(text, @session).run
       update_session(response[:session])
-      puts response[:display]
+      if response[:javascript]
+        puts I18n.t('cli.can_not_run_javascript')
+      else
+        puts response[:display]
+      end
     end
 
     def update_session(hash)
