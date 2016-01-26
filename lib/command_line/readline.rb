@@ -11,8 +11,10 @@ module CommandLine
 
     def completion_process
       proc do |input|
-        options = self.options.select { |x| !!x.match(/^#{Regexp.escape(input)}/) }
+        options = self.options.select { |x| !!x.match(/^#{Regexp.escape(input)}/i) }
         if options.count == 0
+          puts "\nno suggestions"
+          print "> #{input}"
           input
         elsif options.count == 1
           options[0]

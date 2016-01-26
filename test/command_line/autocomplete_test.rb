@@ -56,5 +56,38 @@ class CommandLine::AutocompleteTest < ActiveSupport::TestCase
     assert_includes(@original_options, 'compile to sonic pi')
   end
 
+  def test_options
+    options
+    assert_includes(@options, 'set speed to 160 bpm')
+    assert_includes(@options, 'show kick')
+    assert_includes(@options, 'show tom3, snare and hihat')
+    assert_includes(@options, 'play F# 5, C 6, D# 5, C 5 from step 1')
+  end
+
+  def test_each_replacement
+    opts = each_replacement(
+      'show -drum-, -drum- and -drum-',
+      {
+        '-drum-' => %w{kick snare hihat crash tom1 tom2 tom3},
+        '-synth' => %w{brian trevor sarah anne polly}
+      }
+    )
+    assert_includes(opts.to_a, 'show kick, snare and hihat')
+    refute_includes(opts.to_a, 'show kick, kick and kick')
+  end
+
+  def test_each_replacement_multiple_values
+    opts = each_replacement(
+      'set -synth- -parameter- to -value-',
+      {
+        '-synth-' => %w{brian trevor sarah anne polly},
+        '-parameter-' => %w{volume fm_depth},
+        '-value-' => [10, 20, 30, 40]
+      }
+    )
+    assert_includes(opts.to_a, 'set trevor volume to 10')
+    assert_includes(opts.to_a, 'set sarah fm_depth to 40')
+    refute_includes(opts.to_a, 'set sarah 20 to fm_depth')
+  end
 
 end
