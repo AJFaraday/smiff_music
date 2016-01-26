@@ -3,7 +3,9 @@ module Messages
     module Compile
 
       COMPILERS = {
-        'sonic-pi' => ::Compile::SonicPi::Compiler
+        'sonic-pi' => ::Compile::SonicPi::Compiler,
+        'sonic pi' => ::Compile::SonicPi::Compiler,
+        'sonic_pi' => ::Compile::SonicPi::Compiler
       }
 
       def compile(args)
