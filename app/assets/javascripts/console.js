@@ -46,7 +46,6 @@ var Console = {
     this.field.val('');
     console.log(this.message);
     jQuery.each(this.message.split(/[\n;]/), function (index, message) {
-
       if (message.trim().length > 0) {
         Console.display('<div class="input">> ' + message + '</div>');
         $.post(
@@ -57,6 +56,10 @@ var Console = {
             eval(response['javascript']);
             var feedback = "<div class='" + response['response'] + "'>";
             feedback = feedback.concat(response['display'].replace(/\n/g, "<br/>"));
+            if (response['file'] != undefined) {
+              display_file = response['file'].split('/')[2];
+              feedback = feedback.concat('<br/><a href="' + response['file'] + '">' + display_file + '</a><br/>')
+            }
             feedback = feedback.concat('</div>');
             Console.display(feedback);
             Sound.reset_patterns();
