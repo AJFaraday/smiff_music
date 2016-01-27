@@ -62,7 +62,7 @@ module CommandLine
     end
 
     def drum_names
-      @drum_names ||= Pattern.all.collect { |x| x.name }.sort
+      @drum_names ||= Pattern.all.select { |x| x.purpose== 'event' }.collect { |x| x.name }.sort
     end
 
     def synth_names

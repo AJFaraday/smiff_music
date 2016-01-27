@@ -61,7 +61,6 @@ class CommandLine::AutocompleteTest < ActiveSupport::TestCase
     assert_includes(@options, 'set speed to 160 bpm')
     assert_includes(@options, 'show kick')
     assert_includes(@options, 'show tom3, snare and hihat')
-    assert_includes(@options, 'play F# 5, C 6, D# 5, C 5 from step 1')
   end
 
   def test_each_replacement

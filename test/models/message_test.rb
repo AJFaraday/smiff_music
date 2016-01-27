@@ -552,29 +552,29 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   def test_list_params
-    message = Message.parse('list params for sine')
+    message = Message.parse('list params for sarah')
     assert_equal 'list_params', message.action
     assert_equal(
-      {'synth' => ['sine']},
+      {'synth' => ['sarah']},
       message.parameters
     )
   end
 
-  def test_list_parameterss
-    message = Message.parse('list parameters for sine')
+  def test_list_parameters
+    message = Message.parse('list parameters for sarah')
     assert_equal 'list_params', message.action
     assert_equal(
-      {'synth' => ['sine']},
+      {'synth' => ['sarah']},
       message.parameters
     )
   end
 
   def test_set_parameter_no_param
-    message = Message.parse('set sine volume to 10')
+    message = Message.parse('set sarah volume to 10')
     assert_equal 'set_param', message.action
     assert_equal(
       {
-        'synth' => 'sine',
+        'synth' => 'sarah',
         'parameter' => 'volume',
         'value' => '10'
       },

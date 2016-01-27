@@ -249,7 +249,7 @@ help:
     - message
   weight:  0
 
-list_params:
+compile:
   name: compile
   regex: 'compile(?: for| to)? ([a-z\-_ ]+)'
   action: compile

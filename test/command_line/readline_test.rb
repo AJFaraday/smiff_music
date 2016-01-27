@@ -2,6 +2,7 @@ require 'test_helper'
 
 class CommandLine::ReadlineTest < ActiveSupport::TestCase
   include CommandLine::Readline
+  attr_accessor :options # so we don't need to refer to CommandLine::Autocomplete here
 
   def test_common_substring
     strings = ['test x', 'test y']

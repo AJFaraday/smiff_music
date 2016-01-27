@@ -214,7 +214,6 @@ TEXT
       name: name,
       constructor: constructor
     }
-    puts self.parameters
     params.merge!(self.parameters.symbolize_keys)
     params
   end
