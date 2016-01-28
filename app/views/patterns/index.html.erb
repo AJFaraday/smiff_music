@@ -2,40 +2,27 @@
   <div role="tabpanel">
 
     <ul class='nav nav-tabs' role='tablist'>
-      <li role=presentation class='active' id="overview_tab">
-        <a href='#pattern_diagram' aria-controls='pattern_diagram' role=tab data-toggle="tab">
-          <%= t('.overview') %>
-        </a>
-      </li>
-      <li role=presentation>
+      <li role=presentation class='active'>
         <a href='#console' aria-controls='console' role=tab data-toggle="tab" id="terminal_tab">
           <%= t('.terminal') %>
         </a>
       </li>
-      <% Synth.all.each do |synth| %>
-        <li role=presentation>
-          <a href='#synth_<%= synth.name %>' aria-controls='synth_<%= synth.name %>' role=tab data-toggle="tab" id="synth_<%= synth.name %>_tab">
-            <%= synth.name %>
-          </a>
-        </li>
-      <% end %>
-
+      <li role=presentation id="overview_tab">
+        <a href='#pattern_diagram' aria-controls='pattern_diagram' role=tab data-toggle="tab">
+          <%= t('.overview') %>
+        </a>
+      </li>
     </ul>
 
     <div class="tab-content">
-      <div role=tabpanel class="tab-pane active" id=pattern_diagram>
-        <%= render partial: 'patterns_table' %>
-      </div>
 
-      <div role=tabpanel class="tab-pane" id=console>
+      <div role=tabpanel class="tab-pane active" id=console>
         <%= render partial: 'messages/console' %>
       </div>
 
-      <% Synth.all.each do |synth| %>
-        <div role=tabpanel class='tab-pane' id="synth_<%= synth.name %>">
-          <%= render partial: 'synths/display', locals: {synth: synth} %>
-        </div>
-      <% end %>
+      <div role=tabpanel class="tab-pane" id=pattern_diagram>
+        <%= render partial: 'patterns_table' %>
+      </div>
 
     </div>
   </div>
