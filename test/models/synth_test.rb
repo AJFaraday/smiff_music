@@ -120,39 +120,6 @@ class SynthTest < ActiveSupport::TestCase
   end
 
   #
-  # This produces the data for the envelope graph
-  #
-=begin
-  attack_time: 0.1
-  decay_time: 0.3
-  sustain_level: 0.3
-  release_time: 0.5
-=end
-  def test_chart_data
-    data = Synth.find_by_name('sarah').chart_data
-    assert_equal(
-      [0,1,nil,nil,0.7,nil,nil,nil,nil,0.7,nil,nil,nil,nil,0],
-      data
-    )
-
-  end
-
-  # this is the data required to draw the graph, required by chart.js
-  def test_chart_data_full
-    synth = Synth.find_by_name('sarah')
-    data = synth.chart_data_full
-    assert_kind_of Array, data[:labels]
-    data[:labels].each do |label|
-      assert_equal '', label
-    end
-    assert_kind_of Array, data[:datasets]
-    assert_equal 1, data[:datasets].length
-    assert_equal "rgba(220,220,220,0.2)", data[:datasets][0][:fillColor]
-    assert_equal "rgba(220,220,220,1)", data[:datasets][0][:strokeColor]
-    assert_equal synth.chart_data, data[:datasets][0][:data]
-  end
-
-  #
   # back-end method to add a note
   #
   # The result is a change to the note_on and note_off patterns
