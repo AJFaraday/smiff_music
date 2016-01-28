@@ -5,6 +5,6 @@ en:
 
       If you know SMIFF messages, you can type them in here.
 
-      If not, type help to get started.
+      If not, type 'help' to get started.
     can_not_run_javascript: I'm sorry, I can't do that in the console.
     file: "File: %{file}"
