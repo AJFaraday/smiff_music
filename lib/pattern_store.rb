@@ -9,11 +9,11 @@ class PatternStore
   cattr_accessor :changed_entities
 
   def PatternStore.version
-    @@version ||= SystemSetting['pattern_version'].to_i
+    $pattern_store_version ||= SystemSetting['pattern_version'].to_i
   end
 
   def PatternStore.version=(value)
-    @@version = SystemSetting['pattern_version'] = PatternStore.hash['version'] = value
+    $pattern_store_version = SystemSetting['pattern_version'] = PatternStore.hash['version'] = value
   end
 
   def PatternStore.increment_version(entity=nil,value=nil)
@@ -51,16 +51,16 @@ class PatternStore
   end 
 
   def PatternStore.hash
-    @@hash ||= PatternStore.build_hash
+    $pattern_store_hash ||= PatternStore.build_hash
   end
 
   def PatternStore.build_hash
-    @@hash = {}
-    @@hash['patterns'] = Pattern.to_hash
-    @@hash['synths'] = Synth.to_hash
-    @@hash['bpm'] = SystemSetting['bpm']
-    @@hash['version'] = PatternStore.version
-    @@hash
+    $pattern_store_hash = {}
+    $pattern_store_hash['patterns'] = Pattern.to_hash
+    $pattern_store_hash['synths'] = Synth.to_hash
+    $pattern_store_hash['bpm'] = SystemSetting['bpm']
+    $pattern_store_hash['version'] = PatternStore.version
+    $pattern_store_hash
   end
 
   def PatternStore.modify_hash(changed_entity, value=nil)
