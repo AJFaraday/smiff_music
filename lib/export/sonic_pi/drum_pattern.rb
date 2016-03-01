@@ -1,4 +1,4 @@
-module Compile
+module Export
   module SonicPi
     class DrumPattern
 

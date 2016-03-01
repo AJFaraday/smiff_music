@@ -1,7 +1,7 @@
-module Compile
+module Export
   module SonicPi
 
-    class Compiler
+    class Exporter
 
       # source is the hash from PatternStore.hash
       def initialize(source)
@@ -14,14 +14,14 @@ module Compile
       def init_drum_patterns(source)
         @drum_patterns = []
         source['patterns'].each do |drum, attrs|
-          @drum_patterns << Compile::SonicPi::DrumPattern.new(attrs)
+          @drum_patterns << Export::SonicPi::DrumPattern.new(attrs)
         end
       end
 
       def init_synths(source)
         @synths = []
         source['synths'].each do |name, attrs|
-          @synths << Compile::SonicPi::Synth.new(name, attrs)
+          @synths << Export::SonicPi::Synth.new(name, attrs)
         end
       end
 

@@ -2,9 +2,9 @@
 soprano:
   name: sarah
   attack_time: 0.1
-  decay_time: 0.3
+  decay_time: 0.1
   sustain_level: 0.7
-  release_time: 0.5
+  release_time: 0.3
   muted: false
   step_size: 16
   step_count: 32
@@ -18,8 +18,8 @@ alto:
   name: anne
   attack_time: 0.1
   decay_time: 0.1
-  sustain_level: 0.8
-  release_time: 0.2
+  sustain_level: 0.7
+  release_time: 0.1
   muted: false
   step_size: 16
   step_count: 32
@@ -33,10 +33,10 @@ alto:
 
 tenor:
   name: trevor
-  attack_time: 0.4
-  decay_time: 0.2
+  attack_time: 0.1
+  decay_time: 0.1
   sustain_level: 0.7
-  release_time: 0.5
+  release_time: 0.1
   muted: false
   step_size: 16
   step_count: 32
@@ -65,10 +65,10 @@ bass:
 
 polly:
   name: polly
-  attack_time: 0.4
-  decay_time: 0.2
+  attack_time: 0.1
+  decay_time: 0.1
   sustain_level: 0.7
-  release_time: 0.5
+  release_time: 0.1
   muted: false
   step_size: 16
   step_count: 32

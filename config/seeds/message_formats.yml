@@ -249,10 +249,10 @@ help:
     - message
   weight:  0
 
-compile:
-  name: compile
-  regex: 'compile(?: for| to)? ([a-z\-_ ]+)'
-  action: compile
+export:
+  name: export
+  regex: 'export(?: for| to)? ([a-z\-_ ]+)'
+  action: export
   variables:
     - system
   weight: 0

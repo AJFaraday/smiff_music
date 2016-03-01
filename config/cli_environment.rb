@@ -11,7 +11,7 @@ require 'readline'
 
 directory = File.dirname(__FILE__)
 Dir["#{directory}/../app/helpers/*.rb"].each { |file| require file }
-Dir["#{directory}/../lib/compile/**/*.rb"].each { |file| require file }
+Dir["#{directory}/../lib/export/**/*.rb"].each { |file| require file }
 Dir["#{directory}/../lib/in_memory*.rb"].each { |file| require file }
 Dir["#{directory}/../app/models/*.rb"].each { |file| require file }
 Dir["#{directory}/../lib/context_help/*.rb"].each { |file| require file }

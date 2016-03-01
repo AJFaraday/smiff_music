@@ -53,7 +53,7 @@ class CommandLine::AutocompleteTest < ActiveSupport::TestCase
     assert_kind_of(Array, @original_options)
     assert_includes(@original_options, 'show -drum-, -drum- and -drum-')
     assert_includes(@original_options, 'do not play -drum- on step 1 and 5')
-    assert_includes(@original_options, 'compile to sonic pi')
+    assert_includes(@original_options, 'export to sonic pi')
   end
 
   def test_options

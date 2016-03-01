@@ -55,4 +55,4 @@ clear -synth-
 clear -synth-, -synth- and -synth-
 list parameters for -synth-
 set -synth- -parameter- to -value-
-compile to sonic pi
+export to sonic pi

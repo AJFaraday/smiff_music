@@ -37,16 +37,13 @@ var Console = {
   message: '',
   previous_messages: [],
   message_pointer: 0,
+  message_queue: [], // Used for multiple messages, eliminating race condition
 
-  send_message: function () {
-    this.message = this.field.val();
+  run_message_from_queue: function() {
+    var that = this;
+    if(this.message_queue.length > 0) {
+      var message = this.message_queue.shift();
 
-    this.previous_messages = this.previous_messages.concat(this.message);
-    this.message_pointer = this.previous_messages.length;
-    this.field.val('');
-    console.log(this.message);
-    jQuery.each(this.message.split(/[\n;]/), function (index, message) {
-      if (message.trim().length > 0) {
         Console.display('<div class="input">> ' + message + '</div>');
         $.post(
           '/messages',
@@ -63,11 +60,28 @@ var Console = {
             feedback = feedback.concat('</div>');
             Console.display(feedback);
             Sound.reset_patterns();
+            setTimeout(function(){that.run_message_from_queue()}, 1);
           },
           'json'
         );
+
+    }
+  },
+
+  send_message: function () {
+    var that = this;
+    this.message = this.field.val();
+
+    this.previous_messages = this.previous_messages.concat(this.message);
+    this.message_pointer = this.previous_messages.length;
+    this.field.val('');
+    console.log(this.message);
+    jQuery.each(this.message.split(/[\n;]/), function (index, message) {
+      if (message.trim().length > 0) {
+        that.message_queue = that.message_queue.concat(message);
       }
     });
+    this.run_message_from_queue();
   },
 
   next_message: function () {
