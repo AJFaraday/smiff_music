@@ -47,6 +47,7 @@ module Export
         result << "# pattern version #{@version}\n"
         result << "use_bpm #{@bpm}\n\n"
         result << step_loop
+        result << "\n\n"
         result
       end
 

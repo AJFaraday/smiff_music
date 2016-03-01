@@ -7,7 +7,7 @@ module Export
         'snare' => 'sample :drum_snare_soft',
         'hihat' => 'sample :drum_cymbal_closed',
         'crash' => 'sample :drum_splash_soft, amp: 0.5',
-        'tom1' => 'sample :drum_tom_low_soft',
+        'tom1' => 'sample :drum_tom_lo_soft',
         'tom2' => 'sample :drum_tom_mid_soft',
         'tom3' => 'sample :drum_tom_hi_soft'
       }

@@ -1,7 +1,5 @@
 class Pattern < InMemoryBase
 
-  validate :purpose, inclusion: %w{event note_on note_off}
-
   attr_accessor :synth
 
   def modify_pattern_store
