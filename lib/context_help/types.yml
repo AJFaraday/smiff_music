@@ -47,6 +47,10 @@ mute:
 unmute:
   synonyms:
     - unmute
+export:
+  synonyms:
+    - export
+    - compile
 help:
   synonyms:
     - help

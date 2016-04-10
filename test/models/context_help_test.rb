@@ -102,4 +102,19 @@ class ContextHelpTest < ActiveSupport::TestCase
     )
   end
 
+  def test_help_for_export
+    assert_includes(
+      ContextHelp.for('export'),
+      'Export the current state of the music in another form.'
+    )
+  end
+
+  def test_guessed_export
+    assert_equal(
+      ContextHelp.for('export'),
+      ContextHelp.guess("help me with export")
+    )
+  end
+
 end
+
